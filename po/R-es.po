@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Rpolyhedra 0.1.0\n"
+"POT-Creation-Date: 2017-10-19 22:42\n"
+"PO-Revision-Date: 2017-10-19 19:34-0300\n"
+"Last-Translator: Leonardo Belén <leobelen@gmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "rpoly.abstract_class"
+msgstr "Clase Abstracta"
+
+msgid "rpoly.row_for_label"
+msgstr "Registro para la etiqueta"
+
+msgid "rpoly.already_defined"
+msgstr "Ya definido"
+
+msgid "rpoly.scraping_issue"
+msgstr "Se presentó un problema recuperando datos:"
+
+msgid "rpoly.not_implemented"
+msgstr "Sin implementar"
+
+msgid "rpoly.package_not_found"
+msgstr "Paquete no encontrado"

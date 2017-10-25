@@ -1,0 +1,92 @@
+---
+title: "Rpolyhedra"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Rpolyhedra}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+#Introduction
+This package is a curation made based on the poly package found on http://www.netlib.org/polyhedra/ ([Original Help message](poly_original_help_message.html)), which provides a library of polyhedron and its representation. As such, Rpolyhedra provides with the following:
+
+1. A module to scrape the polyhedra provided by the original poly command. 
+1. A library of the scraped polyhedra.
+1. An object which provides information about each polyhedron and provides a way to plot it using the 'rgl' package, which can be explored. 
+
+#Usage
+The package provides a simplified set of functions to scrape, show the scrapped polyhedra and access each individual polyhedron. 
+
+##Scrape polyhedra
+In order to scrape, the following code can be executed to retrieve all polyhedra from the original files produced by the poly command. 
+
+``` R
+library(Rpolyhedra)
+polyhedra.files <- dir(polyhedra.dir)
+polyhedra.files <- polyhedra.files[grep("[0-9]+", polyhedra.files)]
+polyhedra.files <- polyhedra.files[order(as.numeric(polyhedra.files))]
+if (file.exists("data/polyhedra.RDS")) {
+  polyhedra.saved <- readRDS("data/polyhedra.RDS")
+}
+for (polyhedra.file in polyhedra.files) {
+  current.file <- paste(polyhedra.dir, polyhedra.file, sep = "")
+  polyedra.netlib.lines <- readLines(current.file)
+  current.polyedron <- Polyhedron.class$new(polyhedra.file)
+  self <- current.polyedron$state
+  current.polyedron$scrape(netlib.p3.lines = polyedra.netlib.lines)
+  futile.logger::flog.debug(paste("parsed", polyhedra.file, "with name", current.polyedron$state$name))
+  polyhedra[[polyhedra.file]] <- current.polyedron
+}
+```
+
+##Get available polyhedra
+Once the original files had been processed, a simple call to ```Rpolyhedra::getAvailablePolyhedra()``` retrieves a list of the available polyhedra:
+
+```R 
+library(Rpolyhedra)
+Rpolyhedra::getAvailablePolyhedra()
+```
+
+##Retrieve a polyhedron
+The access to a particular polyhedron can be done with a call to ```Rpolyhedra::getPolyhedron(<<name>>)```, which returns a Polyhedron object. For example, to retrieve a cube, the call would be:
+
+```R 
+library(Rpolyhedra)
+Rpolyhedra::getPolyhedron("cube")
+```
+
+#A demo
+In order to appreciate the virtues of the package, a simple demo can be executed, which would lay out all available polyhedra in a rgl canvas, allowing exploration. 
+
+```R 
+job.debug.level <- 10
+polyhedra.dir <- "./data/www.netlib.org/polyhedra/"
+polyhedra.files <- dir(polyhedra.dir)
+polyhedra.files <- polyhedra.files[grep("[0-9]+", polyhedra.files)]
+polyhedra.files <- polyhedra.files[order(as.numeric(polyhedra.files))]
+polyhedra <- list()
+futile.logger::flog.appender(futile.logger::appender.tee("RPolyedra.log"), name = "data.io")
+futile.logger::flog.threshold(futile.logger::DEBUG)
+if (file.exists("data/polyhedra.RDS")) {
+  polyhedra <- readRDS("data/polyhedra.RDS")
+}
+available.polyhedra <- Rpolyhedra::getAvailablePolyhedra()
+polyhedra.2.draw <- available.polyhedra[1:min(200, length(available.polyhedra))]
+n <- length(polyhedra.2.draw)
+polyhedron.colors <- rainbow(n)
+polyhedron.scale <- 10
+open3d()
+par3d(FOV = 1)
+i <- 1
+for (polyhedron.name in polyhedra.2.draw) {
+  polyhedron <- polyhedra[[polyhedron.name]]
+  self <- polyhedron$state
+  futile.logger::flog.debug(paste(polyhedron$getName(), "has faces with ", max(unlist(lapply(polyhedron$getSolid(), FUN = length))),"sides"))
+  current.angle <- i/24 * 2 * pi
+  shape.rgl <- polyhedron$getRGLModel(1, c(polyhedron.scale * sin(current.angle) * (i + 1) * 4/n, polyhedron.scale * cos(current.angle) * (i + 1) * 4/n, i))
+  if (!is.null(shape.rgl)) {
+    rgl::shade3d(shape.rgl, color = polyhedron.colors[i])
+  }
+  i <- i + 1
+}
+```
+
