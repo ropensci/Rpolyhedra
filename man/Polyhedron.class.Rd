@@ -3,12 +3,12 @@
 \docType{data}
 \name{Polyhedron.class}
 \alias{Polyhedron.class}
-\title{Processes the polyhedron in order to produce a graphical representation.}
+\title{Polyhedron container class}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
 Polyhedron.class
 }
 \description{
-Processes the polyhedron in order to produce a graphical representation.
+Polyhedron container class
 }
 \keyword{datasets}

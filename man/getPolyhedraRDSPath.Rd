@@ -6,6 +6,9 @@
 \usage{
 getPolyhedraRDSPath(polyhedra.rds.filename = "polyhedra.RDS")
 }
+\arguments{
+\item{polyhedra.rds.filename}{filename of polyhedra database}
+}
 \description{
 Get the path of Polyhedra RDS file
 }

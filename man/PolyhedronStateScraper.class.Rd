@@ -3,12 +3,12 @@
 \docType{data}
 \name{PolyhedronStateScraper.class}
 \alias{PolyhedronStateScraper.class}
-\title{Scrapes each polyhedra from source}
+\title{Scrapes each polyhedra from PHD file}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
 PolyhedronStateScraper.class
 }
 \description{
-Scrapes each polyhedra from source
+Scrapes each polyhedra from PHD file
 }
 \keyword{datasets}

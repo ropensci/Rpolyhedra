@@ -6,6 +6,9 @@
 \usage{
 getPolyhedron(name)
 }
+\arguments{
+\item{name}{a valid name of a polyhedron in the database}
+}
 \description{
 Gets a polyhedron from the database.
 }
