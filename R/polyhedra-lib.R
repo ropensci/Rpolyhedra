@@ -10,6 +10,7 @@ getAvailablePolyhedra <- function() {
 }
 
 #' Gets a polyhedron from the database.
+#' @param name a valid name of a polyhedron in the database
 #' @import futile.logger
 #' @export
 getPolyhedron <- function(name) {
@@ -31,12 +32,13 @@ getDataDir <- function(){
 }
 
 #' Get the path of Polyhedra RDS file
+#' @param polyhedra.rds.filename filename of polyhedra database
 getPolyhedraRDSPath <- function(polyhedra.rds.filename="polyhedra.RDS"){
   paste(getDataDir(), polyhedra.rds.filename, sep = "")
 }
 
 
-#' @import stringr rgl
+#' @import rgl
 #' @importFrom R6 R6Class
 PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(initialize = function(number, name, symbol, dual,
     vertices, net, hinges, solid, dihedral) {
@@ -48,9 +50,9 @@ PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(initialize
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 }))
 
-#' Scrapes each polyhedra from source
+#' Scrapes each polyhedra from PHD file
 #'
-#' @import stringr rgl futile.logger
+#' @import stringr futile.logger
 #' @importFrom R6 R6Class
 PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = PolyhedronState.class, public = list(netlib.p3.lines = NA,
     labels.rows = NA, labels.map = NA, errors = "", initialize = function(number, netlib.p3.lines) {
@@ -188,7 +190,8 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
         stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
     }))
 
-#' @import stringr rgl
+#' PolyhedronState when is it defined. Processes the definitionin order to produce a graphical representation in RGL.
+#' @import rgl
 #' @import geometry
 #' @importFrom R6 R6Class
 PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = PolyhedronState.class, public = list(number = NA,
@@ -290,9 +293,9 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = 
         ret
     }))
 
-#' Processes the polyhedron in order to produce a graphical representation.
+#' Polyhedron container class
 #'
-#' @import stringr rgl futile.logger
+#' @import rgl futile.logger
 #' @importFrom R6 R6Class
 Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state = NA, initialize = function(number, state = NULL) {
     self$number <- number
@@ -313,10 +316,13 @@ Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state =
 }))
 
 
-scrapePolyhedra <- function(max.quant = 0, home.dir.data = getDataDir(),
+#' scrape Polyhedra in data dir and saves a representation. It has regression test funcionality
+#' @param max.quant maximum quantity of polyhedra to scrape
+#' @param test scrape polyhedra and compare it with preloaded version
+#' @param save.rds.force force save of database scraped
+scrapePolyhedra <- function(max.quant = 0,
                             test = TRUE, save.rds.force = FALSE) {
-    futile.logger::flog.appender(futile.logger::appender.tee("RPolyedra.log"), name = "data.io")
-    futile.logger::flog.threshold(futile.logger::DEBUG)
+    home.dir.data <- getDataDir()
 
     # wget -r -np -k http://www.netlib.org/polyhedra/ data/www.netlib.org/
     polyhedra.dir <- paste(home.dir.data, "www.netlib.org/polyhedra/", sep = "")
