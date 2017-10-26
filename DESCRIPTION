@@ -2,10 +2,9 @@ Package: Rpolyhedra
 Type: Package
 Title: The polyhedron database for R
 Version: 0.1.0
-Author: Alejandro Baranek <abaranek@gmail.com>
-Maintainer: Leonardo Belen <leobelen@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Belen <leobelen@gmail.com>
+Maintainer: Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Belen <leobelen@gmail.com>
+Description: A 142 polyhedra Database scraped from PHD as R6 objects and RGL visualizing capabilities. The PHD format was created to describe the geometric polyhedron definitions derived mathematically by Andrew Hume and by the Kaleido program of Zvi Har'El.
 License: MIT
 Encoding: UTF-8
 LazyData: true
