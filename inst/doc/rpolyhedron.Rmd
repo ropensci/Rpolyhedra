@@ -21,21 +21,8 @@ In order to scrape, the following code can be executed to retrieve all polyhedra
 
 ``` R
 library(Rpolyhedra)
-polyhedra.files <- dir(polyhedra.dir)
-polyhedra.files <- polyhedra.files[grep("[0-9]+", polyhedra.files)]
-polyhedra.files <- polyhedra.files[order(as.numeric(polyhedra.files))]
-if (file.exists("data/polyhedra.RDS")) {
-  polyhedra.saved <- readRDS("data/polyhedra.RDS")
-}
-for (polyhedra.file in polyhedra.files) {
-  current.file <- paste(polyhedra.dir, polyhedra.file, sep = "")
-  polyedra.netlib.lines <- readLines(current.file)
-  current.polyedron <- Polyhedron.class$new(polyhedra.file)
-  self <- current.polyedron$state
-  current.polyedron$scrape(netlib.p3.lines = polyedra.netlib.lines)
-  futile.logger::flog.debug(paste("parsed", polyhedra.file, "with name", current.polyedron$state$name))
-  polyhedra[[polyhedra.file]] <- current.polyedron
-}
+polyhedra <- Rpolyhedra::scrapePolyhedra(max.quant = 5, "polyhedra.RDS", home.dir.data = getDataDir(),
+        test = TRUE)
 ```
 
 ##Get available polyhedra

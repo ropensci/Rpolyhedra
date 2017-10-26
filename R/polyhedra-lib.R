@@ -24,10 +24,9 @@ getPolyhedron <- function(name) {
 #' Get the path of package data
 getDataDir <- function(){
   home.dir<-find.package("Rpolyhedra", lib.loc=NULL, quiet = TRUE)
-  #TODO find fancy way of accesign data
-  data.subdir<-"/extdata/"
-  if (length(grep("Resources/library",home.dir))==0)
-    data.subdir<-paste("/inst",data.subdir,sep="")
+  data.subdir<-"/inst/extdata/"
+  if (!dir.exists(paste(home.dir,data.subdir,sep="")))
+    data.subdir<-"/extdata/"
   paste(home.dir, data.subdir, sep = "")
 }
 

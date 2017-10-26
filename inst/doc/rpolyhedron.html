@@ -86,21 +86,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Scrape polyhedra</h2>
 <p>In order to scrape, the following code can be executed to retrieve all polyhedra from the original files produced by the poly command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rpolyhedra)
-polyhedra.files &lt;-<span class="st"> </span><span class="kw">dir</span>(polyhedra.dir)
-polyhedra.files &lt;-<span class="st"> </span>polyhedra.files[<span class="kw">grep</span>(<span class="st">&quot;[0-9]+&quot;</span>, polyhedra.files)]
-polyhedra.files &lt;-<span class="st"> </span>polyhedra.files[<span class="kw">order</span>(<span class="kw">as.numeric</span>(polyhedra.files))]
-<span class="cf">if</span> (<span class="kw">file.exists</span>(<span class="st">&quot;data/polyhedra.RDS&quot;</span>)) {
-  polyhedra.saved &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/polyhedra.RDS&quot;</span>)
-}
-<span class="cf">for</span> (polyhedra.file <span class="cf">in</span> polyhedra.files) {
-  current.file &lt;-<span class="st"> </span><span class="kw">paste</span>(polyhedra.dir, polyhedra.file, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  polyedra.netlib.lines &lt;-<span class="st"> </span><span class="kw">readLines</span>(current.file)
-  current.polyedron &lt;-<span class="st"> </span>Polyhedron.class<span class="op">$</span><span class="kw">new</span>(polyhedra.file)
-  self &lt;-<span class="st"> </span>current.polyedron<span class="op">$</span>state
-  current.polyedron<span class="op">$</span><span class="kw">scrape</span>(<span class="dt">netlib.p3.lines =</span> polyedra.netlib.lines)
-  futile.logger<span class="op">::</span><span class="kw">flog.debug</span>(<span class="kw">paste</span>(<span class="st">&quot;parsed&quot;</span>, polyhedra.file, <span class="st">&quot;with name&quot;</span>, current.polyedron<span class="op">$</span>state<span class="op">$</span>name))
-  polyhedra[[polyhedra.file]] &lt;-<span class="st"> </span>current.polyedron
-}</code></pre></div>
+polyhedra &lt;-<span class="st"> </span>Rpolyhedra<span class="op">::</span><span class="kw">scrapePolyhedra</span>(<span class="dt">max.quant =</span> <span class="dv">5</span>, <span class="st">&quot;polyhedra.RDS&quot;</span>, <span class="dt">home.dir.data =</span> <span class="kw">getDataDir</span>(),
+        <span class="dt">test =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="get-available-polyhedra" class="section level2">
 <h2>Get available polyhedra</h2>
