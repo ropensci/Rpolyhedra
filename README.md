@@ -44,3 +44,35 @@ for (polyhedron.name in polyhedra.2.draw) {
 }
 
 ```
+
+# Troubleshooting
+
+## devtools
+Ubuntu
+
+```bash
+apt-get install libcurl4-openssl-dev
+```
+
+Windows
+
+Wait for CRAN version
+
+
+OSX brew
+
+```bash
+brew install openssl
+```
+After, in R:
+
+```R
+install.packages("devtools")
+```
+
+# rgl
+
+Ubuntu
+```bash
+sudo apt-get install r-cran-rgl
+```
