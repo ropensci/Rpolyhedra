@@ -5,7 +5,7 @@
 #' A 142 polyhedra database scraped from PHD files <http://paulbourke.net/dataformats/phd/> as R6 objects and 'rgl' visualizing capabilities. The PHD format was created to describe the geometric polyhedra definitions derived mathematically <http://www.netlib.org/polyhedra/> by Andrew Hume and by the Kaleido program of Zvi Har'El.
 #'
 #' @docType package
-#' @name rpolyhedra
+#' @name Rpolyhedra
 #' @import R6 futile.logger testthat
 #' @author Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Javier Belen <leobelen@gmail.com>
 
