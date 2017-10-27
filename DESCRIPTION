@@ -1,6 +1,6 @@
 Package: Rpolyhedra
 Type: Package
-Title: polyhedra database
+Title: Polyhedra Database
 Version: 0.1.0
 Authors@R: c(
     person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
