@@ -42,7 +42,7 @@ getPolyhedron("cube")
 ```
 
 #A demo
-In order to appreciate the package funcionality, a simple demo can be executed which shows the 5 regular polyhedra.
+To try package funcionality, a simple demo can be executed which shows the 5 regular polyhedra.
 
 ```R 
 polyhedra.2.draw <- getAvailablePolyhedra()[1:5]

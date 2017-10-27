@@ -16,7 +16,7 @@ polyhedron R6 object
 Gets a polyhedron from the database.
 }
 \examples{
-tetrahedron <- getPolyhedron("tetrahedron")
+tetrahedron <- getPolyhedron('tetrahedron')
 
 # returns name of polyhedra
 tetrahedron$getName()
