@@ -51,10 +51,10 @@ getPolyhedron <- function(name) {
 #' Get the path of package data
 getDataDir <- function() {
     home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
-    data.subdir <- "/inst/extdata/"
-    if (!dir.exists(paste(home.dir, data.subdir, sep = ""))) 
-        data.subdir <- "/extdata/"
-    paste(home.dir, data.subdir, sep = "")
+    data.subdir <- "inst/extdata/"
+    if (!dir.exists(paste(home.dir, "/",data.subdir, sep = "")))
+        data.subdir <- "extdata/"
+    paste(home.dir, "/",data.subdir, sep = "")
 }
 
 #' Get the path of Polyhedra RDS file
@@ -66,7 +66,7 @@ getPolyhedraRDSPath <- function(polyhedra.rds.filename = "polyhedra.RDS") {
 
 #' @import rgl
 #' @importFrom R6 R6Class
-PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(initialize = function(number, 
+PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(initialize = function(number,
     name, symbol, dual, vertices, net, hinges, solid, dihedral) {
 }, scrape = function(netlib.p3.lines) {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
@@ -80,8 +80,8 @@ PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(initialize
 #'
 #' @import stringr futile.logger
 #' @importFrom R6 R6Class
-PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = PolyhedronState.class, 
-    public = list(netlib.p3.lines = NA, labels.rows = NA, labels.map = NA, errors = "", initialize = function(number, 
+PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = PolyhedronState.class,
+    public = list(netlib.p3.lines = NA, labels.rows = NA, labels.map = NA, errors = "", initialize = function(number,
         netlib.p3.lines) {
         super$initialize()
         self$netlib.p3.lines <- netlib.p3.lines
@@ -95,7 +95,7 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
         observer.label <- self$netlib.p3.lines[self$labels.rows[label.number]]
         observer.label <- sub("\\:", "", observer.label)
         if (observer.label != expected.label) {
-            current.error <- paste(self$errors, "In label#", label.number, "Expected label was", expected.label, 
+            current.error <- paste(self$errors, "In label#", label.number, "Expected label was", expected.label,
                 " and observed was", observer.label)
             self$add.error(current.error)
         }
@@ -103,7 +103,7 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
         last.data.row <- self$labels.rows[label.number + 1]
         ret <- 0
         if (first.data.row > last.data.row) {
-            self$add.error(paste("for label", expected.label, "no valid rows: (fr, lr)", first.data.row, 
+            self$add.error(paste("for label", expected.label, "no valid rows: (fr, lr)", first.data.row,
                 last.data.row))
         } else ret <- c((first.data.row + 1):(last.data.row - 1))
         ret
@@ -113,7 +113,7 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
         first.line <- strsplit(net.txt[1], split = " ")[[1]]
         faces <- as.numeric(first.line[1])
         max.degree <- as.numeric(first.line[2])
-        if (faces != length(net.txt) - 1) self$add.error(paste("declared ", faces, "faces, but having", 
+        if (faces != length(net.txt) - 1) self$add.error(paste("declared ", faces, "faces, but having",
             length(faces) - 1))
         net <- list()
         cont <- 1
@@ -134,10 +134,10 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
         first.line <- strsplit(vertices.txt[1], split = " ")[[1]]
         vertices.count <- as.numeric(first.line[1])
         max.degree <- as.numeric(first.line[2])
-        if (vertices.count != length(vertices.txt) - 1) self$add.error(paste("declared ", vertices.count, 
+        if (vertices.count != length(vertices.txt) - 1) self$add.error(paste("declared ", vertices.count,
             "vertices.count, but having", length(vertices.count) - 1, elements))
-        vertices <- data.frame(Pos3D_1 = numeric(), Pos3D_2 = numeric(), Pos3D_3 = numeric(), Pos3D_1_exp = numeric(), 
-            Pos3D_2_exp = numeric(), Pos3D_3_exp = numeric(), Pos3D_1_exp_text = numeric(), Pos3D_2_exp_text = numeric(), 
+        vertices <- data.frame(Pos3D_1 = numeric(), Pos3D_2 = numeric(), Pos3D_3 = numeric(), Pos3D_1_exp = numeric(),
+            Pos3D_2_exp = numeric(), Pos3D_3_exp = numeric(), Pos3D_1_exp_text = numeric(), Pos3D_2_exp_text = numeric(),
             Pos3D_3_exp_text = numeric(), stringsAsFactors = FALSE)
         cont <- 1
         n.vertex <- length(vertices.txt)
@@ -147,7 +147,7 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
             cf.inbrackets <- stringr::str_extract(cf, "\\[([:graph:]*)\\]")
             cf.inbrackets <- sub("\\[", "", cf.inbrackets)
             cf.inbrackets <- sub("\\]", "", cf.inbrackets)
-            futile.logger::flog.debug(paste("parsing vertex ", f, "/", n.vertex, " ", paste(cf.outbrackets, 
+            futile.logger::flog.debug(paste("parsing vertex ", f, "/", n.vertex, " ", paste(cf.outbrackets,
                 collapse = ","), " ", paste(cf.inbrackets, collapse = ","), sep = ""))
             vertices[cont, "Pos3D_1"] <- cf.outbrackets[1]
             vertices[cont, "Pos3D_2"] <- cf.outbrackets[2]
@@ -166,12 +166,12 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
             p3.line <- self$labels.rows[r]
             current.label <- self$netlib.p3.lines[p3.line]
             current.label <- sub(":", "", current.label, fixed = TRUE)
-            if (current.label %in% self$labels.map[[current.label]]) stop(paste(gettext("rpoly.row_for_label", 
+            if (current.label %in% self$labels.map[[current.label]]) stop(paste(gettext("rpoly.row_for_label",
                 domain = "R-Rpolyhedra"), current.label, gettext("rpoly.already_defined", domain = "R-Rpolyhedra")))
             self$labels.map[[current.label]] <- r
             futile.logger::flog.debug(paste("Assign order", r, "row", self$labels.rows[r], "to", current.label))
         }
-        futile.logger::flog.debug(paste(names(self$labels.map), lapply(self$labels.map, FUN = function(x) self$netlib.p3.lines[self$labels.rows[x]]), 
+        futile.logger::flog.debug(paste(names(self$labels.map), lapply(self$labels.map, FUN = function(x) self$netlib.p3.lines[self$labels.rows[x]]),
             collapse = "|", sep = "=>"))
         self$labels.map
     }, getDataFromLabel = function(label) {
@@ -209,8 +209,8 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
         # TODO
         dih <- NULL
         vertices <- self$scrapeVertices(vertices.txt)
-        
-        ret <- PolyhedronStateDefined.class$new(number, name, symbol, dual, sfaces, svertices, net, 
+
+        ret <- PolyhedronStateDefined.class$new(number, name, symbol, dual, sfaces, svertices, net,
             solid, hinges, dih, vertices)
         ret
     }, buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
@@ -220,10 +220,10 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
 #' PolyhedronState when is it defined. Processes the definitionin order to produce a graphical representation in RGL.
 #' @import rgl
 #' @importFrom R6 R6Class
-PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = PolyhedronState.class, 
-    public = list(number = NA, name = NA, symbol = NA, dual = NA, sfaces = NA, svertices = NA, net = NA, 
-        hinges = NA, solid = NA, dih = NA, vertices = NA, vertices.rgl = NULL, solid.triangulated = NULL, 
-        mass.center = NA, initialize = function(number, name, symbol, dual, sfaces, svertices, net, 
+PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = PolyhedronState.class,
+    public = list(number = NA, name = NA, symbol = NA, dual = NA, sfaces = NA, svertices = NA, net = NA,
+        hinges = NA, solid = NA, dih = NA, vertices = NA, vertices.rgl = NULL, solid.triangulated = NULL,
+        mass.center = NA, initialize = function(number, name, symbol, dual, sfaces, svertices, net,
             solid, hinges, dih, vertices) {
             super$initialize()
             self$number <- number
@@ -286,7 +286,7 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = 
                     }
                   }
                   ret[[f]] <- tmesh
-                  futile.logger::flog.debug(paste("triangulated f", f, length(face), "original", paste(face, 
+                  futile.logger::flog.debug(paste("triangulated f", f, length(face), "original", paste(face,
                     collapse = ","), "triangulated", paste(tmesh, collapse = ",")))
                   f <- f + 1
                 }
@@ -332,7 +332,7 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = 
 #'
 #' @import rgl futile.logger
 #' @importFrom R6 R6Class
-Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state = NA, initialize = function(number, 
+Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state = NA, initialize = function(number,
     state = NULL) {
     self$number <- number
     if (!is.null(state)) {
@@ -360,7 +360,7 @@ Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state =
 #' @param save.rds.force force save of database scraped
 scrapePolyhedra <- function(max.quant = 0, test = TRUE, save.rds.force = FALSE) {
     home.dir.data <- getDataDir()
-    
+
     # wget -r -np -k http://www.netlib.org/polyhedra/ data/www.netlib.org/
     polyhedra.dir <- paste(home.dir.data, "www.netlib.org/polyhedra/", sep = "")
     # debug
