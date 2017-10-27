@@ -1,6 +1,10 @@
 #' Gets the list of available polyhedra
 #' @import futile.logger
 #' @export
+#' @return polyhedra names vector
+#' @examples
+#' getAvailablePolyhedra()
+#'
 getAvailablePolyhedra <- function() {
     ret <- NULL
     if (exists("polyhedra")) {
@@ -13,6 +17,28 @@ getAvailablePolyhedra <- function() {
 #' @param name a valid name of a polyhedron in the database
 #' @import futile.logger
 #' @export
+#' @return polyhedron R6 object
+#' @examples
+#' tetrahedron <- getPolyhedron("tetrahedron")
+#'
+#' # returns name of polyhedra
+#' tetrahedron$getName()
+#'
+#' # polyhedron state
+#' tetrahedron.state <- tetrahedron$getState()
+#'
+#' # Johnson symbol and Schlafli symbol
+#' tetrahedron.state$getSymbol()
+#'
+#' # vertex data.frame
+#' tetrahedron.state$getVertices()
+#'
+#' # List of faces of solid representation (3D)
+#' tetrahedron.state$getSolid()
+#'
+#' # List of faces of net representation (2D)
+#' tetrahedron.state$getNet()
+
 getPolyhedron <- function(name) {
     ret <- NULL
     if (exists("polyhedra")) {
@@ -192,7 +218,6 @@ PolyhedronStateScraper.class <- R6::R6Class("PolyhedronStateScraper", inherit = 
 
 #' PolyhedronState when is it defined. Processes the definitionin order to produce a graphical representation in RGL.
 #' @import rgl
-#' @import geometry
 #' @importFrom R6 R6Class
 PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = PolyhedronState.class, public = list(number = NA,
     name = NA, symbol = NA, dual = NA, sfaces = NA, svertices = NA, net = NA, hinges = NA, solid = NA, dih = NA, vertices = NA,
@@ -213,6 +238,12 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = 
         self
     }, scrape = function(netlib.p3.lines) {
         self
+    }, getSymbol = function() {
+      self$symbol
+    }, getVertices = function() {
+      self$vertices
+    }, getNet = function() {
+        self$net
     }, getSolid = function() {
         self$solid
     }, triangulate = function(force=FALSE) {
@@ -308,6 +339,8 @@ Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state =
     self
 }, getName = function() {
     self$state$name
+}, getState = function() {
+    self$state
 }, getSolid = function() {
     self$state$getSolid()
 }, getRGLModel = function(size = 1, origin = c(0, 0, 0)) {

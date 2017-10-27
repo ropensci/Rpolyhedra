@@ -9,6 +9,30 @@ getPolyhedron(name)
 \arguments{
 \item{name}{a valid name of a polyhedron in the database}
 }
+\value{
+polyhedron R6 object
+}
 \description{
 Gets a polyhedron from the database.
+}
+\examples{
+tetrahedron <- getPolyhedron("tetrahedron")
+
+# returns name of polyhedra
+tetrahedron$getName()
+
+# polyhedron state
+tetrahedron.state <- tetrahedron$getState()
+
+# Johnson symbol and Schlafli symbol
+tetrahedron.state$getSymbol()
+
+# vertex data.frame
+tetrahedron.state$getVertices()
+
+# List of faces of solid representation (3D)
+tetrahedron.state$getSolid()
+
+# List of faces of net representation (2D)
+tetrahedron.state$getNet()
 }

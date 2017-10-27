@@ -74,9 +74,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>Introduction</h1>
 <p>This package is a curation made based on the poly package found on <a href="http://www.netlib.org/polyhedra/" class="uri">http://www.netlib.org/polyhedra/</a> (<a href="poly_original_help_message.html">Original Help message</a>), which provides a library of polyhedron and its representation. As such, Rpolyhedra provides with the following:</p>
 <ol style="list-style-type: decimal">
-<li>A module to scrape the polyhedra provided by the original poly command.</li>
+<li>A module to scrape the polyhedra PHD files provided by the original poly command.</li>
 <li>A library of the scraped polyhedra.</li>
-<li>An object which provides information about each polyhedron and provides a way to plot it using the ‘rgl’ package, which can be explored.</li>
+<li>An R6 polyhedron representation with ‘rgl’ package visualizing capabilites.</li>
 </ol>
 </div>
 <div id="usage" class="section level1">
@@ -86,53 +86,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Scrape polyhedra</h2>
 <p>In order to scrape, the following code can be executed to retrieve all polyhedra from the original files produced by the poly command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rpolyhedra)
-polyhedra &lt;-<span class="st"> </span>Rpolyhedra<span class="op">::</span><span class="kw">scrapePolyhedra</span>(<span class="dt">max.quant =</span> <span class="dv">5</span>, <span class="st">&quot;polyhedra.RDS&quot;</span>, <span class="dt">home.dir.data =</span> <span class="kw">getDataDir</span>(),
+polyhedra &lt;-<span class="st"> </span><span class="kw">scrapePolyhedra</span>(<span class="dt">max.quant =</span> <span class="dv">5</span>, <span class="st">&quot;polyhedra.RDS&quot;</span>, <span class="dt">home.dir.data =</span> <span class="kw">getDataDir</span>(),
         <span class="dt">test =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="get-available-polyhedra" class="section level2">
 <h2>Get available polyhedra</h2>
-<p>Once the original files had been processed, a simple call to <code>Rpolyhedra::getAvailablePolyhedra()</code> retrieves a list of the available polyhedra:</p>
+<p>Once the original files had been processed, a simple call to <code>getAvailablePolyhedra()</code> retrieves a list of the available polyhedra:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rpolyhedra)
-Rpolyhedra<span class="op">::</span><span class="kw">getAvailablePolyhedra</span>()</code></pre></div>
+<span class="kw">getAvailablePolyhedra</span>()</code></pre></div>
 </div>
 <div id="retrieve-a-polyhedron" class="section level2">
 <h2>Retrieve a polyhedron</h2>
-<p>The access to a particular polyhedron can be done with a call to <code>Rpolyhedra::getPolyhedron(&lt;&lt;name&gt;&gt;)</code>, which returns a Polyhedron object. For example, to retrieve a cube, the call would be:</p>
+<p>The access to a particular polyhedron can be done with a call to <code>getPolyhedron(&lt;&lt;name&gt;&gt;)</code>, which returns a Polyhedron object. For example, to retrieve a cube, the call would be:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rpolyhedra)
-Rpolyhedra<span class="op">::</span><span class="kw">getPolyhedron</span>(<span class="st">&quot;cube&quot;</span>)</code></pre></div>
+<span class="kw">getPolyhedron</span>(<span class="st">&quot;cube&quot;</span>)</code></pre></div>
 </div>
 </div>
 <div id="a-demo" class="section level1">
 <h1>A demo</h1>
-<p>In order to appreciate the virtues of the package, a simple demo can be executed, which would lay out all available polyhedra in a rgl canvas, allowing exploration.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job.debug.level &lt;-<span class="st"> </span><span class="dv">10</span>
-polyhedra.dir &lt;-<span class="st"> &quot;./data/www.netlib.org/polyhedra/&quot;</span>
-polyhedra.files &lt;-<span class="st"> </span><span class="kw">dir</span>(polyhedra.dir)
-polyhedra.files &lt;-<span class="st"> </span>polyhedra.files[<span class="kw">grep</span>(<span class="st">&quot;[0-9]+&quot;</span>, polyhedra.files)]
-polyhedra.files &lt;-<span class="st"> </span>polyhedra.files[<span class="kw">order</span>(<span class="kw">as.numeric</span>(polyhedra.files))]
-polyhedra &lt;-<span class="st"> </span><span class="kw">list</span>()
-futile.logger<span class="op">::</span><span class="kw">flog.appender</span>(futile.logger<span class="op">::</span><span class="kw">appender.tee</span>(<span class="st">&quot;RPolyedra.log&quot;</span>), <span class="dt">name =</span> <span class="st">&quot;data.io&quot;</span>)
-futile.logger<span class="op">::</span><span class="kw">flog.threshold</span>(futile.logger<span class="op">::</span>DEBUG)
-<span class="cf">if</span> (<span class="kw">file.exists</span>(<span class="st">&quot;data/polyhedra.RDS&quot;</span>)) {
-  polyhedra &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/polyhedra.RDS&quot;</span>)
-}
-available.polyhedra &lt;-<span class="st"> </span>Rpolyhedra<span class="op">::</span><span class="kw">getAvailablePolyhedra</span>()
-polyhedra.<span class="fl">2.</span>draw &lt;-<span class="st"> </span>available.polyhedra[<span class="dv">1</span><span class="op">:</span><span class="kw">min</span>(<span class="dv">200</span>, <span class="kw">length</span>(available.polyhedra))]
+<p>In order to appreciate the package funcionality, a simple demo can be executed which shows the 5 regular polyhedra.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">polyhedra.<span class="fl">2.</span>draw &lt;-<span class="st"> </span><span class="kw">getAvailablePolyhedra</span>()[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]
 n &lt;-<span class="st"> </span><span class="kw">length</span>(polyhedra.<span class="fl">2.</span>draw)
 polyhedron.colors &lt;-<span class="st"> </span><span class="kw">rainbow</span>(n)
-polyhedron.scale &lt;-<span class="st"> </span><span class="dv">10</span>
+polyhedron.scale &lt;-<span class="st"> </span><span class="dv">5</span>
+
 <span class="kw">open3d</span>()
 <span class="kw">par3d</span>(<span class="dt">FOV =</span> <span class="dv">1</span>)
+<span class="kw">rgl.bg</span>( <span class="dt">sphere =</span><span class="ot">FALSE</span>, <span class="dt">fogtype =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">color=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>))
+<span class="kw">rgl.viewpoint</span>(<span class="dt">theta =</span> <span class="dv">0</span>,<span class="dt">phi=</span><span class="dv">0</span>,<span class="dt">zoom=</span><span class="fl">0.8</span>,<span class="dt">fov=</span><span class="dv">1</span>)
 i &lt;-<span class="st"> </span><span class="dv">1</span>
 <span class="cf">for</span> (polyhedron.name <span class="cf">in</span> polyhedra.<span class="fl">2.</span>draw) {
-  polyhedron &lt;-<span class="st"> </span>polyhedra[[polyhedron.name]]
-  self &lt;-<span class="st"> </span>polyhedron<span class="op">$</span>state
-  futile.logger<span class="op">::</span><span class="kw">flog.debug</span>(<span class="kw">paste</span>(polyhedron<span class="op">$</span><span class="kw">getName</span>(), <span class="st">&quot;has faces with &quot;</span>, <span class="kw">max</span>(<span class="kw">unlist</span>(<span class="kw">lapply</span>(polyhedron<span class="op">$</span><span class="kw">getSolid</span>(), <span class="dt">FUN =</span> length))),<span class="st">&quot;sides&quot;</span>))
-  current.angle &lt;-<span class="st"> </span>i<span class="op">/</span><span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>pi
-  shape.rgl &lt;-<span class="st"> </span>polyhedron<span class="op">$</span><span class="kw">getRGLModel</span>(<span class="dv">1</span>, <span class="kw">c</span>(polyhedron.scale <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(current.angle) <span class="op">*</span><span class="st"> </span>(i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="dv">4</span><span class="op">/</span>n, polyhedron.scale <span class="op">*</span><span class="st"> </span><span class="kw">cos</span>(current.angle) <span class="op">*</span><span class="st"> </span>(i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="dv">4</span><span class="op">/</span>n, i))
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(shape.rgl)) {
-    rgl<span class="op">::</span><span class="kw">shade3d</span>(shape.rgl, <span class="dt">color =</span> polyhedron.colors[i])
-  }
+  polyhedron &lt;-<span class="st"> </span><span class="kw">getPolyhedron</span>(polyhedron.name)
+  current.angle &lt;-<span class="st"> </span>i<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>pi
+  shape.rgl &lt;-<span class="st"> </span>polyhedron<span class="op">$</span><span class="kw">getRGLModel</span>(<span class="dv">1</span>, <span class="kw">c</span>(polyhedron.scale <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(current.angle),
+                                           polyhedron.scale <span class="op">*</span><span class="st"> </span><span class="kw">cos</span>(current.angle),
+                                           <span class="dv">0</span>))
+  <span class="kw">shade3d</span>(shape.rgl, <span class="dt">color =</span> polyhedron.colors[i])
   i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
 }</code></pre></div>
 </div>

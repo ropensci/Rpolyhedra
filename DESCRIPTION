@@ -1,10 +1,13 @@
 Package: Rpolyhedra
 Type: Package
-Title: The polyhedron database for R
+Title: polyhedra database
 Version: 0.1.0
-Author: Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Belen <leobelen@gmail.com>
+Authors@R: c(
+    person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
+    person("Leonardo","Belen",,"leobelen@gmail.com", c("aut","com","cph"))
+    )
 Maintainer: Alejandro Baranek <abaranek@dc.uba.ar>
-Description: A 142 polyhedra Database scraped from PHD as R6 objects and RGL visualizing capabilities. The PHD format was created to describe the geometric polyhedron definitions derived mathematically by Andrew Hume and by the Kaleido program of Zvi Har'El.
+Description: A 142 polyhedra database scraped from PHD files <http://paulbourke.net/dataformats/phd/> as R6 objects and rgl visualizing capabilities. The PHD format was created to describe the geometric polyhedra definitions derived mathematically <http://www.netlib.org/polyhedra/> by Andrew Hume and by the Kaleido program of Zvi Har'El.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -12,12 +15,13 @@ RoxygenNote: 6.0.1
 Suggests: knitr, rmarkdown,
     covr
 VignetteBuilder: knitr
-Depends: futile.logger,
-    rgl,
-    stringr,
-    R6,
-    geometry,
-    testthat
+Depends: R (>= 3.0.0)
+Imports: futile.logger,
+         rgl,
+         stringr,
+         R6,
+         testthat
 Collate:
   'polyhedra-lib.R'
   'zzz.R'
+bugReports: https://github.com/qbotics/Rpolyhedra/issues

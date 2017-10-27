@@ -5,7 +5,7 @@
 \alias{rpolyhedra}
 \alias{.onLoad}
 \alias{rpolyhedra-package}
-\title{rpolyhedra}
+\title{Rpolyhedra}
 \usage{
 .onLoad(libname, pkgname)
 }
@@ -15,9 +15,12 @@
 \item{pkgname}{Package name}
 }
 \description{
-A package to replace the now defunct poly command.
+polyhedra database
+}
+\details{
+A 142 polyhedra database scraped from PHD files <http://paulbourke.net/dataformats/phd/> as R6 objects and rgl visualizing capabilities. The PHD format was created to describe the geometric polyhedra definitions derived mathematically <http://www.netlib.org/polyhedra/> by Andrew Hume and by the Kaleido program of Zvi Har'El.
 }
 \author{
-Alejandro Baranek <alejandrobaranek@gmail.com>, Leonardo Javier Belen <leobelen@gmail.com>
+Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Javier Belen <leobelen@gmail.com>
 Executes code while loading the package.
 }
