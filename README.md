@@ -13,7 +13,7 @@ For navigating
 Install the R package using the following commands on the R console:
 
 ```R
-install.packages("devtools")
+install.packages(c("futile.logger", "rgl", "stringr", "R6", "testthat", "devtools"))
 devtools::install_github("qbotics/Rpolyhedra")
 library(Rpolyhedra)
 ```
@@ -34,7 +34,7 @@ rgl.bg( sphere =FALSE, fogtype = "none", color=c("black"))
 rgl.viewpoint(theta = 0,phi=0,zoom=0.8,fov=1)
 i <- 1
 for (polyhedron.name in polyhedra.2.draw) {
-  polyhedron <- polyhedra[[polyhedron.name]]
+  polyhedron <- getPolyhedron(polyhedron.name)
   current.angle <- i/n * 2 * pi
   shape.rgl <- polyhedron$getRGLModel(1, c(polyhedron.scale * sin(current.angle),
                                            polyhedron.scale * cos(current.angle),

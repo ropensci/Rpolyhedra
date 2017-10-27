@@ -6,6 +6,13 @@
 \usage{
 getAvailablePolyhedra()
 }
+\value{
+polyhedra names vector
+}
 \description{
 Gets the list of available polyhedra
+}
+\examples{
+getAvailablePolyhedra()
+
 }
