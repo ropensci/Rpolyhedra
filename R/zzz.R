@@ -19,11 +19,11 @@
     Sys.setenv(TZ = "GMT")
     futile.logger::flog.appender(futile.logger::appender.tee("RPolyedra.log"), name = "data.io")
     futile.logger::flog.threshold(futile.logger::DEBUG)
-    polyhedra.rds.file<-getPolyhedraRDSPath()
+    polyhedra.rds.file <- getPolyhedraRDSPath()
     if (file.exists(polyhedra.rds.file)) {
         polyhedra <- readRDS(getPolyhedraRDSPath())
     } else {
-      polyhedra <- scrapePolyhedra(test = FALSE)
+        polyhedra <- scrapePolyhedra(test = FALSE)
     }
     assign("polyhedra", value = polyhedra, envir = parent.env(environment()))
 }
