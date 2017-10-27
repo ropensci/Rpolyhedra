@@ -1,6 +1,6 @@
  # Rpolyhedra
 
- A 142 polyhedra Database scraped from PHD as R6 objects and RGL visualizing capabilities. The PHD format was created to describe the geometric polyhedron definitions derived mathematically by Andrew Hume and by the Kaleido program of Zvi Har'El.
+ A 142 polyhedra Database scraped from PHD as R6 objects and 'rgl' visualizing capabilities. The PHD format was created to describe the geometric polyhedron definitions derived mathematically by Andrew Hume and by the Kaleido program of Zvi Har'El.
 
  PHD files were generated using  [[http://www.netlib.org/poly2/readme]](poly2) library which is no longer mantained. Althought the code is available, "archeological" programming skills are required for building it with current progamming languages standards.
 
