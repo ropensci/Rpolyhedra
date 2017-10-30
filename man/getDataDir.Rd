@@ -9,7 +9,3 @@ getDataDir()
 \description{
 Get the path of package data
 }
-\examples{
-## returns current data directory for Rpolyhedra lib
-getDataDir()
-}
