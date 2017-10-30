@@ -49,6 +49,9 @@ getPolyhedron <- function(name) {
 
 
 #' Get the path of package data
+#' @examples
+#' ## returns current data directory for Rpolyhedra lib
+#' getDataDir()
 getDataDir <- function() {
     home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
     data.subdir <- "inst/extdata/"
@@ -59,6 +62,9 @@ getDataDir <- function() {
 
 #' Get the path of Polyhedra RDS file
 #' @param polyhedra.rds.filename filename of polyhedra database
+#' @examples
+#' ## returns current path for polyhedra data container
+#' getPolyhedraRDSPath()
 getPolyhedraRDSPath <- function(polyhedra.rds.filename = "polyhedra.RDS") {
     paste(getDataDir(), polyhedra.rds.filename, sep = "")
 }
@@ -354,10 +360,16 @@ Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state =
 }))
 
 
-#' scrape Polyhedra in data dir and saves a representation. It has regression test funcionality
+#' scrape all polyhedra in data dir and saves a representation.
 #' @param max.quant maximum quantity of polyhedra to scrape
 #' @param test scrape polyhedra and compare it with preloaded version
 #' @param save.rds.force force save of database scraped
+#' @examples
+#' ## Scrape first 15 polyhedra in directory
+#' scrapePolyhedra(max.quant = 15, test = FALSE)
+#'
+#'
+
 scrapePolyhedra <- function(max.quant = 0, test = TRUE, save.rds.force = FALSE) {
     home.dir.data <- getDataDir()
 

@@ -12,3 +12,7 @@ getPolyhedraRDSPath(polyhedra.rds.filename = "polyhedra.RDS")
 \description{
 Get the path of Polyhedra RDS file
 }
+\examples{
+## returns current path for polyhedra data container
+getPolyhedraRDSPath()
+}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/polyhedra-lib.R
 \name{scrapePolyhedra}
 \alias{scrapePolyhedra}
-\title{scrape Polyhedra in data dir and saves a representation. It has regression test funcionality}
+\title{scrape all polyhedra in data dir and saves a representation.}
 \usage{
 scrapePolyhedra(max.quant = 0, test = TRUE, save.rds.force = FALSE)
 }
@@ -14,5 +14,11 @@ scrapePolyhedra(max.quant = 0, test = TRUE, save.rds.force = FALSE)
 \item{save.rds.force}{force save of database scraped}
 }
 \description{
-scrape Polyhedra in data dir and saves a representation. It has regression test funcionality
+scrape all polyhedra in data dir and saves a representation.
+}
+\examples{
+## Scrape first 15 polyhedra in directory
+scrapePolyhedra(max.quant = 15, test = FALSE)
+
+
 }
