@@ -49,9 +49,9 @@ getPolyhedron <- function(name) {
 
 
 #' Get the path of package data
-#' @examples
-#' ## returns current data directory for Rpolyhedra lib
-#' getDataDir()
+# @examples
+# ## returns current data directory for Rpolyhedra lib
+# getDataDir()
 getDataDir <- function() {
     home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
     data.subdir <- "inst/extdata/"
