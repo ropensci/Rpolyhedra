@@ -1,0 +1,41 @@
+Simplest Canonical Polyhedron with D7h Symmetry (2 of 2) (Heptagonal Prism)
+
+C0 = 0.222520933956314404288902564497 = sin(pi/14)
+C1 = 0.433883739117558120475768332848
+C2 = 0.623489801858733530525004884004
+C3 = 0.781831482468029808708444526674
+C4 = 0.900968867902419126236102319507 = cos(pi/7)
+C5 = 0.974927912181823607018131682994
+
+C0 = root of the polynomial:  8*(x^3) - 4*(x^2) - 4*x + 1
+C1 = square-root of a root of the polynomial:  64*(x^3) - 112*(x^2) + 56*x - 7
+C2 = root of the polynomial:  8*(x^3) + 4*(x^2) - 4*x - 1
+C3 = square-root of a root of the polynomial:  64*(x^3) - 112*(x^2) + 56*x - 7
+C4 = root of the polynomial:  8*(x^3) - 4*(x^2) - 4*x + 1
+C5 = square-root of a root of the polynomial:  64*(x^3) - 112*(x^2) + 56*x - 7
+
+V0  = ( C5, -C0,  C1)
+V1  = ( C5, -C0, -C1)
+V2  = (-C5, -C0,  C1)
+V3  = (-C5, -C0, -C1)
+V4  = ( C3,  C2,  C1)
+V5  = ( C3,  C2, -C1)
+V6  = (-C3,  C2,  C1)
+V7  = (-C3,  C2, -C1)
+V8  = ( C1, -C4,  C1)
+V9  = ( C1, -C4, -C1)
+V10 = (-C1, -C4,  C1)
+V11 = (-C1, -C4, -C1)
+V12 = (0.0, 1.0,  C1)
+V13 = (0.0, 1.0, -C1)
+
+Faces:
+{  0,  4, 12,  6,  2, 10,  8 }
+{  1,  9, 11,  3,  7, 13,  5 }
+{  0,  1,  5,  4 }
+{  4,  5, 13, 12 }
+{ 12, 13,  7,  6 }
+{  6,  7,  3,  2 }
+{  2,  3, 11, 10 }
+{ 10, 11,  9,  8 }
+{  8,  9,  1,  0 }

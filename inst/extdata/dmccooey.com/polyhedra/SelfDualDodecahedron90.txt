@@ -1,0 +1,73 @@
+Self-Dual Dodecahedron #90 (canonical)
+
+C0  = 0.1090428964940354048246569108351
+C1  = 0.123736212629287519107646080754
+C2  = 0.242764223412838486842883777237
+C3  = 0.258708351307303420481676609106
+C4  = 0.334448222029562531717617970591
+C5  = 0.423150542702685025176988875883
+C6  = 0.472645027754400032820047308184
+C7  = 0.558208582063247555280240440426
+C8  = 0.593222460681020208478615862699
+C9  = 0.8812529022585074145957196603047
+C10 = 0.907798428748127260306332577610
+C11 = 0.945670345041356199588860068999
+C12 = 0.965955479804248989057082520491
+C13 = 1.068384219711109461106383428749
+C14 = 1.25511203090297965024938638198
+C15 = 2.11575271351342512588494437941
+
+C0  = square-root of a root of the polynomial:
+    361*(x^3) - 1082*(x^2) - 660*x + 8
+C1  = square-root of a root of the polynomial:
+    19*(x^3) - 159*(x^2) + 329*x - 5
+C2  = square-root of a root of the polynomial:
+    169*(x^3) + 198*(x^2) - 148*x + 8
+C3  = square-root of a root of the polynomial:
+    16055*(x^3) - 49291*(x^2) + 30853*x - 1849
+C4  = square-root of a root of the polynomial:
+    592895*(x^3) - 863291*(x^2) + 191501*x - 11449
+C5  = square-root of a root of the polynomial:
+    3125*(x^3) - 3625*(x^2) + 655*x - 19
+C6  = square-root of a root of the polynomial:  95*(x^3) - 131*(x^2) + 29*x - 1
+C7  = square-root of a root of the polynomial:  25*(x^3) - 26*(x^2) - 20*x + 8
+C8  = square-root of a root of the polynomial:
+    95*(x^3) + 1936*(x^2) - 784*x + 32
+C9  = square-root of a root of the polynomial:  95*(x^3) - 154*(x^2) + 52*x + 8
+C10 = square-root of a root of the polynomial:
+    3125*(x^3) + 13000*(x^2) - 24640*x + 9728
+C11 = square-root of a root of the polynomial:
+    592895*(x^3) - 443624*(x^2) - 78016*x + 512
+C12 = square-root of a root of the polynomial:
+    16055*(x^3) + 1126*(x^2) - 19564*x + 4232
+C13 = square-root of a root of the polynomial:
+    19*(x^3) + 216*(x^2) - 832*x + 640
+C14 = square-root of a root of the polynomial:  (x^3) + 16*(x^2) - 48*x + 32
+C15 = square-root of a root of the polynomial:  (x^3) - 29*(x^2) + 131*x - 95
+
+V0  = ( C14,   C8, -C6)
+V1  = (-C14,   C8, -C6)
+V2  = (  C7,  -C9, -C6)
+V3  = ( -C7,  -C9, -C6)
+V4  = (  C0,   C9, -C6)
+V5  = ( -C0,   C9, -C6)
+V6  = (  C2, -C12,  C3)
+V7  = ( -C2, -C12,  C3)
+V8  = ( 0.0,  0.0, C15)
+V9  = ( 0.0, -C10,  C5)
+V10 = ( 0.0,  C11, -C4)
+V11 = ( 0.0,  C13,  C1)
+
+Faces:
+{  0,  2,  3,  1,  5,  4 }
+{  0,  4, 10, 11 }
+{  0,  8,  6,  2 }
+{  1,  3,  7,  8 }
+{  1, 11, 10,  5 }
+{  2,  6,  7,  3 }
+{  8,  0, 11 }
+{  8,  7,  9 }
+{  8,  9,  6 }
+{  8, 11,  1 }
+{  4,  5, 10 }
+{  6,  9,  7 }

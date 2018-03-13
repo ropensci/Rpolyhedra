@@ -18,57 +18,69 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource div.sourceLine, .numberSource a.sourceLine
+pre.numberSource a.sourceLine
   { position: relative; }
-pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
     position: absolute; left: -5em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em; }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; color: #aaaaaa;  padding-left: 4px; }
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
 @media screen {
-a.sourceLine::before { text-decoration: underline; color = initial; }
+a.sourceLine::before { text-decoration: underline; }
 }
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code span.dt { color: #902000; } /* DataType */
 code span.dv { color: #40a070; } /* DecVal */
-code span.bn { color: #40a070; } /* BaseN */
-code span.fl { color: #40a070; } /* Float */
-code span.ch { color: #4070a0; } /* Char */
-code span.st { color: #4070a0; } /* String */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.ot { color: #007020; } /* Other */
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.fu { color: #06287e; } /* Function */
 code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code span.cn { color: #880000; } /* Constant */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.im { } /* Import */
-code span.va { color: #19177c; } /* Variable */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.op { color: #666666; } /* Operator */
-code span.bu { } /* BuiltIn */
 code span.ex { } /* Extension */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.at { color: #7d9029; } /* Attribute */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -268,7 +280,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 
-<p>#Introduction This package is a curation made based on the poly package found on <a href="http://www.netlib.org/polyhedra/" class="uri">http://www.netlib.org/polyhedra/</a> (<a href="poly_original_help_message.html">Original Help message</a>), which provides a library of polyhedron and its representation. As such, Rpolyhedra provides with the following:</p>
+<p>#Introduction This package is a curation made based on based on the poly package found on <a href="http://www.netlib.org/polyhedra/" class="uri">http://www.netlib.org/polyhedra/</a> (<a href="poly_original_help_message.html">Original Help message</a>), and the polyhedra database found on <a href="https://www.dmccooey.com/polyhedra" class="uri">https://www.dmccooey.com/polyhedra</a>, both of which provide a library of polyhedron and its representation. As such, Rpolyhedra provides with the following:</p>
 <ol type="1">
 <li>A module to scrape the polyhedra PHD files provided by the original poly command.</li>
 <li>A library of the scraped polyhedra.</li>
@@ -276,35 +288,39 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </ol>
 <p>#Usage The package provides a simplified set of functions to scrape, show the scrapped polyhedra and access each individual polyhedron.</p>
 <p>##Scrape polyhedra In order to scrape, the following code can be executed to retrieve all polyhedra from the original files produced by the poly command.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">library</span>(Rpolyhedra)</div>
-<div class="sourceLine" id="2" href="#2" data-line-number="2">polyhedra &lt;-<span class="st"> </span><span class="kw">scrapePolyhedra</span>(<span class="dt">max.quant =</span> <span class="dv">5</span>, <span class="st">&quot;polyhedra.RDS&quot;</span>, <span class="dt">home.dir.data =</span> <span class="kw">getDataDir</span>(),</div>
-<div class="sourceLine" id="3" href="#3" data-line-number="3">        <span class="dt">test =</span> <span class="ot">TRUE</span>)</div></code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(rgl)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(Rpolyhedra)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">polyhedra &lt;-<span class="st"> </span><span class="kw">scrapePolyhedraSources</span>(<span class="dt">sources.config =</span> PolyhedronScraperConfigurationNetlib.class<span class="op">$</span><span class="kw">new</span>(), <span class="dt">max.quant =</span> <span class="dv">5</span>)</a></code></pre></div>
 <p>##Get available polyhedra Once the original files had been processed, a simple call to <code>getAvailablePolyhedra()</code> retrieves a list of the available polyhedra:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">library</span>(Rpolyhedra)</div>
-<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="kw">getAvailablePolyhedra</span>()</div></code></pre>
-<p>##Retrieve a polyhedron The access to a particular polyhedron can be done with a call to <code>getPolyhedron(&lt;&lt;name&gt;&gt;)</code>, which returns a Polyhedron object. For example, to retrieve a cube, the call would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><div class="sourceLine" id="1" href="#1" data-line-number="1"><span class="kw">library</span>(Rpolyhedra)</div>
-<div class="sourceLine" id="2" href="#2" data-line-number="2"><span class="kw">getPolyhedron</span>(<span class="st">&quot;cube&quot;</span>)</div></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(rgl)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(Rpolyhedra)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">getAvailablePolyhedra</span>()</a></code></pre></div>
+<p>##Retrieve a polyhedron The access to a particular polyhedron can be done with a call to <code>getPolyhedron(&lt;&lt;source&gt;&gt;, &lt;&lt;polyhedron.name&gt;&gt;)</code>, which returns a Polyhedron object. For example, to retrieve a cube from the netlib database, the call would be:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(rgl)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(Rpolyhedra)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">cube &lt;-<span class="st"> </span><span class="kw">getPolyhedron</span>(<span class="dt">source =</span> <span class="st">&quot;netlib&quot;</span>, <span class="dt">polyhedron.name =</span> <span class="st">&quot;cube&quot;</span>)</a></code></pre></div>
 <p>#A demo To try package funcionality, a simple demo can be executed which shows the 5 regular polyhedra.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><div class="sourceLine" id="1" href="#1" data-line-number="1">polyhedra.<span class="fl">2.</span>draw &lt;-<span class="st"> </span><span class="kw">getAvailablePolyhedra</span>()[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</div>
-<div class="sourceLine" id="2" href="#2" data-line-number="2">n &lt;-<span class="st"> </span><span class="kw">length</span>(polyhedra.<span class="fl">2.</span>draw)</div>
-<div class="sourceLine" id="3" href="#3" data-line-number="3">polyhedron.colors &lt;-<span class="st"> </span><span class="kw">rainbow</span>(n)</div>
-<div class="sourceLine" id="4" href="#4" data-line-number="4">polyhedron.scale &lt;-<span class="st"> </span><span class="dv">5</span></div>
-<div class="sourceLine" id="5" href="#5" data-line-number="5"></div>
-<div class="sourceLine" id="6" href="#6" data-line-number="6"><span class="kw">open3d</span>()</div>
-<div class="sourceLine" id="7" href="#7" data-line-number="7"><span class="kw">par3d</span>(<span class="dt">FOV =</span> <span class="dv">1</span>)</div>
-<div class="sourceLine" id="8" href="#8" data-line-number="8"><span class="kw">rgl.bg</span>( <span class="dt">sphere =</span><span class="ot">FALSE</span>, <span class="dt">fogtype =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">color=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>))</div>
-<div class="sourceLine" id="9" href="#9" data-line-number="9"><span class="kw">rgl.viewpoint</span>(<span class="dt">theta =</span> <span class="dv">0</span>,<span class="dt">phi=</span><span class="dv">0</span>,<span class="dt">zoom=</span><span class="fl">0.8</span>,<span class="dt">fov=</span><span class="dv">1</span>)</div>
-<div class="sourceLine" id="10" href="#10" data-line-number="10">i &lt;-<span class="st"> </span><span class="dv">1</span></div>
-<div class="sourceLine" id="11" href="#11" data-line-number="11"><span class="cf">for</span> (polyhedron.name <span class="cf">in</span> polyhedra.<span class="fl">2.</span>draw) {</div>
-<div class="sourceLine" id="12" href="#12" data-line-number="12">  polyhedron &lt;-<span class="st"> </span><span class="kw">getPolyhedron</span>(polyhedron.name)</div>
-<div class="sourceLine" id="13" href="#13" data-line-number="13">  current.angle &lt;-<span class="st"> </span>i<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>pi</div>
-<div class="sourceLine" id="14" href="#14" data-line-number="14">  shape.rgl &lt;-<span class="st"> </span>polyhedron<span class="op">$</span><span class="kw">getRGLModel</span>(<span class="dv">1</span>, <span class="kw">c</span>(polyhedron.scale <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(current.angle),</div>
-<div class="sourceLine" id="15" href="#15" data-line-number="15">                                           polyhedron.scale <span class="op">*</span><span class="st"> </span><span class="kw">cos</span>(current.angle),</div>
-<div class="sourceLine" id="16" href="#16" data-line-number="16">                                           <span class="dv">0</span>))</div>
-<div class="sourceLine" id="17" href="#17" data-line-number="17">  <span class="kw">shade3d</span>(shape.rgl, <span class="dt">color =</span> polyhedron.colors[i])</div>
-<div class="sourceLine" id="18" href="#18" data-line-number="18">  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></div>
-<div class="sourceLine" id="19" href="#19" data-line-number="19">}</div></code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(rgl)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">library</span>(Rpolyhedra)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">polyhedra.<span class="fl">2.</span>draw &lt;-<span class="st"> </span><span class="kw">getAvailablePolyhedra</span>(<span class="dt">source =</span> <span class="st">&quot;netlib&quot;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">n &lt;-<span class="st"> </span><span class="kw">length</span>(polyhedra.<span class="fl">2.</span>draw)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">polyhedron.colors &lt;-<span class="st"> </span><span class="kw">rainbow</span>(n)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">polyhedron.scale &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">open3d</span>()</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="kw">par3d</span>(<span class="dt">FOV =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="kw">rgl.bg</span>( <span class="dt">sphere =</span><span class="ot">FALSE</span>, <span class="dt">fogtype =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">color=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>))</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw">rgl.viewpoint</span>(<span class="dt">theta =</span> <span class="dv">0</span>,<span class="dt">phi=</span><span class="dv">0</span>,<span class="dt">zoom=</span><span class="fl">0.8</span>,<span class="dt">fov=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">i &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="cf">for</span> (polyhedron.name <span class="cf">in</span> polyhedra.<span class="fl">2.</span>draw) {</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">  polyhedron &lt;-<span class="st"> </span><span class="kw">getPolyhedron</span>(<span class="dt">source =</span> <span class="st">&quot;netlib&quot;</span>, polyhedron.name)</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">  current.angle &lt;-<span class="st"> </span>i<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>pi</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">  shape.rgl &lt;-<span class="st"> </span>polyhedron<span class="op">$</span><span class="kw">getRGLModel</span>(<span class="dv">1</span>, <span class="kw">c</span>(polyhedron.scale <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(current.angle),</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">                                           polyhedron.scale <span class="op">*</span><span class="st"> </span><span class="kw">cos</span>(current.angle),</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">                                           <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">  <span class="kw">shade3d</span>(shape.rgl, <span class="dt">color =</span> polyhedron.colors[i])</a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">}</a></code></pre></div>
 
 
 

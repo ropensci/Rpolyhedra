@@ -1,0 +1,43 @@
+Simplest Canonical Polyhedron with D7h Symmetry (1 of 2) (Heptagonal Dipyramid)
+
+C0 = 0.246979603717467061050009768008
+C1 = 0.481574618807528644332162353057
+C2 = 0.692021471630095869627814897002
+C3 = 0.867767478235116240951536665697
+C4 = 1.08208834612853097308472670029
+C5 = 1.10991626417474238284438974201
+C6 = 2.304764870962486505241150223547 = 1 / sin(pi/7)
+
+C0 = root of the polynomial:  (x^3) + 4*(x^2) + 3*x - 1
+C1 = square-root of a root of the polynomial:  (x^3) - 21*(x^2) + 35*x - 7
+C2 = root of the polynomial:  (x^3) + 3*(x^2) - 4*x + 1
+C3 = square-root of a root of the polynomial:  (x^3) - 7*(x^2) + 14*x - 7
+C4 = square-root of a root of the polynomial:  (x^3) - 14*(x^2) + 21*x - 7
+C5 = root of the polynomial:  (x^3) - 4*(x^2) - 4*x + 8
+C6 = square-root of a root of the polynomial:  7*(x^3) - 56*(x^2) + 112*x - 64
+
+V0 = (0.0, 0.0,  C6)
+V1 = (0.0, 0.0, -C6)
+V2 = ( C4,  C0, 0.0)
+V3 = (-C4,  C0, 0.0)
+V4 = ( C3, -C2, 0.0)
+V5 = (-C3, -C2, 0.0)
+V6 = ( C1, 1.0, 0.0)
+V7 = (-C1, 1.0, 0.0)
+V8 = (0.0, -C5, 0.0)
+
+Faces:
+{ 0, 2, 6 }
+{ 0, 6, 7 }
+{ 0, 7, 3 }
+{ 0, 3, 5 }
+{ 0, 5, 8 }
+{ 0, 8, 4 }
+{ 0, 4, 2 }
+{ 1, 2, 4 }
+{ 1, 4, 8 }
+{ 1, 8, 5 }
+{ 1, 5, 3 }
+{ 1, 3, 7 }
+{ 1, 7, 6 }
+{ 1, 6, 2 }

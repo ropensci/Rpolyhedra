@@ -1,0 +1,53 @@
+Simplest Canonical Polyhedron with D9h Symmetry (1 of 2) (Enneagonal Dipyramid)
+
+C0 = 0.184792530904095372701352047572
+C1 = 0.363970234266202361351047882777
+C2 = 0.532088886237956070404785301111
+C3 = 0.68404028665133746608819922936452
+C4 = 0.815207469095904627298647952428
+C5 = 0.921604985106876291294238937038
+C6 = 1.04801052091753982743924711214
+C7 = 1.06417777247591214080957060222
+C8 = 2.92380440016308725223275441337
+
+C0 = root of the polynomial:  (x^3) + 3*(x^2) - 6*x + 1
+C1 = square-root of a root of the polynomial:  (x^3) - 33*(x^2) + 27*x - 3
+C2 = root of the polynomial:  (x^3) + 3*(x^2) - 1
+C3 = square-root of a root of the polynomial:  (x^3) - 6*(x^2) + 9*x - 3
+C4 = root of the polynomial:  (x^3) - 6*(x^2) + 3*x + 1
+C5 = square-root of a root of the polynomial:  (x^3) - 27*(x^2) + 54*x - 27
+C6 = square-root of a root of the polynomial:  (x^3) - 15*(x^2) + 18*x - 3
+C7 = root of the polynomial:  (x^3) + 6*(x^2) - 8
+C8 = square-root of a root of the polynomial:  3*(x^3) - 36*(x^2) + 96*x - 64
+
+V0  = (0.0, 0.0, -C8)
+V1  = (0.0, 0.0,  C8)
+V2  = ( C6, -C0, 0.0)
+V3  = (-C6, -C0, 0.0)
+V4  = ( C5,  C2, 0.0)
+V5  = (-C5,  C2, 0.0)
+V6  = ( C3, -C4, 0.0)
+V7  = (-C3, -C4, 0.0)
+V8  = ( C1, 1.0, 0.0)
+V9  = (-C1, 1.0, 0.0)
+V10 = (0.0, -C7, 0.0)
+
+Faces:
+{  0,  2,  6 }
+{  0,  6, 10 }
+{  0, 10,  7 }
+{  0,  7,  3 }
+{  0,  3,  5 }
+{  0,  5,  9 }
+{  0,  9,  8 }
+{  0,  8,  4 }
+{  0,  4,  2 }
+{  1,  2,  4 }
+{  1,  4,  8 }
+{  1,  8,  9 }
+{  1,  9,  5 }
+{  1,  5,  3 }
+{  1,  3,  7 }
+{  1,  7, 10 }
+{  1, 10,  6 }
+{  1,  6,  2 }

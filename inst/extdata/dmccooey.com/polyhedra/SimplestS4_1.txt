@@ -1,0 +1,45 @@
+Simplest Canonical Polyhedron with S4 Symmetry (1 of 2)
+
+C0 = 0.299777872862282828851272703628
+C1 = 0.360313460706274934573852723020
+C2 = 0.661206432957571218646476111769
+C3 = 0.709737043160654673917487917849
+C4 = 1.17661419773267604108961848501
+C5 = 1.41421356237309504880168872421
+
+C0 = square-root of a root of the polynomial:
+    (x^4) + 6*(x^3) + 12*(x^2) + 10*x - 1
+C1 = square-root of a root of the polynomial:
+    (x^4) + 24*(x^3) + 280*(x^2) - 160*x + 16
+C2 = square-root of a root of the polynomial:
+    (x^4) - 16*(x^3) + 1888*(x^2) - 1408*x + 256
+C3 = square-root of a root of the polynomial:
+    (x^4) - 2*(x^3) + 444*(x^2) - 126*x - 49
+C4 = square-root of a root of the polynomial:
+    (x^4) + 14*(x^3) - 28*(x^2) + 10*x - 1
+C5 = sqrt(2)
+
+V0 = (0.0, 0.0,  C4)
+V1 = (0.0, 0.0, -C4)
+V2 = ( C1,  C2,  C3)
+V3 = (-C1, -C2,  C3)
+V4 = ( C2, -C1, -C3)
+V5 = (-C2,  C1, -C3)
+V6 = ( C5, 0.0,  C0)
+V7 = (-C5, 0.0,  C0)
+V8 = (0.0,  C5, -C0)
+V9 = (0.0, -C5, -C0)
+
+Faces:
+{ 0, 2, 8, 7 }
+{ 0, 3, 9, 6 }
+{ 1, 8, 6, 4 }
+{ 1, 9, 7, 5 }
+{ 2, 0, 6 }
+{ 2, 6, 8 }
+{ 3, 0, 7 }
+{ 3, 7, 9 }
+{ 4, 6, 9 }
+{ 4, 9, 1 }
+{ 5, 7, 8 }
+{ 5, 8, 1 }

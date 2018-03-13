@@ -1,0 +1,42 @@
+Simplest Canonical Polyhedron with C9v Symmetry (Enneagonal Pyramid)
+
+C0 = 0.147955904479076327030170123453
+C1 = 0.253333322869124623199377205440
+C2 = 0.546636806188645068376696383624
+C3 = 0.584036489173247542393117192847
+C4 = 0.698888493528037043536091625296
+C5 = 0.758770483143633536216437109299
+C6 = 0.874851972962163370741106048768
+C7 = 3.94736858410298178899827809593
+
+C0 = root of the polynomial:  (x^3) + 15*(x^2) - 9*x + 1
+C1 = square-root of a root of the polynomial:  (x^3) + 9*(x^2) + 15*x - 1
+C2 = root of the polynomial:  (x^3) - 15*(x^2) + 39*x - 17
+C3 = square-root of a root of the polynomial:  (x^3) + 105*(x^2) - 33*x - 1
+C4 = square-root of a root of the polynomial:  (x^3) + 57*(x^2) + 711*x - 361
+C5 = root of the polynomial:  (x^3) + 9*(x^2) + 15*x - 17
+C6 = square-root of a root of the polynomial:  (x^3)+153*(x^2)+1671*x-1369
+C7 = square-root of a root of the polynomial:  (x^3) - 15*(x^2) - 9*x - 1
+
+V0 = ( C7,  C7, -1.0)
+V1 = (-C1, -C1, -1.0)
+V2 = ( C1, -C1,  1.0)
+V3 = (-C1,  C1,  1.0)
+V4 = ( C1, -C4,  -C5)
+V5 = (-C4,  C1,  -C5)
+V6 = ( C3, -C4,   C2)
+V7 = (-C4,  C3,   C2)
+V8 = ( C3, -C6,  -C0)
+V9 = (-C6,  C3,  -C0)
+
+Faces:
+{ 1, 4, 8, 6, 2, 3, 7, 9, 5 }
+{ 0, 1, 5 }
+{ 0, 5, 9 }
+{ 0, 9, 7 }
+{ 0, 7, 3 }
+{ 0, 3, 2 }
+{ 0, 2, 6 }
+{ 0, 6, 8 }
+{ 0, 8, 4 }
+{ 0, 4, 1 }
