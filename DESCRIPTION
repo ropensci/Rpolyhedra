@@ -25,6 +25,7 @@ Imports: futile.logger,
 Collate:
   'xml-lib.R'
   'polyhedra-lib.R'
+  'ledger-lib.R'
   'db-lib.R'
   'zzz.R'
 BugReports: https://github.com/qbotics/Rpolyhedra/issues

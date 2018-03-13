@@ -206,9 +206,9 @@ initialize = function(number, netlib.p3.lines) {
     } else {
         solid <- NULL
     }
-    # TODO
+    #TODO
     hinges <- NULL
-    # TODO
+    #TODO
     dih <- NULL
     vertices <- self$scrapeVertices(vertices.txt)
 
