@@ -18,7 +18,7 @@ Scrapes all polyhedra in data folder to save a representation which is accesible
 
 \item{\code{sources.config}}{Sources configuration for scraping different sources}
 
-\item{\code{record}}{rr record of scraping process}
+\item{\code{ledger}}{rr ledger of scraping process}
 
 \item{\code{data}}{Polyhedra data from different sources}
 }}

@@ -83,7 +83,6 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class("PolyhedronScraperConf
       polyhedron.number <- polyhedron.filename
       polyhedron.number <- strsplit(polyhedron.number,split = "/")[[1]]
       polyhedron.number <- as.numeric(polyhedron.number[length(polyhedron.number)])
-      #TODO check polyhedron number
       current.polyhedron <- Polyhedron.class$new(number=polyhedron.number)
       current.polyhedron$scrapeNetlib(netlib.p3.lines = polyhedra.netlib.lines)
       futile.logger::flog.debug(paste("parsed", polyhedron.filename, "with name",
@@ -135,7 +134,7 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class("PolyhedronScraperCon
       geodesic.order  <- geodesic.order[1:50,]
       non.geodesic.files <- polyhedra.files[-which(polyhedra.files %in% geodesic.order$filename)]
       polyhedra.files <- c(geodesic.order$filename,non.geodesic.files[order(non.geodesic.files)])
-      #TODO remove geodesic files from proirity when everything works ok.
+      #TODO remove geodesic files from priority when everything works ok.
       polyhedra.files
     },
     scrape = function(polyhedron.number, polyhedron.filename){
@@ -165,198 +164,23 @@ getGitCommit <- function(){
   git_id
 }
 
-#' ScraperRecord
-#' TODO add doc
 
-ScraperRecord.class <- R6::R6Class("ScraperRecord",
-  public = list(
-    states = NULL,
-    df = NA,
-    preloaded.complexities.filename = NA,
-    preloaded.complexities = NA,
-    initialize = function() {
-      self$df <- data.frame(id           = character(),
-                            source       = character(),
-                            number       = numeric(),
-                            filename     = character(),
-                            start.scrape = as.POSIXct(character()),
-                            end.scrape   = as.POSIXct(character()),
-                            status       = character(),
-                            scraped.name = character(),
-                            status.test  = character(),
-                            obs          = character(),
-                            git.commit   = character(),
-                            time.scraped = numeric(),
-                            preloaded.time2scrape = numeric(),
-                            stringsAsFactors = FALSE)
-      self$resetStatesMetrics()
-      self$loadPreloadedComplexities()
-      self
-    },
-    addFilename = function(source, filename){
-      r <- NULL
-      default.status <- "queued"
-      if (is.null(self$getIdFilename(source, filename))){
-        r <- nrow(self$df)+1
-        status.field <- "status"
-        self$countStatusUse(status.field = status.field, status = default.status)
-        #TODO make abstraction as method
-        states.row <- which(self$states$status.field %in% status.field &
-                                    self$states$status %in% default.status)
-        number <- self$states[states.row,"count"]
-
-        #obtain preloaded.time2scrape
-        row.preloaded.t2s <- which(self$preloaded.complexities$source == source &
-                                     self$preloaded.complexities$filename==filename)
-        if (length(row.preloaded.t2s)==1){
-          preloaded.time2scrape <- as.numeric(self$preloaded.complexities[row.preloaded.t2s,"time2scrape"])
-        }
-        else{
-          preloaded.time2scrape <- NA
-        }
-        self$df[r,c("id","source","filename","status")]<- c(r,source,filename,default.status)
-        self$df[r,c("number","preloaded.time2scrape")]<- c(number,preloaded.time2scrape)
-      }
-      r
-    },
-    getIdFilename = function(source, filename){
-      r <- which(self$df$source == source & self$df$filename == filename)
-      if (length(r)>0){
-        self$df[r,"id"]
-      }
-      else{
-        r <- NULL
-      }
-      r
-    },
-    updateStatus = function(source, filename, status, status.field = "status",
-                            scraped.name = NA, obs =""){
-      if (is.null(obs)){
-        obs <- ""
-      }
-      if (!status.field %in% c("status","status.test"))
-        stop(paste("Cannot update invalid status field",status.field))
-      ret <- NULL
-      retrieved.id <- self$getIdFilename(source = source, filename = filename)
-      if (length(retrieved.id)!=1){
-        stop(paste("There must be a unique row for",source,filename,"and have",length(retrieved.id)))
-      }
-      if (status.field == "status"){
-        end.scrape <- Sys.time()
-        if (status == "scraping"){
-          fields.update <- c("start.scrape")
-          values.update <- as.character(end.scrape)
-        }
-        if (status %in% c("scraped","failed","skipped","exception")){
-          fields.update <- c("end.scrape", "scraped.name", "git.commit","time.scraped")
-          start.scrape  <- self$df[retrieved.id,"start.scrape"]
-          time.scraped  <- round(as.numeric(end.scrape - start.scrape),3)
-          values.update <- c(as.character(end.scrape), scraped.name, getGitCommit(),time.scraped)
-        }
-      }
-      if (status.field == "status.test"){
-        #status.test only possible value
-        if (status %in% c("tested","testing","failed")){
-          fields.update <- NULL
-          values.update <- NULL
-        }
-      }
-
-      fields.update  <- c(fields.update,status.field,"obs")
-      values.update  <- c(values.update,status,obs)
-
-      self$df[retrieved.id,fields.update] <- values.update
-      ret <- self$df[retrieved.id,]
-      #count status uses
-      self$countStatusUse(status.field,status)
-      ret
-    },
-    savePreloadedComplexities = function(){
-      preloaded.complexities <- self$df[!is.na(self$df$time.scraped),c("source","filename","time.scraped")]
-      preloaded.complexities <- preloaded.complexities[order(preloaded.complexities$time.scraped,
-                                                             preloaded.complexities$source,
-                                                             preloaded.complexities$filename),]
-      names(preloaded.complexities)[3]<-"time2scrape"
-      write.csv(preloaded.complexities, self$preloaded.complexities.filename,
-                row.names = FALSE)
-      preloaded.complexities
-    },
-    loadPreloadedComplexities = function(){
-      self$preloaded.complexities.filename <- paste(getDataDir(),"polyhedra.complexity.csv",sep="")
-      self$preloaded.complexities <- read.csv(paste(getDataDir(),"polyhedra.complexity.csv",sep=""))
-      self$preloaded.complexities
-    },
-    getSizeToTimeScrape = function(sources, time2scrape = 60){
-      pre.comp.source <- self$preloaded.complexities[self$preloaded.complexities$source %in% sources,]
-      pre.comp.source <- pre.comp.source[order(pre.comp.source$time2scrape,
-                                               pre.comp.source$source,
-                                               pre.comp.source$filename),]
-      pre.comp.source$cummsum <- cumsum(pre.comp.source$time2scrape)
-      length(which(pre.comp.source$cummsum<time2scrape))
-    },
-    resetStatesMetrics = function(){
-      self$states <- data.frame(status.field = character(),
-                                status       = character(),
-                                count        = numeric(),
-                                stringsAsFactors = FALSE)
-      self$states
-    },
-    countStatusUse = function(status.field,status){
-      status.row <- which(self$states$status.field %in% status.field &
-                          self$states$status %in% status)
-      if (length(status.row)==0){
-        status.row <- nrow(self$states) + 1
-        count <- 1
-      }
-      else {
-        count <- self$states[status.row,"count"]+1
-      }
-      self$states[status.row, c("status.field","status")] <- c(status.field,status)
-      self$states[status.row, "count"] <- count
-      self$states
-    },
-    getFilenamesStatusMode = function(mode,
-                                      sources = sort(unique(self$df$source)),
-                                      max.quant = 0,
-                                      order.by.time2scrape = FALSE){
-      #status in queued, scraped, exception, retry, skipped
-      allowed.status<- NULL
-      if (mode == "scrape.retry"){
-        allowed.status <- c("queued","exception","failed")
-      }
-      if (mode == "scrape.queued"){
-        allowed.status <- c("queued")
-      }
-      if (mode == "test"){
-        allowed.status <- "scraped"
-      }
-      if (mode == "skipped"){
-        allowed.status <- c("skipped","scraping")
-      }
-      self$getFilenamesStatus(status = allowed.status,
-                              sources = sources,
-                              max.quant = max.quant,
-                              order.by.time2scrape = order.by.time2scrape)
-    },
-    getFilenamesStatus = function(status,
-                                  sources = sort(unique(self$df$source)),
-                                  max.quant = 0,
-                                  order.by.time2scrape = FALSE){
-      filtred.rows <- which(self$df$source %in% sources &
-                            self$df$status %in% status)
-      ret <- NULL
-      if (length(filtred.rows)>0){
-        if (max.quant >0){
-          filtred.rows <- filtred.rows[1:min(max.quant,length(filtred.rows))]
-        }
-        ret <- self$df[filtred.rows,]
-        if (order.by.time2scrape){
-          ret <- ret[order(ret$preloaded.time2scrape,ret$source,ret$number),]
-        }
-      }
-      ret
-    }
-  ))
+#' PolyhedronTestTask
+#'
+#' Is an abstract class for specifying TestTask to make R6 iteration methods like cover
+#' complaint with testhat infrastructure
+#'
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{\code{initialize()}}{initializes the object}
+#'   \item{\code{run()}}{Run the test task}
+#' }
+#'
+#' @format \code{\link{R6Class}} object.
+#' @docType class
+#' @importFrom R6 R6Class
+#'
 
 PolyhedronTestTask.class <- R6::R6Class("PolyhedronTestTask",
   public = list(
@@ -372,6 +196,23 @@ PolyhedronTestTask.class <- R6::R6Class("PolyhedronTestTask",
     run = function(){
       stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
     }))
+
+#' PolyhedronTestTaskScrape
+#'
+#' A Test task for comparing a new scrape with an already scraped polyhedron in database
+#'
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{\code{initialize()}}{initializes the object}
+#'   \item{\code{run()}}{Run the test task}
+#' }
+#'
+#' @format \code{\link{R6Class}} object.
+#' @docType class
+#' @import futile.logger
+#' @importFrom R6 R6Class
+#'
 
 PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
   inherit = PolyhedronTestTask.class,
@@ -410,7 +251,6 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       expected.polyhedron <-
                 self$polyhedra.db$getPolyhedron(source = source,
                                                 polyhedron.name = scraped.name)
-      # TODO debug inferEdges not working while scraping
 
       #debug gp
       #print(scraped.polyhedron)
@@ -423,6 +263,9 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
 
     }))
 
+#' PolyhedronTestTaskEdgesConsistency
+#'
+#' A Test task for running edges consistency test for current polyhedron
 
 PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdgesConsistency",
   inherit = PolyhedronTestTask.class,
@@ -469,7 +312,7 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
 #'
 #' @field polyhedra.rds.file path of rds database file
 #' @field sources.config Sources configuration for scraping different sources
-#' @field record rr record of scraping process
+#' @field ledger rr ledger of scraping process
 #' @field data Polyhedra data from different sources
 #'
 #' @format \code{\link{R6Class}} object.
@@ -480,10 +323,10 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
   public = list(
     polyhedra.rds.file = NA,
     sources.config = NA,
-    record         = NA,
+    ledger         = NA,
     data           = NA,
     initialize = function() {
-      self$record         <- ScraperRecord.class$new()
+      self$ledger         <- ScraperLedger.class$new()
       self$sources.config <- list()
       self$data           <- list()
       self
@@ -543,7 +386,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
         self$data[[source]][[polyhedron.name]]<-polyhedron
         futile.logger::flog.info(paste("Added polyhedron in file",polyhedron.name,"#|n", polyhedron$number, polyhedron.name,"in source",source,"to database"))
       }
-      self$record$updateStatus(source = source,filename = polyhedron.filename,
+      self$ledger$updateStatus(source = source,filename = polyhedron.filename,
                                status = "scraped",scraped.name = polyhedron.name)
       polyhedron
     },
@@ -561,30 +404,29 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
         self$addSourceConfig(source.config)
         scheduled <- NULL
         for (polyhedron.filename in polyhedra.files) {
-          if (is.null(self$record$getIdFilename(source = source,filename = polyhedron.filename))){
-            self$record$addFilename(source = source, filename = polyhedron.filename)
+          if (is.null(self$ledger$getIdFilename(source = source,filename = polyhedron.filename))){
+            self$ledger$addFilename(source = source, filename = polyhedron.filename)
             scheduled <- c(scheduled, polyhedron.filename)
           }
         }
         if (length(scheduled)>0){
-          futile.logger::flog.info(paste("Scheduling source ",source, "filenames:",
+          futile.logger::flog.info(paste("Scheduling source ",source, length(scheduled), "filenames:",
                                          paste(scheduled, collapse = ",")))
         }
 
       }
-      saveRDS(self, self$polyhedra.rds.file)
+      self$saveRDS()
       self
+    },
+    saveRDS = function(){
+      saveRDS(self, self$polyhedra.rds.file)
     },
     cover = function(mode,
                      sources = names(self$sources.config),
                      covering.code,
                      max.quant=0){
       self$configPolyhedraRDSPath()
-      #TODO include
-      #source.config$initScrape()
-      # For correct poyhedron numbering while testing
-
-      filenames2scrape <- self$record$getFilenamesStatusMode(mode = mode,
+      filenames2scrape <- self$ledger$getFilenamesStatusMode(mode = mode,
                                                              sources = sources,
                                                              max.quant = max.quant,
                                                              order.by.time2scrape = TRUE)
@@ -603,7 +445,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
                                 polyhedron.number, polyhedron.filename)
         }
         #after covering, save RDS
-        saveRDS(self, self$polyhedra.rds.file)
+        self$saveRDS()
       }
       ret
     },
@@ -615,7 +457,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
         source <- source.config$getName()
         current.polyhedron <- NULL
         tryCatch({
-          self$record$updateStatus(source = source,filename = polyhedron.filename,
+          self$ledger$updateStatus(source = source,filename = polyhedron.filename,
                                  status = "scraping",scraped.name = polyhedron.name)
           current.polyhedron <- source.config$scrape(polyhedron.number = polyhedron.number, paste(polyhedra.dir, polyhedron.filename, sep = ""))
           if (current.polyhedron$isChecked()){
@@ -626,19 +468,19 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
           }
           else{
             errors <- current.polyhedron$getErrors()
-            self$record$updateStatus(source,polyhedron.filename,status = "failed",obs=errors)
+            self$ledger$updateStatus(source,polyhedron.filename,status = "failed",obs=errors)
           }
         },
         error=function(e){
           error <- paste(e$message,collapse=",")
           futile.logger::flog.error(paste("catched error",error))
           assign("error",error,envir = parent.env(environment()))
-          self$record$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
+          self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
         })
         current.polyhedron
       }
       if (time2scrape.source >0){
-        max.quant.time <- self$record$getSizeToTimeScrape(sources = sources, time2scrape = time2scrape.source)
+        max.quant.time <- self$ledger$getSizeToTimeScrape(sources = sources, time2scrape = time2scrape.source)
       }
       else{
         max.quant.time <- 0
@@ -690,7 +532,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
           status <- "exception"
           obs    <- scraped.polyhedron$getErrors()
         })
-        self$record$updateStatus(source,polyhedron.filename, status.field = "status.test", status = status, obs= obs)
+        self$ledger$updateStatus(source,polyhedron.filename, status.field = "status.test", status = status, obs= obs)
         if (status=="testing"){
           tryCatch({
             res <- expect_true(self$existsPolyhedron(source = source,
@@ -700,7 +542,6 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
             #debug
             #scraped.polyhedron <<- scraped.polyhedron
             #db.polyhedron <<- db.polyhedron
-            # TODO debug inferEdges not working while scraping
             scraped.polyhedron$state$inferEdges()
             expect_equal(scraped.polyhedron,db.polyhedron)
             status <- "tested"
@@ -712,7 +553,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
             status <- "failed"
             obs    <- scraped.polyhedron$getErrors()
           })
-          self$record$updateStatus(source,polyhedron.filename, status.field = "status.test", status = status, obs= obs)
+          self$ledger$updateStatus(source,polyhedron.filename, status.field = "status.test", status = status, obs= obs)
         }
         scraped.polyhedron
       }
@@ -739,8 +580,8 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       test.task.gen.function <- function(polyhedra.dir, source.config, polyhedron.number, polyhedron.filename){
         scraped.polyhedron <- NULL
         source <- source.config$getName()
-        polyhedron.record <- polyhedra.db.saved$record$df[polyhedra.db.saved$record$getIdFilename(source,polyhedron.filename),]
-        polyhedron.name   <- polyhedron.record$scraped.name
+        polyhedron.ledger <- polyhedra.db.saved$ledger$df[polyhedra.db.saved$ledger$getIdFilename(source,polyhedron.filename),]
+        polyhedron.name   <- polyhedron.ledger$scraped.name
 
         task <- TestTaskClass$new(polyhedra.db = polyhedra.db.saved,
                                   source.config = source.config, polyhedron.name = polyhedron.name,
@@ -833,8 +674,16 @@ scrapePolyhedraSources<- function(sources.config = .available.sources,
   .polyhedra$scrape(mode = mode, max.quant = max.quant.scrape,
                     time2scrape.source = time2scrape.source)
   #All files not scraped in building, marked as skipped
-  still.queued <- which(.polyhedra$record$df$status=="queued")
-  .polyhedra$record$df[still.queued,"status"] <- "skipped"
+  still.queued <- which(.polyhedra$ledger$df$status=="queued")
+  if (length(still.queued)>0){
+    apply(.polyhedra$ledger$df[still.queued,], MARGIN = 1,
+          FUN=function(x){.polyhedra$ledger$updateStatus(source = x["source"],
+                                                         filename = x["filename"],
+                                                         status = "skipped",
+                                                         obs = "#TODO in next release")})
+    #save skipped state in RDS file
+    .polyhedra$saveRDS()
+  }
   .polyhedra
 }
 
