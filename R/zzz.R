@@ -44,7 +44,7 @@
   assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
   scrapePolyhedraSources(max.quant.config.schedule = 100,
                          max.quant.scrape = 0,
-                         time2scrape.source = 20,
+                         time2scrape.source = 5,
                          sources.config = .available.sources,
                          retry.scrape = FALSE)
 }
