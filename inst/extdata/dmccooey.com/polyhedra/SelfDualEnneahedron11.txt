@@ -1,0 +1,48 @@
+Self-Dual Enneahedron #11 (canonical)
+
+C0 = 0.279960257218374181596898095091
+C1 = 0.299385692899124782302003027929
+C2 = 0.3123837363258728328806496181503
+C3 = 0.394713073693449746303534776571
+C4 = 0.577363821367906368032677816771
+C5 = 0.598206890128249064466915566418
+C6 = 0.655704193535281075670931458726
+C7 = 0.728973854146067968048080094252
+C8 = 1.31840994094011244589123352090
+C9 = 1.380283382707183265710497965748
+
+C0 = square-root of a root of the polynomial:  (x^3) + 3*(x^2) - 13*x + 1
+C1 = root of the polynomial:  5*(x^3) + 13*(x^2) - x - 1
+C2 = square-root of a root of the polynomial:
+    4225*(x^3) + 3387*(x^2) - 8989*x + 841
+C3 = square-root of a root of the polynomial:  25*(x^3) - 13*(x^2) - 5*x + 1
+C4 = root of the polynomial:  115*(x^3) + 239*(x^2) + 9*x - 107
+C5 = square-root of a root of the polynomial:
+    13225*(x^3) - 4637*(x^2) - 37*x + 1
+C6 = square-root of a root of the polynomial:
+    4225*(x^3) - 973*(x^2) - 365*x + 1
+C7 = root of the polynomial:  65*(x^3) + 73*(x^2) - 37*x - 37
+C8 = square-root of a root of the polynomial:  (x^3) - 13*(x^2) + 19*x + 1
+C9 = square-root of a root of the polynomial:
+    25*(x^3) + 1067*(x^2) - 2565*x + 841
+
+V0 = ( C3, -C3,  1.0)
+V1 = (-C3,  C3,  1.0)
+V2 = ( C8,  C8, -1.0)
+V3 = (-C0, -C0, -1.0)
+V4 = ( C6,  C2,   C7)
+V5 = ( C2,  C6,   C7)
+V6 = (-C5, -C5,  -C4)
+V7 = (-C9,  C3,  -C1)
+V8 = ( C3, -C9,  -C1)
+
+Faces:
+{ 0, 1, 7, 6, 8 }
+{ 0, 4, 5, 1 }
+{ 0, 8, 2, 4 }
+{ 1, 5, 2, 7 }
+{ 3, 2, 8 }
+{ 3, 6, 7 }
+{ 3, 7, 2 }
+{ 3, 8, 6 }
+{ 2, 5, 4 }

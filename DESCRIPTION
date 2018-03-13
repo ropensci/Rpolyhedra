@@ -1,13 +1,13 @@
 Package: Rpolyhedra
 Type: Package
 Title: Polyhedra Database
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
     person("Leonardo","Belen",,"leobelen@gmail.com", c("aut","com","cph"))
     )
 Maintainer: Alejandro Baranek <abaranek@dc.uba.ar>
-Description: A 142 polyhedra database scraped from PHD files <http://paulbourke.net/dataformats/phd/> as R6 objects and 'rgl' visualizing capabilities. The PHD format was created to describe the geometric polyhedra definitions derived mathematically <http://www.netlib.org/polyhedra/> by Andrew Hume and by the Kaleido program of Zvi Har'El.
+Description: A polyhedra database scraped from various sources as R6 objects and 'rgl' visualizing capabilities. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -20,8 +20,11 @@ Imports: futile.logger,
          rgl,
          stringr,
          R6,
-         testthat
+         testthat, 
+         XML
 Collate:
+  'xml-lib.R'
   'polyhedra-lib.R'
+  'db-lib.R'
   'zzz.R'
 BugReports: https://github.com/qbotics/Rpolyhedra/issues

@@ -1,0 +1,51 @@
+Simplest Canonical Polyhedron with D3 Symmetry (2 of 2)
+
+C0  = 0.112918833009058413277651397791
+C1  = 0.129755260684312238636981902484
+C2  = 0.372048597236051480186970856220
+C3  = 0.427521799819910293382348183393
+C4  = 0.492619623739625959203402196534
+C5  = 0.567629753139126303325137294811
+C6  = 0.652264503874483500072549079056
+C7  = 0.757325906306629348085366699724
+C8  = 0.870244739315687761363018097516
+C9  = 0.939678350375177783512108151031
+C10 = 1.079786303694393793454897262449
+
+C0  = root of the polynomial:  4*(x^3) + 40*(x^2) + 22*x - 3
+C1  = root of the polynomial:  2*(x^3) + 2*(x^2) - 8*x + 1
+C2  = square-root of a root of the polynomial:  4*(x^3)-672*(x^2)+288*x-27
+C3  = square-root of a root of the polynomial:  3*(x^3) - 43*(x^2) + 57*x - 9
+C4  = square-root of a root of the polynomial:  4*(x^3) + 44*(x^2) - 48*x + 9
+C5  = square-root of a root of the polynomial:  16*(x^3)-192*(x^2)+144*x-27
+C6  = square-root of a root of the polynomial:  12*(x^3) - 40*(x^2) + 36*x - 9
+C7  = root of the polynomial:  4*(x^3) - 56*(x^2) + 52*x - 9
+C8  = root of the polynomial:  2*(x^3) - 8*(x^2) + 2*x + 3
+C9  = square-root of a root of the polynomial:  16*(x^3)-1488*(x^2)+1332*x-27
+C10 = square-root of a root of the polynomial:  12*(x^3)-100*(x^2)+108*x-9
+
+V0  = ( C4,   C3, 1.0)
+V1  = (-C4,  -C3, 1.0)
+V2  = ( C4,   C6, -C8)
+V3  = (-C4,  -C6, -C8)
+V4  = ( C4,  -C2, -C8)
+V5  = (-C4,   C2, -C8)
+V6  = ( C4,  -C5,  C7)
+V7  = (-C4,   C5,  C7)
+V8  = ( C4, -C10, -C1)
+V9  = (-C4,  C10, -C1)
+V10 = ( C4,   C9,  C0)
+V11 = (-C4,  -C9,  C0)
+
+Faces:
+{  0,  6,  8,  4,  2, 10 }
+{  1,  7,  9,  5,  3, 11 }
+{  0, 10,  9,  7 }
+{  1, 11,  8,  6 }
+{  2,  4,  3,  5 }
+{  0,  7,  1 }
+{  0,  1,  6 }
+{  2,  5,  9 }
+{  2,  9, 10 }
+{  3,  4,  8 }
+{  3,  8, 11 }

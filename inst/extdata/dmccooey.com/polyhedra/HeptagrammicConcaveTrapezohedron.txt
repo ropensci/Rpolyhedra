@@ -1,0 +1,52 @@
+Heptagrammic Concave Trapezohedron
+
+C0 = 0.114121737195074969038805681031 = tan(pi/14) / 2
+C1 = 0.222520933956314404288902564497 = sin(pi/14)
+C2 = 0.319762001922483151436962651818 = 1 / (4 * sin(2*pi/7))
+C3 = 0.342304764636611185780262779376 = sqrt((6-8*cos(pi/7)+7/cos(pi/7))/56)
+C4 = 0.400968867902419126236102319507 = cos(pi/7) - 1/2
+C5 = 0.462069480545546657271481874856 = (sin(pi/14) + 1) / sqrt(7)
+C6 = 0.512858431636276949746649808138 = 1 / (2 * cos(pi/14))
+C7 = 0.538245669675346226181671804628 = sqrt(5 - 7*tan(pi/14) * tan(pi/14)) / 4
+
+C0 = square-root of a root of the polynomial:  448*(x^3) - 560*(x^2) + 84*x - 1
+C1 = root of the polynomial:  8*(x^3) - 4*(x^2) - 4*x + 1
+C2 = square-root of a root of the polynomial:  448*(x^3) - 224*(x^2) + 28*x - 1
+C3 = square-root of a root of the polynomial:  3136*(x^3)-2352*(x^2)+224*x+1
+C4 = root of the polynomial:  8*(x^3) + 8*(x^2) - 2*x - 1
+C5 = square-root of a root of the polynomial:  448*(x^3) - 336*(x^2) + 56*x - 1
+C6 = square-root of a root of the polynomial:  7*(x^3) - 14*(x^2) + 7*x - 1
+C7 = square-root of a root of the polynomial:  64*(x^3) + 80*(x^2) - 32*x + 1
+
+V0  = ( 0.0, 0.0,  C3)
+V1  = ( 0.0, 0.0, -C3)
+V2  = (  C4, -C2,  C7)
+V3  = ( -C4, -C2, -C7)
+V4  = ( -C4, -C2,  C7)
+V5  = (  C4, -C2, -C7)
+V6  = ( -C1,  C5,  C7)
+V7  = (  C1,  C5, -C7)
+V8  = (  C1,  C5,  C7)
+V9  = ( -C1,  C5, -C7)
+V10 = (-0.5,  C0,  C7)
+V11 = ( 0.5,  C0, -C7)
+V12 = ( 0.5,  C0,  C7)
+V13 = (-0.5,  C0, -C7)
+V14 = ( 0.0, -C6,  C7)
+V15 = ( 0.0, -C6, -C7)
+
+Faces:
+{  0,  2,  7, 10 }
+{  0, 10, 15, 12 }
+{  0, 12,  9,  4 }
+{  0,  4,  5,  8 }
+{  0,  8, 13, 14 }
+{  0, 14, 11,  6 }
+{  0,  6,  3,  2 }
+{  1,  3,  6, 11 }
+{  1, 11, 14, 13 }
+{  1, 13,  8,  5 }
+{  1,  5,  4,  9 }
+{  1,  9, 12, 15 }
+{  1, 15, 10,  7 }
+{  1,  7,  2,  3 }

@@ -1,0 +1,29 @@
+Simplest Canonical Polyhedron with C2v Symmetry (1 of 2)
+
+C0 = 0.551990753025816103310591674534
+C1 = 0.9628473112416751826283075640449
+C2 = 1.07458419412619661371776233244
+C3 = 1.66770046300166564460257543577
+
+C0 = root of the polynomial: 12*(x^3) - 71*(x^2) + 108*x - 40
+C1 = square-root of a root of the polynomial:
+    108*(x^3) + 2017*(x^2) + 2024*x - 3696
+C2 = square-root of a root of the polynomial:  81*(x^3) + 69*(x^2) - 121*x - 77
+C3 = square-root of a root of the polynomial:
+    36*(x^3) + 2017*(x^2) + 6072*x - 33264
+
+V0 = (0.0,  C2, 1.0)
+V1 = (0.0, -C2, 1.0)
+V2 = ( C3, 0.0, -C0)
+V3 = (-C3, 0.0, -C0)
+V4 = (0.0,  C1, -C0)
+V5 = (0.0, -C1, -C0)
+
+Faces:
+{ 2, 5, 3, 4 }
+{ 2, 4, 0 }
+{ 2, 0, 1 }
+{ 2, 1, 5 }
+{ 3, 5, 1 }
+{ 3, 1, 0 }
+{ 3, 0, 4 }
