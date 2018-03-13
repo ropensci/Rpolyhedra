@@ -16,4 +16,6 @@ inst/extdata/dmccooey.com/polyhedra/*.js
 
 
 # polyhedra database should only be included in release commits
-inst/extdata/polyhedra*.RDS
+# Release version
+#inst/extdata/polyhedra*.RDS
+
