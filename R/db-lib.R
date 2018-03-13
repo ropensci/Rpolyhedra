@@ -258,7 +258,6 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       #expected.polyhedron <<- expected.polyhedron
       #task <<- self
 
-      expect_equal(scraped.name, self$polyhedron.name)
       expect_equal(scraped.polyhedron, expected.polyhedron)
 
     }))
