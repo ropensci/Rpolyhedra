@@ -651,8 +651,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
         max.quant.scrape <- max(max.quant, max.quant.time)
       }
 
-      #TODO change to debug
-      futile.logger::flog.info(paste("Scraping sources",paste(sources,collapse=","),
+      futile.logger::flog.debug(paste("Scraping sources",paste(sources,collapse=","),
                                 "max.quant =",max.quant,
                                 "time2scrape.source =",time2scrape.source,
                                 "max.quant.time =",max.quant.time,
@@ -777,7 +776,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
             polyhedron.names <- names(source.polyhedra)
           }
           if (length(polyhedron.names)>0){
-            current.ret <- data.frame(source=source, polyhedron.name = filtred.polyhedra.names,
+            current.ret <- data.frame(source=source, polyhedron.name = polyhedron.names,
                                       stringsAsFactors = FALSE)
             ret <- rbind(ret,current.ret)
           }
