@@ -211,7 +211,6 @@ initialize = function(number, netlib.p3.lines) {
     #TODO
     dih <- NULL
     vertices <- self$scrapeVertices(vertices.txt)
-
     ret <- PolyhedronStateDefined.class$new(source = self$source, number = number, name = name, symbol = symbol,
     dual = dual, sfaces = sfaces,
     svertices = svertices, net = net, solid = solid, hinges = hinges, dih = dih, vertices =vertices)

@@ -105,10 +105,12 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          values.update <- as.character(end.scrape)
        }
        if (status %in% c("scraped","failed","skipped","exception")){
-         fields.update <- c("end.scrape", "scraped.name", "git.commit","time.scraped")
+         fields.update <- c("end.scrape", "scraped.name", "git.commit")
          start.scrape  <- self$df[retrieved.id,"start.scrape"]
          time.scraped  <- round(as.numeric(end.scrape - start.scrape),3)
-         values.update <- c(as.character(end.scrape), scraped.name, getGitCommit(),time.scraped)
+         values.update <- c(as.character(end.scrape), scraped.name, getGitCommit())
+         #in a different commands for not converting it to character
+         self$df[retrieved.id,"time.scraped"] <- time.scraped
        }
      }
      if (status.field == "status.test"){

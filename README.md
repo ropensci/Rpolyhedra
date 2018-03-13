@@ -4,11 +4,13 @@
  
 ## sources 
 ### netlib
+ Includes 142 polyhedra definitions
  The PHD format was created to describe the geometric polyhedron definitions derived mathematically by Andrew Hume and by the Kaleido program of Zvi Har'El.
 
  PHD files were generated using  [[http://www.netlib.org/poly2/readme]](poly2) library which is no longer mantained. Althought the code is available, specific programming skills are required to run the code.
 
 ### Dmccooey
+Includes 767 polyhedra definitions 
 The [[http://dmccooey.com/polyhedra/]](polyhedra database) built by David Mccooey has an open format which has been scraped to feed RPolyhedra database
 
 
