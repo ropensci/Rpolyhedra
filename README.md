@@ -2,6 +2,11 @@
 
  A polyhedra Database scraped from public available sources using R6 (OOP) and 'rgl' visualizing capabilities. 
  
+  | Release | Usage | Development |
+|:--------|:------|:------------|
+ [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.0.0-blue.svg)](https://cran.r-project.org/) | [![Travis](https://travis-ci.org/qbotics/Rpolyhedra.svg?branch=master)](https://travis-ci.org/qbotics/Rpolyhedra) |
+| [![CRAN](http://www.r-pkg.org/badges/version/Rpolyhedra)](http://cran.r-project.org/package=Rpolyhedra) 
+
 ## sources 
 ### netlib
  Includes 142 polyhedra definitions
@@ -91,3 +96,6 @@ Ubuntu
 ```bash
 sudo apt-get install r-cran-rgl
 ```
+
+
+[![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)
