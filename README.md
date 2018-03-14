@@ -1,6 +1,6 @@
  # Rpolyhedra
 
- A polyhedra Database scraped from public available sources using R6 (OOP) and 'rgl' visualizing capabilities. 
+ Polyhedra database scraped from public available sources using R6 objects and 'rgl' visualizing capabilities. 
  
   | Release | Usage | Development |
 |:--------|:------|:------------|
