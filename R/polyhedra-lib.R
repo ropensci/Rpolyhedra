@@ -614,21 +614,8 @@ buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
         }
         self$calculateMassCenter(size, vertices.3d = sort(unique(unlist(triangulated.solid))))
         positioned.vertices     <- self$getPositionedVertices(size,origin)
-        positioned.bounding.box <- self$getBoundingBox(vertices.def = positioned.vertices)
-
-        faces2draw     <- NULL
-        for (f.desc in names(self$solid)){
-          current.face <- self$solid[[f.desc]]
-          faces2draw[[f.desc]] <- current.face
-        }
-        #filter vertices inside
-        if (length(faces2draw)>0){
-          vertices <- as.matrix(cbind(positioned.vertices, 1))
-          ret <- rgl::tmesh3d(c(t(vertices)), unlist(faces2draw))
-        }
-        else{
-          ret <- NULL
-        }
+        vertices <- as.matrix(cbind(positioned.vertices, 1))
+        ret <- rgl::tmesh3d(c(t(vertices)), unlist(triangulated.solid))
     } else {
         futile.logger::flog.info(paste("For", self$name, " solid definition not found"))
         self$addError("solid definition not found")
