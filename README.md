@@ -9,19 +9,18 @@
 
 ## sources 
 ### netlib
- Includes 142 polyhedra definitions
+ Includes 142 polyhedra definitions.
  The PHD format was created to describe the geometric polyhedron definitions derived mathematically by Andrew Hume and by the Kaleido program of Zvi Har'El.
 
- PHD files were generated using  [[http://www.netlib.org/poly2/readme]](poly2) library which is no longer mantained. Althought the code is available, specific programming skills are required to run the code.
+ PHD files were generated using [poly2](http://www.netlib.org/poly2/readme) library (no longer mantained). Althought the code is available, specific programming skills are required to run it.
+ 
+PDH files can be found in `extdata/www.netlib.org/polyhedra/index.html`
 
 ### Dmccooey
-Includes 767 polyhedra definitions 
-The [[http://dmccooey.com/polyhedra/]](polyhedra database) built by David Mccooey has an open format which has been scraped to feed RPolyhedra database
+Includes 767 polyhedra definitions.
+The [polyhedra database](http://dmccooey.com/polyhedra/) built by David Mccooey has an open format which has been scraped to feed RPolyhedra database
 
-
-# Exploring PDH files
-For navigating
-`extdata/www.netlib.org/polyhedra/index.html`
+dmccooney files can be found in `extdata/dmccooey.com/polyhedra/`
 
 # How to get started
 ```R
@@ -76,8 +75,7 @@ apt-get install libcurl4-openssl-dev
 
 Windows
 
-Wait for CRAN version
-
+run end user CRAN version
 
 OSX brew
 
@@ -96,6 +94,3 @@ Ubuntu
 ```bash
 sudo apt-get install r-cran-rgl
 ```
-
-
-[![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)
