@@ -21,7 +21,7 @@ For flexible and reproducible configuration for package development
   \item{\code{initialize()}}{initializes the object}
   \item{\code{addFilename(source, filename)}}{add filename to the ledger}
   \item{\code{getIdFilename(source, filename)}}{Returns id/row of source and filenames parameters in the ledger}
-  \item{\code{updateStatus(source, filename, status, status.field = 'status', scraped.name = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
+  \item{\code{updateStatus(source, filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
   \item{\code{savePreloadedComplexities()}}{Internal method which saves a file with an estimation of time required time to scrape each filename}
   \item{\code{loadPreloadedComplexities()}}{Load a file with an estimation of time required time to scrape each filename}
   \item{\code{getSizeToTimeScrape(sources, time2scrape = 60)}}{Estimates how much filenames could be scraped in a time frame, considering data retrieved with loadPreloadedComplexities}

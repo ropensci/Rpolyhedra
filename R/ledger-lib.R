@@ -10,7 +10,7 @@
 #'   \item{\code{initialize()}}{initializes the object}
 #'   \item{\code{addFilename(source, filename)}}{add filename to the ledger}
 #'   \item{\code{getIdFilename(source, filename)}}{Returns id/row of source and filenames parameters in the ledger}
-#'   \item{\code{updateStatus(source, filename, status, status.field = 'status', scraped.name = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
+#'   \item{\code{updateStatus(source, filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
 #'   \item{\code{savePreloadedComplexities()}}{Internal method which saves a file with an estimation of time required time to scrape each filename}
 #'   \item{\code{loadPreloadedComplexities()}}{Load a file with an estimation of time required time to scrape each filename}
 #'   \item{\code{getSizeToTimeScrape(sources, time2scrape = 60)}}{Estimates how much filenames could be scraped in a time frame, considering data retrieved with loadPreloadedComplexities}
@@ -30,8 +30,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
  public = list(
    states = NULL,
    df = NA,
-   preloaded.complexities.filename = NA,
-   preloaded.complexities = NA,
+   preloaded.data.filename = NA,
+   preloaded.data = NA,
    initialize = function() {
      self$df <- data.frame(id           = character(),
                            source       = character(),
@@ -41,10 +41,14 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                            end.scrape   = as.POSIXct(character()),
                            status       = character(),
                            scraped.name = character(),
-                           status.test  = character(),
-                           obs          = character(),
-                           git.commit   = character(),
-                           time.scraped = numeric(),
+                           scraped.vertices   = numeric(),
+                           scraped.faces      = numeric(),
+                           status.test        = character(),
+                           obs                = character(),
+                           git.commit         = character(),
+                           time.scraped       = numeric(),
+                           preloaded.vertices    = numeric(),
+                           preloaded.faces       = numeric(),
                            preloaded.time2scrape = numeric(),
                            stringsAsFactors = FALSE)
      self$resetStatesMetrics()
@@ -63,10 +67,10 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        number <- self$states[states.row,"count"]
 
        #obtain preloaded.time2scrape
-       row.preloaded.t2s <- which(self$preloaded.complexities$source == source &
-                                    self$preloaded.complexities$filename==filename)
+       row.preloaded.t2s <- which(self$preloaded.data$source == source &
+                                    self$preloaded.data$filename==filename)
        if (length(row.preloaded.t2s)==1){
-         preloaded.time2scrape <- as.numeric(self$preloaded.complexities[row.preloaded.t2s,"time2scrape"])
+         preloaded.time2scrape <- as.numeric(self$preloaded.data[row.preloaded.t2s,"time2scrape"])
        }
        else{
          preloaded.time2scrape <- NA
@@ -87,7 +91,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      r
    },
    updateStatus = function(source, filename, status, status.field = "status",
-                           scraped.name = NA, obs =""){
+                           scraped.polyhedron = NA, obs =""){
      if (is.null(obs)){
        obs <- ""
      }
@@ -105,12 +109,26 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          values.update <- as.character(end.scrape)
        }
        if (status %in% c("scraped","failed","skipped","exception")){
-         fields.update <- c("end.scrape", "scraped.name", "git.commit")
          start.scrape  <- self$df[retrieved.id,"start.scrape"]
          time.scraped  <- round(as.numeric(end.scrape - start.scrape),3)
-         values.update <- c(as.character(end.scrape), scraped.name, getGitCommit())
+
+         fields.update <- c("end.scrape",  "git.commit")
+         values.update <- c(as.character(end.scrape), getGitCommit())
+         fields.numeric.update <-c("time.scraped")
+         values.numeric.update <- c(time.scraped)
          #in a different commands for not converting it to character
-         self$df[retrieved.id,"time.scraped"] <- time.scraped
+         if (status %in% "scraped"){
+
+           scraped.name <- scraped.polyhedron$getName()
+           scraped.vertices <- nrow(scraped.polyhedron$getState()$getVertices(solid = TRUE))
+           scraped.faces    <- length(scraped.polyhedron$getState()$getSolid())
+
+           fields.update <- c(fields.update, "scraped.name")
+           values.update <- c(values.update, scraped.name)
+           fields.numeric.update <-c(fields.numeric.update, "scraped.vertices", "scraped.faces")
+           values.numeric.update <- c(values.numeric.update,scraped.vertices,scraped.faces)
+         }
+         self$df[retrieved.id, fields.numeric.update] <-values.numeric.update
        }
      }
      if (status.field == "status.test"){
@@ -131,22 +149,22 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      ret
    },
    savePreloadedComplexities = function(){
-     preloaded.complexities <- self$df[!is.na(self$df$time.scraped),c("source","filename","time.scraped")]
-     preloaded.complexities <- preloaded.complexities[order(preloaded.complexities$time.scraped,
-                                                            preloaded.complexities$source,
-                                                            preloaded.complexities$filename),]
-     names(preloaded.complexities)[3]<-"time2scrape"
-     write.csv(preloaded.complexities, self$preloaded.complexities.filename,
+     preloaded.data <- self$df[!is.na(self$df$time.scraped),c("source","filename","time.scraped")]
+     preloaded.data <- preloaded.data[order(preloaded.data$time.scraped,
+                                                            preloaded.data$source,
+                                                            preloaded.data$filename),]
+     names(preloaded.data)[3]<-"time2scrape"
+     write.csv(preloaded.data, self$preloaded.data.filename,
                row.names = FALSE)
-     preloaded.complexities
+     preloaded.data
    },
    loadPreloadedComplexities = function(){
-     self$preloaded.complexities.filename <- paste(getDataDir(),"polyhedra.complexity.csv",sep="")
-     self$preloaded.complexities <- read.csv(paste(getDataDir(),"polyhedra.complexity.csv",sep=""))
-     self$preloaded.complexities
+     self$preloaded.data.filename <- paste(getDataDir(),"polyhedra.complexity.csv",sep="")
+     self$preloaded.data <- read.csv(paste(getDataDir(),"polyhedra.complexity.csv",sep=""))
+     self$preloaded.data
    },
    getSizeToTimeScrape = function(sources, time2scrape = 60){
-     pre.comp.source <- self$preloaded.complexities[self$preloaded.complexities$source %in% sources,]
+     pre.comp.source <- self$preloaded.data[self$preloaded.data$source %in% sources,]
      pre.comp.source <- pre.comp.source[order(pre.comp.source$time2scrape,
                                               pre.comp.source$source,
                                               pre.comp.source$filename),]

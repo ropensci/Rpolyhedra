@@ -458,8 +458,18 @@ name, vertices, solid, symbol=NULL, dual=NULL, sfaces=NULL, svertices = NULL, ne
     self
 }, getSymbol = function() {
     self$symbol
-}, getVertices = function() {
-    self$vertices
+}, getVertices = function(solid = FALSE) {
+    ret<- self$vertices
+    if (solid){
+      vertices.in.faces <- NULL
+      for (f in self$solid){
+        for (v in f){
+          vertices.in.faces <- union(vertices.in.faces,v)
+        }
+      }
+      ret <- self$vertices[vertices.in.faces,]
+    }
+    ret
 }, getNet = function() {
     self$net
 }, getSolid = function() {
@@ -596,7 +606,7 @@ getNormalizedSize=function(size){
     size <- size * (0.7501087 / volume) ^ (1 / 3)
     size
 },
-getPositionedVertices = function(size,origin){
+getPositionedVertices = function(size = 1,origin = c(0,0,0)){
     positioned.vertices <- private$vertices.rgl[, c(1:3)] * size
     for (d in 1:3) {
         positioned.vertices[, d] <- positioned.vertices[, d] + origin[d] -
