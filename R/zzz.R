@@ -42,9 +42,10 @@
     .polyhedra <- PolyhedronDatabase.class$new()
   }
   assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
-  scrapePolyhedraSources(max.quant.config.schedule = 10, #change
+  scrapePolyhedraSources(max.quant.config.schedule = 20, #change
                          max.quant.scrape = 0,
-                         time2scrape.source = 0.5, #40 seconds of building scraping polyhedra
+                         time2scrape.source = 4.2, #4.2 seconds for scraping all Platonic solids
+                         #time2scrape.source = 40, #40 seconds of building scraping polyhedra
                          sources.config = .available.sources,
                          retry.scrape = FALSE)
 }
