@@ -1,9 +1,10 @@
 
 #' maxWithoutNA
 #' Function that returns NA if all elements are NA, and the max value not NA, if not.
-#' @param x vector for processing function
+#' @param x vector parameter
 
 maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
+
 
 #' ScraperLedger
 #'
