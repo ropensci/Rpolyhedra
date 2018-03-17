@@ -70,13 +70,17 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        row.preloaded.t2s <- which(self$preloaded.data$source == source &
                                     self$preloaded.data$filename==filename)
        if (length(row.preloaded.t2s)==1){
-         preloaded.time2scrape <- as.numeric(self$preloaded.data[row.preloaded.t2s,"time2scrape"])
+         preloaded.data <- self$preloaded.data[row.preloaded.t2s,]
+         self$df[r,c("preloaded.name")]<-
+           as.character(preloaded.data[,3])
+         self$df[r,c("preloaded.vertices","preloaded.faces","preloaded.time2scrape")]<-
+           c(preloaded.data[,4:6])
        }
        else{
          preloaded.time2scrape <- NA
        }
        self$df[r,c("id","source","filename","status")]<- c(r,source,filename,default.status)
-       self$df[r,c("number","preloaded.time2scrape")]<- c(number,preloaded.time2scrape)
+       self$df[r,c("number")]<- c(number)
      }
      r
    },
@@ -149,11 +153,11 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      ret
    },
    savePreloadedComplexities = function(){
-     preloaded.data <- self$df[!is.na(self$df$time.scraped),c("source","filename","time.scraped")]
+     preloaded.data <- self$df[!is.na(self$df$time.scraped),c("source","filename","scraped.name","scraped.vertices","scraped.faces","time.scraped")]
      preloaded.data <- preloaded.data[order(preloaded.data$time.scraped,
                                                             preloaded.data$source,
                                                             preloaded.data$filename),]
-     names(preloaded.data)[3]<-"time2scrape"
+     names(preloaded.data)[3:6]<-c("name","vertices","faces","time2scrape")
      write.csv(preloaded.data, self$preloaded.data.filename,
                row.names = FALSE)
      preloaded.data
