@@ -603,29 +603,11 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
     getAvailableSources = function() {
       names(self$data)
     },
-    getAvailablePolyhedra = function(sources = getAvailableSources(),
+    getAvailablePolyhedra = function(sources = self$getAvailableSources(),
                                      search.string = NULL,ignore.case=TRUE) {
-      ret <- NULL
-      for (source in sources){
-        source.polyhedra <- self$getSource(source)
-        if (!is.null(source.polyhedra)){
-          if (!is.null(search.string)) {
-            source.polyhedra.names <- names(source.polyhedra)
-            polyhedron.names <- source.polyhedra.names[grepl(search.string, source.polyhedra.names,ignore.case = ignore.case)]
-          } else {
-            polyhedron.names <- names(source.polyhedra)
-          }
-          if (length(polyhedron.names)>0){
-            current.ret <- data.frame(source=source, polyhedron.name = polyhedron.names,
-                                      stringsAsFactors = FALSE)
-            ret <- rbind(ret,current.ret)
-          }
-        }
-        else{
-          stop(paste("No polyhedra found for source",source))
-        }
-      }
-      ret
+      self$ledger$getAvailablePolyhedra(sources = sources,
+                                        search.string = search.string,
+                                        ignore.case = ignore.case)
     }
   ))
 

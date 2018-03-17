@@ -1,3 +1,9 @@
+
+#' maxWithoutNA
+#' Function that returns NA if all elements are NA, and the max value not NA, if not.
+
+maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
+
 #' ScraperLedger
 #'
 #' Ledger of scraping status of each objects. Allows different type of states:
@@ -30,6 +36,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
  public = list(
    states = NULL,
    df = NA,
+   dirty = FALSE,
    preloaded.data.filename = NA,
    preloaded.data = NA,
    initialize = function() {
@@ -47,6 +54,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                            obs                = character(),
                            git.commit         = character(),
                            time.scraped       = numeric(),
+                           preloaded.name        = character(),
                            preloaded.vertices    = numeric(),
                            preloaded.faces       = numeric(),
                            preloaded.time2scrape = numeric(),
@@ -81,6 +89,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        }
        self$df[r,c("id","source","filename","status")]<- c(r,source,filename,default.status)
        self$df[r,c("number")]<- c(number)
+       self$dirty <- TRUE
      }
      r
    },
@@ -122,7 +131,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          values.numeric.update <- c(time.scraped)
          #in a different commands for not converting it to character
          if (status %in% "scraped"){
-
+           #TODO Check scraped.name = preloaded name
            scraped.name <- scraped.polyhedron$getName()
            scraped.vertices <- nrow(scraped.polyhedron$getState()$getVertices(solid = TRUE))
            scraped.faces    <- length(scraped.polyhedron$getState()$getSolid())
@@ -150,6 +159,29 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      ret <- self$df[retrieved.id,]
      #count status uses
      self$countStatusUse(status.field,status)
+     self$dirty <- TRUE
+     ret
+   },
+   updateCalculatedFields = function(){
+     resolveScrapedPreloaded <- function(x, field){maxWithoutNA(c(x[paste("scraped",field,sep=".")],
+                                                                  x[paste("preloaded",field,sep=".")]))}
+     if (self$dirty){
+       self$df$name <-  apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="name")} )
+       self$df$vertices <-  apply(self$df,MARGIN = 1, FUN= function(x)maxWithoutNA(c(x["scraped.name"],x["preloaded.name"])))
+       self$df$faces <-  apply(self$df,MARGIN = 1, FUN= function(x)maxWithoutNA(c(x["scraped.name"],x["preloaded.name"])))
+       self$dirty <- FALSE
+     }
+   },
+   getAvailablePolyhedra = function(sources = sources,
+                                    search.string = search.string,
+                                    ignore.case = ignore.case){
+     self$updateCalculatedFields()
+     ret <- self$df[!is.na(self$df$name) & self$df$source %in% sources ,
+                    c("source","name","vertices","faces","status")]
+
+     if (!is.null(search.string)) {
+       ret <- ret[grepl(search.string, ret$name,ignore.case = ignore.case)]
+     }
      ret
    },
    savePreloadedComplexities = function(){
