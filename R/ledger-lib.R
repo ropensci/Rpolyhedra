@@ -22,8 +22,8 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 #'   \item{\code{getSizeToTimeScrape(sources, time2scrape = 60)}}{Estimates how much filenames could be scraped in a time frame, considering data retrieved with loadPreloadedData}
 #'   \item{\code{resetStatesMetrics()}}{Reset metrics of application of different status values}
 #'   \item{\code{countStatusUse(status.field,status)}}{Add an use to the metrics of status.field and status parameters}
-#'   \item{\code{getFilenamesStatusMode(mode,sources = sort(unique(self$df$source)),max.quant = 0,order.by.time2scrape = FALSE)}}{Get a list of the filenames in the ledger with a defined mode (status agrupation)}
-#'   \item{\code{getFilenamesStatus(status,sources = sort(unique(self$df$source)),max.quant = 0,order.by.time2scrape = FALSE)}}{Get a list of the filenames in the ledger with specified status}
+#'   \item{\code{getFilenamesStatusMode(mode,sources = sort(unique(self$df$source)),max.quant = 0,order.by.vertices.faces = FALSE)}}{Get a list of the filenames in the ledger with a defined mode (status agrupation)}
+#'   \item{\code{getFilenamesStatus(status,sources = sort(unique(self$df$source)),max.quant = 0,order.by.vertices.faces = FALSE)}}{Get a list of the filenames in the ledger with specified status}
 #' }
 #'
 #' @format \code{\link{R6Class}} object.
@@ -182,6 +182,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      if (!is.null(search.string)) {
        ret <- ret[grepl(search.string, ret$name,ignore.case = ignore.case)]
      }
+     ret <- ret[order(ret$vertices,ret$faces,ret$source),]
      ret
    },
    savePreloadedData = function(){
@@ -201,7 +202,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    },
    getSizeToTimeScrape = function(sources, time2scrape = 60){
      pre.comp.source <- self$preloaded.data[self$preloaded.data$source %in% sources,]
-     pre.comp.source <- pre.comp.source[order(pre.comp.source$time2scrape,
+     pre.comp.source <- pre.comp.source[order(pre.comp.source$vertices,
+                                              pre.comp.source$faces,
                                               pre.comp.source$source,
                                               pre.comp.source$filename),]
      pre.comp.source$cummsum <- cumsum(pre.comp.source$time2scrape)
@@ -231,7 +233,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    getFilenamesStatusMode = function(mode,
                                      sources = sort(unique(self$df$source)),
                                      max.quant = 0,
-                                     order.by.time2scrape = FALSE){
+                                     order.by.vertices.faces = FALSE){
      #status in queued, scraped, exception, retry, skipped
      allowed.status<- NULL
      if (mode == "scrape.retry"){
@@ -250,12 +252,13 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      self$getFilenamesStatus(status = allowed.status,
                              sources = sources,
                              max.quant = max.quant,
-                             order.by.time2scrape = order.by.time2scrape)
+                             order.by.vertices.faces = order.by.vertices.faces)
    },
    getFilenamesStatus = function(status,
                                  sources = sort(unique(self$df$source)),
                                  max.quant = 0,
-                                 order.by.time2scrape = FALSE){
+                                 order.by.vertices.faces = FALSE){
+     self$updateCalculatedFields()
      filtred.rows <- which(self$df$source %in% sources &
                              self$df$status %in% status)
      ret <- NULL
@@ -264,8 +267,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          filtred.rows <- filtred.rows[1:min(max.quant,length(filtred.rows))]
        }
        ret <- self$df[filtred.rows,]
-       if (order.by.time2scrape){
-         ret <- ret[order(ret$preloaded.time2scrape,ret$source,ret$number),]
+       if (order.by.vertices.faces){
+         ret <- ret[order(ret$vertices,ret$faces,ret$source,ret$name),]
        }
      }
      ret

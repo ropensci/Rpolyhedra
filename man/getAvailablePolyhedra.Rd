@@ -15,8 +15,8 @@ getAvailablePolyhedra(sources, search.string)
 polyhedra names vector
 }
 \description{
-Gets the list of names of available polyhedra in the internal database, which can be later
-called with getAvailablePolyhedra for later use.
+Gets the list of names of available polyhedra and its status in the polyhedra database, which can be later
+called with getPolyhedron
 }
 \examples{
 
