@@ -166,9 +166,9 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      resolveScrapedPreloaded <- function(x, field){maxWithoutNA(c(x[paste("scraped",field,sep=".")],
                                                                   x[paste("preloaded",field,sep=".")]))}
      if (self$dirty){
-       self$df$name <-  apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="name")} )
-       self$df$vertices <-  apply(self$df,MARGIN = 1, FUN= function(x)maxWithoutNA(c(x["scraped.name"],x["preloaded.name"])))
-       self$df$faces <-  apply(self$df,MARGIN = 1, FUN= function(x)maxWithoutNA(c(x["scraped.name"],x["preloaded.name"])))
+       self$df$name     <-  apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="name")} )
+       self$df$vertices <-  as.numeric(apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="vertices")}))
+       self$df$faces    <-  as.numeric(apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="faces")}))
        self$dirty <- FALSE
      }
    },
