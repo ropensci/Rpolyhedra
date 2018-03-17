@@ -1,6 +1,7 @@
 
 #' maxWithoutNA
 #' Function that returns NA if all elements are NA, and the max value not NA, if not.
+#' @param x vector for processing function
 
 maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 
@@ -180,7 +181,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                     c("source","name","vertices","faces","status")]
 
      if (!is.null(search.string)) {
-       ret <- ret[grepl(search.string, ret$name,ignore.case = ignore.case)]
+       ret <- ret[grepl(search.string, ret$name,ignore.case = ignore.case),]
      }
      ret <- ret[order(ret$vertices,ret$faces,ret$source),]
      ret

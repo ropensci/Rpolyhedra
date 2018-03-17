@@ -7,6 +7,9 @@ Function that returns NA if all elements are NA, and the max value not NA, if no
 \usage{
 maxWithoutNA(x)
 }
+\arguments{
+\item{x}{vector for processing function}
+}
 \description{
 maxWithoutNA
 Function that returns NA if all elements are NA, and the max value not NA, if not.
