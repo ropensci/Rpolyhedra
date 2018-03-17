@@ -17,9 +17,9 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 #'   \item{\code{addFilename(source, filename)}}{add filename to the ledger}
 #'   \item{\code{getIdFilename(source, filename)}}{Returns id/row of source and filenames parameters in the ledger}
 #'   \item{\code{updateStatus(source, filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
-#'   \item{\code{savePreloadedComplexities()}}{Internal method which saves a file with an estimation of time required time to scrape each filename}
-#'   \item{\code{loadPreloadedComplexities()}}{Load a file with an estimation of time required time to scrape each filename}
-#'   \item{\code{getSizeToTimeScrape(sources, time2scrape = 60)}}{Estimates how much filenames could be scraped in a time frame, considering data retrieved with loadPreloadedComplexities}
+#'   \item{\code{savePreloadedData()}}{Internal method which saves a file with an estimation of time required time to scrape each filename}
+#'   \item{\code{loadPreloadedData()}}{Load a file with an estimation of time required time to scrape each filename}
+#'   \item{\code{getSizeToTimeScrape(sources, time2scrape = 60)}}{Estimates how much filenames could be scraped in a time frame, considering data retrieved with loadPreloadedData}
 #'   \item{\code{resetStatesMetrics()}}{Reset metrics of application of different status values}
 #'   \item{\code{countStatusUse(status.field,status)}}{Add an use to the metrics of status.field and status parameters}
 #'   \item{\code{getFilenamesStatusMode(mode,sources = sort(unique(self$df$source)),max.quant = 0,order.by.time2scrape = FALSE)}}{Get a list of the filenames in the ledger with a defined mode (status agrupation)}
@@ -60,7 +60,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                            preloaded.time2scrape = numeric(),
                            stringsAsFactors = FALSE)
      self$resetStatesMetrics()
-     self$loadPreloadedComplexities()
+     self$loadPreloadedData()
      self
    },
    addFilename = function(source, filename){
@@ -184,7 +184,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      }
      ret
    },
-   savePreloadedComplexities = function(){
+   savePreloadedData = function(){
      preloaded.data <- self$df[!is.na(self$df$time.scraped),c("source","filename","scraped.name","scraped.vertices","scraped.faces","time.scraped")]
      preloaded.data <- preloaded.data[order(preloaded.data$time.scraped,
                                                             preloaded.data$source,
@@ -194,9 +194,9 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                row.names = FALSE)
      preloaded.data
    },
-   loadPreloadedComplexities = function(){
-     self$preloaded.data.filename <- paste(getDataDir(),"polyhedra.complexity.csv",sep="")
-     self$preloaded.data <- read.csv(paste(getDataDir(),"polyhedra.complexity.csv",sep=""))
+   loadPreloadedData = function(){
+     self$preloaded.data.filename <- paste(getDataDir(),"polyhedra.preloaded.data.csv",sep="")
+     self$preloaded.data <- read.csv(paste(getDataDir(),"polyhedra.preloaded.data.csv",sep=""))
      self$preloaded.data
    },
    getSizeToTimeScrape = function(sources, time2scrape = 60){
