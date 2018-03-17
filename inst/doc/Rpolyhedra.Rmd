@@ -39,7 +39,7 @@ polyhedra <- scrapePolyhedraSources(sources.config = PolyhedronScraperConfigurat
 
 
 ##Get available polyhedra
-Once the original files had been processed, a simple call to ```getAvailablePolyhedra()``` retrieves a list of the available polyhedra:
+Once the original files had been processed, a simple call to ```getAvailablePolyhedra()``` retrieves a list of the available polyhedra with properties and status in the polyhedra database:
 
 ```R 
 library(rgl)

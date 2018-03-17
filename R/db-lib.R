@@ -418,7 +418,11 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       self
     },
     saveRDS = function(){
-      saveRDS(self, self$polyhedra.rds.file)
+      ret <- NULL
+      if (self$ledger$dirty){
+        ret <- saveRDS(self, self$polyhedra.rds.file)
+      }
+      ret
     },
     cover = function(mode,
                      sources = names(self$sources.config),
@@ -428,7 +432,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       filenames2scrape <- self$ledger$getFilenamesStatusMode(mode = mode,
                                                              sources = sources,
                                                              max.quant = max.quant,
-                                                             order.by.time2scrape = TRUE)
+                                                             order.by.vertices.faces = TRUE)
       ret <- list()
       home.dir.data <- getDataDir()
       if (!is.null(filenames2scrape)){
@@ -690,8 +694,8 @@ getAvailableSources <- function(){
 
 #' getAvailablePolyhedra()
 #'
-#' Gets the list of names of available polyhedra in the internal database, which can be later
-#' called with getAvailablePolyhedra for later use.
+#' Gets the list of names of available polyhedra and its status in the polyhedra database, which can be later
+#' called with getPolyhedron
 #'
 #' @import futile.logger
 #' @param sources A source of polyhedra. Available sources are netlib, dmccooey
