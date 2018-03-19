@@ -386,7 +386,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
         futile.logger::flog.info(paste("Added polyhedron in file",polyhedron.name,"#|n", polyhedron$number, polyhedron.name,"in source",source,"to database"))
       }
       self$ledger$updateStatus(source = source,filename = polyhedron.filename,
-                               status = "scraped",scraped.name = polyhedron.name)
+                               status = "scraped",scraped.polyhedron = polyhedron)
       polyhedron
     },
     configPolyhedraSource = function(source.config, max.quant = 0) {
@@ -418,7 +418,11 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       self
     },
     saveRDS = function(){
-      saveRDS(self, self$polyhedra.rds.file)
+      ret <- NULL
+      if (self$ledger$dirty){
+        ret <- saveRDS(self, self$polyhedra.rds.file)
+      }
+      ret
     },
     cover = function(mode,
                      sources = names(self$sources.config),
@@ -428,7 +432,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       filenames2scrape <- self$ledger$getFilenamesStatusMode(mode = mode,
                                                              sources = sources,
                                                              max.quant = max.quant,
-                                                             order.by.time2scrape = TRUE)
+                                                             order.by.vertices.faces = TRUE)
       ret <- list()
       home.dir.data <- getDataDir()
       if (!is.null(filenames2scrape)){
@@ -457,7 +461,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
         current.polyhedron <- NULL
         tryCatch({
           self$ledger$updateStatus(source = source,filename = polyhedron.filename,
-                                 status = "scraping",scraped.name = polyhedron.name)
+                                 status = "scraping")
           current.polyhedron <- source.config$scrape(polyhedron.number = polyhedron.number, paste(polyhedra.dir, polyhedron.filename, sep = ""))
           if (current.polyhedron$isChecked()){
             current.polyhedron$getRGLModel(1, c(0, 0, 0))
@@ -603,29 +607,11 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
     getAvailableSources = function() {
       names(self$data)
     },
-    getAvailablePolyhedra = function(sources = getAvailableSources(),
+    getAvailablePolyhedra = function(sources = self$getAvailableSources(),
                                      search.string = NULL,ignore.case=TRUE) {
-      ret <- NULL
-      for (source in sources){
-        source.polyhedra <- self$getSource(source)
-        if (!is.null(source.polyhedra)){
-          if (!is.null(search.string)) {
-            source.polyhedra.names <- names(source.polyhedra)
-            polyhedron.names <- source.polyhedra.names[grepl(search.string, source.polyhedra.names,ignore.case = ignore.case)]
-          } else {
-            polyhedron.names <- names(source.polyhedra)
-          }
-          if (length(polyhedron.names)>0){
-            current.ret <- data.frame(source=source, polyhedron.name = polyhedron.names,
-                                      stringsAsFactors = FALSE)
-            ret <- rbind(ret,current.ret)
-          }
-        }
-        else{
-          stop(paste("No polyhedra found for source",source))
-        }
-      }
-      ret
+      self$ledger$getAvailablePolyhedra(sources = sources,
+                                        search.string = search.string,
+                                        ignore.case = ignore.case)
     }
   ))
 
@@ -708,8 +694,8 @@ getAvailableSources <- function(){
 
 #' getAvailablePolyhedra()
 #'
-#' Gets the list of names of available polyhedra in the internal database, which can be later
-#' called with getAvailablePolyhedra for later use.
+#' Gets the list of names of available polyhedra and its status in the polyhedra database, which can be later
+#' called with getPolyhedron
 #'
 #' @import futile.logger
 #' @param sources A source of polyhedra. Available sources are netlib, dmccooey
