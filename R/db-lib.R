@@ -393,7 +393,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       source <- source.config$getName()
       home.dir.data <- getDataDir()
       self$configPolyhedraRDSPath()
-      futile.logger::flog.debug(paste("opening", self$polyhedra.rds.file))
+      futile.logger::flog.debug(paste("configuring source", source))
       polyhedra.dir   <- source.config$getBaseDir(home.dir.data)
       polyhedra.files <- source.config$getPolyhedraFiles(home.dir.data)
       if (max.quant >0){
@@ -420,6 +420,8 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
     saveRDS = function(){
       ret <- NULL
       if (self$ledger$dirty){
+        self$ledger$updateCalculatedFields()
+        futile.logger::flog.info(paste("Saving RDS in file",self$polyhedra.rds.file))
         ret <- saveRDS(self, self$polyhedra.rds.file)
       }
       ret
