@@ -477,6 +477,9 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
     sapply(vertices.3d,FUN=function(x){private$vertices.centered[x,1:3] <- private$vertices.centered[x,1:3] - mass.center})
     #private$vertices.centered[vertices.3d,1:3] <- private$vertices.centered[vertices.3d,1:3] - mass.center
     private$mass.center <- self$calculateMassCenter(vertices.3d = vertices.3d)
+    #normalize size
+    normalized.size <- self$getNormalizedSize(1)
+    private$vertices.centered<- private$vertices.centered[,1:3]*normalized.size
     self
   },
   getVertices = function(solid = FALSE) {
@@ -587,8 +590,8 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
               }
               ret[[f]] <- tmesh
               futile.logger::flog.debug(paste("triangulated f", f, length(face),
-              "original", paste(face, collapse = ","), "triangulated", paste(tmesh,
-              collapse = ",")))
+                                        "original", paste(face, collapse = ","), "triangulated", paste(tmesh,
+                                        collapse = ",")))
               f <- f + 1
           }
           private$solid.triangulated <- ret
@@ -620,22 +623,13 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
     apply(transformed.vertex, MARGIN = 2, FUN = mean)
   },
   getNormalizedSize=function(size){
-      vertices.def <- private$vertices.rgl[sort(unique(unlist(private$solid.triangulated))), c(1:3)]
+      vertices.3d <- sort(unique(unlist(self$solid)))
+      vertices.def <- private$vertices.centered[vertices.3d, c(1:3)]
       bounding.box <- self$getBoundingBox(vertices.def = vertices.def)
-      volume <- prod(apply(bounding.box, MARGIN = 2,
-      FUN = function(x) {x[2] - x[1]}))
+      volume <- prod(apply(bounding.box, MARGIN = 2,FUN = function(x) {x[2] - x[1]}))
       # 0.7501087 is tetrahedron bounding box
       size <- size * (0.7501087 / volume) ^ (1 / 3)
       size
-  },
-  #TODO remove
-  getTransformedVertices.old = function(size = 1, origin = c(0,0,0)){
-      positioned.vertices <- private$vertices.rgl[, c(1:3)] * size
-      for (d in 1:3) {
-          positioned.vertices[, d] <- positioned.vertices[, d] + origin[d] -
-                                      private$mass.center[d]
-      }
-      positioned.vertices
   },
   getTransformedVertices = function(transformation.matrix){
     #positioned.vertices <- self$transformation.matrix private$vertices.rgl[, c(1:3)] %*%
@@ -644,7 +638,7 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
     positioned.vertices <- positioned.vertices[,1:3]
     positioned.vertices
   },
-  buildRGL = function(transformation.matrix = NULL, normalize.size = TRUE) {
+  buildRGL = function(transformation.matrix = NULL) {
       if (is.null(transformation.matrix)){
         transformation.matrix <- self$transformation.matrix
       }
@@ -652,11 +646,6 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
       self$inferEdges()
       if (length(self$solid) > 1) {
           triangulated.solid <- self$triangulate()
-          if (normalize.size) {
-              #TODO calculate size with transformation matrix
-              size <- 1
-              size <- self$getNormalizedSize(size)
-          }
           positioned.vertices     <- self$getTransformedVertices(transformation.matrix)
           vertices <- as.matrix(cbind(positioned.vertices, 1))
           ret <- rgl::tmesh3d(c(t(vertices)), unlist(triangulated.solid))
