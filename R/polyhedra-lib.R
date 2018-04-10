@@ -477,10 +477,6 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
     sapply(vertices.3d,FUN=function(x){private$vertices.centered[x,1:3] <- private$vertices.centered[x,1:3] - mass.center})
     #private$vertices.centered[vertices.3d,1:3] <- private$vertices.centered[vertices.3d,1:3] - mass.center
     private$mass.center <- self$calculateMassCenter(vertices.3d = vertices.3d)
-
-    #debug
-    self.debug <<- self
-    private.debug <<- self$getPrivate()
     self
   },
   getVertices = function(solid = FALSE) {
@@ -575,7 +571,7 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
                       tmesh <- c(face[1], face[2], face[3], face[3], face[4], face[1])
                   }
                   if (length(face) >= 5) {
-                      extra.mid.vertex <- apply(self$vertices[face, 1:3], MARGIN = 2,
+                      extra.mid.vertex <- apply(self$vertices.centered[face, 1:3], MARGIN = 2,
                       FUN = mean)
                       extra.vertex.id <- current.vertex + 1
                       private$vertices.rgl[extra.vertex.id, 1:3] <- extra.mid.vertex
