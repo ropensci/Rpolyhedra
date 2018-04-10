@@ -38,11 +38,19 @@ Polyhedron state inside database.
 
 \item{\code{vertices}}{Polyhedron vertices list (netlib|dmccooey)}
 
+\item{\code{mass.center}}{polyhedron mass center}
+
+\item{\code{transformation.matrix}}{transformation matrix for calculations and visualizing polyhedron}
+
+\item{\code{edges.cont}}{Edges count}
+
+\item{\code{edges.check}}{Edges check degree property}
+
+\item{\code{vertices.centered}}{centered vertices for applying transformation matrices}
+
 \item{\code{vertices.rgl}}{Polyhedron triangulated vertices list for RGL}
 
 \item{\code{solid.triangulated}}{Polyhedron solid (triangulated) for RGL visualization}
-
-\item{\code{mass.center}}{polyhedron mass center}
 }}
 
 \section{Methods}{
@@ -58,7 +66,7 @@ Polyhedron state inside database.
   \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates the object's Mass Center for parameter
         vertices}
   \item{\code{getNormalizedSize()}}{Normalizes the volume of the object to a tetrahedron bounding box}#'
-  \item{\code{getPositionedVertices(size,origin)}}{Returns the vertices adjusted to size and origin parameters}#'
+  \item{\code{getTransformedVertices(size,origin)}}{Returns the vertices adjusted to size and origin parameters}#'
   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{
   Builds the RGL model, taking the object's size, the origin}
   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}

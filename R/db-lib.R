@@ -461,12 +461,13 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       scrape.function <- function(polyhedra.dir, source.config, polyhedron.number, polyhedron.filename){
         source <- source.config$getName()
         current.polyhedron <- NULL
-        tryCatch({
+        #FIXME add exception catching
+        #tryCatch({
           self$ledger$updateStatus(source = source,filename = polyhedron.filename,
                                  status = "scraping")
           current.polyhedron <- source.config$scrape(polyhedron.number = polyhedron.number, paste(polyhedra.dir, polyhedron.filename, sep = ""))
           if (current.polyhedron$isChecked()){
-            current.polyhedron$getRGLModel(1, c(0, 0, 0))
+            current.polyhedron$getRGLModel(transformation.matrix = identityMatrix())
             futile.logger::flog.debug(paste("generated RGLModel"))
             self$addPolyhedron(source=source, polyhedron.filename = polyhedron.filename,
                                polyhedron = current.polyhedron)
@@ -475,13 +476,13 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
             errors <- current.polyhedron$getErrors()
             self$ledger$updateStatus(source,polyhedron.filename,status = "failed",obs=errors)
           }
-        },
-        error=function(e){
-          error <- paste(e$message,collapse=",")
-          futile.logger::flog.error(paste("catched error",error))
-          assign("error",error,envir = parent.env(environment()))
-          self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
-        })
+        # },
+        # error=function(e){
+        #   error <- paste(e$message,collapse=",")
+        #   futile.logger::flog.error(paste("catched error",error))
+        #   assign("error",error,envir = parent.env(environment()))
+        #   self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
+        # })
         current.polyhedron
       }
       if (time2scrape.source >0){
