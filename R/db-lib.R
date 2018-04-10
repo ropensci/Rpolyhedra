@@ -232,22 +232,23 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
     },
     run = function(){
       source <- self$source.config$getName()
-      tryCatch({
+      #FIX try Exception
+      #tryCatch({
         scraped.polyhedron <- self$source.config$scrape(polyhedron.number = self$polyhedron.number,
                                                    paste(self$polyhedra.dir, self$polyhedron.filename, sep = ""))
         scraped.name <- scraped.polyhedron$getName()
-        scraped.polyhedron$getRGLModel(1, c(0, 0, 0))
+        scraped.polyhedron$getRGLModel()
         futile.logger::flog.debug(paste("generated RGLModel"))
         status <- "testing"
         obs    <- ""
-      },
-      error=function(e){
-        error <- paste(e$message,collapse=",")
-        futile.logger::flog.error(paste("catched error",error))
-        assign("error",error,envir = parent.env(environment()))
-        status <- "exception"
-        obs    <- scraped.polyhedron$getErrors()
-      })
+      # },
+      # error=function(e){
+      #   error <- paste(e$message,collapse=",")
+      #   futile.logger::flog.error(paste("catched error",error))
+      #   assign("error",error,envir = parent.env(environment()))
+      #   status <- "exception"
+      #   obs    <- scraped.polyhedron$getErrors()
+      # })
       expected.polyhedron <-
                 self$polyhedra.db$getPolyhedron(source = source,
                                                 polyhedron.name = scraped.name)
@@ -525,19 +526,20 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       test.function <- function(polyhedra.dir, source.config, polyhedron.number, polyhedron.filename){
         source <- source.config$getName()
         scraped.polyhedron <- NULL
-        tryCatch({
+        #FIX add exception catching
+        #tryCatch({
           scraped.polyhedron <- source.config$scrape(polyhedron.number = polyhedron.number, paste(polyhedra.dir, polyhedron.filename, sep = ""))
           polyhedron.name <- scraped.polyhedron$getName()
           status <- "testing"
           obs    <- ""
-        },
-        error=function(e){
-          error <- paste(e$message,collapse=",")
-          futile.logger::flog.error(paste("catched error",error))
-          assign("error",error,envir = parent.env(environment()))
-          status <- "exception"
-          obs    <- scraped.polyhedron$getErrors()
-        })
+        # },
+        # error=function(e){
+        #   error <- paste(e$message,collapse=",")
+        #   futile.logger::flog.error(paste("catched error",error))
+        #   assign("error",error,envir = parent.env(environment()))
+        #   status <- "exception"
+        #   obs    <- scraped.polyhedron$getErrors()
+        # })
         self$ledger$updateStatus(source,polyhedron.filename, status.field = "status.test", status = status, obs= obs)
         if (status=="testing"){
           tryCatch({
