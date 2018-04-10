@@ -13,7 +13,8 @@
 #'   \item{\code{addError(current.error)}}{Adds an error to the error string and log it as info}
 #'   \item{\code{scrape()}}{Scrapes the polyhedra folder files}
 #'   \item{\code{geSolid()}}{returns the object corresponding to the solid}
-#'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{creates a RGL representation of the object}
+#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
+#'   \item{\code{buildRGL(transformation.matrix)}}{creates a RGL representation of the object}
 #'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
 #' }
 #' @field errors Errors string
@@ -44,7 +45,10 @@ getSolid = function() {
 checkEdgesConsistency=function(){
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
-buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
+applyTransformationMatrix = function(transformation.matrix){
+  stop("Abstract class")
+},
+buildRGL = function(transformation.matrix) {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
 exportToXML = function(){
@@ -68,7 +72,8 @@ exportToXML = function(){
 #'   \item{\code{setupLabelsOrder()}}{Sets up the order of labels included in PHD file}
 #'   \item{\code{getDataFromLabel(label)}}{Gets data from the Label}
 #'   \item{\code{scrape()}}{Scrapes the data from the PHD file}
-#'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{Builds the \code{RGL} mmodel}
+#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
+#'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} mmodel}
 #' }
 #' @field netlib.p3.lines The path to the PHD files
 #' @field labels.rows Labels - row of appearance
@@ -215,7 +220,11 @@ initialize = function(number, netlib.p3.lines) {
     dual = dual, sfaces = sfaces,
     svertices = svertices, net = net, solid = solid, hinges = hinges, dih = dih, vertices =vertices)
     ret
-}, buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
+},
+applyTransformationMatrix = function(transformation.matrix){
+    stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
+},
+buildRGL = function(transformation.matrix) {
     stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
 },
 exportToXML = function(){
@@ -235,7 +244,8 @@ exportToXML = function(){
 #'   \item{\code{scrapeValues(values.lines)}}{Scrapes values}
 #'   \item{\code{scrapeVertices(vertices.lines)}}{Scrapes vertices}
 #'   \item{\code{scrapeFaces(face.lines)}}{Scrapes faces}
-#'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{Builds the \code{RGL} implementation}
+#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
+#'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} implementation}
 #' }
 #' @format \code{\link{R6Class}} object.
 #' @docType class
@@ -372,7 +382,11 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
       vertices = self$vertices.replaced,
       solid    = self$faces)
       ret
-  }, buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
+  },
+  applyTransformationMatrix = function(transformation.matrix){
+    stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
+  },
+  buildRGL = function(transformation.matrix) {
       stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
   },
   exportToXML = function(){
@@ -401,12 +415,12 @@ norm <- function(vector){
 #'   \item{\code{getNet()}}{Gets the 2d net model}
 #'   \item{\code{getSolid()}}{Gets the solid representation}
 #'   \item{\code{triangulate(force = FALSE)}}{Generates the triangular faces model for generating tmesh }
-#'   \item{\code{getBoundingBox(vertices.3d)}}{Gets the bounding box of the object}
-#'   \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates the object's Mass Center for parameter
+#'   \item{\code{getBoundingBox(vertices.id.3d)}}{Gets the bounding box of the object}
+#'   \item{\code{calculateMassCenter(size = 1, vertices.id.3d)}}{Calculates the object's Mass Center for parameter
 #'         vertices}
 #'   \item{\code{getNormalizedSize()}}{Normalizes the volume of the object to a tetrahedron bounding box}#'
-#'   \item{\code{getTransformedVertices(size,origin)}}{Returns the vertices adjusted to size and origin parameters}#'
-#'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{
+#'   \item{\code{getTransformedVertices(vertices, transformation.matrix)}}{Returns the vertices adjusted to size and origin parameters}#'
+#'   \item{\code{buildRGL(transformation.matrix)}}{
 #'   Builds the RGL model, taking the object's size, the origin}
 #'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
 #' }
@@ -442,6 +456,7 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
                   edges.cont = 0,
                   edges.check = NULL,
                   #rgl aux members
+                  vertices.id.3d = NULL,
                   vertices.centered = NULL,
                   vertices.rgl = NULL,
                   solid.triangulated = NULL
@@ -471,12 +486,11 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
       self$symbol
   },
   adjustVertices = function(){
-    vertices.3d <- sort(unique(unlist(self$solid)))
+    private$vertices.id.3d <- sort(unique(unlist(self$solid)))
     private$vertices.centered <- self$vertices
-    mass.center <- self$calculateMassCenter(vertices.3d = vertices.3d)
-    sapply(vertices.3d,FUN=function(x){private$vertices.centered[x,1:3] <- private$vertices.centered[x,1:3] - mass.center})
-    #private$vertices.centered[vertices.3d,1:3] <- private$vertices.centered[vertices.3d,1:3] - mass.center
-    private$mass.center <- self$calculateMassCenter(vertices.3d = vertices.3d)
+    mass.center <- self$calculateMassCenter(vertices.id.3d = private$vertices.id.3d, applyTransformation = FALSE)
+    sapply(private$vertices.id.3d,FUN=function(x){private$vertices.centered[x,1:3] <- private$vertices.centered[x,1:3] - mass.center})
+    private$mass.center <- self$calculateMassCenter(vertices.id.3d = private$vertices.id.3d, applyTransformation = FALSE)
     #normalize size
     normalized.size <- self$getNormalizedSize(1)
     private$vertices.centered<- private$vertices.centered[,1:3]*normalized.size
@@ -597,7 +611,10 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
           private$solid.triangulated <- ret
       }
       private$solid.triangulated
-  }, getBoundingBox = function(vertices.def) {
+  }, getBoundingBox = function(transformation.matrix = self$transformation.matrix,
+                               vertices.id.3d=private$vertices.id.3d) {
+      vertices.def <- self$getTransformedVertices(private$vertices.centered, transformation.matrix = transformation.matrix)
+      vertices.def <- vertices.def[private$vertices.id.3d,]
       vertices.def.min <- apply(vertices.def, MARGIN = 2, FUN = min)
       vertices.def.max <- apply(vertices.def, MARGIN = 2, FUN = max)
       rbind(vertices.def.min, vertices.def.max)
@@ -615,28 +632,32 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
       }
       ret
   },
-  calculateMassCenter = function(vertices.3d) {
-    transformed.vertex <- private$vertices.centered[vertices.3d, c(1:3)]
-    #transform3d(asHomogeneous(as.matrix(private$vertices[vertices.3d, c(1:3)])),transformation.matrix)
-
+  calculateMassCenter = function(vertices.id.3d = private$vertices.id.3d, applyTransformation=TRUE) {
+    transformed.vertex <- private$vertices.centered[vertices.id.3d, c(1:3)]
+    if (applyTransformation){
+      transformed.vertex <- transform3d(asHomogeneous(as.matrix(private$vertices.centered[vertices.id.3d, c(1:3)])),self$transformation.matrix)
+    }
+    transformed.vertex <- transformed.vertex[,1:3]
     # delaunayn(transformed.vertex)
     apply(transformed.vertex, MARGIN = 2, FUN = mean)
   },
-  getNormalizedSize=function(size){
-      vertices.3d <- sort(unique(unlist(self$solid)))
-      vertices.def <- private$vertices.centered[vertices.3d, c(1:3)]
-      bounding.box <- self$getBoundingBox(vertices.def = vertices.def)
+  getNormalizedSize=function(size, vertices.id.3d = private$vertices.id.3d){
+      bounding.box <- self$getBoundingBox()
       volume <- prod(apply(bounding.box, MARGIN = 2,FUN = function(x) {x[2] - x[1]}))
       # 0.7501087 is tetrahedron bounding box
       size <- size * (0.7501087 / volume) ^ (1 / 3)
       size
   },
-  getTransformedVertices = function(transformation.matrix){
+  getTransformedVertices = function(vertices = private$vertices.centered,transformation.matrix){
     #positioned.vertices <- self$transformation.matrix private$vertices.rgl[, c(1:3)] %*%
-    positioned.vertices <-  transform3d(asHomogeneous(as.matrix(private$vertices.rgl[, c(1:3)])),
+    positioned.vertices <-  transform3d(asHomogeneous(as.matrix(vertices[, c(1:3)])),
                                         transformation.matrix)
     positioned.vertices <- positioned.vertices[,1:3]
     positioned.vertices
+  },
+  applyTransformationMatrix = function(transformation.matrix){
+    self$transformation.matrix <- transformation.matrix %*% self$transformation.matrix
+    self$transformation.matrix
   },
   buildRGL = function(transformation.matrix = NULL) {
       if (is.null(transformation.matrix)){
@@ -646,7 +667,8 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
       self$inferEdges()
       if (length(self$solid) > 1) {
           triangulated.solid <- self$triangulate()
-          positioned.vertices     <- self$getTransformedVertices(transformation.matrix)
+          positioned.vertices     <- self$getTransformedVertices(vertices = private$vertices.rgl,
+                                                                 transformation.matrix = transformation.matrix)
           vertices <- as.matrix(cbind(positioned.vertices, 1))
           ret <- rgl::tmesh3d(c(t(vertices)), unlist(triangulated.solid))
       } else {
@@ -676,6 +698,7 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
 #'   \item{\code{getSolid()}}{Gets the solid definition of polyhedron definition}
 #'   \item{\code{isChecked()}}{Returns TRUE is polyhedron is checked}
 #'   \item{\code{getErrors()}}{Returns errors collected in checking process}
+#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
 #'   \item{\code{getRGLModel(size = 1, origin = c(0, 0, 0)}}{Builds the RGL model}
 #'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
 #'   \item{\code{checkProperties(expected.vertices, expected.faces)}}{check polyhedron basic properties}
@@ -723,6 +746,9 @@ isChecked = function(){
         ret <- nrow(inconsistent.edges)==0
     }
     ret
+},
+applyTransformationMatrix = function(transformation.matrix){
+  self$state$applyTransformationMatrix(transformation.matrix)
 },
 getRGLModel = function(transformation.matrix=NULL) {
     futile.logger::flog.debug(paste("drawing", self$getName()),"model")

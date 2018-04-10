@@ -29,6 +29,7 @@ Polyhedron container class, which is accesible by the final users upon call to \
   \item{\code{getSolid()}}{Gets the solid definition of polyhedron definition}
   \item{\code{isChecked()}}{Returns TRUE is polyhedron is checked}
   \item{\code{getErrors()}}{Returns errors collected in checking process}
+  \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
   \item{\code{getRGLModel(size = 1, origin = c(0, 0, 0)}}{Builds the RGL model}
   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
   \item{\code{checkProperties(expected.vertices, expected.faces)}}{check polyhedron basic properties}

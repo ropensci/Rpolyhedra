@@ -62,12 +62,12 @@ Polyhedron state inside database.
   \item{\code{getNet()}}{Gets the 2d net model}
   \item{\code{getSolid()}}{Gets the solid representation}
   \item{\code{triangulate(force = FALSE)}}{Generates the triangular faces model for generating tmesh }
-  \item{\code{getBoundingBox(vertices.3d)}}{Gets the bounding box of the object}
-  \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates the object's Mass Center for parameter
+  \item{\code{getBoundingBox(vertices.id.3d)}}{Gets the bounding box of the object}
+  \item{\code{calculateMassCenter(size = 1, vertices.id.3d)}}{Calculates the object's Mass Center for parameter
         vertices}
   \item{\code{getNormalizedSize()}}{Normalizes the volume of the object to a tetrahedron bounding box}#'
-  \item{\code{getTransformedVertices(size,origin)}}{Returns the vertices adjusted to size and origin parameters}#'
-  \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{
+  \item{\code{getTransformedVertices(vertices, transformation.matrix)}}{Returns the vertices adjusted to size and origin parameters}#'
+  \item{\code{buildRGL(transformation.matrix)}}{
   Builds the RGL model, taking the object's size, the origin}
   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
 }
