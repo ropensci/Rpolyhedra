@@ -571,7 +571,7 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
                       tmesh <- c(face[1], face[2], face[3], face[3], face[4], face[1])
                   }
                   if (length(face) >= 5) {
-                      extra.mid.vertex <- apply(self$vertices.centered[face, 1:3], MARGIN = 2,
+                      extra.mid.vertex <- apply(private$vertices.centered[face, 1:3], MARGIN = 2,
                       FUN = mean)
                       extra.vertex.id <- current.vertex + 1
                       private$vertices.rgl[extra.vertex.id, 1:3] <- extra.mid.vertex
