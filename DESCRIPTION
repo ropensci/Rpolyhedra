@@ -1,4 +1,4 @@
-Package: RpolyhedraFullDB
+Package: Rpolyhedra
 Type: Package
 Title: Polyhedra Database
 Version: 0.2.4
