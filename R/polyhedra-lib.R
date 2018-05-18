@@ -648,10 +648,11 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
       size <- size * (0.7501087 / volume) ^ (1 / 3)
       size
   },
-  getTransformedVertices = function(vertices = private$vertices.centered,transformation.matrix){
+  getTransformedVertices = function(vertices = private$vertices.centered,
+                                    transformation.matrix = self$transformation.matrix){
     #positioned.vertices <- self$transformation.matrix private$vertices.rgl[, c(1:3)] %*%
     positioned.vertices <-  transform3d(asHomogeneous(as.matrix(vertices[, c(1:3)])),
-                                        transformation.matrix)
+                                        matrix = transformation.matrix)
     positioned.vertices <- positioned.vertices[,1:3]
     positioned.vertices
   },
