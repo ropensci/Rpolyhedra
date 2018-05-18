@@ -10,7 +10,7 @@
 #' * http://dmccooey.com/Polyhedra: Polyhedra text datafiles.
 #'
 #' @docType package
-#' @name Rpolyhedra
+#' @name RpolyhedraFullDB
 #' @import R6 futile.logger testthat
 #' @author Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Javier Belen <leobelen@gmail.com>
 
