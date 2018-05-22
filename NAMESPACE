@@ -2,6 +2,8 @@
 
 export(getAvailablePolyhedra)
 export(getAvailableSources)
+export(getDataDir)
+export(getPolyhedraRDSPath)
 export(getPolyhedron)
 export(polyhedronToXML)
 export(scrapePolyhedraSources)
