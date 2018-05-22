@@ -2,7 +2,6 @@
 #'
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
-#' @export
 getDataDir <- function() {
   home.dir <- find.package(getPackageName(), lib.loc = NULL, quiet = TRUE) #find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
   data.subdir <- "inst/extdata/"
@@ -15,7 +14,6 @@ getDataDir <- function() {
 #'
 #' @param polyhedra_rds_filename filename of polyhedra database
 #' @return the path to the Polyhedra database file
-#' @export
 getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
   paste(getDataDir(), polyhedra_rds_filename, sep = "")
 }
@@ -395,7 +393,7 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
       source <- source.config$getName()
       home.dir.data <- getDataDir()
       self$configPolyhedraRDSPath()
-      futile.logger::flog.debug(paste("opening", self$polyhedra.rds.file))
+      futile.logger::flog.debug(paste("configuring source", source))
       polyhedra.dir   <- source.config$getBaseDir(home.dir.data)
       polyhedra.files <- source.config$getPolyhedraFiles(home.dir.data)
       if (max.quant >0){
@@ -422,6 +420,8 @@ PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
     saveRDS = function(){
       ret <- NULL
       if (self$ledger$dirty){
+        self$ledger$updateCalculatedFields()
+        futile.logger::flog.info(paste("Saving RDS in file",self$polyhedra.rds.file))
         ret <- saveRDS(self, self$polyhedra.rds.file)
       }
       ret

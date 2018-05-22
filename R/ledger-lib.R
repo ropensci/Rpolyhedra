@@ -69,6 +69,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      r <- NULL
      default.status <- "queued"
      if (is.null(self$getIdFilename(source, filename))){
+       futile.logger::flog.info(paste("Adding Filename to ledger ",source, filename))
        r <- nrow(self$df)+1
        status.field <- "status"
        self$countStatusUse(status.field = status.field, status = default.status)
