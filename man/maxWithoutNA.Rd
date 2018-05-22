@@ -8,7 +8,7 @@ Function that returns NA if all elements are NA, and the max value not NA, if no
 maxWithoutNA(x)
 }
 \arguments{
-\item{x}{vector for processing function}
+\item{x}{vector parameter}
 }
 \description{
 maxWithoutNA
