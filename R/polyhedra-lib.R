@@ -670,7 +670,10 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
           triangulated.solid <- self$triangulate()
           positioned.vertices     <- self$getTransformedVertices(vertices = private$vertices.rgl,
                                                                  transformation.matrix = transformation.matrix)
-          vertices <- as.matrix(cbind(positioned.vertices, 1))
+          positioned.vertices <- checkVertices(vertices = self$getVertices()[,1:3],
+                                             positioned.vertices = positioned.vertices,
+                                             triangulated.solid)      
+	  vertices <- as.matrix(cbind(positioned.vertices, 1))
           ret <- rgl::tmesh3d(c(t(vertices)), unlist(triangulated.solid))
       } else {
           futile.logger::flog.info(paste("For", self$name, " solid definition not found"))
@@ -685,6 +688,12 @@ PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined",
     getPrivate = function(){
       private
     }
+    ret
+  },
+  exportToXML = function()
+  {
+      polyhedronToXML(self)
+  }
 ))
 
 #' Polyhedron
