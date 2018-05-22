@@ -624,8 +624,6 @@ buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
         }
         self$calculateMassCenter(size, vertices.3d = sort(unique(unlist(triangulated.solid))))
         positioned.vertices     <- self$getPositionedVertices(size,origin)
-        #debug
-        positioned.vertices <<- positioned.vertices
         positioned.vertices <- checkVertices(vertices = self$getVertices()[,1:3],
                                              positioned.vertices = positioned.vertices,
                                              triangulated.solid)
