@@ -3,7 +3,7 @@
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
 getDataDir <- function() {
-  home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
+  home.dir <- find.package(getPackageName(), lib.loc = NULL, quiet = TRUE)
   data.subdir <- "inst/extdata/"
   if (!dir.exists(paste(home.dir, "/", data.subdir, sep = "")))
     data.subdir <- "extdata/"
