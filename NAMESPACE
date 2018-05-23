@@ -2,6 +2,7 @@
 
 export(getAvailablePolyhedra)
 export(getAvailableSources)
+export(getPolyhedraRDSPath)
 export(getPolyhedron)
 export(polyhedronToXML)
 export(scrapePolyhedraSources)
