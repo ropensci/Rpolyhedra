@@ -3,7 +3,8 @@
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
 getDataDir <- function() {
-  home.dir <- find.package(getPackageName(), lib.loc = NULL, quiet = TRUE) #find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
+  home.dir <- find.package(getPackageName(), lib.loc = NULL, quiet = TRUE)
+  #find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
   data.subdir <- "inst/extdata/"
   if (!dir.exists(paste(home.dir, "/", data.subdir, sep = "")))
     data.subdir <- "extdata/"
@@ -14,6 +15,7 @@ getDataDir <- function() {
 #'
 #' @param polyhedra_rds_filename filename of polyhedra database
 #' @return the path to the Polyhedra database file
+#' @export
 getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
   paste(getDataDir(), polyhedra_rds_filename, sep = "")
 }
