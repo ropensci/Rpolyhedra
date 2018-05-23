@@ -27,7 +27,7 @@ convertDFToXML <- function(df, name, node) {
 #' @return the document or an error status.
 #' @import XML
 validatePolyhedronXML <- function (polyhedron.xml) {
-  xsd <- XML::xmlSchemaParse(system.file("extdata", "polyhedron.xsd", package = "Rpolyhedra"))
+  xsd <- XML::xmlSchemaParse(system.file("extdata", "polyhedron.xsd", package = getPackageName()))
   result <- XML::xmlSchemaValidate(xsd, polyhedron.xml)
   result
 }
