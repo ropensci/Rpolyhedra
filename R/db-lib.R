@@ -10,7 +10,6 @@ getDataDir <- function() {
   if(dir.exists(home.dir) == FALSE) {
     dir.create(home.dir, recursive=TRUE, showWarnings = FALSE)
   }
-  home.dir
 }
 
 #' getPolyhedraRDSPath
@@ -67,7 +66,7 @@ PolyhedronScraperConfiguration.class <- R6::R6Class("PolyhedronScraperConfigurat
       self$name
     },
     getBaseDir = function(home.dir.data) {
-      file.path(home.dir.data,self$base.dir)
+      file.path(home.dir.data, self$base.dir)
     },
     getPolyhedraFiles = function(home.dir.data){
       stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
