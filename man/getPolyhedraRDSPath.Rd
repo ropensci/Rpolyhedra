@@ -2,7 +2,7 @@
 % Please edit documentation in R/db-lib.R
 \name{getPolyhedraRDSPath}
 \alias{getPolyhedraRDSPath}
-\title{Gets the path of Polyhedra RDS database file}
+\title{getPolyhedraRDSPath}
 \usage{
 getPolyhedraRDSPath(polyhedra_rds_filename = "polyhedra.RDS")
 }

@@ -35,16 +35,20 @@
       .polyhedra <- polyhedra.candidate
     }
     else{
-      stop("Incompatible polyhedra database found. Reinstall")
+      #stop("Incompatible polyhedra database found. Reinstall")
+      downloadRPolyhedraSupportingFiles()
     }
   }
   else{
+    downloadRPolyhedraSupportingFiles()
     .polyhedra <- PolyhedronDatabase.class$new()
   }
+
   assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
-  scrapePolyhedraSources(max.quant.config.schedule = 0,
-                         max.quant.scrape = 0,
-                         time2scrape.source = 80, #80 seconds of building scraping polyhedra
-                         sources.config = .available.sources,
-                         retry.scrape = FALSE)
+  #scrapePolyhedraSources(max.quant.config.schedule = 1,
+  #                       max.quant.scrape = 1,
+  #                       time2scrape.source = 80, #80 seconds of building scraping polyhedra
+  #                       sources.config = .available.sources,
+  #                       retry.scrape = FALSE)
 }
+
