@@ -1,21 +1,46 @@
+#' getDataDir
+#'
 #' Gets the path of package data.
 #'
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
+#' @import methods
 getDataDir <- function() {
-  home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
-  data.subdir <- "inst/extdata/"
-  if (!dir.exists(paste(home.dir, "/", data.subdir, sep = "")))
-    data.subdir <- "extdata/"
-  paste(home.dir, "/", data.subdir, sep = "")
+  home.dir <- file.path(path.expand('~'), ".R", "Rpolyhedra")
+  if(dir.exists(home.dir) == FALSE) {
+    dir.create(home.dir, recursive=TRUE, showWarnings = FALSE)
+  }
+  home.dir
 }
 
+#' getPolyhedraRDSPath
+#'
 #' Gets the path of Polyhedra RDS database file
 #'
 #' @param polyhedra_rds_filename filename of polyhedra database
 #' @return the path to the Polyhedra database file
+#' @export
 getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
-  paste(getDataDir(), polyhedra_rds_filename, sep = "")
+  file.path(getDataDir(), polyhedra_rds_filename)
+}
+
+#' downloadRPolyhedraSupportingFiles
+#'
+#' Downloads the files from the remote location
+#'
+#' @return TRUE if sucessfull, FALSE otherwise
+#' @import utils
+#' @export
+downloadRPolyhedraSupportingFiles <- function(){
+  URL <- "https://github.com/qbotics/RpolyhedraDB/archive/master.zip"
+  td <- tempdir()
+  zipFile <- tempfile(tmpdir=td, fileext=".zip")
+  download.file(URL, destfile = zipFile)
+  utils::unzip(zipfile = zipFile, exdir = td)
+  files.to.copy <- list.files(file.path(td, "RpolyhedraDB-master"))
+  file.copy(from = file.path(td,"RpolyhedraDB-master", files.to.copy), to=getDataDir(), recursive = TRUE)
+  unlink(td)
+  return(TRUE)
 }
 
 
@@ -42,7 +67,7 @@ PolyhedronScraperConfiguration.class <- R6::R6Class("PolyhedronScraperConfigurat
       self$name
     },
     getBaseDir = function(home.dir.data) {
-      paste(home.dir.data,self$base.dir,sep="")
+      file.path(home.dir.data,self$base.dir)
     },
     getPolyhedraFiles = function(home.dir.data){
       stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
