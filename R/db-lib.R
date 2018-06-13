@@ -10,6 +10,7 @@ getDataDir <- function() {
   if(dir.exists(home.dir) == FALSE) {
     dir.create(home.dir, recursive=TRUE, showWarnings = FALSE)
   }
+  home.dir
 }
 
 #' getPolyhedraRDSPath
