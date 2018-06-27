@@ -11,7 +11,7 @@ checkVertices(vertices, positioned.vertices, triangulated.solid)
 
 \item{positioned.vertices}{positioned vertices dataframe for checking}
 
-\item{triangulated}{solid triangulated.solid for checking}
+\item{triangulated.solid}{triangulated.solid for checking}
 }
 \value{
 checked positioned vertices
