@@ -33,6 +33,7 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 #' @import futile.logger
 #' @import utils
 #' @importFrom R6 R6Class
+#' @export
 #'
 
 ScraperLedger.class <- R6::R6Class("ScraperLedger",

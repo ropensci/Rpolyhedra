@@ -20,8 +20,6 @@
 #' @param pkgname The package name
 .onLoad <- function(libname, pkgname) {
   #debug settings to run the logger.
-  #futile.logger::flog.appender(futile.logger::appender.tee("RPolyedra.log"), name = "data.io")
-  #futile.logger::flog.threshold(futile.logger::INFO)
   polyhedra.rds.file <- getPolyhedraRDSPath()
 
   #setup Available sources
@@ -35,7 +33,6 @@
       .polyhedra <- polyhedra.candidate
     }
     else{
-      #stop("Incompatible polyhedra database found. Reinstall")
       downloadRPolyhedraSupportingFiles()
     }
   }
@@ -43,12 +40,6 @@
     downloadRPolyhedraSupportingFiles()
     .polyhedra <- PolyhedronDatabase.class$new()
   }
-
   assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
-  #scrapePolyhedraSources(max.quant.config.schedule = 1,
-  #                       max.quant.scrape = 1,
-  #                       time2scrape.source = 80, #80 seconds of building scraping polyhedra
-  #                       sources.config = .available.sources,
-  #                       retry.scrape = FALSE)
 }
 
