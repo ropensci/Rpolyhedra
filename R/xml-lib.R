@@ -40,10 +40,11 @@ validatePolyhedronXML <- function (polyhedron.xml) {
 #'
 #' @param polyhedron.state.defined the polyhedron to get a representation from
 #' @return an XML document, ready to be converted to String with XML::saveXML()
-#' @examples
-#' #get the representation of a cube (netlib library)
-#' library(Rpolyhedra)
-#' XML::saveXML(polyhedronToXML(getPolyhedron("netlib", "cube")$state))
+# TODO examples
+# @examples
+# #get the representation of a cube (netlib library)
+# library(Rpolyhedra)
+# XML::saveXML(polyhedronToXML(getPolyhedron("netlib", "cube")$state))
 #'
 #' @import XML
 #' @export
@@ -54,8 +55,7 @@ polyhedronToXML <- function(polyhedron.state.defined)
 
   #TODO: Apply tranformation matrix
   positioned.vertices <- polyhedron.state.defined$state$vertices
-  faces <- polyhedron.state.defined$state$vertices
-  edges <- polyhedron.state.defined$state$vertices
+  faces <- polyhedron.state.defined$state$faces
   # Start by adding a document tag at the root of the XML file
   root <- XML::newXMLNode("polyhedron", doc=doc, attrs=c(name=polyhedron.state.defined$name, dual=polyhedron.state.defined$dual))
   vertices <- XML::newXMLNode("vertices", doc = doc, parent = root, attrs=c(name=polyhedron.state.defined$name))
