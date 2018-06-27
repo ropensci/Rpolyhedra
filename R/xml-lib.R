@@ -63,12 +63,12 @@ polyhedronToXML <- function(polyhedron.state.defined)
   vertices <- convertDFToXML(df = polyhedron.state.defined$vertices, name= "vertice", node = vertices)
 
   #TODO validate XML
-  # validation.result <- validatePolyhedronXML(doc)
-  # if (validation.result == 0){
-  #   return(doc)
-  # }else{
-  #   return(validation.result)
-  # }
+  validation.result <- validatePolyhedronXML(doc)
+  if (validation.result == 0){
+     return(doc)
+  }else{
+     return(validation.result)
+  }
   doc
 }
 
