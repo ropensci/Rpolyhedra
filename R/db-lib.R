@@ -4,7 +4,6 @@
 #'
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
-#' @import methods
 getDataDir <- function() {
   home.dir <- file.path(path.expand("~"), ".R", "Rpolyhedra")
   if(dir.exists(home.dir) == FALSE) {
@@ -40,7 +39,7 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
 #'
 #' Gets the path of Polyhedra preloaded data CSV file
 #'
-#' @param polyhedra_rds_filename filename of polyhedra database
+#' @param polyhedra_preloaded_data filename of polyhedra preloaded data csv
 #' @return the path to the Polyhedra database file
 #' @export
 
@@ -698,7 +697,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
 #'
 #' Tests if the polyhedra RDS is compatible with the current format
 #'
-#' @param .polyhedra current polyhedra database
+#' @param .polyhedra.candidate current polyhedra database candidate for checking compatibility
 isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra){
   file.class <- class(.polyhedra.candidate)
   compatible <- FALSE
@@ -803,8 +802,9 @@ getAvailablePolyhedra <- function(sources = names(.available.sources), search.st
 }
 
 
-#' getPercentilPolyhedraQuant()
+#' getPercentilPolyhedraQuant
 #' returns polyhedra quantity of parameter percentil
+#' @param percentil is the percentil which must be applied to estimate the figure
 getPercentilPolyhedraQuant <- function(percentil){
   round(percentil*nrow(getAvailablePolyhedra()))
 }

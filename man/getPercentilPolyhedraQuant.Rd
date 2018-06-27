@@ -2,12 +2,15 @@
 % Please edit documentation in R/db-lib.R
 \name{getPercentilPolyhedraQuant}
 \alias{getPercentilPolyhedraQuant}
-\title{getPercentilPolyhedraQuant()
+\title{getPercentilPolyhedraQuant
 returns polyhedra quantity of parameter percentil}
 \usage{
 getPercentilPolyhedraQuant(percentil)
 }
+\arguments{
+\item{percentil}{is the percentil which must be applied to estimate the figure}
+}
 \description{
-getPercentilPolyhedraQuant()
+getPercentilPolyhedraQuant
 returns polyhedra quantity of parameter percentil
 }

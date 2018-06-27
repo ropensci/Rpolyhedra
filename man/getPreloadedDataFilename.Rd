@@ -8,7 +8,7 @@
   getPreloadedDataFilename(polyhedra_preloaded_data = "polyhedra.preloaded.data.csv")
 }
 \arguments{
-\item{polyhedra_rds_filename}{filename of polyhedra database}
+\item{polyhedra_preloaded_data}{filename of polyhedra preloaded data csv}
 }
 \value{
 the path to the Polyhedra database file

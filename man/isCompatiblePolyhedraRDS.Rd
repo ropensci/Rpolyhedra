@@ -7,7 +7,7 @@
 isCompatiblePolyhedraRDS(.polyhedra.candidate = .polyhedra)
 }
 \arguments{
-\item{.polyhedra}{current polyhedra database}
+\item{.polyhedra.candidate}{current polyhedra database candidate for checking compatibility}
 }
 \description{
 Tests if the polyhedra RDS is compatible with the current format
