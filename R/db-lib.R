@@ -375,6 +375,9 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       self$data           <- list()
       self
     },
+    getVersion = function(){
+      self$version
+    },
     configPolyhedraRDSPath = function(){
       self$polyhedra.rds.file <- getPolyhedraRDSPath()
       self$polyhedra.rds.file
@@ -684,14 +687,14 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
 #' Tests if the polyhedra RDS is compatible with the current format
 #'
 #' @param .polyhedra current polyhedra database
-isCompatiblePolyhedraRDS <- function(.polyhedra = .polyhedra){
-  file.class <- class(.polyhedra)
+isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra){
+  file.class <- class(.polyhedra.candidate)
   compatible <- FALSE
   #if (file.class[[1]]=="PolyhedronDatabase"){
   #  stop("Database version previous to v0.2.5. Must delete or upgrade database")
   #}
   if (file.class[[1]]=="PolyhedraDatabase"){
-    compatible <- .polyhedra$getVersion()==checkPackageVersion()
+    compatible <- .polyhedra.candidate$getVersion()==checkPackageVersion()
   }
   compatible
 }

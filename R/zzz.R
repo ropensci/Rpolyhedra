@@ -29,7 +29,7 @@
   assign(".available.sources", value = .available.sources, envir = parent.env(environment()))
   if (file.exists(polyhedra.rds.file)) {
     polyhedra.candidate <- readRDS(polyhedra.rds.file)
-    if (compatiblePolyhedraRDS(polyhedra.candidate)){
+    if (isCompatiblePolyhedraRDS(polyhedra.candidate)){
       .polyhedra <- polyhedra.candidate
     }
     else{
@@ -42,7 +42,8 @@
   assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
   scrapePolyhedraSources(max.quant.config.schedule = 0,
                          max.quant.scrape = 0,
-                         time2scrape.source = 0, #160 seconds of building scraping polyhedra
+                         time2scrape.source = 30,
+                         #30 seconds of building/scraping polyhedra database for reasonable devs timing
                          sources.config = .available.sources,
                          retry.scrape = FALSE)
 }
