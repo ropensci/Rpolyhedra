@@ -722,9 +722,9 @@ checkProperties = function(expected.vertices, expected.faces){
 #'
 #' @param vertices vertices dataframe for checking
 #' @param positioned.vertices positioned vertices dataframe for checking
-#' @param triangulated solid triangulated.solid for checking
+#' @param triangulated.solid triangulated.solid for checking
 #' @return checked positioned vertices
-#' @importFrom Stats runif
+#' @importFrom stats runif
 
 
 checkVertices <- function(vertices, positioned.vertices, triangulated.solid){
