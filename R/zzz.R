@@ -27,18 +27,22 @@
   .available.sources[["netlib"]] <- PolyhedronScraperConfigurationNetlib.class$new()
   .available.sources[["dmccooey"]] <- PolyhedronScraperConfigurationDmccoey.class$new()
   assign(".available.sources", value = .available.sources, envir = parent.env(environment()))
+  if (!file.exists(getPreloadedDataFilename())){
+    downloadRPolyhedraSupportingFiles()
+  }
   if (file.exists(polyhedra.rds.file)) {
     polyhedra.candidate <- readRDS(polyhedra.rds.file)
     if (isCompatiblePolyhedraRDS(polyhedra.candidate)){
       .polyhedra <- polyhedra.candidate
     }
     else{
+      #If polyhedra db not compatible, download again
       downloadRPolyhedraSupportingFiles()
     }
   }
   else{
     .polyhedra <- PolyhedraDatabase.class$new()
-}
+  }
   assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
   scrapePolyhedraSources(max.quant.config.schedule = 0,
                          max.quant.scrape = 0,

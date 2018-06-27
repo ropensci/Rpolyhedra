@@ -201,8 +201,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      preloaded.data
    },
    loadPreloadedData = function(){
-     self$preloaded.data.filename <- file.path(getDataDir(),"polyhedra.preloaded.data.csv")
-     self$preloaded.data <- utils::read.csv(file.path(getDataDir(),"polyhedra.preloaded.data.csv"))
+     self$preloaded.data.filename <- getPreloadedDataFilename()
+     self$preloaded.data <- utils::read.csv(preloaded.data.filename)
      self$preloaded.data
    },
    getSizeToTimeScrape = function(sources, time2scrape = 60){

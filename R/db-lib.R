@@ -36,6 +36,18 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
   file.path(getDataDir(), polyhedra_rds_filename)
 }
 
+#' getPreloadedDataFilename
+#'
+#' Gets the path of Polyhedra preloaded data CSV file
+#'
+#' @param polyhedra_rds_filename filename of polyhedra database
+#' @return the path to the Polyhedra database file
+#' @export
+
+getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.preloaded.data.csv"){
+  file.path(getDataDir(),polyhedra_preloaded_data)
+}
+
 #' downloadRPolyhedraSupportingFiles
 #'
 #' Downloads the files from the remote location
