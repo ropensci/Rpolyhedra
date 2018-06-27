@@ -1,6 +1,6 @@
 #' getDataDir
 #'
-#' Gets the path of package data.
+#' Gets the path of Rpolyhedra data dir.
 #'
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
@@ -11,6 +11,18 @@ getDataDir <- function() {
     dir.create(home.dir, recursive=TRUE, showWarnings = FALSE)
   }
   home.dir
+}
+
+#' getPackageDir
+#'
+#' Gets the path of package data.
+
+getPackageDir <- function(){
+  home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
+  data.subdir <- "inst/extdata/"
+  if (!dir.exists(paste(home.dir, "/", data.subdir, sep = "")))
+    data.subdir <- "extdata/"
+  paste(home.dir, "/", data.subdir, sep = "")
 }
 
 #' getPolyhedraRDSPath
@@ -313,9 +325,7 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
 #'
 #' Obtains code version from configuration text file
 checkPackageVersion <- function(){
-  filename <- system.file(package = "Rpolyhedra","extdata", ".version",mustWork=FALSE)
-  #debug
-  print(filename)
+  filename <- paste(getPackageDir(), ".version",sep="")
   readLines(filename, n = 1)
 }
 
@@ -467,22 +477,25 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                      max.quant=0,
                      seed = NULL){
       self$configPolyhedraRDSPath()
+      if (!is.null(seed)){
+        set.seed(seed)
+        max.quant.retrieve <- 0
+      }
+      else{
+        max.quant.retrieve <- max.quant
+      }
       filenames2scrape <- self$ledger$getFilenamesStatusMode(mode = mode,
                                                              sources = sources,
-                                                             max.quant = max.quant,
+                                                             max.quant = max.quant.retrieve,
                                                              order.by.vertices.faces = TRUE)
       ret <- list()
       home.dir.data <- getDataDir()
       if (!is.null(filenames2scrape)){
         if (!is.null(seed)){
-          set.seed(seed)
-          #FIX ME: add parameter max.quant.test or something like that
-          sample.2.cover <- sort(sample(1:nrow(filenames2scrape),size = max.quant.test))
+          sample.2.cover <- sort(sample(1:nrow(filenames2scrape),size = max.quant))
           filenames2scrape <- filenames2scrape[sample.2.cover,]
         }
-        if (max.quant > 0){
-          n <- min(nrow(filenames2scrape),max.quant)
-        }
+        n <- nrow(filenames2scrape)
         for (r in c(1:n)){
           current.filename.data <- filenames2scrape[r,]
           source <- current.filename.data$source
@@ -774,6 +787,12 @@ getAvailablePolyhedra <- function(sources = names(.available.sources), search.st
   .polyhedra$getAvailablePolyhedra(sources = sources, search.string = search.string)
 }
 
+
+#' getPercentilPolyhedraQuant()
+#' returns polyhedra quantity of parameter percentil
+getPercentilPolyhedraQuant <- function(percentil){
+  round(percentil*nrow(getAvailablePolyhedra()))
+}
 #' getPolyhedron()
 #'
 #' Gets a polyhedron from the database. It returns an R6 Class with all its characteristics and functions.
