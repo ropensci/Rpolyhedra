@@ -26,7 +26,6 @@ convertDFToXML <- function(df, name, node) {
 #' @param polyhedron.xml the xml document object to test against the schema
 #' @return the document or an error status.
 #' @import XML
-#' @import methods
 validatePolyhedronXML <- function (polyhedron.xml) {
   xsd <- XML::xmlSchemaParse(paste(getDataDir(), "/polyhedron.xsd",sep=""))
   result <- XML::xmlSchemaValidate(xsd, polyhedron.xml)
