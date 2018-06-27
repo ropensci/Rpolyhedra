@@ -6,7 +6,7 @@
 #' is compiled in source or package directory.
 #' @import methods
 getDataDir <- function() {
-  home.dir <- file.path(path.expand('~'), ".R", "Rpolyhedra")
+  home.dir <- file.path(path.expand("~"), ".R", "Rpolyhedra")
   if(dir.exists(home.dir) == FALSE) {
     dir.create(home.dir, recursive=TRUE, showWarnings = FALSE)
   }
@@ -309,9 +309,15 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
       expect_equal(nrow(edges.inconsistent),0)
     }))
 
+#' checkPackageVersion
+#'
+#' Obtains code version from configuration text file
+checkPackageVersion <- function(){
+  filename <- system.file(package = "Rpolyhedra", "extdata", "version.conf", mustWork=FALSE)
+  readLines(filename, n = 1)
+}
 
-
-#' PolyhedronDatabase
+#' PolyhedraDatabase
 #'
 #' Scrapes all polyhedra in data folder to save a representation which is accesible by the final users upon call to \code{getPolyhedron()}.
 #'
@@ -343,13 +349,15 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
 #' @docType class
 #' @import futile.logger
 #' @importFrom R6 R6Class
-PolyhedronDatabase.class <- R6::R6Class("PolyhedronDatabase",
+PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
   public = list(
+    version = NA,
     polyhedra.rds.file = NA,
     sources.config = NA,
     ledger         = NA,
     data           = NA,
     initialize = function() {
+      self$version        <- checkPackageVersion()
       self$ledger         <- ScraperLedger.class$new()
       self$sources.config <- list()
       self$data           <- list()
@@ -651,7 +659,10 @@ compatiblePolyhedraRDS <- function(.polyhedra = .polyhedra){
   file.class <- class(.polyhedra)
   compatible <- FALSE
   if (file.class[[1]]=="PolyhedronDatabase"){
-    compatible <- TRUE
+    stop("Database version previous to v0.2.5. Must delete or upgrade database")
+  }
+  if (file.class[[1]]=="PolyhedraDatabase"){
+    compatible <- .polyhedra$getVersion()==checkPackageVersion()
   }
   compatible
 }
