@@ -313,7 +313,9 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
 #'
 #' Obtains code version from configuration text file
 checkPackageVersion <- function(){
-  filename <- system.file(package = "Rpolyhedra", "extdata", "version.conf", mustWork=FALSE)
+  filename <- system.file(package = "Rpolyhedra","extdata", ".version",mustWork=FALSE)
+  #debug
+  print(filename)
   readLines(filename, n = 1)
 }
 
@@ -462,7 +464,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     cover = function(mode,
                      sources = names(self$sources.config),
                      covering.code,
-                     max.quant=0){
+                     max.quant=0,
+                     seed = NULL){
       self$configPolyhedraRDSPath()
       filenames2scrape <- self$ledger$getFilenamesStatusMode(mode = mode,
                                                              sources = sources,
@@ -471,7 +474,16 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       ret <- list()
       home.dir.data <- getDataDir()
       if (!is.null(filenames2scrape)){
-        for (r in c(1:nrow(filenames2scrape))){
+        if (!is.null(seed)){
+          set.seed(seed)
+          #FIX ME: add parameter max.quant.test or something like that
+          sample.2.cover <- sort(sample(1:nrow(filenames2scrape),size = max.quant.test))
+          filenames2scrape <- filenames2scrape[sample.2.cover,]
+        }
+        if (max.quant > 0){
+          n <- min(nrow(filenames2scrape),max.quant)
+        }
+        for (r in c(1:n)){
           current.filename.data <- filenames2scrape[r,]
           source <- current.filename.data$source
           source.config <- self$sources.config[[source]]
@@ -546,7 +558,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       self$configPolyhedraRDSPath()
       if (file.exists(self$polyhedra.rds.file)) {
         polyhedra.db.saved <- readRDS(self$polyhedra.rds.file)
-        if (!compatiblePolyhedraRDS(polyhedra.db.saved)){
+        if (!isCompatiblePolyhedraRDS(polyhedra.db.saved)){
           stop("Incompatible polyhedra.db saved. Contact package mantainer")
         }
       }else{
@@ -604,10 +616,13 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     generateTestTasks = function(sources = names(self$sources.config),
                                  TestTaskClass,
                                  max.quant = 0){
+      seed <- checkPackageVersion()
+      seed <- as.numeric(gsub("v|\\.","",seed))
+      seed <- seed *121
       self$configPolyhedraRDSPath()
       if (file.exists(self$polyhedra.rds.file)) {
         polyhedra.db.saved <- readRDS(self$polyhedra.rds.file)
-        if (!compatiblePolyhedraRDS(polyhedra.db.saved)){
+        if (!isCompatiblePolyhedraRDS(polyhedra.db.saved)){
           stop("Incompatible polyhedra.db saved. Contact package mantainer")
         }
       }else{
@@ -630,7 +645,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       ret <- self$cover(mode          = "test",
                         sources       = sources,
                         covering.code = test.task.gen.function,
-                        max.quant     = max.quant)
+                        max.quant     = max.quant,
+                        seed          = seed)
       ret
     },
     schedulePolyhedraSources=function (sources.config=.available.sources,max.quant = 0, test = FALSE){
@@ -650,17 +666,17 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     }
   ))
 
-#' compatiblePolyhedraRDS()
+#' isCompatiblePolyhedraRDS()
 #'
 #' Tests if the polyhedra RDS is compatible with the current format
 #'
 #' @param .polyhedra current polyhedra database
-compatiblePolyhedraRDS <- function(.polyhedra = .polyhedra){
+isCompatiblePolyhedraRDS <- function(.polyhedra = .polyhedra){
   file.class <- class(.polyhedra)
   compatible <- FALSE
-  if (file.class[[1]]=="PolyhedronDatabase"){
-    stop("Database version previous to v0.2.5. Must delete or upgrade database")
-  }
+  #if (file.class[[1]]=="PolyhedronDatabase"){
+  #  stop("Database version previous to v0.2.5. Must delete or upgrade database")
+  #}
   if (file.class[[1]]=="PolyhedraDatabase"){
     compatible <- .polyhedra$getVersion()==checkPackageVersion()
   }
