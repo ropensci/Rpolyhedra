@@ -7,7 +7,7 @@
 getDataDir()
 }
 \description{
-Gets the path of package data.
+Gets the path of Rpolyhedra data dir.
 }
 \details{
 This function is used internally to determine whether the package
