@@ -55,14 +55,20 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 #' @import utils
 #' @export
 downloadRPolyhedraSupportingFiles <- function(){
-  URL <- "https://github.com/qbotics/RpolyhedraDB/archive/master.zip"
-  td <- tempdir()
-  zipFile <- tempfile(tmpdir=td, fileext=".zip")
-  download.file(URL, destfile = zipFile)
-  utils::unzip(zipfile = zipFile, exdir = td)
-  files.to.copy <- list.files(file.path(td, "RpolyhedraDB-master"))
-  file.copy(from = file.path(td,"RpolyhedraDB-master", files.to.copy), to=getDataDir(), recursive = TRUE)
-  unlink(td)
+  if(checkDatabaseVersion() == "UPDATE")
+  {
+    package.version = checkPackageVersion()
+    URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/", package.version, sep="")
+    td <- tempdir()
+    zipFile <- tempfile(tmpdir=td, fileext=".zip")
+    download.file(URL, destfile = zipFile)
+    utils::unzip(zipfile = zipFile, exdir = td)
+    tmp.db.path = list.files(path = td, pattern="qbotics*")[1]
+    files.to.copy <- list.files(file.path(td, tmp.db.path))
+    file.copy(from = file.path(td,tmp.db.path, files.to.copy), to=getDataDir(), recursive = TRUE)
+    unlink(file.path(td,tmp.db.path), recursive=TRUE)
+    return(TRUE)
+  }
   return(TRUE)
 }
 
@@ -336,9 +342,52 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
 #'
 #' Obtains code version from configuration text file
 checkPackageVersion <- function(){
-  filename <- paste(getPackageDir(), ".version",sep="")
-  readLines(filename, n = 1)
+  version = NULL
+  version.file <- file.path(getPackageDir(), "version")
+  if (file.exists(version.file))
+    version = readLines(version.file, n = 1)
+  version
 }
+
+#' getDatabaseVersion
+#'
+#' Obtains the code version from the database version file
+getDatabaseVersion <- function(){
+  version = NULL
+  version.file <- file.path(getDataDir(), "version")
+  if (file.exists(version.file))
+    version = readLines(version.file, n = 1)
+  version
+}
+
+#' checkDatabaseVersion
+#'
+#' Determines if there is a need for a database update by checking the version file of both
+#' the package and the database installation.
+#'
+#' @return "UPDATE" if an update is required, "NO_ACTION_REQUIRED" otherwise.
+checkDatabaseVersion <- function(){
+  status = NULL
+  database.version = getDatabaseVersion()
+  if(is.null(database.version)) {
+    status = "UPDATE"
+  } else {
+    database.version = as.numeric(gsub("v|\\.","",database.version))
+  }
+  package.version = as.numeric(gsub("v|\\.","",checkPackageVersion()))
+
+  if(!is.null(database.version))
+  {
+    if(package.version > database.version) {
+      status = "UPDATE"
+    } else {
+      status = "NO_ACTION_REQUIRED"
+    }
+  }
+  status
+
+}
+
 
 #' PolyhedraDatabase
 #'

@@ -46,11 +46,3 @@ test_that("test check edges consistency for 7% of available polyhedra", {
     task$run()
   }
 })
-
-#context("export XML")
-# test_that("an XML document can be created out of a cube (netlib)", {
-#   cube <- getPolyhedron("netlib", "cube")
-#   cube.xml <- cube$exportToXML()
-#   cube.str <- XML::saveXML(cube.xml)
-#   expect(is.null(cube.str) == FALSE, "The document could not be saved")
-# })
