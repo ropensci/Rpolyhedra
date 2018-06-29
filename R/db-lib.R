@@ -58,7 +58,7 @@ downloadRPolyhedraSupportingFiles <- function(){
   if(checkDatabaseVersion() == "UPDATE")
   {
     package.version = checkPackageVersion()
-    URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", package.version, sep="")
+    URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/", package.version, sep="")
     td <- tempdir()
     zipFile <- tempfile(tmpdir=td, fileext=".zip")
     download.file(URL, destfile = zipFile)
