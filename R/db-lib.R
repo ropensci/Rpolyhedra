@@ -57,13 +57,13 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 downloadRPolyhedraSupportingFiles <- function(){
   if(checkDatabaseVersion() == "UPDATE")
   {
-    package.version = checkPackageVersion()
+    package.version <- checkPackageVersion()
     URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/", package.version, sep="")
     td <- tempdir()
     zipFile <- tempfile(tmpdir=td, fileext=".zip")
-    download.file(URL, destfile = zipFile)
+    download.file(URL, destfile = zipFile, mode="wb")
     utils::unzip(zipfile = zipFile, exdir = td)
-    tmp.db.path = list.files(path = td, pattern="qbotics*")[1]
+    tmp.db.path <- list.files(path = td, pattern="qbotics*")[1]
     files.to.copy <- list.files(file.path(td, tmp.db.path))
     file.copy(from = file.path(td,tmp.db.path, files.to.copy), to=getDataDir(), recursive = TRUE)
     unlink(file.path(td,tmp.db.path), recursive=TRUE)
