@@ -342,11 +342,7 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
 #'
 #' Obtains code version from configuration text file
 checkPackageVersion <- function(){
-  version = NULL
-  version.file <- file.path(getPackageDir(), "version")
-  if (file.exists(version.file))
-    version = readLines(version.file, n = 1)
-  version
+  paste("v", packageVersion("Rpolyhedra"), sep="")
 }
 
 #' getDatabaseVersion
@@ -367,25 +363,22 @@ getDatabaseVersion <- function(){
 #'
 #' @return "UPDATE" if an update is required, "NO_ACTION_REQUIRED" otherwise.
 checkDatabaseVersion <- function(){
-  status = NULL
-  database.version = getDatabaseVersion()
+  status <- NULL
+  database.version <- getDatabaseVersion()
   if(is.null(database.version)) {
-    status = "UPDATE"
-  } else {
-    database.version = as.numeric(gsub("v|\\.","",database.version))
+    status <- "UPDATE"
   }
-  package.version = as.numeric(gsub("v|\\.","",checkPackageVersion()))
+  package.version <- checkPackageVersion()
 
   if(!is.null(database.version))
   {
     if(package.version > database.version) {
-      status = "UPDATE"
+      status <- "UPDATE"
     } else {
-      status = "NO_ACTION_REQUIRED"
+      status <- "NO_ACTION_REQUIRED"
     }
   }
   status
-
 }
 
 
