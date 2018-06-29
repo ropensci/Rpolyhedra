@@ -752,7 +752,9 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = 
 
   if (file.class[[1]]=="PolyhedraDatabase"){
     compatible <- .polyhedra.candidate$getVersion()==getPackageVersion()
-    error <- paste("Incompatible! DB version= ",.polyhedra.candidate$getVersion()," Code version",getPackageVersion(), ".", sep="")
+    if (!compatible){
+      error <- paste("Incompatible! DB version= ",.polyhedra.candidate$getVersion()," Code version= ",getPackageVersion(), ".", sep="")
+    }
   }
   else{
     error <- paste("Incompatible! PolyhedraDatabase class is ",file.class[[1]],".", sep ="")
