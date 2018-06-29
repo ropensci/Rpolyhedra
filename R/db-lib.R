@@ -19,9 +19,9 @@ getDataDir <- function() {
 getPackageDir <- function(){
   home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
   data.subdir <- "inst/extdata/"
-  if (!dir.exists(paste(home.dir, "/", data.subdir, sep = "")))
+  if (!dir.exists(file.path(home.dir, "/", data.subdir)))
     data.subdir <- "extdata/"
-  paste(home.dir, "/", data.subdir, sep = "")
+  file.path(home.dir, "/", data.subdir)
 }
 
 #' getPolyhedraRDSPath
@@ -57,8 +57,8 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 downloadRPolyhedraSupportingFiles <- function(){
   if(checkDatabaseVersion() == "UPDATE")
   {
-    package.version <- checkPackageVersion()
-    URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/", package.version, sep="")
+    package.version <- getPackageVersion()
+    URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", package.version, sep="")
     td <- tempdir()
     zipFile <- tempfile(tmpdir=td, fileext=".zip")
     download.file(URL, destfile = zipFile, mode="wb")
@@ -287,20 +287,22 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
     run = function(){
       source <- self$source.config$getName()
       tryCatch({
+        obs    <- ""
         scraped.polyhedron <- self$source.config$scrape(polyhedron.number = self$polyhedron.number,
-                                                   paste(self$polyhedra.dir, self$polyhedron.filename, sep = ""))
+                                                   file.path(self$polyhedra.dir, self$polyhedron.filename))
         scraped.name <- scraped.polyhedron$getName()
         scraped.polyhedron$getRGLModel(1, c(0, 0, 0))
         futile.logger::flog.debug(paste("generated RGLModel"))
         status <- "testing"
-        obs    <- ""
       },
       error=function(e){
         error <- paste(e$message,collapse=",")
         futile.logger::flog.error(paste("catched error",error))
         assign("error",error,envir = parent.env(environment()))
         status <- "exception"
-        obs    <- scraped.polyhedron$getErrors()
+        if (exists("scraped.polyhedron")){
+          obs    <- scraped.polyhedron$getErrors()
+        }
       })
       expected.polyhedron <-
                 self$polyhedra.db$getPolyhedron(source = source,
@@ -338,11 +340,11 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
       expect_equal(nrow(edges.inconsistent),0)
     }))
 
-#' checkPackageVersion
+#' getPackageVersion
 #'
-#' Obtains code version from configuration text file
-checkPackageVersion <- function(){
-  paste("v", packageVersion("Rpolyhedra"), sep="")
+#' Obtains code version from the Description
+getPackageVersion <- function(){
+  paste(packageVersion("Rpolyhedra"), sep="")
 }
 
 #' getDatabaseVersion
@@ -368,7 +370,7 @@ checkDatabaseVersion <- function(){
   if(is.null(database.version)) {
     status <- "UPDATE"
   }
-  package.version <- checkPackageVersion()
+  package.version <- getPackageVersion()
 
   if(!is.null(database.version))
   {
@@ -422,7 +424,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     ledger         = NA,
     data           = NA,
     initialize = function() {
-      self$version        <- checkPackageVersion()
+      self$version        <- getPackageVersion()
       self$ledger         <- ScraperLedger.class$new()
       self$sources.config <- list()
       self$data           <- list()
@@ -685,7 +687,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     generateTestTasks = function(sources = names(self$sources.config),
                                  TestTaskClass,
                                  max.quant = 0){
-      seed <- checkPackageVersion()
+      seed <- getPackageVersion()
       seed <- as.numeric(gsub("v|\\.","",seed))
       seed <- seed *121
       self$configPolyhedraRDSPath()
@@ -747,7 +749,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra){
   #  stop("Database version previous to v0.2.5. Must delete or upgrade database")
   #}
   if (file.class[[1]]=="PolyhedraDatabase"){
-    compatible <- .polyhedra.candidate$getVersion()==checkPackageVersion()
+    compatible <- .polyhedra.candidate$getVersion()==getPackageVersion()
   }
   compatible
 }
