@@ -51,8 +51,9 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 #'
 #' Downloads the files from the remote location
 #'
-#' @return TRUE if sucessfull, FALSE otherwise
 #' @import utils
+#' @import futile.logger
+#' @return TRUE if sucessfull, FALSE otherwise
 #' @export
 downloadRPolyhedraSupportingFiles <- function(){
   if(checkDatabaseVersion() == "UPDATE")
@@ -61,6 +62,7 @@ downloadRPolyhedraSupportingFiles <- function(){
     URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", package.version, sep="")
     td <- tempdir()
     zipFile <- tempfile(tmpdir=td, fileext=".zip")
+    futile.logger::flog.info(paste("downloading DB from",URL))
     download.file(URL, destfile = zipFile, mode="wb")
     utils::unzip(zipfile = zipFile, exdir = td)
     tmp.db.path <- list.files(path = td, pattern="qbotics*")[1]
@@ -630,7 +632,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       if (file.exists(self$polyhedra.rds.file)) {
         polyhedra.db.saved <- readRDS(self$polyhedra.rds.file)
         if (!isCompatiblePolyhedraRDS(polyhedra.db.saved)){
-          stop("Incompatible polyhedra.db saved. Contact package mantainer")
+          stop("Incompatible polyhedra.db saved. Contact package mantainer.")
         }
       }else{
         # if database doesn't exists setup test as false
@@ -694,7 +696,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       if (file.exists(self$polyhedra.rds.file)) {
         polyhedra.db.saved <- readRDS(self$polyhedra.rds.file)
         if (!isCompatiblePolyhedraRDS(polyhedra.db.saved)){
-          stop("Incompatible polyhedra.db saved. Contact package mantainer")
+          stop("Incompatible polyhedra.db saved. Contact package mantainer.")
         }
       }else{
         # if database doesn't exists setup test as false
@@ -741,8 +743,9 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
 #'
 #' Tests if the polyhedra RDS is compatible with the current format
 #'
+#' @import futile.logger
 #' @param .polyhedra.candidate current polyhedra database candidate for checking compatibility
-isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra){
+isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = FALSE){
   file.class <- class(.polyhedra.candidate)
   compatible <- FALSE
   #if (file.class[[1]]=="PolyhedronDatabase"){
@@ -750,6 +753,13 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra){
   #}
   if (file.class[[1]]=="PolyhedraDatabase"){
     compatible <- .polyhedra.candidate$getVersion()==getPackageVersion()
+    error <- paste("Incompatible! DB version=",.polyhedra.candidate$getVersion(),"Code version",getPackageVersion(),".")
+  }
+  if (halts){
+    stop(paste(error,"Contact package mantainer."))
+  }
+  else{
+    futile.logger::error(error)
   }
   compatible
 }

@@ -32,12 +32,8 @@
   }
   if (file.exists(polyhedra.rds.file)) {
     polyhedra.candidate <- readRDS(polyhedra.rds.file)
-    if (isCompatiblePolyhedraRDS(polyhedra.candidate)){
+    if (isCompatiblePolyhedraRDS(polyhedra.candidate, halts = TRUE)){
       .polyhedra <- polyhedra.candidate
-    }
-    else{
-      #If polyhedra db not compatible, download again
-      downloadRPolyhedraSupportingFiles()
     }
   }
   else{
