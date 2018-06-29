@@ -4,7 +4,7 @@
 \alias{isCompatiblePolyhedraRDS}
 \title{isCompatiblePolyhedraRDS()}
 \usage{
-isCompatiblePolyhedraRDS(.polyhedra.candidate = .polyhedra)
+isCompatiblePolyhedraRDS(.polyhedra.candidate = .polyhedra, halts = FALSE)
 }
 \arguments{
 \item{.polyhedra.candidate}{current polyhedra database candidate for checking compatibility}
