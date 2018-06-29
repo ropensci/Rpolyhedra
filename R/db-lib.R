@@ -353,10 +353,10 @@ getPackageVersion <- function(){
 #'
 #' Obtains the code version from the database version file
 getDatabaseVersion <- function(){
-  version = NULL
+  version <- NULL
   version.file <- file.path(getDataDir(), "version")
   if (file.exists(version.file))
-    version = readLines(version.file, n = 1)
+    version <- readLines(version.file, n = 1)
   version
 }
 
@@ -748,18 +748,22 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
 isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = FALSE){
   file.class <- class(.polyhedra.candidate)
   compatible <- FALSE
-  #if (file.class[[1]]=="PolyhedronDatabase"){
-  #  stop("Database version previous to v0.2.5. Must delete or upgrade database")
-  #}
+  error <- ""
+
   if (file.class[[1]]=="PolyhedraDatabase"){
     compatible <- .polyhedra.candidate$getVersion()==getPackageVersion()
-    error <- paste("Incompatible! DB version=",.polyhedra.candidate$getVersion(),"Code version",getPackageVersion(),".")
-  }
-  if (halts){
-    stop(paste(error,"Contact package mantainer."))
+    error <- paste("Incompatible! DB version= ",.polyhedra.candidate$getVersion()," Code version",getPackageVersion(), ".", sep="")
   }
   else{
-    futile.logger::error(error)
+    error <- paste("Incompatible! PolyhedraDatabase class is ",file.class[[1]],".", sep ="")
+  }
+  if (nchar(error)>0){
+    if (halts){
+      stop(paste(error,"Contact package mantainer."))
+    }
+    else{
+      futile.logger::error(error)
+    }
   }
   compatible
 }
