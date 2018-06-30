@@ -47,22 +47,45 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
   file.path(getDataDir(),polyhedra_preloaded_data)
 }
 
+#' checkDownloadFilesUserAcceptance
+#'
+#' Asks the user to download the supporting files
+#'
+#' @return TRUE if user accepts the download, FALSE otherwise
+#' @export
+checkDownloadFilesUserAcceptance <- function() {
+  accept.option <- readline(prompt="This package needs to download data to the home folder. Do you accept it [y/n]?:")
+  if(tolower(accept.option[1]) == "n") {
+    return(FALSE)
+  }
+  if(tolower(accept.option[1]) == "y") {
+    return(TRUE)
+  }
+  while(tolower(accept.option[1]) != "n" || tolower(accept.option[1]) != "y") {
+    accept.option <- readline(prompt="We do not understand the option provided. Do you accept to download the supporting files [y/n]?:")
+    if(tolower(accept.option[1]) == "n") {
+      return(FALSE)
+    } else if(tolower(accept.option[1]) == "y") {
+      return(TRUE)
+    }
+  }
+  return(FALSE)
+}
+
 #' downloadRPolyhedraSupportingFiles
 #'
 #' Downloads the files from the remote location
 #'
-#' @import utils
-#' @import futile.logger
 #' @return TRUE if sucessfull, FALSE otherwise
+#' @import utils
 #' @export
 downloadRPolyhedraSupportingFiles <- function(){
-  if(checkDatabaseVersion() == "UPDATE")
+  if(checkDatabaseVersion() == "UPDATE" && checkDownloadFilesUserAcceptance() == TRUE)
   {
     package.version <- getPackageVersion()
     URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", package.version, sep="")
     td <- tempdir()
     zipFile <- tempfile(tmpdir=td, fileext=".zip")
-    futile.logger::flog.info(paste("downloading DB from",URL))
     download.file(URL, destfile = zipFile, mode="wb")
     utils::unzip(zipfile = zipFile, exdir = td)
     tmp.db.path <- list.files(path = td, pattern="qbotics*")[1]
@@ -73,6 +96,7 @@ downloadRPolyhedraSupportingFiles <- function(){
   }
   return(TRUE)
 }
+
 
 
 #' PolyhedronScraperConfiguration
