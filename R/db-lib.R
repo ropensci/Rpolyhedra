@@ -54,6 +54,9 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 #' @return TRUE if user accepts the download, FALSE otherwise
 #' @export
 checkDownloadFilesUserAcceptance <- function() {
+  if(!is.na(Sys.getenv(x = "ON_TRAVIS", unset=NA)))
+    return(TRUE)
+  #gettext("rpoly.already_defined", domain = "R-Rpolyhedra")
   accept.option <- readline(prompt="This package needs to download data to the home folder. Do you accept it [y/n]?:")
   if(tolower(accept.option[1]) == "n") {
     return(FALSE)
@@ -62,7 +65,7 @@ checkDownloadFilesUserAcceptance <- function() {
     return(TRUE)
   }
   while(tolower(accept.option[1]) != "n" || tolower(accept.option[1]) != "y") {
-    accept.option <- readline(prompt="We do not understand the option provided. Do you accept to download the supporting files [y/n]?:")
+    accept.option <- "We do not understand the option provided. Do you accept to download the supporting files [y/n]?:"
     if(tolower(accept.option[1]) == "n") {
       return(FALSE)
     } else if(tolower(accept.option[1]) == "y") {
