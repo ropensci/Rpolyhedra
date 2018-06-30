@@ -65,7 +65,7 @@ checkDownloadFilesUserAcceptance <- function() {
     return(TRUE)
   }
   while(tolower(accept.option[1]) != "n" || tolower(accept.option[1]) != "y") {
-    accept.option <- "We do not understand the option provided. Do you accept to download the supporting files [y/n]?:"
+    accept.option <- readline(prompt="We do not understand the option provided. Do you accept to download the supporting files [y/n]?:")
     if(tolower(accept.option[1]) == "n") {
       return(FALSE)
     } else if(tolower(accept.option[1]) == "y") {
