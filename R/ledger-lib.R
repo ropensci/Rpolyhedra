@@ -170,6 +170,9 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    updateCalculatedFields = function(){
      resolveScrapedPreloaded <- function(x, field){maxWithoutNA(c(x[paste("scraped",field,sep=".")],
                                                                   x[paste("preloaded",field,sep=".")]))}
+     if (!"name" %in% names(self$df)){
+       self$dirty <- TRUE
+     }
      if (self$dirty){
        self$df$name     <-  apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="name")} )
        self$df$vertices <-  as.numeric(apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="vertices")}))
@@ -177,13 +180,16 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        self$dirty <- FALSE
      }
    },
-   getAvailablePolyhedra = function(sources = sources,
-                                    search.string = search.string,
-                                    ignore.case = ignore.case){
+   getAvailablePolyhedra = function(sources = names(.available.sources),
+                                    search.string = "",
+                                    ret.fields = c("source","name","vertices","faces","status"),
+                                    ignore.case = TRUE){
      self$updateCalculatedFields()
-     ret <- self$df[!is.na(self$df$name) & self$df$source %in% sources ,
-                    c("source","name","vertices","faces","status")]
-
+     if (is.null(ret.fields)){
+       ret.fields <- 1:ncol(self$df)
+     }
+     ret <- self$df[!is.na(self$df$name) & self$df$source %in% sources,
+                    ret.fields]
      if (!is.null(search.string)) {
        ret <- ret[grepl(search.string, ret$name,ignore.case = ignore.case),]
      }
