@@ -4,12 +4,57 @@
 #'
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
-getDataDir <- function() {
-  home.dir <- file.path(path.expand("~"), ".R", "Rpolyhedra")
-  if(dir.exists(home.dir) == FALSE) {
-    dir.create(home.dir, recursive=TRUE, showWarnings = FALSE)
+getDataDir <- function(data.env=.data.env) {
+  data.dir <- ""
+  if(data.env == "HOME")
+  {
+    data.dir <- file.path(path.expand("~"), ".R", "Rpolyhedra")
+    if(dir.exists(data.dir) == FALSE) {
+      dir.create(data.dir, recursive=TRUE, showWarnings = FALSE)
+    }
   }
-  home.dir
+  else{
+    data.dir <- getPackageDir()
+  }
+  data.dir
+}
+
+#' setDataDirEnv
+#'
+#' Sets the path of Rpolyhedra data dir.
+#'
+#' This function is used to set the data directories either to the package or the user home directory.
+#'
+#' @param env The type of environment to work with. Values are "PACKAGE" or "HOME" and it defaults to package
+#' @export
+setDataDirEnvironment <- function(env="PACKAGE") {
+  if(env=="PACKAGE")
+    .data.env <- "PACKAGE"
+  else if(env=="HOME")
+    .data.env <- "HOME"
+  else
+    stop("Possible values are PACKAGE and HOME")
+  assign(".data.env", value = .data.env, envir = parent.env(environment()))
+  .data.env
+}
+
+#' setDataDirEnv
+#'
+#' Sets the path of Rpolyhedra data dir.
+#'
+#' This function is used to set the data directories either to the package or the user home directory.
+#'
+#' @param env The type of environment to work with. Values are "PACKAGE" or "HOME" and it defaults to package
+#' @export
+askDataDirEnvironment <- function(env="PACKAGE") {
+  if(env=="PACKAGE")
+    .data.env <- "PACKAGE"
+  else if(env=="HOME")
+    .data.env <- "HOME"
+  else
+    stop("Possible values are PACKAGE and HOME")
+  assign(".data.env", value = .data.env, envir = parent.env(environment()))
+  .data.env
 }
 
 #' getPackageDir
@@ -18,10 +63,10 @@ getDataDir <- function() {
 
 getPackageDir <- function(){
   home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
-  data.subdir <- "inst/extdata/"
-  if (!dir.exists(file.path(home.dir, "/", data.subdir)))
+  data.subdir <- file.path("inst", "extdata/")
+  if (!dir.exists(file.path(home.dir, data.subdir)))
     data.subdir <- "extdata/"
-  file.path(home.dir, "/", data.subdir)
+  file.path(home.dir, data.subdir)
 }
 
 #' getPolyhedraRDSPath
@@ -47,32 +92,33 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
   file.path(getDataDir(),polyhedra_preloaded_data)
 }
 
-#' checkDownloadFilesUserAcceptance
+#' selectDataEnv
 #'
 #' Asks the user to download the supporting files
 #'
-#' @return TRUE if user accepts the download, FALSE otherwise
+#' @return .data.env
 #' @export
-checkDownloadFilesUserAcceptance <- function() {
+selectDataEnv <- function() {
   if(!is.na(Sys.getenv(x = "ON_TRAVIS", unset=NA)))
     return(TRUE)
-  #gettext("rpoly.already_defined", domain = "R-Rpolyhedra")
-  accept.option <- readline(prompt="This package needs to download data to the home folder. Do you accept it [y/n]?:")
+  accept.option <- readline(prompt="Full Database needs to download data to home folder. Agree [y/n]?:")
   if(tolower(accept.option[1]) == "n") {
-    return(FALSE)
+    print("Working on demo DB. You can call selectDataEnv to use the full database.")
+    setDataDirEnvironment("PACKAGE")
   }
   if(tolower(accept.option[1]) == "y") {
-    return(TRUE)
+    setDataDirEnvironment("HOME")
   }
-  while(tolower(accept.option[1]) != "n" || tolower(accept.option[1]) != "y") {
-    accept.option <- readline(prompt="We do not understand the option provided. Do you accept to download the supporting files [y/n]?:")
+  while(!tolower(accept.option[1]) %in% c("n","y")) {
+    accept.option <- readline(prompt="Unknown option. Agree [y/n]?:")
     if(tolower(accept.option[1]) == "n") {
-      return(FALSE)
+      print("Working on demo DB. You can call selectDataEnv to use the full database.")
+      setDataDirEnvironment("PACKAGE")
     } else if(tolower(accept.option[1]) == "y") {
-      return(TRUE)
+      setDataDirEnvironment("HOME")
     }
   }
-  return(FALSE)
+  .data.env
 }
 
 #' downloadRPolyhedraSupportingFiles
@@ -83,24 +129,59 @@ checkDownloadFilesUserAcceptance <- function() {
 #' @import utils
 #' @export
 downloadRPolyhedraSupportingFiles <- function(){
-  if(checkDatabaseVersion() == "UPDATE" && checkDownloadFilesUserAcceptance() == TRUE)
+  if(checkDatabaseVersion() == "UPDATE")
   {
-    package.version <- getPackageVersion()
-    URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", package.version, sep="")
-    td <- tempdir()
-    zipFile <- tempfile(tmpdir=td, fileext=".zip")
-    download.file(URL, destfile = zipFile, mode="wb")
-    utils::unzip(zipfile = zipFile, exdir = td)
-    tmp.db.path <- list.files(path = td, pattern="qbotics*")[1]
-    files.to.copy <- list.files(file.path(td, tmp.db.path))
-    file.copy(from = file.path(td,tmp.db.path, files.to.copy), to=getDataDir(), recursive = TRUE)
-    unlink(file.path(td,tmp.db.path), recursive=TRUE)
-    return(TRUE)
+    if(.data.env == "HOME"){
+      package.version <- getPackageVersion()
+      URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", package.version, sep="")
+      td <- tempdir()
+      zipFile <- tempfile(tmpdir=td, fileext=".zip")
+      download.file(URL, destfile = zipFile, mode="wb")
+      utils::unzip(zipfile = zipFile, exdir = td)
+      tmp.db.path <- list.files(path = td, pattern="qbotics*")[1]
+      files.to.copy <- list.files(file.path(td, tmp.db.path))
+      file.copy(from = file.path(td,tmp.db.path, files.to.copy), to=getDataDir(), recursive = TRUE)
+      unlink(file.path(td,tmp.db.path), recursive=TRUE)
+      return(TRUE)
+    } else if(.data.env == "PACKAGE") {
+      copyFilesToExtData(force = FALSE)
+    }
   }
   return(TRUE)
 }
 
+#' downloadRPolyhedraSupportingFiles
+#'
+#' Downloads the files from the remote location
+#'
+#' @return TRUE if sucessfull, FALSE otherwise
+#' @import utils
+copyFilesToExtData <- function(force = FALSE){
+  polyhedra.ledger <- .polyhedra$ledger$getAvailablePolyhedra(ret.fields = NULL)
+  polyhedra.ledger.scraped <- polyhedra.ledger[polyhedra.ledger$status=="scraped",]
+  data.env.home <- getDataDir(data.env ="HOME")
+  data.env.package <- getDataDir(data.env ="PACKAGE")
+  #clean dirs
+  dir.create(data.env.package,showWarnings = FALSE, recursive = TRUE)
+  for (source in names(.available.sources)){
+    source.config <- .available.sources[[source]]
+    source.dir <- source.config$getBaseDir(data.env.package)
+    file.remove(source.dir)
+    dir.create(source.dir, showWarnings = FALSE, recursive = TRUE)
+  }
+  #copy files
+  #copy version
+  file.copy(file.path(data.env.home,"version"),data.env.package,overwrite = TRUE)
 
+  #copy polyhedra source files
+  for (i in c(1:nrow(polyhedra.ledger.scraped))){
+    current.polyhedron <-polyhedra.ledger.scraped[i,]
+    #TODO copy polyhedra sources files
+  }
+  #copy RDS
+  file.copy(file.path(data.env.home,"polyhedra.RDS"),data.env.package)
+  self
+}
 
 #' PolyhedronScraperConfiguration
 #'
@@ -795,6 +876,29 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = 
     }
   }
   compatible
+}
+
+
+#' scrapePolyhedra()
+#'
+#' Method for obtaining polyhedra objects from text files of
+#' different sources, scheduling and scraping using predefined configurations
+#'
+#' @param scrape.config predefined configuration for scraping
+#' @param sources.config the sources that will be used by the function
+#' @usage
+#'     scrapePolyhedra(.available.scrapping.conf[["pkg-minimal"]],
+#'                     sources.config = .available.sources)
+#' @export
+
+scrapePolyhedra <- function(scrape.config,
+                sources.config = .available.sources){
+  scrapePolyhedraSources(max.quant.config.schedule = scrape.config[["max.quant.config.schedule"]],
+                         max.quant.scrape = scrape.config[["max.quant.scrape"]],
+                         time2scrape.source = scrape.config[["time2scrape.source"]],
+                         sources.config = sources.config,
+                         retry.scrape = scrape.config[["retry.scrape"]])
+
 }
 
 #' scrapePolyhedraSources()

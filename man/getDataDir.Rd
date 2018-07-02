@@ -4,7 +4,7 @@
 \alias{getDataDir}
 \title{getDataDir}
 \usage{
-getDataDir()
+getDataDir(data.env = .data.env)
 }
 \description{
 Gets the path of Rpolyhedra data dir.
