@@ -4,6 +4,8 @@
 #'
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
+#' @param data.env enviroment where data directory must be returned
+#'
 getDataDir <- function(data.env=.data.env) {
   data.dir <- ""
   if(data.env == "HOME")
@@ -154,7 +156,8 @@ downloadRPolyhedraSupportingFiles <- function(){
 #'
 #' Downloads the files from the remote location
 #'
-#' @return TRUE if sucessfull, FALSE otherwise
+#' @param force indicate if existings directories must be overwritten
+#' @return TRUE if sucessfull,
 #' @import utils
 copyFilesToExtData <- function(force = FALSE){
   polyhedra.ledger <- .polyhedra$ledger$getAvailablePolyhedra(ret.fields = NULL)
@@ -202,7 +205,7 @@ copyFilesToExtData <- function(force = FALSE){
   futile.logger::flog.info(paste("Copied",cont,"polyhedra sources files to",data.env.package))
   #copy RDS
   file.copy(file.path(data.env.home,"polyhedra.RDS"),data.env.package)
-  self
+  TRUE
 }
 
 #' PolyhedronScraperConfiguration
@@ -860,9 +863,10 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
 #' isCompatiblePolyhedraRDS()
 #'
 #' Tests if the polyhedra RDS is compatible with the current format
+#' @param .polyhedra.candidate polyhedra db to test
+#' @param halts indicates whether it has to halt execution when it is not compatible
 #'
 #' @import futile.logger
-#' @param .polyhedra.candidate current polyhedra database candidate for checking compatibility
 isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = FALSE){
   file.class <- class(.polyhedra.candidate)
   compatible <- FALSE
@@ -882,7 +886,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = 
       stop(paste(error,"Contact package mantainer."))
     }
     else{
-      futile.logger::error(error)
+      futile.logger::flog.error(error)
     }
   }
   compatible
@@ -910,9 +914,6 @@ switchToFullDatabase <- function(){
 #'
 #' @param scrape.config predefined configuration for scraping
 #' @param sources.config the sources that will be used by the function
-#' @usage
-#'     scrapePolyhedra(.available.scrapping.conf[["pkg-minimal"]],
-#'                     sources.config = .available.sources)
 #' @export
 
 scrapePolyhedra <- function(scrape.config,

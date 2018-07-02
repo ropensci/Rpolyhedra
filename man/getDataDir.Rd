@@ -6,6 +6,9 @@
 \usage{
 getDataDir(data.env = .data.env)
 }
+\arguments{
+\item{data.env}{enviroment where data directory must be returned}
+}
 \description{
 Gets the path of Rpolyhedra data dir.
 }
