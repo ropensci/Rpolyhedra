@@ -39,10 +39,9 @@
                                                      max.quant.scrape = 0,
                                                      time2scrape.source = 0,
                                                      retry.scrape = FALSE)
-  assign(".available.scrapping.conf", value = .available.sources, envir = parent.env(environment()))
-  if(!exists(".data.env"))
-  {
-    selectDataEnv()
+  assign(".available.scrapping.conf", value = .available.scrapping.conf, envir = parent.env(environment()))
+  if (!exists(".data.env")){
+    setDataDirEnvironment("PACKAGE")
   }
   if (!file.exists(getPreloadedDataFilename())){
     downloadRPolyhedraSupportingFiles()
