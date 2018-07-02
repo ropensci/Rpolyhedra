@@ -6,8 +6,11 @@
 \usage{
 copyFilesToExtData(force = FALSE)
 }
+\arguments{
+\item{force}{indicate if existings directories must be overwritten}
+}
 \value{
-TRUE if sucessfull, FALSE otherwise
+TRUE if sucessfull,
 }
 \description{
 Downloads the files from the remote location

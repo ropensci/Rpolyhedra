@@ -4,8 +4,7 @@
 \alias{scrapePolyhedra}
 \title{scrapePolyhedra()}
 \usage{
-scrapePolyhedra(.available.scrapping.conf[["pkg-minimal"]],
-                    sources.config = .available.sources)
+scrapePolyhedra(scrape.config, sources.config = .available.sources)
 }
 \arguments{
 \item{scrape.config}{predefined configuration for scraping}
