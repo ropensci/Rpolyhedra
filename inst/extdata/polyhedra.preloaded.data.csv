@@ -1,0 +1,904 @@
+"source","filename","name","vertices","faces","time2scrape"
+"dmccooey","Regular_4_6_10.txt",NA,NA,NA,0.025
+"dmccooey","SimplestCi.txt","Simplest Canonical Polyhedron with Ci = S2 Symmetry",10,10,0.034
+"dmccooey","RegularTetragonalToroid18B2.txt",NA,NA,NA,0.036
+"dmccooey","SelfDualTridecahedron34.txt","Self-Dual Tridecahedron #34 (canonical)",13,13,0.043
+"dmccooey","SelfDualHendecahedron8.txt","Self-Dual Hendecahedron #8 (canonical)",11,11,0.044
+"dmccooey","SimplestD8h_1.txt","Simplest Canonical Polyhedron with D8h Symmetry (1 of 2) (Octagonal Dipyramid)",10,16,0.045
+"dmccooey","TrigonalTrapezohedron.txt","Trigonal Trapezohedron (Cube)",8,6,0.046
+"dmccooey","SelfDualHexadecahedron20.txt","Self-Dual Hexadecahedron #20 (canonical)",16,16,0.05
+"dmccooey","SimplestTd.txt","Simplest Canonical Polyhedron with Td Symmetry (Tetrahedron)",4,4,0.05
+"dmccooey","Heptagrammic73Antiprism.txt","Heptagrammic 7/3 Antiprism",14,16,0.052
+"dmccooey","ChamferedOctahedron1.txt","Chamfered Octahedron with chamfer depth chosen to make all edges",30,20,0.061
+"dmccooey","OctagonalDipyramid.txt","Octagonal Dipyramid",10,16,0.061
+"dmccooey","ElongatedPentagonalDipyramid.txt","Elongated Pentagonal Diypramid",12,15,0.062
+"dmccooey","Regular_6_4_10.txt",NA,NA,NA,0.063
+"dmccooey","SimplestCs_1.txt","Simplest Canonical Polyhedron with Cs Symmetry (1 of 2)",6,7,0.063
+"dmccooey","RhombicIcosahedron.txt","Rhombic Icosahedron",22,20,0.064
+"netlib","59","elongated square dipyramid (J15)",10,12,0.068
+"dmccooey","RegularTetragonalToroid9.txt","Regular Tetragonal Toroid with 9 faces",9,9,0.069
+"netlib","28","pentagonal antiprism",10,12,0.07
+"dmccooey","SelfDualDodecahedron5.txt","Self-Dual Dodecahedron #5 (canonical)",12,12,0.071
+"dmccooey","Szilassi1.txt","Szilassi Polyhedron (version 1)",14,7,0.072
+"netlib","45","square pyramid (J1)",5,5,0.073
+"dmccooey","SelfDualTetradecahedron22.txt","Self-Dual Tetradecahedron #22 (canonical)",14,14,0.074
+"dmccooey","GreatRhombihexacron.txt","Great Rhombihexacron",18,24,0.075
+"dmccooey","DisdyakisDodecahedron.txt","Disdyakis Dodecahedron",26,48,0.076
+"dmccooey","SelfDualPentadecahedron637.txt","Self-Dual Pentadecahedron #637 (canonical)",15,15,0.078
+"dmccooey","SelfDualHendecahedron9.txt","Self-Dual Hendecahedron #9 (canonical)",11,11,0.081
+"dmccooey","SelfDualTridecahedron37.txt","Self-Dual Tridecahedron #37 (canonical)",13,13,0.082
+"dmccooey","Heptagrammic73Dipyramid.txt","Heptagrammic 7/3 Dipyramid",9,14,0.089
+"dmccooey","SimplestD8h_2.txt","Simplest Canonical Polyhedron with D8h Symmetry (2 of 2) (Octagonal Prism)",16,10,0.09
+"dmccooey","SimplestCs_2.txt","Simplest Canonical Polyhedron with Cs Symmetry (2 of 2)",7,6,0.091
+"dmccooey","ChamferedTetrahedron1.txt","Chamfered Tetrahedron with chamfer depth chosen to make all edges",16,10,0.099
+"dmccooey","TruncatedCube.txt","Truncated Cube",24,14,0.101
+"netlib","132","sphenomegacorona (J88)",12,18,0.103
+"dmccooey","SelfDualHexadecahedron24.txt","Self-Dual Hexadecahedron #24 (canonical)",16,16,0.104
+"dmccooey","RegularTriangularToroid16.txt","Regular Triangular Toroid with 16 faces",8,16,0.106
+"dmccooey","SimplestTh_1.txt","Simplest Canonical Polyhedron with Th Symmetry (1 of 2)",24,20,0.109
+"dmccooey","SelfDualDodecahedron51.txt","Self-Dual Dodecahedron #51 (canonical)",12,12,0.11
+"netlib","4","icosahedron",12,20,0.11
+"dmccooey","SelfDualHeptahedron1.txt","Self-Dual Heptahedron #1 (canonical)",7,7,0.111
+"dmccooey","OctagonalIrisToroid.txt","Octagonal Iris Toroid",16,24,0.117
+"dmccooey","SelfDualTetradecahedron23.txt","Self-Dual Tetradecahedron #23 (canonical)",14,14,0.117
+"netlib","97","biaugmented pentagonal prism (J53)",12,13,0.118
+"dmccooey","SelfDualIcosioctahedron3.txt","Self-Dual Icosioctahedron #3 (canonical)",28,28,0.119
+"dmccooey","SelfDualPentadecahedron7.txt","Self-Dual Pentadecahedron #7 (canonical)",15,15,0.12
+"dmccooey","ElongatedSquareGyrobicupola.txt","Elongated Square Gyrobicupola",24,26,0.121
+"netlib","106","metabidiminished icosahedron (J62)",10,12,0.122
+"dmccooey","SelfDualTridecahedron39.txt","Self-Dual Tridecahedron #39 (canonical)",13,13,0.124
+"netlib","46","pentagonal pyramid (J2)",6,6,0.126
+"dmccooey","Heptagrammic73Prism.txt","Heptagrammic 7/3 Prism",14,9,0.127
+"dmccooey","RegularTriangularToroid18A1.txt",NA,NA,NA,0.127
+"dmccooey","BiscribedTruncatedIcosahedron.txt","Biscribed Truncated Icosahedron with inradius = 1",60,32,0.13
+"dmccooey","LpentagonalIcositetrahedron.txt","Pentagonal Icositetrahedron (laevo)",38,24,0.13
+"dmccooey","SimplestD9h_1.txt","Simplest Canonical Polyhedron with D9h Symmetry (1 of 2) (Enneagonal Dipyramid)",11,18,0.131
+"dmccooey","GreatRhombihexahedron.txt","Great Rhombihexahedron",24,18,0.132
+"dmccooey","RegularFaceToroid.txt","Toroid with regular faces",30,24,0.135
+"dmccooey","SimplestD10h_1.txt","Simplest Canonical Polyhedron with D10h Symmetry (1 of 2) (Decagonal Dipyramid)",12,20,0.135
+"dmccooey","AntiHeptagonalIrisToroid.txt","Anti-Heptagonal Iris Toroid",14,28,0.139
+"dmccooey","ChamferedTetrahedron3.txt","Chamfered Tetrahedron (canonical)",16,10,0.14
+"dmccooey","SelfDualHeptahedron2.txt","Self-Dual Heptahedron #2 (canonical)",7,7,0.147
+"dmccooey","TetradyakisHexahedron.txt","Tetradyakis Hexahedron",20,48,0.15
+"netlib","60","elongated pentagonal dipyramid (J16)",12,15,0.152
+"dmccooey","SelfDualHexadecahedron3.txt","Self-Dual Hexadecahedron #3 (canonical)",16,16,0.153
+"dmccooey","ElongatedTriangularDipyramid.txt","Elongated Triangular Dipyramid",8,9,0.154
+"dmccooey","RegularTriangularToroid18A2.txt",NA,NA,NA,0.154
+"dmccooey","SmallDodecicosidodecahedron.txt","Small Dodecicosidodecahedron",60,44,0.154
+"dmccooey","GreatHexacronicIcositetrahedron.txt","Great Hexacronic Icositetrahedron",20,24,0.155
+"dmccooey","SelfDualDodecahedron7.txt","Self-Dual Dodecahedron #7 (canonical)",12,12,0.155
+"dmccooey","GreatInvertedSnubIcosidodecahedron.txt","Great Inverted Snub Icosidodecahedron",60,92,0.157
+"dmccooey","RectifiedTruncatedCuboctahedron.txt","Rectified Truncated Cuboctahedron",72,74,0.157
+"dmccooey","RegularHexagonalToroid10_2.txt",NA,NA,NA,0.158
+"dmccooey","OctagonalPrism.txt","Octagonal Prism",16,10,0.159
+"dmccooey","SelfDualTetradecahedron24.txt","Self-Dual Tetradecahedron #24 (canonical)",14,14,0.159
+"netlib","29","hexagonal antiprism",12,14,0.159
+"dmccooey","BiscribedPropelloDodecahedron.txt","Biscribed Propello Dodecahedron with inradius = 1",80,72,0.165
+"dmccooey","BiscribedRpentagonalHexecontahedron.txt","Biscribed Pentagonal Hexecontahedron (dextro) with radius = 1",92,60,0.165
+"dmccooey","SelfDualTridecahedron4.txt","Self-Dual Tridecahedron #4 (canonical)",13,13,0.165
+"dmccooey","PropelloTruncatedOctahedron.txt","Propello Truncated Octahedron (canonical)",96,86,0.166
+"dmccooey","SelfDualPentadecahedron80.txt","Self-Dual Pentadecahedron #80 (canonical)",15,15,0.166
+"dmccooey","SimplestTh_2.txt","Simplest Canonical Polyhedron with Th Symmetry (2 of 2)",20,24,0.167
+"dmccooey","GeodesicCube3.txt","Geodesic Cube Pattern 3 [2,1] (Propello Cube)",32,30,0.169
+"dmccooey","Heptagrammic73Trapezohedron.txt","Heptagrammic 7/3 Trapezohedron",16,14,0.173
+"dmccooey","ImproperSelfDualDecahedron1.txt","Improper Self-Dual Decahedron #1 (canonical)",10,10,0.175
+"dmccooey","RegularTriangularToroid18B.txt",NA,NA,NA,0.175
+"dmccooey","SelfDualHeptahedron3.txt","Self-Dual Heptahedron #3 (canonical)",7,7,0.176
+"dmccooey","SimplestD9h_2.txt","Simplest Canonical Polyhedron with D9h Symmetry (2 of 2) (Enneagonal Prism)",18,11,0.176
+"dmccooey","SimplestD10h_2.txt","Simplest Canonical Polyhedron with D10h Symmetry (2 of 2) (Decagonal Prism)",20,12,0.18
+"dmccooey","Rhombicosacron.txt","Rhombicosacron",50,60,0.182
+"dmccooey","SnubIcosidodecadodecahedron.txt","Snub Icosidodecadodecahedron",60,104,0.182
+"dmccooey","TetragonalTrapezohedron.txt","Tetragonal Trapezohedron",10,8,0.184
+"dmccooey","AntiHexagonalIrisToroid.txt","Anti-Hexagonal Iris Toroid",12,24,0.185
+"dmccooey","RegularHexagonalToroid11.txt",NA,NA,NA,0.186
+"dmccooey","RsnubDodecahedron.txt","Snub Dodecahedron (dextro)",60,92,0.186
+"dmccooey","SelfDualIcosioctahedron4.txt","Self-Dual Icosioctahedron #4 (canonical)",28,28,0.186
+"dmccooey","MedialDisdyakisTriacontahedron.txt","Medial Disdyakis Triacontahedron",54,120,0.187
+"netlib","47","triangular cupola (J3)",9,8,0.189
+"dmccooey","SelfDualPentahedron.txt","Self-Dual Pentahedron (canonical)",5,5,0.191
+"dmccooey","TruncatedDodecadodecahedron.txt","Truncated Dodecadodecahedron",120,54,0.192
+"dmccooey","SelfDualDodecahedron8.txt","Self-Dual Dodecahedron #8 (canonical)",12,12,0.194
+"netlib","14",NA,NA,NA,0.195
+"dmccooey","GreatTruncatedIcosidodecahedron.txt","Great Truncated Icosidodecahedron",120,62,0.196
+"dmccooey","OrthotruncatedPropelloOctahedron.txt","Orthotruncated Propello Octahedron (canonical)",48,38,0.196
+"dmccooey","RegularTriangularToroid20.txt",NA,NA,NA,0.197
+"dmccooey","TruncatedCuboctahedron.txt","Truncated Cuboctahedron",48,26,0.197
+"dmccooey","SelfDualTetradecahedron294.txt","Self-Dual Tetradecahedron #294 (canonical)",14,14,0.201
+"dmccooey","SelfDualHeptahedron4.txt","Self-Dual Heptahedron #4 (canonical)",7,7,0.204
+"netlib","107","tridiminished icosahedron (J63)",9,8,0.204
+"dmccooey","SelfDualTridecahedron48.txt","Self-Dual Tridecahedron #48 (canonical)",13,13,0.205
+"dmccooey","SelfDualHexadecahedron508.txt","Self-Dual Hexadecahedron #508 (canonical)",16,16,0.206
+"netlib","5","small stellated dodecahedron",12,12,0.206
+"dmccooey","OctagonalTrapezohedron.txt","Octagonal Trapezohedron",18,16,0.207
+"netlib","133","hebesphenomegacorona (J89)",14,21,0.207
+"netlib","98","augmented hexagonal prism (J54)",13,11,0.208
+"dmccooey","RegularHexagonalToroid12A1.txt",NA,NA,NA,0.209
+"netlib","69",NA,NA,NA,0.212
+"dmccooey","SmallRhombidodecacron.txt","Small Rhombidodecacron",42,60,0.214
+"netlib","84","elongated pentagonal orthocupolarotunda (J40)",35,37,0.214
+"dmccooey","HeptagrammicConcaveTrapezohedron.txt","Heptagrammic Concave Trapezohedron",16,14,0.217
+"dmccooey","Schonhardt.txt","Schonhardt Polyhedron",6,8,0.217
+"dmccooey","SelfDualOctahedron1.txt","Self-Dual Octahedron #1 (canonical)",8,8,0.217
+"dmccooey","SmallHexacronicIcositetrahedron.txt","Small Hexacronic Icositetrahedron",20,24,0.218
+"dmccooey","SimplestD2.txt","Simplest Canonical Polyhedron with D2 Symmetry",10,10,0.219
+"dmccooey","RegularTriangularToroid22.txt",NA,NA,NA,0.22
+"dmccooey","JoinedRhombicosidodecahedron.txt","Joined Rhombicosidodecahedron",122,120,0.222
+"dmccooey","OverarchingHexagonalToroid8.txt",NA,NA,NA,0.224
+"dmccooey","DisdyakisTriacontahedron.txt","Disdyakis Triacontahedron",62,120,0.225
+"netlib","61","gyroelongated square dipyramid (J17)",10,16,0.226
+"dmccooey","EqualEdgeTetracontahedron.txt","Tetracontahedron with equal edges",28,40,0.227
+"dmccooey","SmallCubicuboctahedron.txt","Small Cubicuboctahedron",24,20,0.227
+"dmccooey","PentakisLsnubDodecahedron.txt","Pentakis Snub Dodecahedron (laevo) (canonical)",72,140,0.229
+"dmccooey","TetragonalTrapezohedronAntiprismToroid.txt","Tetragonal Trapezohedron-Antiprism Toroid",16,16,0.233
+"dmccooey","SelfDualDodecahedron83.txt","Self-Dual Dodecahedron #83 (canonical)",12,12,0.234
+"dmccooey","AntiOctagonalIrisToroid1.txt","Anti-Octagonal Iris Toroid #1",16,32,0.241
+"dmccooey","SelfDualTetradecahedron325.txt","Self-Dual Tetradecahedron #325 (canonical)",14,14,0.242
+"dmccooey","SelfDualOctahedron2.txt","Self-Dual Octahedron #2 (canonical)",8,8,0.245
+"dmccooey","SelfDualTridecahedron68.txt","Self-Dual Tridecahedron #68 (canonical)",13,13,0.245
+"dmccooey","BiscribedRpentagonalIcositetrahedron.txt","Biscribed Pentagonal Icositetrahedron (dextro) with radius = 1",38,24,0.247
+"dmccooey","SimplestD2h.txt","Simplest Canonical Polyhedron with D2h Symmetry",8,8,0.248
+"dmccooey","RegularTriangularToroid24A1.txt",NA,NA,NA,0.25
+"dmccooey","GeodesicCube12.txt","Geodesic Cube Pattern 12 [5,0]",152,150,0.252
+"dmccooey","GreatDitrigonalDodecacronicHexecontahedron.txt","Great Ditrigonal Dodecacronic Hexecontahedron",44,60,0.252
+"dmccooey","SelfDualHexadecahedron51.txt","Self-Dual Hexadecahedron #51 (canonical)",16,16,0.253
+"dmccooey","TruncatedTetrahedron.txt","Truncated Tetrahedron",12,8,0.253
+"dmccooey","BiscribedDualSnubTruncatedOctahedron.txt","Biscribed Dual Snub Truncated Octahedron with radius = 1",110,72,0.255
+"dmccooey","GeodesicCube7.txt","Geodesic Cube Pattern 7 [3,2]",80,78,0.256
+"dmccooey","SelfDualDecahedron1.txt","Self-Dual Decahedron #1 (canonical)",10,10,0.256
+"dmccooey","SelfDualHexadecahedron1.txt","Self-Dual Hexadecahedron #1 (canonical)",16,16,0.256
+"dmccooey","OctagrammicAntiprism.txt","Octagrammic Antiprism",16,18,0.259
+"netlib","1","cube",8,6,0.259
+"dmccooey","GyrateDeltoidalIcositetrahedron.txt","Gyrate Deltoidal Icositetrahedron",26,24,0.26
+"dmccooey","PentagonalAntiprism.txt","Pentagonal Antiprism",10,12,0.26
+"dmccooey","BiscribedOrthokisPropelloDodecahedron.txt","Biscribed Orthokis Propello Dodecahedron with radius = 1",92,120,0.263
+"dmccooey","HeptagrammicCrossedAntiprism.txt","Heptagrammic Crossed Antiprism",14,16,0.263
+"netlib","38","pentagonal icositetrahedron (dextro)",38,24,0.263
+"dmccooey","RegularHexagonalToroid12B.txt","Regular Hexagonal Toroid with 12 faces (type B)",24,12,0.264
+"netlib","30","octagonal antiprism",16,18,0.268
+"netlib","108",NA,NA,NA,0.27
+"netlib","48","square cupola (J4)",12,10,0.27
+"netlib","70",NA,NA,NA,0.271
+"dmccooey","RegularTriangularToroid24B.txt",NA,NA,NA,0.274
+"dmccooey","SelfDualOctahedron3.txt","Self-Dual Octahedron #3 (canonical)",8,8,0.275
+"dmccooey","SelfDualDodecahedron90.txt","Self-Dual Dodecahedron #90 (canonical)",12,12,0.278
+"dmccooey","SelfDualTetracontahedron1.txt","Self-Dual Tetracontahedron #1 (canonical)",40,40,0.278
+"dmccooey","SimplestD2v_1.txt","Simplest Canonical Polyhedron with D2v Symmetry (1 of 2)",8,8,0.279
+"dmccooey","GeodesicCube6.txt","Geodesic Cube Pattern 6 [3,1]",62,60,0.281
+"dmccooey","PropelloTetrahedron.txt","Propello Tetrahedron (canonical)",16,16,0.281
+"netlib","15",NA,NA,NA,0.285
+"dmccooey","SelfDualTetradecahedron34.txt","Self-Dual Tetradecahedron #34 (canonical)",14,14,0.286
+"dmccooey","SelfDualTridecahedron7.txt","Self-Dual Tridecahedron #7 (canonical)",13,13,0.286
+"dmccooey","GreatSnubDodecicosidodecahedron.txt","Great Snub Dodecicosidodecahedron",60,104,0.289
+"dmccooey","DitrigonalDodecadodecahedron.txt","Ditrigonal Dodecadodecahedron",20,24,0.29
+"dmccooey","SelfDualDecahedron11.txt","Self-Dual Decahedron #11 (canonical)",10,10,0.293
+"dmccooey","RegularHexagonalToroid12C_Knot.txt",NA,NA,NA,0.294
+"dmccooey","AntiOctagonalIrisToroid2.txt","Anti-Octagonal Iris Toroid #2",16,32,0.296
+"netlib","78","pentagonal orthobirotunda (J34)",30,32,0.296
+"dmccooey","RegularTriangularToroid24C.txt",NA,NA,NA,0.298
+"dmccooey","RectifiedLsnubCube.txt","Rectified Snub Cube (laevo)",60,62,0.299
+"dmccooey","TetragonalTrapezohedronToroid.txt","Tetragonal Trapezohedron Toroid",24,16,0.299
+"netlib","99","parabiaugmented hexagonal prism (J55)",14,14,0.301
+"dmccooey","SelfDualHexadecahedron10.txt","Self-Dual Hexadecahedron #10 (canonical)",16,16,0.302
+"dmccooey","HexagonalAntiprism.txt","Hexagonal Antiprism",12,14,0.303
+"dmccooey","PropelloCube.txt","Propello Cube (canonical)",32,30,0.304
+"dmccooey","Escher.txt","Escher's Solid",26,48,0.305
+"dmccooey","Rhombicosahedron.txt","Rhombicosahedron",60,50,0.305
+"netlib","122","metagyrate diminished rhombicosidodecahedron (J78)",55,52,0.305
+"dmccooey","SelfDualHexadecahedron6.txt","Self-Dual Hexadecahedron #6 (canonical)",16,16,0.306
+"dmccooey","OctagrammicConcaveTrapezohedron.txt","Octagrammic Concave Trapezohedron",18,16,0.307
+"dmccooey","SelfDualOctahedron5.txt","Self-Dual Octahedron #5 (canonical)",8,8,0.307
+"dmccooey","TruncatedDodecahedron.txt","Truncated Dodecahedron",60,32,0.307
+"dmccooey","BiscribedPropelloIcosahedron.txt","Biscribed Propello Icosahedron with radius = 1",72,80,0.308
+"dmccooey","HeptagonalAntiprism.txt","Heptagonal Antiprism",14,16,0.308
+"dmccooey","SimplestD2v_2.txt","Simplest Canonical Polyhedron with D2v Symmetry (2 of 2)",8,8,0.309
+"dmccooey","JoinedTruncatedIcosahedron.txt","Joined Truncated Icosahedron",92,90,0.311
+"dmccooey","SelfDualEnneahedron1.txt","Self-Dual Enneahedron #1 (canonical)",9,9,0.311
+"dmccooey","BiscribedTruncatedIcosidodecahedron.txt","Biscribed Truncated Icosidodecahedron with inradius = 1",120,62,0.316
+"netlib","90","gyroelongated pentagonal bicupola (J46)",30,42,0.316
+"dmccooey","PentagonalAntiprismTrapezohedronToroid.txt","Pentagonal Antiprism-Trapezohedron Toroid",20,20,0.317
+"dmccooey","RegularHexagonalToroid12C1.txt",NA,NA,NA,0.317
+"netlib","134","disphenocingulum (J90)",16,24,0.32
+"dmccooey","InvertedSnubDodecadodecahedron.txt","Inverted Snub Dodecadodecahedron",60,84,0.322
+"dmccooey","RegularTriangularToroid24D.txt",NA,NA,NA,0.322
+"netlib","62","elongated triangular cupola (J18)",15,14,0.322
+"dmccooey","Tetrahedron.txt","Tetrahedron",4,4,0.323
+"dmccooey","SimplestI_1.txt","Simplest Canonical Polyhedron with I Symmetry (1 of 4) (Snub Dodecahedron)",60,92,0.324
+"dmccooey","GreatPentagonalHexecontahedron.txt","Great Pentagonal Hexecontahedron",92,60,0.325
+"dmccooey","SelfDualTridecahedron9.txt","Self-Dual Tridecahedron #9 (canonical)",13,13,0.325
+"dmccooey","SelfDualDecahedron12.txt","Self-Dual Decahedron #12 (canonical)",10,10,0.328
+"dmccooey","GeodesicCube11.txt","Geodesic Cube Pattern 11 [4,2]",122,120,0.329
+"dmccooey","JoinedRhombicuboctahedron.txt","Joined Rhombicuboctahedron",50,48,0.329
+"dmccooey","SelfDualTetradecahedron356.txt","Self-Dual Tetradecahedron #356 (canonical)",14,14,0.329
+"dmccooey","Associahedron.txt","Associahedron (canonical)",14,9,0.333
+"dmccooey","RectifiedTruncatedDodecahedron.txt","Rectified Truncated Dodecahedron",90,92,0.334
+"dmccooey","SelfDualOctahedron6.txt","Self-Dual Octahedron #6 (canonical)",8,8,0.337
+"dmccooey","SmallRhombidodecahedron.txt","Small Rhombidodecahedron",60,42,0.337
+"dmccooey","GeodesicIcosahedron3.txt","Geodesic Icosahedron Pattern 3 [2,1] (Pentakis Snub Dodecahedron)",72,140,0.34
+"dmccooey","RegularHexagonalToroid12D2.txt",NA,NA,NA,0.34
+"dmccooey","SmallDitrigonalDodecacronicHexecontahedron.txt","Small Ditrigonal Dodecacronic Hexecontahedron",44,60,0.34
+"dmccooey","HeptagonalDipyramid.txt","Heptagonal Dipyramid",9,14,0.343
+"dmccooey","SimplestD3_1.txt","Simplest Canonical Polyhedron with D3 Symmetry (1 of 2)",11,12,0.344
+"dmccooey","SelfDualEnneahedron10.txt","Self-Dual Enneahedron #10 (canonical)",9,9,0.346
+"dmccooey","Tetrahemihexahedron.txt","Tetrahemihexahedron",6,7,0.35
+"netlib","71","triangular orthobicupola (J27)",12,14,0.352
+"dmccooey","SelfDualHexadecahedron63.txt","Self-Dual Hexadecahedron #63 (canonical)",16,16,0.353
+"dmccooey","SelfDualHexadecahedron100.txt","Self-Dual Hexadecahedron #100 (canonical)",16,16,0.354
+"netlib","6","great dodecahedron",12,12,0.356
+"dmccooey","OctagrammicCrossedAntiprism.txt","Octagrammic Crossed Antiprism",16,18,0.359
+"dmccooey","Dodecadodecahedron.txt","Dodecadodecahedron",30,24,0.362
+"dmccooey","PentagonalBifrustum.txt","Pentagonal Bifrustum",15,12,0.365
+"dmccooey","SelfDualTridecahedron90.txt","Self-Dual Tridecahedron #90 (canonical)",13,13,0.365
+"netlib","49","pentagonal cupola (J5)",15,12,0.365
+"dmccooey","SelfDualDecahedron13.txt","Self-Dual Decahedron #13 (canonical)",10,10,0.367
+"dmccooey","HexagonalAntiprismTrapezohedronToroid.txt","Hexagonal Antiprism-Trapezohedron Toroid",24,24,0.37
+"dmccooey","SelfDualTetracontahedron2.txt","Self-Dual Tetracontahedron #2 (canonical)",40,40,0.371
+"dmccooey","SelfDualTetradecahedron4.txt","Self-Dual Tetradecahedron #4 (canonical)",14,14,0.371
+"dmccooey","IsohedralToroid24.txt","Isohedral Toroid with 24 faces",12,24,0.372
+"netlib","109","augmented truncated tetrahedron (J65)",15,14,0.372
+"dmccooey","BilinskiDodecahedron.txt","Bilinski's Dodecahedron",14,12,0.373
+"dmccooey","BiscribedTruncatedOctahedron.txt","Biscribed Truncated Octahedron with inradius = 1",24,14,0.374
+"dmccooey","BiscribedPropelloOctahedron.txt","Biscribed Propello Octahedron with radius = 1",30,32,0.376
+"dmccooey","GreatDitrigonalDodecicosidodecahedron.txt","Great Ditrigonal Dodecicosidodecahedron",60,44,0.378
+"dmccooey","MedialHexagonalHexecontahedron.txt","Medial Hexagonal Hexecontahedron",104,60,0.378
+"dmccooey","SelfDualPentadecahedron1.txt","Self-Dual Pentadecahedron #1 (canonical)",15,15,0.38
+"dmccooey","SelfDualEnneahedron11.txt","Self-Dual Enneahedron #11 (canonical)",9,9,0.384
+"dmccooey","SimplestD3_2.txt","Simplest Canonical Polyhedron with D3 Symmetry (2 of 2)",12,11,0.386
+"dmccooey","TruncatedTetrakisHexahedron1.txt","Truncated Tetrakis Hexahedron (canonical)",72,38,0.387
+"dmccooey","DualGeodesicIcosahedron2.txt","Dual Geodesic Icosahedron Pattern 2 [2,0] (Chamfered Dodecahedron)",80,42,0.39
+"dmccooey","45TruncatedDeltoidalHexecontahedron1.txt","4-5-Truncated Deltoidal Hexecontahedron with truncation depth chosen",200,102,0.391
+"netlib","16",NA,NA,NA,0.391
+"netlib","113","parabiaugmented truncated dodecahedron (J69)",70,52,0.392
+"dmccooey","SimplestC1_1.txt","Simplest Canonical Polyhedron with C1 Symmetry (1 of 2)",7,7,0.394
+"dmccooey","SmallRhombihexacron.txt","Small Rhombihexacron",18,24,0.394
+"dmccooey","PentagonalDipyramid.txt","Pentagonal Dipyramid",7,10,0.396
+"netlib","31","decagonal antiprism",20,22,0.396
+"dmccooey","LpropelloLsnubCube.txt","L-Propello L-Snub Cube (canonical)",144,158,0.397
+"netlib","100","metabiaugmented hexagonal prism (J56)",14,14,0.397
+"dmccooey","OctagrammicDipyramid.txt","Octagrammic Dipyramid",10,16,0.398
+"dmccooey","SelfDualHexadecahedron11.txt","Self-Dual Hexadecahedron #11 (canonical)",16,16,0.402
+"dmccooey","GeodesicCube16.txt","Geodesic Cube Pattern 16 [4,4]",194,192,0.403
+"dmccooey","HeptagonalDodecahedronA_C3_3.txt","Heptagonal Dodecahedron (type A) (C3-symmetric form 3)",28,12,0.403
+"dmccooey","HexagonalDipyramid.txt","Hexagonal Dipyramid",8,12,0.403
+"dmccooey","RegularHexagonalToroid13A.txt","Regular Hexagonal Toroid with 13 faces (type A)",26,13,0.403
+"netlib","2","octahedron",6,8,0.403
+"dmccooey","SelfDualDecahedron19.txt","Self-Dual Decahedron #19 (canonical)",10,10,0.404
+"dmccooey","SelfDualHexadecahedron68.txt","Self-Dual Hexadecahedron #68 (canonical)",16,16,0.405
+"dmccooey","BorromeanRings.txt",NA,NA,NA,0.406
+"dmccooey","Dodecahedron.txt","Dodecahedron",20,12,0.407
+"dmccooey","TetrakisCuboctahedron.txt","Tetrakis Cuboctahedron (canonical)",18,32,0.408
+"netlib","126","gyrate bidiminished rhombicosidodecahedron (J82)",50,42,0.41
+"dmccooey","SimplestD3h_1.txt","Simplest Canonical Polyhedron with D3h Symmetry (1 of 2) (Triangular Dipyramid)",5,6,0.411
+"netlib","79","elongated triangular orthobicupola (J35)",18,20,0.411
+"dmccooey","SelfDualTetradecahedron5.txt","Self-Dual Tetradecahedron #5 (canonical)",14,14,0.412
+"dmccooey","SmallHexagonalHexecontahedron.txt","Small Hexagonal Hexecontahedron",112,60,0.412
+"netlib","85","elongated pentagonal gyrocupolarotunda (J41)",35,37,0.413
+"dmccooey","CanonicalTruncatedTruncatedOctahedron.txt","Canonical Truncated Truncated Octahedron",72,38,0.416
+"dmccooey","SelfDualEnneahedron2.txt","Self-Dual Enneahedron #2 (canonical)",9,9,0.416
+"dmccooey","GeodesicCube5.txt","Geodesic Cube Pattern 5 [3,0]",56,54,0.417
+"dmccooey","TruncatedGreatDodecahedron.txt","Truncated Great Dodecahedron",60,24,0.417
+"netlib","135","bilunabirotunda (J91)",14,14,0.417
+"dmccooey","Jessen.txt","Jessen's Orthogonal Icosahedron",12,20,0.419
+"dmccooey","GreatHexagonalHexecontahedron.txt","Great Hexagonal Hexecontahedron",104,60,0.421
+"netlib","119","trigyrate rhombicosidodecahedron (J75)",60,62,0.421
+"dmccooey","SelfDualPentadecahedron18.txt","Self-Dual Pentadecahedron #18 (canonical)",15,15,0.423
+"dmccooey","RegularHexagonalToroid13B2.txt",NA,NA,NA,0.428
+"dmccooey","PentagonalPrism.txt","Pentagonal Prism",10,7,0.429
+"dmccooey","RhexpropelloCube1.txt","Hexpropello Cube (dextro) (canonical)",56,30,0.429
+"dmccooey","SimplestC10v.txt","Simplest Canonical Polyhedron with C10v Symmetry (Decagonal Pyramid)",11,11,0.429
+"dmccooey","Cairo16A.txt",NA,NA,NA,0.433
+"dmccooey","TruncatedDisdyakisDodecahedron2.txt","Truncated Disdyakis Dodecahedron with truncation depths chosen to make",144,74,0.434
+"dmccooey","Rhombicosidodecahedron.txt","Rhombicosidodecahedron",60,62,0.435
+"netlib","32",NA,NA,NA,0.436
+"dmccooey","SimplestD3h_2.txt","Simplest Canonical Polyhedron with D3h Symmetry (2 of 2) (Triangular Prism)",6,5,0.437
+"dmccooey","HexagonalPrism.txt","Hexagonal Prism",12,8,0.439
+"dmccooey","SelfDualDecahedron2.txt","Self-Dual Decahedron #2 (canonical)",10,10,0.439
+"dmccooey","GreatSnubIcosidodecahedron.txt","Great Snub Icosidodecahedron",60,92,0.44
+"netlib","39","rhombic triacontahedron",32,30,0.442
+"dmccooey","OctagrammicPrism.txt","Octagrammic Prism",16,10,0.444
+"dmccooey","BiscribedDisdyakisDodecahedron.txt","Biscribed Disdyakis Dodecahedron with radius = 1",26,48,0.446
+"dmccooey","GreatDitrigonalIcosidodecahedron.txt","Great Ditrigonal Icosidodecahedron",20,32,0.446
+"dmccooey","PropelloTetrakisHexahedron.txt","Propello Tetrakis Hexahedron (canonical)",86,96,0.446
+"dmccooey","CanonicalTruncatedTruncatedDodecahedron.txt","Canonical Truncated Truncated Dodecahedron",180,92,0.448
+"dmccooey","SelfDualEnneahedron3.txt","Self-Dual Enneahedron #3 (canonical)",9,9,0.45
+"dmccooey","SmallRhombihexahedron.txt","Small Rhombihexahedron",24,18,0.451
+"netlib","63","elongated square cupola (J19)",20,18,0.452
+"dmccooey","RegularHexagonalToroid14A_Knot.txt",NA,NA,NA,0.453
+"dmccooey","SelfDualHexadecahedron69.txt","Self-Dual Hexadecahedron #69 (canonical)",16,16,0.453
+"dmccooey","JoinedRsnubCube.txt","Joined Snub Cube (dextro)",62,60,0.454
+"dmccooey","SelfDualHexadecahedron1143.txt","Self-Dual Hexadecahedron #1143 (canonical)",16,16,0.454
+"dmccooey","SelfDualTetradecahedron7.txt","Self-Dual Tetradecahedron #7 (canonical)",14,14,0.455
+"dmccooey","Cairo16B1.txt",NA,NA,NA,0.456
+"netlib","72","square orthobicupola (J28)",16,18,0.456
+"netlib","116","gyrate rhombicosidodecahedron (J72)",60,62,0.457
+"dmccooey","HeptagonalDodecahedronA_S4_1.txt","Heptagonal Dodecahedron (type A) (S4-symmetric form 1)",28,12,0.464
+"dmccooey","SelfDualPentadecahedron2.txt","Self-Dual Pentadecahedron #2 (canonical)",15,15,0.464
+"dmccooey","SelfDualTetracontahedron3.txt","Self-Dual Tetracontahedron #3 (canonical)",40,40,0.464
+"dmccooey","TetrakisHexahedron.txt","Tetrakis Hexahedron",14,24,0.464
+"dmccooey","GeodesicCube19.txt","Geodesic Cube Pattern 19 [6,1]",224,222,0.465
+"dmccooey","SmallDitrigonalDodecicosidodecahedron.txt","Small Ditrigonal Dodecicosidodecahedron",60,44,0.467
+"dmccooey","SimplestD3v_1.txt","Simplest Canonical Polyhedron with D3v Symmetry (1 of 2)",8,12,0.47
+"dmccooey","PentagonalTrapezohedron.txt","Pentagonal Trapezohedron",12,10,0.471
+"dmccooey","SelfDualDecahedron22.txt","Self-Dual Decahedron #22 (canonical)",10,10,0.475
+"dmccooey","RegularHexagonalToroid14A3.txt",NA,NA,NA,0.478
+"dmccooey","Cairo16C6.txt",NA,NA,NA,0.479
+"dmccooey","HexagonalTrapezohedron.txt","Hexagonal Trapezohedron",14,12,0.481
+"dmccooey","JoinedCuboctahedron.txt","Joined Cuboctahedron",26,24,0.481
+"dmccooey","CanonicalTruncatedTruncatedTetrahedron.txt","Canonical Truncated Truncated Tetrahedron",36,20,0.482
+"dmccooey","SimplestC11v.txt","Simplest Canonical Polyhedron with C11v Symmetry (Hendecagonal Pyramid)",12,12,0.485
+"dmccooey","DodecahedronIcosahedronCompound1.txt","Dodecahedron-Icosahedron Compound (Actual)",32,32,0.486
+"netlib","50","pentagonal rotunda (J6)",20,17,0.487
+"dmccooey","SelfDualEnneahedron4.txt","Self-Dual Enneahedron #4 (canonical)",9,9,0.489
+"dmccooey","MedialIcosacronicHexecontahedron.txt","Medial Icosacronic Hexecontahedron",44,60,0.49
+"dmccooey","ChamferedTruncatedIcosahedron.txt","Chamfered Truncated Icosahedron (canonical)",240,122,0.491
+"netlib","21",NA,NA,NA,0.491
+"dmccooey","OctagrammicTrapezohedron.txt","Octagrammic Trapezohedron",18,16,0.492
+"dmccooey","GreatPentagrammicHexecontahedron.txt","Great Pentagrammic Hexecontahedron",92,60,0.493
+"dmccooey","Cairo8_1.txt",NA,NA,NA,0.496
+"dmccooey","SelfDualTetradecahedron8.txt","Self-Dual Tetradecahedron #8 (canonical)",14,14,0.498
+"dmccooey","SimplestI_2.txt","Simplest Canonical Polyhedron with I Symmetry (2 of 4)",92,60,0.498
+"netlib","7",NA,NA,NA,0.499
+"netlib","101","triaugmented hexagonal prism (J57)",15,17,0.5
+"dmccooey","GeodesicCube17.txt","Geodesic Cube Pattern 17 [5,3]",206,204,0.502
+"dmccooey","SelfDualHexadecahedron12.txt","Self-Dual Hexadecahedron #12 (canonical)",16,16,0.503
+"dmccooey","SelfDualHexadecahedron731.txt","Self-Dual Hexadecahedron #731 (canonical)",16,16,0.505
+"dmccooey","SimplestD3v_2.txt","Simplest Canonical Polyhedron with D3v Symmetry (2 of 2)",12,8,0.506
+"dmccooey","DualGeodesicIcosahedron6.txt","Dual Geodesic Icosahedron Pattern 6 [3,1]",260,132,0.509
+"dmccooey","RhombicTriacontahedron.txt","Rhombic Triacontahedron",32,30,0.509
+"dmccooey","SelfDualPentadecahedron22.txt","Self-Dual Pentadecahedron #22 (canonical)",15,15,0.509
+"dmccooey","SimplestC2.txt","Simplest Canonical Polyhedron with C2 Symmetry",6,6,0.513
+"dmccooey","BiscribedLpropelloLsnubCube.txt","Biscribed L-Propello L-Snub Cube with inradius = 1",144,158,0.514
+"dmccooey","SelfDualDecahedron28.txt","Self-Dual Decahedron #28 (canonical)",10,10,0.515
+"dmccooey","RectifiedTruncatedIcosahedron.txt","Rectified Truncated Icosahedron",90,92,0.518
+"dmccooey","RegularHexagonalToroid14B_D2Sym1.txt",NA,NA,NA,0.518
+"dmccooey","SelfDualTetrahedron.txt","Self-Dual Tetrahedron (canonical)",4,4,0.52
+"dmccooey","Octahedron.txt","Octahedron",6,8,0.521
+"dmccooey","UniformGreatRhombicosidodecahedron.txt","Uniform Great Rhombicosidodecahedron",60,62,0.521
+"dmccooey","SelfDualEnneahedron5.txt","Self-Dual Enneahedron #5 (canonical)",9,9,0.522
+"dmccooey","HeptagonalDodecahedronB1.txt","Heptagonal Dodecahedron (type B) (form 1)",28,12,0.524
+"netlib","91","gyroelongated pentagonal cupolarotunda (J47)",35,47,0.524
+"dmccooey","4TruncatedDeltoidalIcositetrahedron2.txt","4-Truncated Deltoidal Icositetrahedron (canonical)",80,42,0.525
+"dmccooey","BiscribedOrthotruncatedPropelloIcosahedron.txt","Biscribed Orthotruncated Propello Icosahedron with inradius = 1",120,92,0.525
+"dmccooey","GreatCubicuboctahedron.txt","Great Cubicuboctahedron",24,20,0.526
+"netlib","33","rhombic dodecahedron",14,12,0.526
+"dmccooey","PentagonalTrapezohedronAntiprismToroid.txt","Pentagonal Trapezohedron-Antiprism Toroid",20,20,0.527
+"netlib","80","elongated triangular gyrobicupola (J36)",18,20,0.527
+"netlib","110","augmented truncated cube (J66)",28,22,0.532
+"dmccooey","GeodesicCube1.txt","Geodesic Cube Pattern 1 [1,1] (Rhombic Dodecahedron)",14,12,0.535
+"dmccooey","GreatIcosacronicHexecontahedron.txt","Great Icosacronic Hexecontahedron",52,60,0.535
+"dmccooey","GreatStellapentakisDodecahedron.txt","Great Stellapentakis Dodecahedron",32,60,0.535
+"dmccooey","SmallDitrigonalIcosidodecahedron.txt","Small Ditrigonal Icosidodecahedron",20,32,0.536
+"dmccooey","TruncatedGreatIcosahedron.txt","Truncated Great Icosahedron",60,32,0.536
+"dmccooey","GeodesicCube10.txt","Geodesic Cube Pattern 10 [3,3]",110,108,0.539
+"netlib","136","triangular hebesphenorotunda (J92)",18,20,0.539
+"dmccooey","ConcaveDodecahedron.txt","Concave Dodecahedron",20,12,0.543
+"dmccooey","GeodesicCube8.txt","Geodesic Cube Pattern 8 [4,0]",98,96,0.543
+"dmccooey","RegularHexagonalToroid14B.txt",NA,NA,NA,0.543
+"dmccooey","SimplestC2h_1.txt","Simplest Canonical Polyhedron with C2h Symmetry (1 of 2)",8,10,0.544
+"dmccooey","SimplestD4h_1.txt","Simplest Canonical Polyhedron with D4h Symmetry (1 of 2)",10,12,0.544
+"dmccooey","ChamferedCube1.txt","Chamfered Cube with chamfer depth chosen to make all edges of the",32,18,0.545
+"dmccooey","HexagonalTrapezohedronAntiprismToroid.txt","Hexagonal Trapezohedron-Antiprism Toroid",24,24,0.545
+"netlib","51","elongated triangular pyramid (J7)",7,7,0.545
+"dmccooey","SimplestIh_1.txt","Simplest Canonical Polyhedron with Ih Symmetry (1 of 2) (Icosahedron)",12,20,0.546
+"netlib","22","triangular prism",6,5,0.549
+"dmccooey","SelfDualDecahedron3.txt","Self-Dual Decahedron #3 (canonical)",10,10,0.55
+"dmccooey","SelfDualHexadecahedron8.txt","Self-Dual Hexadecahedron #8 (canonical)",16,16,0.551
+"dmccooey","SelfDualHexadecahedron120.txt","Self-Dual Hexadecahedron #120 (canonical)",16,16,0.554
+"dmccooey","SelfDualPentadecahedron230.txt","Self-Dual Pentadecahedron #230 (canonical)",15,15,0.554
+"dmccooey","SelfDualTetracontahedron4.txt","Self-Dual Tetracontahedron #4 (canonical)",40,40,0.554
+"dmccooey","TetrakisLsnubCube.txt","Tetrakis Snub Cube (laevo) (canonical)",30,56,0.554
+"dmccooey","SelfDualEnneahedron8.txt","Self-Dual Enneahedron #8 (canonical)",9,9,0.555
+"dmccooey","GreatDodecacronicHexecontahedron.txt","Great Dodecacronic Hexecontahedron",44,60,0.556
+"dmccooey","SelfDualTridecahedron1.txt","Self-Dual Tridecahedron #1 (canonical)",13,13,0.559
+"netlib","73","square gyrobicupola (J29)",16,18,0.562
+"dmccooey","Octahemioctahedron.txt","Octahemioctahedron",12,12,0.566
+"dmccooey","GeodesicCube15.txt","Geodesic Cube Pattern 15 [5,2]",176,174,0.568
+"dmccooey","SnubTruncatedIcosahedron.txt","Snub Truncated Icosahedron (canonical)",180,272,0.573
+"dmccooey","Csaszar4.txt","Csaszar Polyhedron (version 4)",7,14,0.577
+"dmccooey","DualGeodesicIcosahedron8.txt","Dual Geodesic Icosahedron Pattern 8 [3,2]",380,192,0.577
+"dmccooey","Rhombicuboctahedron.txt","Rhombicuboctahedron",24,26,0.577
+"dmccooey","SimplestC2h_2.txt","Simplest Canonical Polyhedron with C2h Symmetry (2 of 2)",10,8,0.578
+"dmccooey","GreatIcosahedron.txt","Great Icosahedron",12,20,0.579
+"dmccooey","GreatPentakisDodecahedron.txt","Great Pentakis Dodecahedron",24,60,0.58
+"dmccooey","SimplestD4h_2.txt","Simplest Canonical Polyhedron with D4h Symmetry (2 of 2)",12,10,0.581
+"netlib","43","hexakis icosahedron",62,120,0.584
+"dmccooey","UniformGreatRhombicuboctahedron.txt","Uniform Great Rhombicuboctahedron",24,26,0.585
+"dmccooey","HeptagonalDodecahedronC1.txt","Heptagonal Dodecahedron (type C) (form 1)",28,12,0.586
+"dmccooey","SelfDualDecahedron4.txt","Self-Dual Decahedron #4 (canonical)",10,10,0.586
+"netlib","17",NA,NA,NA,0.587
+"dmccooey","GreatStellatedDodecahedron.txt","Great Stellated Dodecahedron",20,12,0.588
+"dmccooey","GeodesicIcosahedron6.txt","Geodesic Icosahedron Pattern 6 [3,1]",132,260,0.589
+"dmccooey","RectifiedLsnubDodecahedron.txt","Rectified Snub Dodecahedron (laevo)",150,152,0.59
+"dmccooey","DualGeodesicIcosahedron1.txt","Dual Geodesic Icosahedron Pattern 1 [1,1] (Truncated Icosahedron)",60,32,0.594
+"dmccooey","GeodesicRT3.txt","Geodesic Rhombic Triacontahedron Pattern 3 [2,1]",152,150,0.594
+"dmccooey","GeodesicCube13.txt","Geodesic Cube Pattern 13 [4,3]",152,150,0.596
+"dmccooey","SelfDualPentadecahedron297.txt","Self-Dual Pentadecahedron #297 (canonical)",15,15,0.597
+"dmccooey","SelfDualTridecahedron10.txt","Self-Dual Tridecahedron #10 (canonical)",13,13,0.597
+"dmccooey","SimplestIh_2.txt","Simplest Canonical Polyhedron with Ih Symmetry (2 of 2) (Dodecahedron)",20,12,0.597
+"dmccooey","SelfDualHendecahedron1.txt","Self-Dual Hendecahedron #1 (canonical)",11,11,0.598
+"netlib","64","elongated pentagonal cupola (J20)",25,22,0.598
+"dmccooey","BiscribedDisdyakisTriacontahedron.txt","Biscribed Disdyakis Triacontahedron with radius = 1",62,120,0.6
+"netlib","123","bigyrate diminished rhombicosidodecahedron (J79)",55,52,0.6
+"dmccooey","Cube.txt","Cube",8,6,0.602
+"dmccooey","PentagonalTrapezohedronToroid.txt","Pentagonal Trapezohedron Toroid",30,20,0.602
+"dmccooey","SelfDualHexadecahedron1256.txt","Self-Dual Hexadecahedron #1256 (canonical)",16,16,0.603
+"dmccooey","6TruncatedJoinedTruncatedTetrahedron1.txt","6-Truncated Joined Truncated Tetrahedron (canonical)",40,22,0.604
+"dmccooey","JoinedIcosidodecahedron.txt","Joined Icosidodecahedron",62,60,0.604
+"dmccooey","SelfDualHexadecahedron9.txt","Self-Dual Hexadecahedron #9 (canonical)",16,16,0.604
+"dmccooey","GreatDodecahedron.txt","Great Dodecahedron",12,12,0.605
+"dmccooey","SimplestC2v_1.txt","Simplest Canonical Polyhedron with C2v Symmetry (1 of 2)",6,7,0.605
+"dmccooey","ChamferedCube3.txt","Chamfered Cube (canonical)",32,18,0.606
+"netlib","140","dodecadodecahedron",110,72,0.606
+"netlib","137",NA,NA,NA,0.608
+"netlib","52","elongated square pyramid (J8)",9,9,0.609
+"dmccooey","SmallHexagrammicHexecontahedron.txt","Small Hexagrammic Hexecontahedron",112,60,0.611
+"dmccooey","SimplestD4v_1.txt","Simplest Canonical Polyhedron with D4v Symmetry (1 of 2) (Square Antiprism)",8,10,0.612
+"dmccooey","RegularHexagonalToroid15A_Knot2.txt","Regular Hexagonal Toroid with 15 faces (type A) (knot form 2)",30,15,0.616
+"dmccooey","SmallSnubIcosicosidodecahedron.txt","Small Snub Icosicosidodecahedron",60,112,0.617
+"dmccooey","GeodesicIcosahedron1.txt","Geodesic Icosahedron Pattern 1 [1,1] (Pentakis Dodecahedron)",32,60,0.618
+"dmccooey","GeodesicCube29.txt","Geodesic Cube Pattern 29 [6,5]",368,366,0.619
+"netlib","23","pentagonal prism",10,7,0.621
+"dmccooey","PropelloDisdyakisDodecahedron.txt","Propello Disdyakis Dodecahedron (canonical)",170,192,0.623
+"dmccooey","BiscribedOrthotruncatedPropelloOctahedron.txt","Biscribed Orthotruncated Propello Octahedron with inradius = 1",48,38,0.624
+"dmccooey","BiscribedSnubTruncatedIcosahedron.txt","Biscribed Snub Truncated Icosahedron with inradius = 1",180,272,0.626
+"dmccooey","SelfDualDecahedron5.txt","Self-Dual Decahedron #5 (canonical)",10,10,0.626
+"dmccooey","HexagonalTrapezohedronToroid.txt","Hexagonal Trapezohedron Toroid",36,24,0.627
+"netlib","102","augmented dodecahedron (J58)",21,16,0.627
+"netlib","34","triakis octahedron",14,24,0.629
+"dmccooey","JoinedTruncatedIcosidodecahedron.txt","Joined Truncated Icosidodecahedron",182,180,0.631
+"dmccooey","SimplestC2v_2.txt","Simplest Canonical Polyhedron with C2v Symmetry (2 of 2)",7,6,0.632
+"dmccooey","PropelloDodecahedron.txt","Propello Dodecahedron (canonical)",80,72,0.633
+"dmccooey","SelfDualHendecahedron12.txt","Self-Dual Hendecahedron #12 (canonical)",11,11,0.635
+"dmccooey","CubeOctahedronCompound1.txt","Cube-Octahedron Compound (Actual)",14,14,0.638
+"dmccooey","GeodesicIcosahedron7.txt","Geodesic Icosahedron Pattern 7 [4,0]",162,320,0.638
+"dmccooey","SelfDualPentadecahedron3.txt","Self-Dual Pentadecahedron #3 (canonical)",15,15,0.638
+"dmccooey","PentagrammicAntiprism.txt","Pentagrammic Antiprism",10,12,0.639
+"dmccooey","DualGeodesicIcosahedron3.txt","Dual Geodesic Icosahedron Pattern 3 [2,1] (Hexpropello Dodecahedron)",140,72,0.64
+"dmccooey","SelfDualTridecahedron102.txt","Self-Dual Tridecahedron #102 (canonical)",13,13,0.64
+"netlib","86","elongated pentagonal orthobirotunda (J42)",40,42,0.64
+"dmccooey","SimplestD4v_2.txt","Simplest Canonical Polyhedron with D4v Symmetry (2 of 2)",10,8,0.645
+"dmccooey","HeptagonalDodecahedronD3.txt","Heptagonal Dodecahedron (type D) (form 3)",28,12,0.646
+"dmccooey","SelfDualTetracontahedron5.txt","Self-Dual Tetracontahedron #5 (canonical)",40,40,0.646
+"dmccooey","SmallDodecacronicHexecontahedron.txt","Small Dodecacronic Hexecontahedron",44,60,0.648
+"dmccooey","GreatDeltoidalHexecontahedron.txt","Great Deltoidal Hexecontahedron",62,60,0.65
+"dmccooey","SelfDualHexadecahedron126.txt","Self-Dual Hexadecahedron #126 (canonical)",16,16,0.65
+"dmccooey","SelfDualHexadecahedron92.txt","Self-Dual Hexadecahedron #92 (canonical)",16,16,0.651
+"dmccooey","TriakisIcosahedron.txt","Triakis Icosahedron",32,60,0.654
+"dmccooey","TruncatedIcosahedron.txt","Truncated Icosahedron",60,32,0.656
+"dmccooey","MedialInvertedPentagonalHexecontahedron.txt","Medial Inverted Pentagonal Hexecontahedron",84,60,0.659
+"dmccooey","OrthokisPropelloCube.txt","Orthokis Propello Cube (canonical)",38,48,0.66
+"dmccooey","RhexpropelloDodecahedron1.txt","Hexpropello Dodecahedron (dextro) (canonical)",140,72,0.661
+"dmccooey","SelfDualDecahedron6.txt","Self-Dual Decahedron #6 (canonical)",10,10,0.661
+"dmccooey","CanonicalJoinedTruncatedIcosahedron.txt","Canonical Joined Truncated Icosahedron with radius = sqrt(3)",92,90,0.663
+"netlib","127","tridiminished rhombicosidodecahedron (J83)",45,32,0.663
+"dmccooey","BiscribedPropelloTruncatedOctahedron.txt","Biscribed Propello Truncated Octahedron with inradius = 1",96,86,0.668
+"dmccooey","SimplestO_1.txt","Simplest Canonical Polyhedron with O Symmetry (1 of 4) (Snub Cube)",24,38,0.669
+"dmccooey","SimplestC3_1.txt","Simplest Canonical Polyhedron with C3 Symmetry (1 of 5)",9,11,0.67
+"netlib","81","elongated square gyrobicupola (J37)",24,26,0.67
+"dmccooey","SelfDualHendecahedron2.txt","Self-Dual Hendecahedron #2 (canonical)",11,11,0.673
+"dmccooey","SimplestD5h_1.txt","Simplest Canonical Polyhedron with D5h Symmetry (1 of 2) (Pentagonal Dipyramid)",7,10,0.675
+"dmccooey","CubeOctahedronToroid.txt","Cube-Octahedron Toroid",12,12,0.676
+"netlib","8","great icosahedron",12,20,0.678
+"dmccooey","BiscribedPropelloTruncatedIcosahedron.txt","Biscribed Propello Truncated Icosahedron with inradius = 1",240,212,0.679
+"dmccooey","GreatDodecahemicosahedron.txt","Great Dodecahemicosahedron",30,22,0.679
+"dmccooey","SelfDualTridecahedron119.txt","Self-Dual Tridecahedron #119 (canonical)",13,13,0.68
+"dmccooey","PentagrammicConcaveTrapezohedron.txt","Pentagrammic Concave Trapezohedron",12,10,0.681
+"dmccooey","RegularHexagonalToroid15A1.txt","Regular Hexagonal Toroid with 15 faces (type A) (version 1)",30,15,0.681
+"dmccooey","LpropelloRpentagonalIcositetrahedron.txt","L-Propello R-Pentagonal Icositetrahedron (canonical)",158,144,0.683
+"dmccooey","SelfDualPentadecahedron30.txt","Self-Dual Pentadecahedron #30 (canonical)",15,15,0.684
+"netlib","74","pentagonal orthobicupola (J30)",20,22,0.686
+"netlib","53","elongated pentagonal pyramid (J9)",11,11,0.687
+"dmccooey","CanonicalTruncatedRhombicosidodecahedron.txt","Canonical Truncated Rhombicosidodecahedron",240,122,0.688
+"dmccooey","GeodesicCube4.txt","Geodesic Cube Pattern 4 [2,2]",50,48,0.691
+"dmccooey","GreatStellatedTruncatedDodecahedron.txt","Great Stellated Truncated Dodecahedron",60,32,0.695
+"dmccooey","GeodesicIcosahedron5.txt","Geodesic Icosahedron Pattern 5 [2,2] (Hexakis-Pentakis Chamfered Dodecahedron)",122,240,0.699
+"dmccooey","Hugel.txt","Hugel's Polyhedron",20,20,0.699
+"dmccooey","SelfDualDecahedron8.txt","Self-Dual Decahedron #8 (canonical)",10,10,0.7
+"dmccooey","SelfDualHexadecahedron144.txt","Self-Dual Hexadecahedron #144 (canonical)",16,16,0.702
+"dmccooey","TriakisOctahedron.txt","Triakis Octahedron",14,24,0.702
+"dmccooey","Rhombidodecadodecahedron.txt","Rhombidodecadodecahedron",60,54,0.703
+"dmccooey","SelfDualHexadecahedron97.txt","Self-Dual Hexadecahedron #97 (canonical)",16,16,0.703
+"dmccooey","GreatIcosicosidodecahedron.txt","Great Icosicosidodecahedron",60,52,0.705
+"dmccooey","RhombicDodecahedron.txt","Rhombic Dodecahedron",14,12,0.705
+"netlib","138",NA,NA,NA,0.705
+"dmccooey","SimplestD5h_2.txt","Simplest Canonical Polyhedron with D5h Symmetry (2 of 2) (Pentagonal Prism)",10,7,0.706
+"dmccooey","SmallStellapentakisDodecahedron.txt","Small Stellapentakis Dodecahedron",24,60,0.706
+"netlib","24","hexagonal prism",12,8,0.706
+"dmccooey","HeptagonalDodecahedronE1.txt","Heptagonal Dodecahedron (type E) (form 1)",28,12,0.707
+"dmccooey","SimplestC3_2.txt","Simplest Canonical Polyhedron with C3 Symmetry (2 of 5)",11,9,0.707
+"dmccooey","BiscribedPentakisDodecahedron.txt","Biscribed Pentakis Dodecahedron with radius = 1",32,60,0.712
+"netlib","111","biaugmented truncated cube (J67)",32,30,0.712
+"dmccooey","CanonicalTruncatedTruncatedIcosahedron.txt","Canonical Truncated Truncated Icosahedron",180,92,0.713
+"dmccooey","RegularHexagonalToroid15D6.txt",NA,NA,NA,0.714
+"netlib","120","diminished rhombicosidodecahedron (J76)",55,52,0.714
+"dmccooey","GreatDeltoidalIcositetrahedron.txt","Great Deltoidal Icositetrahedron",26,24,0.716
+"dmccooey","PentagrammicCrossedAntiprism.txt","Pentagrammic Crossed Antiprism",10,12,0.717
+"dmccooey","SelfDualTridecahedron131.txt","Self-Dual Tridecahedron #131 (canonical)",13,13,0.72
+"dmccooey","GreatRetrosnubIcosidodecahedron.txt","Great Retrosnub Icosidodecahedron",60,92,0.721
+"dmccooey","JoinedTruncatedOctahedron.txt","Joined Truncated Octahedron",38,36,0.722
+"dmccooey","SmallDodecahemicosahedron.txt","Small Dodecahemicosahedron",30,22,0.722
+"dmccooey","SelfDualHendecahedron22.txt","Self-Dual Hendecahedron #22 (canonical)",11,11,0.724
+"dmccooey","JoinedRsnubDodecahedron.txt","Joined Snub Dodecahedron (dextro)",152,150,0.725
+"dmccooey","SelfDualPentadecahedron36.txt","Self-Dual Pentadecahedron #36 (canonical)",15,15,0.728
+"netlib","9",NA,NA,NA,0.728
+"dmccooey","SmallIcosacronicHexecontahedron.txt","Small Icosacronic Hexecontahedron",52,60,0.729
+"dmccooey","GeodesicRT1.txt","Geodesic Rhombic Triacontahedron Pattern 1 [1,1] (Deltoidal Hexecontahedron)",62,60,0.73
+"dmccooey","JoinedLsnubCube.txt","Joined Snub Cube (laevo)",62,60,0.731
+"dmccooey","DualGeodesicIcosahedron4.txt","Dual Geodesic Icosahedron Pattern 4 [3,0] (Truncated Pentakis Dodecahedron)",180,92,0.732
+"netlib","35","tetrakis hexahedron",14,24,0.733
+"dmccooey","SimplestC3v_1.txt","Simplest Canonical Polyhedron with C3v Symmetry (1 of 2)",7,7,0.735
+"dmccooey","SelfDualTetracontahedron6.txt","Self-Dual Tetracontahedron #6 (canonical)",40,40,0.737
+"netlib","128","snub disphenoid (J84)",8,12,0.737
+"dmccooey","ChamferedDodecahedron1.txt","Chamfered Dodecahedron with chamfer depth chosen to make all edges",80,42,0.739
+"dmccooey","Icosahedron.txt","Icosahedron",12,20,0.742
+"dmccooey","SelfDualDodecahedron1.txt","Self-Dual Dodecahedron #1 (canonical)",12,12,0.742
+"netlib","40","triakis icosahedron",32,60,0.742
+"dmccooey","TriakisTetrahedron.txt","Triakis Tetrahedron",8,12,0.743
+"dmccooey","SimplestD5v_1.txt","Simplest Canonical Polyhedron with D5v Symmetry (1 of 2) (Pentagonal Antiprism)",10,12,0.746
+"netlib","114","metabiaugmented truncated dodecahedron (J70)",70,52,0.747
+"dmccooey","RegularHexagonalToroid24.txt",NA,NA,NA,0.748
+"dmccooey","PentagrammicDipyramid.txt","Pentagrammic Dipyramid",7,10,0.749
+"dmccooey","BiscribedPropelloPentakisDodecahedron.txt","Biscribed Propello Pentakis Dodecahedron with radius = 1",212,240,0.75
+"dmccooey","SelfDualHexadecahedron1462.txt","Self-Dual Hexadecahedron #1462 (canonical)",16,16,0.75
+"dmccooey","SelfDualHexadecahedron98.txt","Self-Dual Hexadecahedron #98 (canonical)",16,16,0.75
+"dmccooey","SnubTruncatedOctahedron.txt","Snub Truncated Octahedron (canonical)",72,110,0.75
+"dmccooey","GreatDodecahemidodecahedron.txt","Great Dodecahemidodecahedron",30,18,0.752
+"dmccooey","SimplestO_2.txt","Simplest Canonical Polyhedron with O Symmetry (2 of 4)",38,24,0.752
+"netlib","92","gyroelongated pentagonal birotunda (J48)",40,52,0.752
+"netlib","54","gyroelongated square pyramid (J10)",9,13,0.753
+"dmccooey","HeptagonalIrisToroid.txt","Heptagonal Iris Toroid",14,21,0.755
+"dmccooey","10TruncatedTriakisIcosahedron2.txt","10-Truncated Triakis Icosahedron (canonical)",140,72,0.757
+"dmccooey","CubitruncatedCuboctahedron.txt","Cubitruncated Cuboctahedron",48,20,0.757
+"dmccooey","LsnubCube.txt","Snub Cube (laevo)",24,38,0.757
+"dmccooey","SmallStellatedDodecahedron.txt","Small Stellated Dodecahedron",12,12,0.757
+"dmccooey","SelfDualTridecahedron16.txt","Self-Dual Tridecahedron #16 (canonical)",13,13,0.759
+"dmccooey","SelfDualHendecahedron25.txt","Self-Dual Hendecahedron #25 (canonical)",11,11,0.762
+"dmccooey","GeodesicCube22.txt","Geodesic Cube Pattern 22 [6,3]",272,270,0.763
+"netlib","103","parabiaugmented dodecahedron (J59)",22,20,0.764
+"dmccooey","PropelloTruncatedCuboctahedron.txt","Propello Truncated Cuboctahedron (canonical)",192,170,0.769
+"netlib","65","elongated pentagonal rotunds (J21)",30,27,0.769
+"dmccooey","SelfDualPentadecahedron364.txt","Self-Dual Pentadecahedron #364 (canonical)",15,15,0.771
+"dmccooey","BiscribedRhexpropelloCube.txt","Biscribed Hexpropello Cube (dextro) with inradius = 1",56,30,0.772
+"dmccooey","TriangularAntiprism.txt","Triangular Antiprism (Octahedron)",6,8,0.772
+"dmccooey","JoinedTruncatedTetrahedron.txt","Joined Truncated Tetrahedron",20,18,0.775
+"dmccooey","SimplestC4_1.txt","Simplest Canonical Polyhedron with C4 Symmetry (1 of 5)",12,14,0.775
+"netlib","117","parabigyrate rhombicosidodecahedron (J73)",60,62,0.775
+"netlib","10",NA,NA,NA,0.776
+"netlib","18",NA,NA,NA,0.777
+"dmccooey","GreatIcosidodecahedron.txt","Great Icosidodecahedron",30,32,0.778
+"dmccooey","PropelloIcosahedron.txt","Propello Icosahedron (canonical)",72,80,0.778
+"dmccooey","DualSnubTruncatedIcosahedron.txt","Dual Snub Truncated Icosahedron (canonical)",272,180,0.78
+"dmccooey","SimplestOh_1.txt","Simplest Canonical Polyhedron with Oh Symmetry (1 of 2) (Octahedron)",6,8,0.78
+"dmccooey","SelfDualDodecahedron12.txt","Self-Dual Dodecahedron #12 (canonical)",12,12,0.781
+"dmccooey","GeodesicCube24.txt","Geodesic Cube Pattern 24 [7,1]",302,300,0.782
+"dmccooey","SimplestD5v_2.txt","Simplest Canonical Polyhedron with D5v Symmetry (2 of 2)",12,10,0.782
+"dmccooey","BiscribedLpropelloRpentagonalIcositetrahedron.txt","Biscribed L-Propello R-Pentagonal Icositetrahedron with radius = 1",158,144,0.783
+"dmccooey","SelfDualTetradecahedron1.txt","Self-Dual Tetradecahedron #1 (canonical)",14,14,0.783
+"dmccooey","SelfDualHexahedron1.txt","Self-Dual Hexahedron #1 (canonical)",6,6,0.784
+"dmccooey","GeodesicCube2.txt","Geodesic Cube Pattern 2 [2,0] (Deltoidal Icositetrahedron)",26,24,0.786
+"dmccooey","PentagrammicPrism.txt","Pentagrammic Prism",10,7,0.787
+"dmccooey","KleinBasic.txt",NA,NA,NA,0.789
+"dmccooey","GreatTriakisIcosahedron.txt","Great Triakis Icosahedron",32,60,0.79
+"dmccooey","RegularHexagonalToroid8_1.txt","Regular Hexagonal Toroid with 8 faces (version 1)",16,8,0.79
+"dmccooey","SquareAntiprism.txt","Square Antiprism",8,10,0.793
+"dmccooey","BiscribedSnubTruncatedOctahedron.txt","Biscribed Snub Truncated Octahedron with inradius = 1",72,110,0.794
+"dmccooey","GreatRhombicTriacontahedron.txt","Great Rhombic Triacontahedron",32,30,0.795
+"dmccooey","Cuboctahedron.txt","Cuboctahedron",12,14,0.796
+"dmccooey","HeptagonalPrism.txt","Heptagonal Prism",14,9,0.797
+"dmccooey","SmallDodecahemidodecahedron.txt","Small Dodecahemidodecahedron",30,18,0.797
+"dmccooey","SelfDualTridecahedron17.txt","Self-Dual Tridecahedron #17 (canonical)",13,13,0.801
+"dmccooey","BiscribedPropelloTetrahedron.txt","Biscribed Propello Tetrahedron with radius = 1",16,16,0.802
+"dmccooey","SelfDualHexadecahedron147.txt","Self-Dual Hexadecahedron #147 (canonical)",16,16,0.803
+"dmccooey","TriangularBifrustum.txt","Triangular Bifrustum",9,8,0.804
+"dmccooey","SelfDualHendecahedron29.txt","Self-Dual Hendecahedron #29 (canonical)",11,11,0.806
+"dmccooey","SimplestOh_2.txt","Simplest Canonical Polyhedron with Oh Symmetry (2 of 2) (Cube)",8,6,0.808
+"netlib","25","octagonal prism",16,10,0.808
+"dmccooey","SelfDualHexahedron2.txt","Self-Dual Hexahedron #2 (canonical)",6,6,0.812
+"netlib","75","pentagonal gyrobicupola (J31)",20,22,0.812
+"dmccooey","SelfDualPentadecahedron4.txt","Self-Dual Pentadecahedron #4 (canonical)",15,15,0.815
+"dmccooey","SimplestC4_2.txt","Simplest Canonical Polyhedron with C4 Symmetry (2 of 5)",14,12,0.815
+"dmccooey","SimplestD6h_1.txt","Simplest Canonical Polyhedron with D6h Symmetry (1 of 2) (Hexagonal Dipyramid)",8,12,0.815
+"dmccooey","RegularHexagonalToroid8_D2Sym1.txt",NA,NA,NA,0.816
+"netlib","93","augmented triangular prism (J49)",7,8,0.816
+"dmccooey","RectifiedRhombicosidodecahedron.txt","Rectified Rhombicosidodecahedron",120,122,0.818
+"dmccooey","6TruncatedPentakisDodecahedron2.txt","6-Truncated Pentakis Dodecahedron (canonical)",132,80,0.822
+"dmccooey","JoinedTruncatedCube.txt","Joined Truncated Cube",38,36,0.822
+"dmccooey","KleinDual.txt",NA,NA,NA,0.822
+"dmccooey","PentagrammicTrapezohedron.txt","Pentagrammic Trapezohedron",12,10,0.825
+"dmccooey","SelfDualTetradecahedron121.txt","Self-Dual Tetradecahedron #121 (canonical)",14,14,0.825
+"dmccooey","SelfDualDodecahedron14.txt","Self-Dual Dodecahedron #14 (canonical)",12,12,0.826
+"dmccooey","MedialPentagonalHexecontahedron.txt","Medial Pentagonal Hexecontahedron",84,60,0.828
+"dmccooey","Cubohemioctahedron.txt","Cubohemioctahedron",12,10,0.83
+"dmccooey","TriangularDipyramid.txt","Triangular Dipyramid",5,6,0.831
+"netlib","55","gyroelongated pentagonal pyramid (J11)",11,16,0.834
+"dmccooey","RegularHexagonalToroid9A1.txt",NA,NA,NA,0.838
+"dmccooey","GreatTriakisOctahedron.txt","Great Triakis Octahedron",14,24,0.84
+"dmccooey","HeptagonalTrapezohedron.txt","Heptagonal Trapezohedron",16,14,0.841
+"netlib","82","elongated pentagonal orthobicupola (J38)",30,32,0.841
+"dmccooey","SelfDualTridecahedron173.txt","Self-Dual Tridecahedron #173 (canonical)",13,13,0.842
+"dmccooey","CanonicalTruncatedRhombicuboctahedron.txt","Canonical Truncated Rhombicuboctahedron",96,50,0.843
+"dmccooey","SquareAntiprismTrapezohedronToroid.txt","Square Antiprism-Trapezohedron Toroid",16,16,0.843
+"dmccooey","GeodesicCube26.txt","Geodesic Cube Pattern 26 [6,4]",314,312,0.844
+"dmccooey","SelfDualHendecahedron3.txt","Self-Dual Hendecahedron #3 (canonical)",11,11,0.844
+"dmccooey","SimplestC4v.txt","Simplest Canonical Polyhedron with C4v Symmetry (Square Pyramid)",5,5,0.844
+"dmccooey","BiscribedTetrakisHexahedron.txt","Biscribed Tetrakis Hexahedron with radius = 1",14,24,0.845
+"dmccooey","RectifiedTruncatedIcosidodecahedron.txt","Rectified Truncated Icosidodecahedron",180,182,0.846
+"netlib","129","snub square antiprism (J85)",16,26,0.846
+"dmccooey","GreatIcosihemidodecahedron.txt","Great Icosihemidodecahedron",30,26,0.848
+"dmccooey","SimplestS4_1.txt","Simplest Canonical Polyhedron with S4 Symmetry (1 of 2)",10,12,0.848
+"dmccooey","SelfDualHexadecahedron152.txt","Self-Dual Hexadecahedron #152 (canonical)",16,16,0.85
+"dmccooey","SimplestD6h_2.txt","Simplest Canonical Polyhedron with D6h Symmetry (2 of 2) (Hexagonal Prism)",12,8,0.85
+"netlib","66",NA,NA,NA,0.85
+"dmccooey","PropelloOctahedron.txt","Propello Octahedron (canonical)",30,32,0.851
+"dmccooey","TruncatedIcosidodecahedron.txt","Truncated Icosidodecahedron",120,62,0.852
+"dmccooey","GreatDodecicosacron.txt","Great Dodecicosacron",32,60,0.853
+"dmccooey","BiscribedLsnubCube.txt","Biscribed Snub Cube (laevo) with inradius = 1",24,38,0.855
+"dmccooey","TriangularPrism.txt","Triangular Prism",6,5,0.856
+"dmccooey","OrthokisPropelloDodecahedron.txt","Orthokis Propello Dodecahedron (canonical)",92,120,0.859
+"dmccooey","RegularHexagonalToroid9A2.txt",NA,NA,NA,0.859
+"dmccooey","SelfDualPentadecahedron414.txt","Self-Dual Pentadecahedron #414 (canonical)",15,15,0.859
+"dmccooey","SmallIcosicosidodecahedron.txt","Small Icosicosidodecahedron",60,52,0.862
+"dmccooey","SmallStellatedTruncatedDodecahedron.txt","Small Stellated Truncated Dodecahedron",60,24,0.864
+"dmccooey","CanonicalTruncatedLsnubCube.txt","Canonical Truncated Snub Cube (laevo)",120,62,0.865
+"dmccooey","SelfDualDodecahedron18.txt","Self-Dual Dodecahedron #18 (canonical)",12,12,0.866
+"dmccooey","SelfDualTetradecahedron13.txt","Self-Dual Tetradecahedron #13 (canonical)",14,14,0.866
+"netlib","11",NA,NA,NA,0.866
+"netlib","87","elongated pentagonal gyrobirotunda (J43)",40,42,0.866
+"dmccooey","Icosidodecadodecahedron.txt","Icosidodecadodecahedron",60,44,0.87
+"dmccooey","ChamferedDodecahedron3.txt","Chamfered Dodecahedron (canonical)",80,42,0.871
+"dmccooey","SimplestC5v.txt","Simplest Canonical Polyhedron with C5v Symmetry (Pentagonal Pyramid)",6,6,0.871
+"netlib","124","parabidiminished rhombicosidodecahedron (J80)",50,42,0.871
+"dmccooey","SquareDipyramid.txt","Square Dipyramid (Octahedron)",6,8,0.872
+"dmccooey","KnottedDodecahedron.txt","Knotted Dodecahedron",18,12,0.873
+"dmccooey","GeodesicCube20.txt","Geodesic Cube Pattern 20 [6,2]",242,240,0.877
+"dmccooey","RpentagonalHexecontahedron.txt","Pentagonal Hexecontahedron (dextro)",92,60,0.877
+"dmccooey","RhombicEnneacontahedron.txt","Rhombic Enneacontahedron",92,90,0.878
+"netlib","56","triangular dipyramid (J12)",5,6,0.878
+"dmccooey","RegularHexagonalToroid9B.txt",NA,NA,NA,0.879
+"netlib","0","tetrahedron",4,4,0.88
+"netlib","94","biaugmented triangular prism (J50)",8,11,0.88
+"dmccooey","SelfDualHendecahedron32.txt","Self-Dual Hendecahedron #32 (canonical)",11,11,0.882
+"dmccooey","SelfDualTridecahedron18.txt","Self-Dual Tridecahedron #18 (canonical)",13,13,0.883
+"dmccooey","Heptagrammic72Antiprism.txt","Heptagrammic 7/2 Antiprism",14,16,0.885
+"dmccooey","BiscribedPentakisLsnubDodecahedron.txt","Biscribed Pentakis Snub Dodecahedron (laevo) with radius = 1",72,140,0.886
+"dmccooey","SimplestS4_2.txt","Simplest Canonical Polyhedron with S4 Symmetry (2 of 2)",12,10,0.886
+"netlib","36","trapezoidal icositetrahedron",26,24,0.886
+"dmccooey","SimplestD6v_1.txt","Simplest Canonical Polyhedron with D6v Symmetry (1 of 2) (Hexagonal Antiprism)",12,14,0.893
+"dmccooey","GeodesicIcosahedron2.txt","Geodesic Icosahedron Pattern 2 [2,0] (Pentakis Icosidodecahedron)",42,80,0.895
+"dmccooey","GreatDirhombicosidodecahedron.txt","Great Dirhombicosidodecahedron",60,124,0.898
+"dmccooey","SimplestC6v.txt","Simplest Canonical Polyhedron with C6v Symmetry (Hexagonal Pyramid)",7,7,0.899
+"dmccooey","GreatRhombidodecacron.txt","Great Rhombidodecacron",42,60,0.901
+"dmccooey","MedialRhombicTriacontahedron.txt","Medial Rhombic Triacontahedron",24,30,0.901
+"dmccooey","SquarePrism.txt","Square Prism (Cube)",8,6,0.901
+"netlib","104","metabiaugmented dodecahedron (J60)",22,20,0.901
+"dmccooey","SelfDualHexadecahedron159.txt","Self-Dual Hexadecahedron #159 (canonical)",16,16,0.903
+"dmccooey","SelfDualPentadecahedron47.txt","Self-Dual Pentadecahedron #47 (canonical)",15,15,0.903
+"dmccooey","SelfDualDodecahedron2.txt","Self-Dual Dodecahedron #2 (canonical)",12,12,0.904
+"dmccooey","GeodesicIcosahedron4.txt","Geodesic Icosahedron Pattern 4 [3,0] (Hexakis-Pentakis Truncated Icosahedron)",92,180,0.906
+"dmccooey","SmallDodecicosacron.txt","Small Dodecicosacron",32,60,0.906
+"dmccooey","SelfDualTetradecahedron15.txt","Self-Dual Tetradecahedron #15 (canonical)",14,14,0.907
+"dmccooey","LsnubDodecahedron.txt","Snub Dodecahedron (laevo)",60,92,0.908
+"dmccooey","GeodesicIcosahedron12.txt","Geodesic Icosahedron Pattern 12 [4,2]",282,560,0.911
+"dmccooey","GreatTriambicIcosahedron.txt","Great Triambic Icosahedron",32,20,0.915
+"dmccooey","TruncatedOctahedron.txt","Truncated Octahedron",24,14,0.917
+"dmccooey","PentakisDodecahedron.txt","Pentakis Dodecahedron",32,60,0.921
+"dmccooey","SelfDualTridecahedron2.txt","Self-Dual Tridecahedron #2 (canonical)",13,13,0.921
+"dmccooey","Heptagrammic72Dipyramid.txt","Heptagrammic 7/2 Dipyramid",9,14,0.924
+"dmccooey","RectifiedRhombicuboctahedron.txt","Rectified Rhombicuboctahedron",48,50,0.924
+"dmccooey","SelfDualHendecahedron4.txt","Self-Dual Hendecahedron #4 (canonical)",11,11,0.925
+"netlib","26","decagonal prism",20,12,0.926
+"dmccooey","6TruncatedTetrakisHexahedron2.txt","6-Truncated Tetrakis Hexahedron (canonical)",54,32,0.927
+"netlib","130","sphenocorona (J86)",10,14,0.928
+"dmccooey","StellaOctangula1.txt","Stella Octangula (Actual)",8,8,0.929
+"dmccooey","SimplestC7v.txt","Simplest Canonical Polyhedron with C7v Symmetry (Heptagonal Pyramid)",8,8,0.93
+"dmccooey","BiscribedTetrakisLsnubCube.txt","Biscribed Tetrakis Snub Cube (laevo) with radius = 1",30,56,0.931
+"dmccooey","SimplestS6_1.txt","Simplest Canonical Polyhedron with S6 Symmetry (1 of 2)",14,18,0.931
+"netlib","41","pentakis dodecahedron",32,60,0.932
+"dmccooey","RegularTetragonalToroid18A1.txt","Regular Tetragonal Toroid with 18 faces (type A) (version 1)",18,18,0.933
+"dmccooey","SimplestD6v_2.txt","Simplest Canonical Polyhedron with D6v Symmetry (2 of 2)",14,12,0.933
+"netlib","57","pentagonal dipyramid (J13)",7,10,0.935
+"dmccooey","RectifiedTruncatedOctahedron.txt","Rectified Truncated Octahedron",36,38,0.937
+"dmccooey","GeodesicIcosahedron11.txt","Geodesic Icosahedron Pattern 11 [3,3]",272,540,0.938
+"dmccooey","SmallIcosihemidodecahedron.txt","Small Icosihemidodecahedron",30,26,0.939
+"dmccooey","DeltoidalHexecontahedron.txt","Deltoidal Hexecontahedron",62,60,0.944
+"dmccooey","SmallTriambicIcosahedron.txt","Small Triambic Icosahedron",32,20,0.944
+"dmccooey","SelfDualPentadecahedron5.txt","Self-Dual Pentadecahedron #5 (canonical)",15,15,0.945
+"netlib","67",NA,NA,NA,0.948
+"dmccooey","Icosidodecahedron.txt","Icosidodecahedron",30,32,0.949
+"dmccooey","SelfDualDodecahedron3.txt","Self-Dual Dodecahedron #3 (canonical)",12,12,0.949
+"dmccooey","SelfDualTetradecahedron178.txt","Self-Dual Tetradecahedron #178 (canonical)",14,14,0.95
+"dmccooey","SelfDualHexadecahedron17.txt","Self-Dual Hexadecahedron #17 (canonical)",16,16,0.951
+"netlib","95","triaugmented triangular prism (J51)",9,14,0.953
+"netlib","12",NA,NA,NA,0.955
+"dmccooey","BiscribedPropelloCube.txt","Biscribed Propello Cube with inradius = 1",32,30,0.956
+"dmccooey","GeodesicCube14.txt","Geodesic Cube Pattern 14 [5,1]",158,156,0.96
+"dmccooey","BiscribedPropelloTetrakisHexahedron.txt","Biscribed Propello Tetrakis Hexahedron with radius = 1",86,96,0.963
+"dmccooey","Heptagrammic72Prism.txt","Heptagrammic 7/2 Prism",14,9,0.963
+"dmccooey","SelfDualHendecahedron40.txt","Self-Dual Hendecahedron #40 (canonical)",11,11,0.963
+"dmccooey","SelfDualTridecahedron22.txt","Self-Dual Tridecahedron #22 (canonical)",13,13,0.963
+"dmccooey","SimplestC8v.txt","Simplest Canonical Polyhedron with C8v Symmetry (Octagonal Pyramid)",9,9,0.963
+"netlib","19",NA,NA,NA,0.963
+"dmccooey","RpentagonalIcositetrahedron.txt","Pentagonal Icositetrahedron (dextro)",38,24,0.964
+"netlib","76","pentagonal orthocupolarontunda (J32)",25,27,0.965
+"dmccooey","JoinedTruncatedCuboctahedron.txt","Joined Truncated Cuboctahedron",74,72,0.968
+"dmccooey","PropelloTruncatedIcosidodecahedron.txt","Propello Truncated Icosidodecahedron (canonical)",480,422,0.968
+"dmccooey","GeodesicCube9.txt","Geodesic Cube Pattern 9 [4,1]",104,102,0.969
+"dmccooey","MedialTriambicIcosahedron.txt","Medial Triambic Icosahedron",24,20,0.969
+"dmccooey","SimplestD7h_1.txt","Simplest Canonical Polyhedron with D7h Symmetry (1 of 2) (Heptagonal Dipyramid)",9,14,0.969
+"dmccooey","GeodesicIcosahedron8.txt","Geodesic Icosahedron Pattern 8 [3,2]",192,380,0.971
+"dmccooey","CanonicalTruncatedTruncatedCube.txt","Canonical Truncated Truncated Cube",72,38,0.972
+"dmccooey","GreatDodecicosahedron.txt","Great Dodecicosahedron",60,32,0.972
+"dmccooey","SimplestS6_2.txt","Simplest Canonical Polyhedron with S6 Symmetry (2 of 2)",18,14,0.979
+"dmccooey","DualSnubTruncatedOctahedron.txt","Dual Snub Truncated Octahedron (canonical)",110,72,0.981
+"dmccooey","GreatDisdyakisDodecahedron.txt","Great Disdyakis Dodecahedron",26,48,0.982
+"dmccooey","RegularTetragonalToroid18A2.txt","Regular Tetragonal Toroid with 18 faces (type A) (version 2)",18,18,0.982
+"dmccooey","SelfDualIcosioctahedron1.txt","Self-Dual Icosioctahedron #1 (canonical)",28,28,0.982
+"dmccooey","GeodesicCube28.txt","Geodesic Cube Pattern 28 [7,3]",350,348,0.986
+"netlib","88","gyroelongated triangular bicupola (J44)",18,26,0.987
+"dmccooey","SnubHexpropelloDodecahedron.txt","Snub Hexpropello Dodecahedron (canonical)",420,632,0.988
+"dmccooey","TruncatedDisdyakisTriacontahedron2.txt","Truncated Disdyakis Triacontahedron with truncation depths chosen to",360,182,0.988
+"dmccooey","6TruncatedTriakisTetrahedron2.txt","6-Truncated Triakis Tetrahedron (canonical)",28,16,0.989
+"dmccooey","SelfDualDodecahedron38.txt","Self-Dual Dodecahedron #38 (canonical)",12,12,0.989
+"dmccooey","StellatedTruncatedHexahedron.txt","Stellated Truncated Hexahedron",24,14,0.989
+"dmccooey","SelfDualPentadecahedron57.txt","Self-Dual Pentadecahedron #57 (canonical)",15,15,0.99
+"dmccooey","BiscribedLsnubDodecahedron.txt","Biscribed Snub Dodecahedron (laevo) with inradius = 1",60,92,0.991
+"dmccooey","SelfDualTetradecahedron185.txt","Self-Dual Tetradecahedron #185 (canonical)",14,14,0.993
+"dmccooey","RectifiedTruncatedTetrahedron.txt","Rectified Truncated Tetrahedron",18,20,0.994
+"dmccooey","DualGeodesicIcosahedron7.txt","Dual Geodesic Icosahedron Pattern 7 [4,0]",320,162,0.995
+"netlib","27","square antiprism",8,10,0.995
+"dmccooey","ChamferedIcosahedron1.txt","Chamfered Icosahedron with chamfer depth chosen to make all edges",72,50,0.996
+"dmccooey","SimplestC9v.txt","Simplest Canonical Polyhedron with C9v Symmetry (Enneagonal Pyramid)",10,10,0.996
+"dmccooey","BiscribedRhexpropelloDodecahedron.txt","Biscribed Hexpropello Dodecahedron (dextro) with inradius = 1",140,72,0.997
+"netlib","58","elongated triangular dipyramid (J14)",8,9,0.997
+"dmccooey","SelfDualHendecahedron7.txt","Self-Dual Hendecahedron #7 (canonical)",11,11,1
+"dmccooey","BiscribedPropelloDisdyakisTriacontahedron.txt","Biscribed Propello Disdyakis Triacontahedron with radius = 1",422,480,1.001
+"dmccooey","JoinedLsnubDodecahedron.txt","Joined Snub Dodecahedron (laevo)",152,150,1.001
+"dmccooey","DeltoidalIcositetrahedron.txt","Deltoidal Icositetrahedron",26,24,1.003
+"dmccooey","SelfDualHexadecahedron2.txt","Self-Dual Hexadecahedron #2 (canonical)",16,16,1.003
+"dmccooey","SelfDualTridecahedron3.txt","Self-Dual Tridecahedron #3 (canonical)",13,13,1.003
+"dmccooey","Heptagrammic72Trapezohedron.txt","Heptagrammic 7/2 Trapezohedron",16,14,1.006
+"dmccooey","RhombicHexecontahedron.txt","Rhombic Hexecontahedron",62,60,1.006
+"dmccooey","GreatTruncatedCuboctahedron.txt","Great Truncated Cuboctahedron",48,26,1.007
+"dmccooey","RegularTetragonalToroid18B1.txt",NA,NA,NA,1.007
+"netlib","121","paragyrate diminished rhombicosidodecahedron (J77)",55,52,1.007
+"dmccooey","SimplestD7h_2.txt","Simplest Canonical Polyhedron with D7h Symmetry (2 of 2) (Heptagonal Prism)",14,9,1.008
+"dmccooey","RectifiedTruncatedCube.txt","Rectified Truncated Cube",36,38,1.012
+"dmccooey","TridyakisIcosahedron.txt","Tridyakis Icosahedron",44,120,1.013
+"netlib","83","elongated pentagonal gyrobicupola (J39)",30,32,1.013
+"dmccooey","GreatInvertedPentagonalHexecontahedron.txt","Great Inverted Pentagonal Hexecontahedron",92,60,1.016
+"netlib","131","augmented sphenocorona (J87)",11,17,1.016
+"dmccooey","GreatRhombidodecahedron.txt","Great Rhombidodecahedron",60,42,1.017
+"dmccooey","BiscribedTruncatedCuboctahedron.txt","Biscribed Truncated Cuboctahedron with inradius = 1",48,26,1.02
+"dmccooey","Durer.txt","Durer's Solid with 3*pi/7 apex angle and 4/7 truncation",12,8,1.02
+"dmccooey","OctagonalAntiprism.txt","Octagonal Antiprism",16,18,1.022
+"netlib","44","pentagonal hexecontahedron (dextro)",92,60,1.026
+"dmccooey","MedialDeltoidalHexecontahedron.txt","Medial Deltoidal Hexecontahedron",54,60,1.028
+"dmccooey","SimplestT.txt","Simplest Canonical Polyhedron with T Symmetry (Propello Tetrahedron)",16,16,1.028
+"dmccooey","SmallDodecicosahedron.txt","Small Dodecicosahedron",60,32,1.03
+"netlib","3","dodecahedron",20,12,1.031
+"netlib","96","augmented pentagonal prism (J52)",11,10,1.031
+"dmccooey","StewartsG3.txt","Stewart's G3",13,13,1.032
+"dmccooey","SelfDualDodecahedron4.txt","Self-Dual Dodecahedron #4 (canonical)",12,12,1.033
+"dmccooey","SelfDualPentadecahedron605.txt","Self-Dual Pentadecahedron #605 (canonical)",15,15,1.034
+"dmccooey","SelfDualTetradecahedron2.txt","Self-Dual Tetradecahedron #2 (canonical)",14,14,1.034
+"dmccooey","PentakisIcosidodecahedron.txt","Pentakis Icosidodecahedron (canonical)",42,80,1.038
+"dmccooey","RsnubCube.txt","Snub Cube (dextro)",24,38,1.038
+"dmccooey","DualGeodesicIcosahedron13.txt","Dual Geodesic Icosahedron Pattern 13 [5,1]",620,312,1.04
+"netlib","112","augmented truncated dodecahedron (J68)",65,42,1.04
+"netlib","13",NA,NA,NA,1.04
+"dmccooey","DualGeodesicIcosahedron12.txt","Dual Geodesic Icosahedron Pattern 12 [4,2]",560,282,1.046
+"dmccooey","LpentagonalHexecontahedron.txt","Pentagonal Hexecontahedron (laevo)",92,60,1.046
+"netlib","105","triaugmented dodecahedron (J61)",23,24,1.048
+"dmccooey","SelfDualIcosioctahedron2.txt","Self-Dual Icosioctahedron #2 (canonical)",28,28,1.05
+"netlib","37","hexakis octahedron",26,48,1.053
+"dmccooey","BiscribedDualSnubTruncatedIcosahedron.txt","Biscribed Dual Snub Truncated Icosahedron with radius = 1",272,180,1.055
+"dmccooey","GeodesicRT10.txt","Geodesic Rhombic Triacontahedron Pattern 10 [3,3]",542,540,1.055
+"netlib","68",NA,NA,NA,1.068
+"dmccooey","BiscribedOrthokisPropelloCube.txt","Biscribed Orthokis Propello Cube with radius = 1",38,48,1.08
+"dmccooey","8TruncatedTriakisOctahedron2.txt","8-Truncated Triakis Octahedron (canonical)",56,30,1.088
+"dmccooey","OrthotruncatedPropelloIcosahedron.txt","Orthotruncated Propello Icosahedron (canonical)",120,92,1.088
+"dmccooey","GeodesicCube18.txt","Geodesic Cube Pattern 18 [6,0]",218,216,1.092
+"dmccooey","132Pentagons.txt","132-Pentagon Polyhedron",200,132,1.093
+"dmccooey","SnubDodecadodecahedron.txt","Snub Dodecadodecahedron",60,84,1.094
+"dmccooey","GreatDodecicosidodecahedron.txt","Great Dodecicosidodecahedron",60,44,1.098
+"netlib","118","metabigyrate rhombicosidodecahedron (J74)",60,62,1.098
+"dmccooey","GeodesicRT2.txt","Geodesic Rhombic Triacontahedron Pattern 2 [2,0]",122,120,1.1
+"dmccooey","GeodesicRT6.txt","Geodesic Rhombic Triacontahedron Pattern 6 [3,1]",302,300,1.101
+"dmccooey","SmallRetrosnubIcosicosidodecahedron.txt","Small Retrosnub Icosicosidodecahedron",60,112,1.101
+"dmccooey","DualGeodesicIcosahedron5.txt","Dual Geodesic Icosahedron Pattern 5 [2,2] (Truncated Pentakis Icosidodecahedron)",240,122,1.106
+"netlib","139","small ditrigonal icosidodecahedron",80,72,1.11
+"netlib","141","echidnahedron",92,180,1.11
+"netlib","77","pentagonal gyrocupolarotunda (J33)",25,27,1.119
+"dmccooey","GeodesicIcosahedron10.txt","Geodesic Icosahedron Pattern 10 [5,0]",252,500,1.122
+"dmccooey","IcositruncatedDodecadodecahedron.txt","Icositruncated Dodecadodecahedron",120,44,1.136
+"netlib","115","triaugmented truncated dodecahedron (J71)",75,62,1.136
+"netlib","89","gyroelongated square bicupola (J45)",24,34,1.137
+"dmccooey","JoinedTruncatedDodecahedron.txt","Joined Truncated Dodecahedron",92,90,1.138
+"netlib","125","metabidiminished rhombicosidodecahedron (J81)",50,42,1.14
+"dmccooey","GreatDisdyakisTriacontahedron.txt","Great Disdyakis Triacontahedron",62,120,1.141
+"dmccooey","GeodesicRT5.txt","Geodesic Rhombic Triacontahedron Pattern 5 [3,0]",272,270,1.157
+"dmccooey","DualGeodesicIcosahedron11.txt","Dual Geodesic Icosahedron Pattern 11 [3,3]",540,272,1.161
+"dmccooey","PropelloTruncatedIcosahedron.txt","Propello Truncated Icosahedron (canonical)",240,212,1.179
+"dmccooey","CanonicalTruncatedTruncatedCuboctahedron.txt","Canonical Truncated Truncated Cuboctahedron",144,74,1.185
+"dmccooey","DualGeodesicIcosahedron14.txt","Dual Geodesic Icosahedron Pattern 14 [6,0]",720,362,1.201
+"dmccooey","TruncatedPentakisDodecahedron1.txt","Truncated Pentakis Dodecahedron (canonical)",180,92,1.211
+"dmccooey","DualGeodesicIcosahedron9.txt","Dual Geodesic Icosahedron Pattern 9 [4,1]",420,212,1.22
+"dmccooey","PropelloPentakisDodecahedron.txt","Propello Pentakis Dodecahedron (canonical)",212,240,1.225
+"dmccooey","CanonicalTruncatedTruncatedIcosidodecahedron.txt","Canonical Truncated Truncated Icosidodecahedron",360,182,1.227
+"netlib","42","trapezoidal hexecontahedron",62,60,1.241
+"dmccooey","BiscribedPropelloDisdyakisDodecahedron.txt","Biscribed Propello Disdyakis Dodecahedron with radius = 1",170,192,1.255
+"dmccooey","GeodesicCube23.txt","Geodesic Cube Pattern 23 [7,0]",296,294,1.267
+"dmccooey","BiscribedPropelloTruncatedCuboctahedron.txt","Biscribed Propello Truncated Cuboctahedron with inradius = 1",192,170,1.279
+"dmccooey","GeodesicCube30.txt","Geodesic Cube Pattern 30 [8,0]",386,384,1.296
+"dmccooey","GeodesicCube21.txt","Geodesic Cube Pattern 21 [5,4]",248,246,1.299
+"dmccooey","GeodesicCube25.txt","Geodesic Cube Pattern 25 [5,5]",302,300,1.299
+"dmccooey","DualSnubHexpropelloDodecahedron.txt","Dual Snub Hexpropello Dodecahedron (canonical)",632,420,1.3
+"netlib","20",NA,NA,NA,1.305
+"dmccooey","GeodesicRT4.txt","Geodesic Rhombic Triacontahedron Pattern 4 [2,2]",242,240,1.306
+"dmccooey","GeodesicIcosahedron13.txt","Geodesic Icosahedron Pattern 13 [5,1]",312,620,1.307
+"dmccooey","GeodesicIcosahedron16.txt","Geodesic Icosahedron Pattern 16 [5,2]",392,780,1.321
+"dmccooey","GeodesicRT9.txt","Geodesic Rhombic Triacontahedron Pattern 9 [4,1]",512,510,1.324
+"dmccooey","CanonicalTruncatedLsnubDodecahedron.txt","Canonical Truncated Snub Dodecahedron (laevo)",300,152,1.328
+"dmccooey","DualGeodesicIcosahedron10.txt","Dual Geodesic Icosahedron Pattern 10 [5,0]",500,252,1.338
+"dmccooey","DualGeodesicIcosahedron15.txt","Dual Geodesic Icosahedron Pattern 15 [4,3]",740,372,1.363
+"dmccooey","GeodesicRT7.txt","Geodesic Rhombic Triacontahedron Pattern 7 [3,2]",392,390,1.363
+"dmccooey","GeodesicCube27.txt","Geodesic Cube Pattern 27 [7,2]",320,318,1.388
+"dmccooey","GeodesicIcosahedron9.txt","Geodesic Icosahedron Pattern 9 [4,1]",212,420,1.453
+"dmccooey","GeodesicIcosahedron15.txt","Geodesic Icosahedron Pattern 15 [4,3]",372,740,1.457
+"dmccooey","PropelloDisdyakisTriacontahedron.txt","Propello Disdyakis Triacontahedron (canonical)",422,480,1.466
+"dmccooey","BiscribedPropelloTruncatedIcosidodecahedron.txt","Biscribed Propello Truncated Icosidodecahedron with inradius = 1",480,422,1.477
+"dmccooey","GeodesicIcosahedron17.txt","Geodesic Icosahedron Pattern 17 [6,1]",432,860,1.51
+"dmccooey","GeodesicIcosahedron18.txt","Geodesic Icosahedron Pattern 18 [4,4]",482,960,1.514
+"dmccooey","GeodesicIcosahedron22.txt","Geodesic Icosahedron Pattern 22 [7,1]",572,1140,1.565
+"dmccooey","GeodesicIcosahedron25.txt","Geodesic Icosahedron Pattern 25 [8,0]",642,1280,1.584
+"dmccooey","DualGeodesicIcosahedron18.txt","Dual Geodesic Icosahedron Pattern 18 [4,4]",960,482,1.591
+"dmccooey","DualGeodesicIcosahedron16.txt","Dual Geodesic Icosahedron Pattern 16 [5,2]",780,392,1.609
+"dmccooey","GeodesicRT13.txt","Geodesic Rhombic Triacontahedron Pattern 13 [4,3]",752,750,1.636
+"dmccooey","ExpandedPropelloTruncatedIcosahedron.txt","Expanded Propello Truncated Icosahedron (canonical)",900,902,1.658
+"dmccooey","GeodesicIcosahedron19.txt","Geodesic Icosahedron Pattern 19 [7,0]",492,980,1.683
+"dmccooey","DualGeodesicIcosahedron21.txt","Dual Geodesic Icosahedron Pattern 21 [6,2]",1040,522,1.697
+"dmccooey","GeodesicRT8.txt","Geodesic Rhombic Triacontahedron Pattern 8 [4,0]",482,480,1.767
+"dmccooey","GeodesicIcosahedron14.txt","Geodesic Icosahedron Pattern 14 [6,0]",362,720,1.841
+"dmccooey","GeodesicIcosahedron20.txt","Geodesic Icosahedron Pattern 20 [5,3]",492,980,1.867
+"dmccooey","ExpandedJoinedHexpropelloDodecahedron.txt","Expanded Joined Hexpropello Dodecahedron (canonical)",840,842,1.894
+"dmccooey","GeodesicRT17.txt","Geodesic Rhombic Triacontahedron Pattern 17 [5,3]",1022,1020,1.906
+"dmccooey","GeodesicIcosahedron24.txt","Geodesic Icosahedron Pattern 24 [6,3]",632,1260,1.947
+"dmccooey","GeodesicRT18.txt","Geodesic Rhombic Triacontahedron Pattern 18 [6,0]",1082,1080,1.947
+"dmccooey","GeodesicRT11.txt","Geodesic Rhombic Triacontahedron Pattern 11 [4,2]",602,600,1.962
+"dmccooey","DualGeodesicIcosahedron20.txt","Dual Geodesic Icosahedron Pattern 20 [5,3]",980,492,1.995
+"dmccooey","GeodesicRT19.txt","Geodesic Rhombic Triacontahedron Pattern 19 [6,1]",1112,1110,1.998
+"dmccooey","DualGeodesicIcosahedron17.txt","Dual Geodesic Icosahedron Pattern 17 [6,1]",860,432,1.999
+"dmccooey","GeodesicIcosahedron29.txt","Geodesic Icosahedron Pattern 29 [6,4]",762,1520,2.004
+"dmccooey","GeodesicRT15.txt","Geodesic Rhombic Triacontahedron Pattern 15 [5,2]",872,870,2.016
+"dmccooey","GeodesicIcosahedron30.txt","Geodesic Icosahedron Pattern 30 [7,3]",792,1580,2.019
+"dmccooey","GeodesicIcosahedron28.txt","Geodesic Icosahedron Pattern 28 [5,5]",752,1500,2.026
+"dmccooey","GeodesicRT16.txt","Geodesic Rhombic Triacontahedron Pattern 16 [4,4]",962,960,2.088
+"dmccooey","GeodesicIcosahedron27.txt","Geodesic Icosahedron Pattern 27 [8,1]",732,1460,2.098
+"dmccooey","DualGeodesicIcosahedron25.txt","Dual Geodesic Icosahedron Pattern 25 [8,0]",1280,642,2.141
+"dmccooey","GeodesicIcosahedron21.txt","Geodesic Icosahedron Pattern 21 [6,2]",522,1040,2.145
+"dmccooey","DualGeodesicIcosahedron19.txt","Dual Geodesic Icosahedron Pattern 19 [7,0]",980,492,2.185
+"dmccooey","GeodesicRT14.txt","Geodesic Rhombic Triacontahedron Pattern 14 [5,1]",782,780,2.22
+"dmccooey","GeodesicIcosahedron26.txt","Geodesic Icosahedron Pattern 26 [7,2]",672,1340,2.248
+"dmccooey","GeodesicRT20.txt","Geodesic Rhombic Triacontahedron Pattern 20 [6,2]",1202,1200,2.27
+"dmccooey","GeodesicRT12.txt","Geodesic Rhombic Triacontahedron Pattern 12 [5,0]",752,750,2.292
+"dmccooey","GeodesicIcosahedron23.txt","Geodesic Icosahedron Pattern 23 [5,4]",612,1220,2.376
+"dmccooey","DualGeodesicIcosahedron26.txt","Dual Geodesic Icosahedron Pattern 26 [7,2]",1340,672,2.508
+"dmccooey","DualGeodesicIcosahedron28.txt","Dual Geodesic Icosahedron Pattern 28 [5,5]",1500,752,2.601
+"dmccooey","GeodesicRT21.txt","Geodesic Rhombic Triacontahedron Pattern 21 [5,4]",1232,1230,2.655
+"dmccooey","DualGeodesicIcosahedron22.txt","Dual Geodesic Icosahedron Pattern 22 [7,1]",1140,572,2.662
+"dmccooey","DualGeodesicIcosahedron23.txt","Dual Geodesic Icosahedron Pattern 23 [5,4]",1220,612,2.717
+"dmccooey","ExpandedJoinedTruncatedPentakisDodecahedron.txt","Expanded Joined Truncated Pentakis Dodecahedron (canonical)",1080,1082,2.896
+"dmccooey","DualGeodesicIcosahedron24.txt","Dual Geodesic Icosahedron Pattern 24 [6,3]",1260,632,2.911
+"dmccooey","DualGeodesicIcosahedron27.txt","Dual Geodesic Icosahedron Pattern 27 [8,1]",1460,732,2.989
+"dmccooey","GeodesicRT23.txt","Geodesic Rhombic Triacontahedron Pattern 23 [7,0]",1472,1470,3.22
+"dmccooey","GeodesicRT25.txt","Geodesic Rhombic Triacontahedron Pattern 25 [5,5]",1502,1500,3.226
+"dmccooey","GeodesicRT24.txt","Geodesic Rhombic Triacontahedron Pattern 24 [7,1]",1502,1500,3.266
+"dmccooey","GeodesicRT22.txt","Geodesic Rhombic Triacontahedron Pattern 22 [6,3]",1352,1350,3.289
+"dmccooey","DualGeodesicIcosahedron29.txt","Dual Geodesic Icosahedron Pattern 29 [6,4]",1520,762,3.299
+"dmccooey","DualGeodesicIcosahedron30.txt","Dual Geodesic Icosahedron Pattern 30 [7,3]",1580,792,3.328
+"dmccooey","GeodesicRT26.txt","Geodesic Rhombic Triacontahedron Pattern 26 [6,4]",1562,1560,3.393
+"dmccooey","GeodesicRT27.txt","Geodesic Rhombic Triacontahedron Pattern 27 [7,2]",1592,1590,3.638
+"dmccooey","GeodesicRT29.txt","Geodesic Rhombic Triacontahedron Pattern 29 [6,5]",1832,1830,4.11
+"dmccooey","GeodesicRT30.txt","Geodesic Rhombic Triacontahedron Pattern 30 [8,0]",1922,1920,4.169
+"dmccooey","GeodesicRT28.txt","Geodesic Rhombic Triacontahedron Pattern 28 [7,3]",1742,1740,4.246
+"dmccooey","GeodesicIcosahedron222.txt","Geodesic Icosahedron Pattern 222 [15,15]",6752,13500,41.787
+"dmccooey","GeodesicIcosahedron223.txt","Geodesic Icosahedron Pattern 223 [26,0]",6762,13520,42.865

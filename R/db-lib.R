@@ -161,23 +161,45 @@ copyFilesToExtData <- function(force = FALSE){
   polyhedra.ledger.scraped <- polyhedra.ledger[polyhedra.ledger$status=="scraped",]
   data.env.home <- getDataDir(data.env ="HOME")
   data.env.package <- getDataDir(data.env ="PACKAGE")
-  #clean dirs
   dir.create(data.env.package,showWarnings = FALSE, recursive = TRUE)
+  #check existing sources
+  existing <- FALSE
   for (source in names(.available.sources)){
     source.config <- .available.sources[[source]]
-    source.dir <- source.config$getBaseDir(data.env.package)
-    file.remove(source.dir)
-    dir.create(source.dir, showWarnings = FALSE, recursive = TRUE)
+    dest.dir <- source.config$getBaseDir(data.env.package)
+    if (file.exists(dest.dir)){
+      existing <- TRUE
+    }
+  }
+  if (existing & !force){
+    stop(paste("Cannot copy files: they exists in destination. Call the function with force=TRUE or remove them manually"))
+  }
+  #clean dirs
+  for (source in names(.available.sources)){
+    source.config <- .available.sources[[source]]
+    dest.dir <- source.config$getBaseDir(data.env.package)
+    if (file.exists(dest.dir)){
+      unlink(dest.dir,recursive = TRUE)
+    }
+    dir.create(dest.dir, showWarnings = FALSE, recursive = TRUE)
   }
   #copy files
   #copy version
   file.copy(file.path(data.env.home,"version"),data.env.package,overwrite = TRUE)
+  file.copy(file.path(data.env.home,"polyhedra.preloaded.data.csv"),data.env.package,overwrite = TRUE)
 
   #copy polyhedra source files
+  cont <- 0
   for (i in c(1:nrow(polyhedra.ledger.scraped))){
     current.polyhedron <-polyhedra.ledger.scraped[i,]
-    #TODO copy polyhedra sources files
+    source.config <- .available.sources[[current.polyhedron$source]]
+    dest.dir <- source.config$getBaseDir(data.env.package)
+    if (file.copy(file.path(source.config$getBaseDir(data.env.home),current.polyhedron$filename),
+                  dest.dir)){
+        cont <- cont+1
+    }
   }
+  futile.logger::flog.info(paste("Copied",cont,"polyhedra sources files to",data.env.package))
   #copy RDS
   file.copy(file.path(data.env.home,"polyhedra.RDS"),data.env.package)
   self
@@ -287,18 +309,6 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class("PolyhedronScraperCon
       polyhedra.dir   <- self$getBaseDir(home.dir.data)
       polyhedra.files <- dir(polyhedra.dir)
       polyhedra.files <- polyhedra.files[grep("\\.txt", polyhedra.files)]
-      geodesic.files  <- polyhedra.files[grep("geodesic",polyhedra.files,ignore.case = TRUE)]
-      geodesic.files  <- geodesic.files[-grep("Dual",geodesic.files,ignore.case = TRUE)]
-      regexp.natnum   <- "([0-9]+)"
-      geodesic.order  <- data.frame(filename = geodesic.files,
-                                    class= sub(regexp.natnum,"",geodesic.files),
-                                    order= as.numeric(str_extract(geodesic.files,regexp.natnum)),
-                                    stringsAsFactors = FALSE)
-      geodesic.order  <- geodesic.order[order(geodesic.order$order,geodesic.order$class),]
-      geodesic.order  <- geodesic.order[1:50,]
-      non.geodesic.files <- polyhedra.files[-which(polyhedra.files %in% geodesic.order$filename)]
-      polyhedra.files <- c(geodesic.order$filename,non.geodesic.files[order(non.geodesic.files)])
-      #TODO remove geodesic files from priority when everything works ok.
       polyhedra.files
     },
     scrape = function(polyhedron.number, polyhedron.filename){
@@ -609,10 +619,10 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       futile.logger::flog.debug(paste("configuring source", source))
       polyhedra.dir   <- source.config$getBaseDir(home.dir.data)
       polyhedra.files <- source.config$getPolyhedraFiles(home.dir.data)
-      if (max.quant >0){
-        polyhedra.files <- polyhedra.files[1:min(max.quant,length(polyhedra.files))]
-      }
       if (length(polyhedra.files)>0) {
+        if (max.quant >0){
+          polyhedra.files <- polyhedra.files[1:min(max.quant,length(polyhedra.files))]
+        }
         self$addSourceConfig(source.config)
         scheduled <- NULL
         for (polyhedron.filename in polyhedra.files) {
@@ -879,6 +889,20 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = 
 }
 
 
+#' switchToFullDatabase()
+#'
+#' Prompts user for changing database to fulldb in user filespace
+#'
+#' @usage
+#'     switchToFullDatabase()
+#' @export
+
+switchToFullDatabase <- function(){
+  selectDataEnv()
+}
+
+
+
 #' scrapePolyhedra()
 #'
 #' Method for obtaining polyhedra objects from text files of
@@ -996,8 +1020,10 @@ getAvailablePolyhedra <- function(sources = names(.available.sources), search.st
 #' getPercentilPolyhedraQuant
 #' returns polyhedra quantity of parameter percentil
 #' @param percentil is the percentil which must be applied to estimate the figure
-getPercentilPolyhedraQuant <- function(percentil){
-  round(percentil*nrow(getAvailablePolyhedra()))
+#' @param quant.min minimum quantity of files to return
+#'
+getPercentilPolyhedraQuant <- function(percentil,quant.min=100){
+  max(round(percentil*nrow(getAvailablePolyhedra())),quant.min)
 }
 #' getPolyhedron()
 #'
@@ -1038,3 +1064,5 @@ getPolyhedron <- function(source = "netlib", polyhedron.name) {
   }
   ret
 }
+
+

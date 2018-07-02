@@ -5,9 +5,15 @@
 #log
 *.log
 
-
-
 #OSX
 **/.DS_Store
 
 
+#html files from dmccooey.com
+dmccooey.com/polyhedra/*.html
+dmccooey.com/polyhedra/*.js
+
+
+# polyhedra database should only be included in release commits
+# Release version
+#polyhedra*.RDS
