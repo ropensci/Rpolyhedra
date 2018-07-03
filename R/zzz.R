@@ -10,7 +10,7 @@
 #' * http://dmccooey.com/Polyhedra: Polyhedra text datafiles.
 #'
 #' @docType package
-#' @name RpolyhedraFullDB
+#' @name Rpolyhedra
 #' @import R6 futile.logger testthat
 #' @author Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Javier Belen <leobelen@gmail.com>
 
@@ -19,32 +19,47 @@
 #' @param libname The library name
 #' @param pkgname The package name
 .onLoad <- function(libname, pkgname) {
-  #debug settings to run the logger.
-  #futile.logger::flog.appender(futile.logger::appender.tee("RPolyedra.log"), name = "data.io")
-  #futile.logger::flog.threshold(futile.logger::INFO)
-  polyhedra.rds.file <- getPolyhedraRDSPath()
 
   #setup Available sources
   .available.sources <- list()
   .available.sources[["netlib"]] <- PolyhedronScraperConfigurationNetlib.class$new()
   .available.sources[["dmccooey"]] <- PolyhedronScraperConfigurationDmccoey.class$new()
   assign(".available.sources", value = .available.sources, envir = parent.env(environment()))
+  .available.scrapping.conf <- list()
+  .available.scrapping.conf[["dev-minimal"]] <- list(max.quant.config.schedule = 0,
+                                                     max.quant.scrape = 10,
+                                                     time2scrape.source = 20,
+                                                      #20 seconds of building/scraping polyhedra database for reasonable devs timing
+                                                     retry.scrape = FALSE)
+  .available.scrapping.conf[["pkg-minimal"]] <- list(max.quant.config.schedule = 0,
+                                                     max.quant.scrape = 0,
+                                                     time2scrape.source = 80,
+                                                     retry.scrape = FALSE)
+  .available.scrapping.conf[["fulldb"]] <- list(max.quant.config.schedule = 0,
+                                                     max.quant.scrape = 0,
+                                                     time2scrape.source = 0,
+                                                     retry.scrape = FALSE)
+  assign(".available.scrapping.conf", value = .available.scrapping.conf, envir = parent.env(environment()))
+  if (!exists(".data.env")){
+    setDataDirEnvironment("PACKAGE")
+  }
+  if (!file.exists(getPreloadedDataFilename())){
+    downloadRPolyhedraSupportingFiles()
+  }
+  .polyhedra <- NULL
+  polyhedra.rds.file <- getPolyhedraRDSPath()
   if (file.exists(polyhedra.rds.file)) {
     polyhedra.candidate <- readRDS(polyhedra.rds.file)
-    if (compatiblePolyhedraRDS(polyhedra.candidate)){
+    if (isCompatiblePolyhedraRDS(polyhedra.candidate, halts = TRUE)){
       .polyhedra <- polyhedra.candidate
     }
-    else{
-      stop("Incompatible polyhedra database found. Reinstall")
-    }
   }
-  else{
-    .polyhedra <- PolyhedronDatabase.class$new()
+  if (is.null(.polyhedra)){
+    .polyhedra <- PolyhedraDatabase.class$new()
   }
+
   assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
-  scrapePolyhedraSources(max.quant.config.schedule = 0, #All polyhedra
-                         max.quant.scrape = 0,          #All polyhedra
-                         time2scrape.source = 0,        #All polyhedra
-                         sources.config = .available.sources,
-                         retry.scrape = FALSE)
+  scrapePolyhedra(.available.scrapping.conf[["fulldb"]],
+                  sources.config = .available.sources)
 }
+

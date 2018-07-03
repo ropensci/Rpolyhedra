@@ -28,3 +28,15 @@ msgstr "Not implemented"
 
 msgid "rpoly.package_not_found"
 msgstr "Package not found"
+
+msgid "rpoly.download_question"
+msgstr "This package needs to download data to the home folder. Do you accept it [y/n]?:"
+
+msgid "rpoly.redo_download_question"
+msgstr "We do not understand the option provided. Do you accept to download the supporting files [y/n]?:"
+
+msgid "rpoly.download_question_yes"
+msgstr "y"
+
+msgid "rpoly.download_question_no"
+msgstr "n"
