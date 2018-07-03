@@ -31,7 +31,9 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @import futile.logger
+#' @import utils
 #' @importFrom R6 R6Class
+#' @export
 #'
 
 ScraperLedger.class <- R6::R6Class("ScraperLedger",
@@ -168,6 +170,9 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    updateCalculatedFields = function(){
      resolveScrapedPreloaded <- function(x, field){maxWithoutNA(c(x[paste("scraped",field,sep=".")],
                                                                   x[paste("preloaded",field,sep=".")]))}
+     if (!"name" %in% names(self$df)){
+       self$dirty <- TRUE
+     }
      if (self$dirty){
        self$df$name     <-  apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="name")} )
        self$df$vertices <-  as.numeric(apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="vertices")}))
@@ -175,13 +180,16 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        self$dirty <- FALSE
      }
    },
-   getAvailablePolyhedra = function(sources = sources,
-                                    search.string = search.string,
-                                    ignore.case = ignore.case){
+   getAvailablePolyhedra = function(sources = names(.available.sources),
+                                    search.string = "",
+                                    ret.fields = c("source","name","vertices","faces","status"),
+                                    ignore.case = TRUE){
      self$updateCalculatedFields()
-     ret <- self$df[!is.na(self$df$name) & self$df$source %in% sources ,
-                    c("source","name","vertices","faces","status")]
-
+     if (is.null(ret.fields)){
+       ret.fields <- 1:ncol(self$df)
+     }
+     ret <- self$df[!is.na(self$df$name) & self$df$source %in% sources,
+                    ret.fields]
      if (!is.null(search.string)) {
        ret <- ret[grepl(search.string, ret$name,ignore.case = ignore.case),]
      }
@@ -199,8 +207,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      preloaded.data
    },
    loadPreloadedData = function(){
-     self$preloaded.data.filename <- paste(getDataDir(),"polyhedra.preloaded.data.csv",sep="")
-     self$preloaded.data <- read.csv(paste(getDataDir(),"polyhedra.preloaded.data.csv",sep=""))
+     self$preloaded.data.filename <- getPreloadedDataFilename()
+     self$preloaded.data <- utils::read.csv(self$preloaded.data.filename)
      self$preloaded.data
    },
    getSizeToTimeScrape = function(sources, time2scrape = 60){
@@ -278,16 +286,3 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    }
  ))
 
-#' checkVertices
-#'
-#' Check rendering vertices properties
-#'
-checkVertices <- function(vertices, positioned.vertices, triangulated.solid){
-  triangulated.solid <- sort(unique(unlist(triangulated.solid)))
-  set.seed(sum(vertices[,1:3]))
-  positioned.vertices.rows <- intersect(triangulated.solid,1:nrow(positioned.vertices))
-  row <- positioned.vertices.rows[trunc(runif(1,1,length(positioned.vertices.rows)+1-0.1^9))]
-  col <- trunc(runif(1,1,4-0.1^9))
-  positioned.vertices[row,col] <-positioned.vertices[row,col]+0.1^6
-  positioned.vertices
-}

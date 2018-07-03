@@ -2,11 +2,17 @@
 % Please edit documentation in R/db-lib.R
 \name{getDataDir}
 \alias{getDataDir}
-\title{Gets the path of package data.}
+\title{getDataDir}
 \usage{
-getDataDir()
+getDataDir(data.env = .data.env)
+}
+\arguments{
+\item{data.env}{enviroment where data directory must be returned}
 }
 \description{
+Gets the path of Rpolyhedra data dir.
+}
+\details{
 This function is used internally to determine whether the package
 is compiled in source or package directory.
 }

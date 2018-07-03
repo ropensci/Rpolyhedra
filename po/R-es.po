@@ -28,3 +28,16 @@ msgstr "Sin implementar"
 
 msgid "rpoly.package_not_found"
 msgstr "Paquete no encontrado"
+
+msgid "rpoly.download_question"
+msgstr "Este paquete requiere bajar información adicional al directorio home del usuario. Desea hacerlo [s/n]?:"
+
+msgid "rpoly.redo_download_question"
+msgstr "No pudimos entender su respuesta. Acepta bajar los archivos de soporte [s/n]?:"
+
+msgid "rpoly.download_question_yes"
+msgstr "s"
+
+msgid "rpoly.download_question_no"
+msgstr "n"
+

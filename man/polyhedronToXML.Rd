@@ -15,9 +15,3 @@ an XML document, ready to be converted to String with XML::saveXML()
 \description{
 Gets an XML representation out of the polyhedron object
 }
-\examples{
-#get the representation of a cube (netlib library)
-library(Rpolyhedra)
-XML::saveXML(polyhedronToXML(getPolyhedron("netlib", "cube")$state))
-
-}
