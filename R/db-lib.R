@@ -6,7 +6,7 @@
 #' is compiled in source or package directory.
 #' @param data.env enviroment where data directory must be returned
 #'
-getDataDir <- function(data.env=get(".data.env", envir = getUserEnv())) {
+getDataDir <- function(data.env=getDataEnv()) {
   data.dir <- ""
   if(data.env == "HOME")
   {
@@ -105,10 +105,10 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 
 #' selectDataEnv
 #'
-#' Asks the user to download the supporting files
+#' Asks the user where to set the system variable .data.env
 #'
 #' @return .data.env
-#' @import     futile.logger
+#' @import futile.logger
 
 selectDataEnv <- function() {
   if(!is.na(Sys.getenv(x = "ON_TRAVIS", unset=NA)))
@@ -130,7 +130,21 @@ selectDataEnv <- function() {
       setDataDirEnvironment("HOME")
     }
   }
-  get(".data.env", envir = getUserEnv())
+  data.env <-getDataEnv()
+  if (data.env=="HOME"){
+    downloadRPolyhedraSupportingFiles()
+  }
+  data.env
+}
+
+#' getDataEnv
+#'
+#' get the current .data.env value
+#'
+#' @return .data.env
+
+getDataEnv <- function() {
+ get(".data.env", envir = getUserEnv())
 }
 
 #' downloadRPolyhedraSupportingFiles
@@ -143,7 +157,7 @@ selectDataEnv <- function() {
 downloadRPolyhedraSupportingFiles <- function(){
   if(checkDatabaseVersion() == "UPDATE")
   {
-    if(.data.env == "HOME"){
+    if(getDataEnv() == "HOME"){
       package.version <- getPackageVersion()
       URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", package.version, sep="")
       td <- tempdir()
@@ -155,19 +169,17 @@ downloadRPolyhedraSupportingFiles <- function(){
       file.copy(from = file.path(td,tmp.db.path, files.to.copy), to=getDataDir(), recursive = TRUE)
       unlink(file.path(td,tmp.db.path), recursive=TRUE)
       return(TRUE)
-    } else if(.data.env == "PACKAGE") {
-      copyFilesToExtData(force = FALSE)
     }
   }
   return(TRUE)
 }
 
-#' downloadRPolyhedraSupportingFiles
+#' copyFilesToExtData
 #'
-#' Downloads the files from the remote location
+#' Copies files from the home directory to the package one to build a preconfigured package.
 #'
 #' @param force indicate if existings directories must be overwritten
-#' @return TRUE if sucessfull,
+#' @return TRUE if sucessfull
 #' @import utils
 #' @import futile.logger
 copyFilesToExtData <- function(force = FALSE){

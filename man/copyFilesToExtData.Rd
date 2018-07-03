@@ -2,7 +2,7 @@
 % Please edit documentation in R/db-lib.R
 \name{copyFilesToExtData}
 \alias{copyFilesToExtData}
-\title{downloadRPolyhedraSupportingFiles}
+\title{copyFilesToExtData}
 \usage{
 copyFilesToExtData(force = FALSE)
 }
@@ -10,8 +10,8 @@ copyFilesToExtData(force = FALSE)
 \item{force}{indicate if existings directories must be overwritten}
 }
 \value{
-TRUE if sucessfull,
+TRUE if sucessfull
 }
 \description{
-Downloads the files from the remote location
+Copies files from the home directory to the package one to build a preconfigured package.
 }
