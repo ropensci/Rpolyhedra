@@ -705,7 +705,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         tryCatch({
           self$ledger$updateStatus(source = source,filename = polyhedron.filename,
                                  status = "scraping")
-          current.polyhedron <- source.config$scrape(polyhedron.number = polyhedron.number, paste(polyhedra.dir, polyhedron.filename, sep = ""))
+          current.polyhedron <- source.config$scrape(polyhedron.number = polyhedron.number, file.path(polyhedra.dir, polyhedron.filename))
           if (current.polyhedron$isChecked()){
             current.polyhedron$getRGLModel(1, c(0, 0, 0))
             futile.logger::flog.debug(paste("generated RGLModel"))
@@ -766,7 +766,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         source <- source.config$getName()
         scraped.polyhedron <- NULL
         tryCatch({
-          scraped.polyhedron <- source.config$scrape(polyhedron.number = polyhedron.number, paste(polyhedra.dir, polyhedron.filename, sep = ""))
+          scraped.polyhedron <- source.config$scrape(polyhedron.number = polyhedron.number, file.path(polyhedra.dir, polyhedron.filename))
           polyhedron.name <- scraped.polyhedron$getName()
           status <- "testing"
           obs    <- ""
