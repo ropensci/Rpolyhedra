@@ -99,13 +99,14 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 #' Asks the user to download the supporting files
 #'
 #' @return .data.env
-#' @export
+#' @import     futile.logger
+
 selectDataEnv <- function() {
   if(!is.na(Sys.getenv(x = "ON_TRAVIS", unset=NA)))
     return(TRUE)
   accept.option <- readline(prompt="Full Database needs to download data to home folder. Agree [y/n]?:")
   if(tolower(accept.option[1]) == "n") {
-    print("Working on demo DB. You can call selectDataEnv to use the full database.")
+    futile.logger::flog.info("Working on demo DB. You can call switchToFullDatabase to use the full database.")
     setDataDirEnvironment("PACKAGE")
   }
   if(tolower(accept.option[1]) == "y") {
@@ -114,7 +115,7 @@ selectDataEnv <- function() {
   while(!tolower(accept.option[1]) %in% c("n","y")) {
     accept.option <- readline(prompt="Unknown option. Agree [y/n]?:")
     if(tolower(accept.option[1]) == "n") {
-      print("Working on demo DB. You can call selectDataEnv to use the full database.")
+      futile.logger::flog.info("Working on demo DB. You can call selectDataEnv to use the full database.")
       setDataDirEnvironment("PACKAGE")
     } else if(tolower(accept.option[1]) == "y") {
       setDataDirEnvironment("HOME")
@@ -159,6 +160,7 @@ downloadRPolyhedraSupportingFiles <- function(){
 #' @param force indicate if existings directories must be overwritten
 #' @return TRUE if sucessfull,
 #' @import utils
+#' @import futile.logger
 copyFilesToExtData <- function(force = FALSE){
   polyhedra.ledger <- .polyhedra$ledger$getAvailablePolyhedra(ret.fields = NULL)
   polyhedra.ledger.scraped <- polyhedra.ledger[polyhedra.ledger$status=="scraped",]
@@ -945,7 +947,7 @@ scrapePolyhedraSources<- function(sources.config = .available.sources,
                                   max.quant.scrape = 0,
                                   time2scrape.source = 30,
                                   retry.scrape = FALSE){
-  futile.logger::flog.info(paste("Scheduling",max.quant.config.schedule, "polyhedra for scraping"))
+  futile.logger::flog.debug(paste("Scheduling",max.quant.config.schedule, "polyhedra for scraping"))
   .polyhedra$schedulePolyhedraSources(sources.config = sources.config,
                                       max.quant = max.quant.config.schedule)
   if (retry.scrape){
@@ -954,7 +956,7 @@ scrapePolyhedraSources<- function(sources.config = .available.sources,
   else {
     mode <- "scrape.queued"
   }
-  futile.logger::flog.info(paste("Scraping",max.quant.scrape, "polyhedra up to",time2scrape.source,"seconds"))
+  futile.logger::flog.debug(paste("Scraping",max.quant.scrape, "polyhedra up to",time2scrape.source,"seconds"))
   .polyhedra$scrape(mode = mode, max.quant = max.quant.scrape,
                     time2scrape.source = time2scrape.source)
   #All files not scraped in building, marked as skipped
