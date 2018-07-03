@@ -59,7 +59,7 @@
   }
 
   assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
-  scrapePolyhedra(.available.scrapping.conf[["pkg-minimal"]],
+  scrapePolyhedra(.available.scrapping.conf[["fulldb"]],
                   sources.config = .available.sources)
 }
 
