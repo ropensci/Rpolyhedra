@@ -20,6 +20,7 @@
 #' @param pkgname The package name
 .onLoad <- function(libname, pkgname) {
 
+  assign("RpolyhedraEnv", new.env(), parent.env(environment()))
   #setup Available sources
   .available.sources <- list()
   .available.sources[["netlib"]] <- PolyhedronScraperConfigurationNetlib.class$new()
