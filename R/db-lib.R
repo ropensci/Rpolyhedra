@@ -49,25 +49,6 @@ getUserEnv <- function() {
 }
 
 
-#' setDataDirEnv
-#'
-#' Sets the path of Rpolyhedra data dir.
-#'
-#' This function is used to set the data directories either to the package or the user home directory.
-#'
-#' @param env The type of environment to work with. Values are "PACKAGE" or "HOME" and it defaults to package
-#' @export
-askDataDirEnvironment <- function(env="PACKAGE") {
-  if(env=="PACKAGE")
-    .data.env <- "PACKAGE"
-  else if(env=="HOME")
-    .data.env <- "HOME"
-  else
-    stop("Possible values are PACKAGE and HOME")
-  assign(".data.env", value = .data.env, envir = parent.env(environment()))
-  .data.env
-}
-
 #' getPackageDir
 #'
 #' Gets the path of package data.
@@ -109,7 +90,9 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 #'
 #' @return .data.env
 #' @import futile.logger
+#' @export
 
+#TODO remove from exports and solve enviroment issue
 selectDataEnv <- function() {
   if(!is.na(Sys.getenv(x = "ON_TRAVIS", unset=NA)))
     return(TRUE)
@@ -925,7 +908,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = 
 #' @export
 
 switchToFullDatabase <- function(){
-  selectDataEnv()
+  Rpolyhedra::selectDataEnv()
 }
 
 
