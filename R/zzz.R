@@ -20,12 +20,12 @@
 #' @param pkgname The package name
 .onLoad <- function(libname, pkgname) {
 
-  assign("RpolyhedraEnv", new.env(), parent.env(environment()))
+  assign("RpolyhedraEnv", new.env(), asNamespace("Rpolyhedra"))
   #setup Available sources
   .available.sources <- list()
   .available.sources[["netlib"]] <- PolyhedronScraperConfigurationNetlib.class$new()
   .available.sources[["dmccooey"]] <- PolyhedronScraperConfigurationDmccoey.class$new()
-  assign(".available.sources", value = .available.sources, envir = parent.env(environment()))
+  assign(".available.sources", value = .available.sources, envir = asNamespace("Rpolyhedra"))
   .available.scrapping.conf <- list()
   .available.scrapping.conf[["dev-minimal"]] <- list(max.quant.config.schedule = 0,
                                                      max.quant.scrape = 10,
@@ -40,7 +40,7 @@
                                                      max.quant.scrape = 0,
                                                      time2scrape.source = 0,
                                                      retry.scrape = FALSE)
-  assign(".available.scrapping.conf", value = .available.scrapping.conf, envir = parent.env(environment()))
+  assign(".available.scrapping.conf", value = .available.scrapping.conf, envir = asNamespace("Rpolyhedra"))
   if (!exists(".data.env")){
     setDataDirEnvironment("PACKAGE")
   }
@@ -59,7 +59,7 @@
     .polyhedra <- PolyhedraDatabase.class$new()
   }
 
-  assign(".polyhedra", value = .polyhedra, envir = parent.env(environment()))
+  assign(".polyhedra", value = .polyhedra, envir = asNamespace("Rpolyhedra"))
   scrapePolyhedra(.available.scrapping.conf[["pkg-minimal"]],
                   sources.config = .available.sources)
 }

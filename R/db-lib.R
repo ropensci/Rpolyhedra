@@ -45,7 +45,8 @@ setDataDirEnvironment <- function(env="PACKAGE") {
 #' Gets a writable environment for the package
 #'
 getUserEnv <- function() {
-  get("RpolyhedraEnv",envir=parent.env(environment()))
+  #get("RpolyhedraEnv",envir=asNamespace("Rpolyhedra"))
+  get("RpolyhedraEnv",envir=asNamespace("Rpolyhedra"))
 }
 
 
@@ -64,7 +65,7 @@ askDataDirEnvironment <- function(env="PACKAGE") {
     .data.env <- "HOME"
   else
     stop("Possible values are PACKAGE and HOME")
-  assign(".data.env", value = .data.env, envir = parent.env(environment()))
+  assign(".data.env", value = .data.env, envir = asNamespace("Rpolyhedra"))
   .data.env
 }
 
@@ -144,6 +145,7 @@ selectDataEnv <- function() {
 #' @return .data.env
 
 getDataEnv <- function() {
+ environment <- environment()
  get(".data.env", envir = getUserEnv())
 }
 
@@ -444,7 +446,7 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       error=function(e){
         error <- paste(e$message,collapse=",")
         futile.logger::flog.error(paste("catched error",error))
-        assign("error",error,envir = parent.env(environment()))
+        assign("error",error,envir = asNamespace("Rpolyhedra"))
         status <- "exception"
         if (exists("scraped.polyhedron")){
           obs    <- scraped.polyhedron$getErrors()
@@ -741,7 +743,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         error=function(e){
           error <- paste(e$message,collapse=",")
           futile.logger::flog.error(paste("catched error",error))
-          assign("error",error,envir = parent.env(environment()))
+          assign("error",error,envir = asNamespace("Rpolyhedra"))
           self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
         })
         current.polyhedron
@@ -795,7 +797,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         error=function(e){
           error <- paste(e$message,collapse=",")
           futile.logger::flog.error(paste("catched error",error))
-          assign("error",error,envir = parent.env(environment()))
+          assign("error",error,envir = asNamespace("Rpolyhedra"))
           status <- "exception"
           obs    <- scraped.polyhedron$getErrors()
         })
@@ -816,7 +818,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           error=function(e){
             error <- paste(e$message,collapse=",")
             futile.logger::flog.error(paste("catched error",error))
-            assign("error",error,envir = parent.env(environment()))
+            assign("error",error,envir = asNamespace("Rpolyhedra"))
             status <- "failed"
             obs    <- scraped.polyhedron$getErrors()
           })
