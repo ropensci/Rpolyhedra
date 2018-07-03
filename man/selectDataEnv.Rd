@@ -10,5 +10,5 @@ selectDataEnv()
 .data.env
 }
 \description{
-Asks the user to download the supporting files
+Asks the user where to set the system variable .data.env
 }

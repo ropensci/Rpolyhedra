@@ -4,7 +4,7 @@
 \alias{getDataDir}
 \title{getDataDir}
 \usage{
-getDataDir(data.env = .data.env)
+getDataDir(data.env = getDataEnv())
 }
 \arguments{
 \item{data.env}{enviroment where data directory must be returned}
