@@ -6,7 +6,7 @@
 #' is compiled in source or package directory.
 #' @param data.env enviroment where data directory must be returned
 #'
-getDataDir <- function(data.env=.data.env) {
+getDataDir <- function(data.env=get(".data.env", envir = getUserEnv())) {
   data.dir <- ""
   if(data.env == "HOME")
   {
@@ -36,9 +36,18 @@ setDataDirEnvironment <- function(env="PACKAGE") {
     .data.env <- "HOME"
   else
     stop("Possible values are PACKAGE and HOME")
-  assign(".data.env", value = .data.env, envir = parent.env(environment()))
+  assign(".data.env", value = .data.env, envir = getUserEnv())
   .data.env
 }
+
+#' getUserEnv
+#'
+#' Gets a writable environment for the package
+#'
+getUserEnv <- function() {
+  get("RpolyhedraEnv",envir=parent.env(environment()))
+}
+
 
 #' setDataDirEnv
 #'
@@ -121,7 +130,7 @@ selectDataEnv <- function() {
       setDataDirEnvironment("HOME")
     }
   }
-  .data.env
+  get(".data.env", envir = getUserEnv())
 }
 
 #' downloadRPolyhedraSupportingFiles
