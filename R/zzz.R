@@ -61,7 +61,7 @@
     .polyhedra <- PolyhedraDatabase.class$new()
   }
 
-  assign(".polyhedra", value = .polyhedra, envir = asNamespace("Rpolyhedra"))
+  assign(".polyhedra", value = .polyhedra, envir = getUserEnv())
   scrapePolyhedra(.available.scrapping.conf[["pkg-minimal"]],
                   sources.config = .available.sources)
 }
