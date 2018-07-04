@@ -4,7 +4,7 @@
 \alias{switchToFullDatabase}
 \title{switchToFullDatabase()}
 \usage{
-switchToFullDatabase()
+switchToFullDatabase(NA)
 }
 \arguments{
 \item{env}{The environment to run on, can be PACKAGE, HOME or NA. If null, it asks the user for a an Environment.}

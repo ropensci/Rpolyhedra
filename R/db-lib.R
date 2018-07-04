@@ -931,7 +931,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = getPolyhedraObject()
 #'
 #' @param env The environment to run on, can be PACKAGE, HOME or NA. If null, it asks the user for a an Environment.
 #' @usage
-#'     switchToFullDatabase()
+#'     switchToFullDatabase(NA)
 #' @export
 
 switchToFullDatabase <- function(env=NA){
