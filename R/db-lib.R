@@ -114,6 +114,16 @@ selectDataEnv <- function() {
   if (data.env=="HOME"){
     downloadRPolyhedraSupportingFiles()
   }
+  polyhedra.rds.file <- getPolyhedraRDSPath()
+  if (file.exists(polyhedra.rds.file)) {
+    polyhedra.candidate <- readRDS(polyhedra.rds.file)
+    if (isCompatiblePolyhedraRDS(polyhedra.candidate, halts = TRUE)){
+      .polyhedra <- polyhedra.candidate
+    }
+  }
+  if (is.null(.polyhedra)){
+    .polyhedra <- PolyhedraDatabase.class$new()
+  }
   data.env
 }
 
@@ -424,7 +434,7 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       error=function(e){
         error <- paste(e$message,collapse=",")
         futile.logger::flog.error(paste("catched error",error))
-        assign("error",error,envir = asNamespace("Rpolyhedra"))
+        assign("error",error,envir = getUserEnv())
         status <- "exception"
         if (exists("scraped.polyhedron")){
           obs    <- scraped.polyhedron$getErrors()
@@ -721,7 +731,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         error=function(e){
           error <- paste(e$message,collapse=",")
           futile.logger::flog.error(paste("catched error",error))
-          assign("error",error,envir = asNamespace("Rpolyhedra"))
+          assign("error",error,envir = getUserEnv())
           self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
         })
         current.polyhedron
@@ -775,7 +785,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         error=function(e){
           error <- paste(e$message,collapse=",")
           futile.logger::flog.error(paste("catched error",error))
-          assign("error",error,envir = asNamespace("Rpolyhedra"))
+          assign("error",error,envir = getUserEnv())
           status <- "exception"
           obs    <- scraped.polyhedron$getErrors()
         })
@@ -796,7 +806,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           error=function(e){
             error <- paste(e$message,collapse=",")
             futile.logger::flog.error(paste("catched error",error))
-            assign("error",error,envir = asNamespace("Rpolyhedra"))
+            assign("error",error,envir = getUserEnv())
             status <- "failed"
             obs    <- scraped.polyhedron$getErrors()
           })
