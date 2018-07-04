@@ -4,7 +4,8 @@
 \alias{isCompatiblePolyhedraRDS}
 \title{isCompatiblePolyhedraRDS()}
 \usage{
-isCompatiblePolyhedraRDS(.polyhedra.candidate = .polyhedra, halts = FALSE)
+isCompatiblePolyhedraRDS(.polyhedra.candidate = getPolyhedraObject(),
+  halts = FALSE)
 }
 \arguments{
 \item{.polyhedra.candidate}{polyhedra db to test}

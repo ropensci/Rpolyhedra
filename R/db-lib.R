@@ -88,32 +88,39 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 #'
 #' Asks the user where to set the system variable .data.env
 #'
+#' @param env The environment to run on, can be PACKAGE, HOME or NULL. If null, it asks the user for a an Environment.
 #' @return .data.env
 #' @import futile.logger
-selectDataEnv <- function() {
-  if(!is.na(Sys.getenv(x = "ON_TRAVIS", unset=NA)))
-    return(TRUE)
-  accept.option <- readline(prompt="Full Database needs to download data to home folder. Agree [y/n]?:")
-  if(tolower(accept.option[1]) == "n") {
-    futile.logger::flog.info("Working on demo DB. You can call switchToFullDatabase to use the full database.")
-    setDataDirEnvironment("PACKAGE")
-  }
-  if(tolower(accept.option[1]) == "y") {
-    setDataDirEnvironment("HOME")
-  }
-  while(!tolower(accept.option[1]) %in% c("n","y")) {
-    accept.option <- readline(prompt="Unknown option. Agree [y/n]?:")
+selectDataEnv <- function(env=NA) {
+  if(is.na(env)) {
+    if(!is.na(Sys.getenv(x = "ON_TRAVIS", unset=NA)))
+      return(TRUE)
+    accept.option <- readline(prompt="Full Database needs to download data to home folder. Agree [y/n]?:")
     if(tolower(accept.option[1]) == "n") {
-      futile.logger::flog.info("Working on demo DB. You can call selectDataEnv to use the full database.")
+      futile.logger::flog.info("Working on demo DB. You can call switchToFullDatabase to use the full database.")
       setDataDirEnvironment("PACKAGE")
-    } else if(tolower(accept.option[1]) == "y") {
+    }
+    if(tolower(accept.option[1]) == "y") {
       setDataDirEnvironment("HOME")
     }
+    while(!tolower(accept.option[1]) %in% c("n","y")) {
+      accept.option <- readline(prompt="Unknown option. Agree [y/n]?:")
+      if(tolower(accept.option[1]) == "n") {
+        futile.logger::flog.info("Working on demo DB. You can call selectDataEnv to use the full database.")
+        setDataDirEnvironment("PACKAGE")
+      } else if(tolower(accept.option[1]) == "y") {
+        setDataDirEnvironment("HOME")
+      }
+    }
+  } else {
+    Rpolyhedra::setDataDirEnvironment(env)
   }
+  #loads the database
   data.env <-getDataEnv()
   if (data.env=="HOME"){
     downloadRPolyhedraSupportingFiles()
   }
+  .polyhedra <- NULL
   polyhedra.rds.file <- getPolyhedraRDSPath()
   if (file.exists(polyhedra.rds.file)) {
     polyhedra.candidate <- readRDS(polyhedra.rds.file)
@@ -124,17 +131,29 @@ selectDataEnv <- function() {
   if (is.null(.polyhedra)){
     .polyhedra <- PolyhedraDatabase.class$new()
   }
+
+  assign(".polyhedra", value = .polyhedra, envir = getUserEnv())
+  scrapePolyhedra(.available.scrapping.conf[["pkg-minimal"]],
+                  sources.config = .available.sources)
   data.env
 }
 
 #' getDataEnv
 #'
-#' get the current .data.env value
+#' Gets the current .data.env value
 #'
 #' @return .data.env
-
 getDataEnv <- function() {
   get(".data.env", envir = getUserEnv())
+}
+
+#' getPolyhedraObject
+#'
+#' Gets the polyhedra object
+#'
+#' @return .polyhedra
+getPolyhedraObject <- function() {
+  get(".polyhedra", envir = getUserEnv())
 }
 
 #' downloadRPolyhedraSupportingFiles
@@ -173,7 +192,7 @@ downloadRPolyhedraSupportingFiles <- function(){
 #' @import utils
 #' @import futile.logger
 copyFilesToExtData <- function(force = FALSE){
-  polyhedra.ledger <- .polyhedra$ledger$getAvailablePolyhedra(ret.fields = NULL)
+  polyhedra.ledger <- getPolyhedraObject()$ledger$getAvailablePolyhedra(ret.fields = NULL)
   polyhedra.ledger.scraped <- polyhedra.ledger[polyhedra.ledger$status=="scraped",]
   data.env.home <- getDataDir(data.env ="HOME")
   data.env.package <- getDataDir(data.env ="PACKAGE")
@@ -880,7 +899,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
 #' @param halts indicates whether it has to halt execution when it is not compatible
 #'
 #' @import futile.logger
-isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = FALSE){
+isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = getPolyhedraObject(), halts = FALSE){
   file.class <- class(.polyhedra.candidate)
   compatible <- FALSE
   error <- ""
@@ -910,12 +929,13 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = .polyhedra, halts = 
 #'
 #' Prompts user for changing database to fulldb in user filespace
 #'
+#' @param env The environment to run on, can be PACKAGE, HOME or NA. If null, it asks the user for a an Environment.
 #' @usage
 #'     switchToFullDatabase()
 #' @export
 
-switchToFullDatabase <- function(){
-  selectDataEnv()
+switchToFullDatabase <- function(env=NA){
+  selectDataEnv(env=env)
 }
 
 
@@ -959,7 +979,7 @@ scrapePolyhedraSources<- function(sources.config = .available.sources,
                                   time2scrape.source = 30,
                                   retry.scrape = FALSE){
   futile.logger::flog.debug(paste("Scheduling",max.quant.config.schedule, "polyhedra for scraping"))
-  .polyhedra$schedulePolyhedraSources(sources.config = sources.config,
+  getPolyhedraObject()$schedulePolyhedraSources(sources.config = sources.config,
                                       max.quant = max.quant.config.schedule)
   if (retry.scrape){
     mode <- "scrape.retry"
@@ -968,20 +988,20 @@ scrapePolyhedraSources<- function(sources.config = .available.sources,
     mode <- "scrape.queued"
   }
   futile.logger::flog.debug(paste("Scraping",max.quant.scrape, "polyhedra up to",time2scrape.source,"seconds"))
-  .polyhedra$scrape(mode = mode, max.quant = max.quant.scrape,
+  getPolyhedraObject()$scrape(mode = mode, max.quant = max.quant.scrape,
                     time2scrape.source = time2scrape.source)
   #All files not scraped in building, marked as skipped
-  still.queued <- which(.polyhedra$ledger$df$status=="queued")
+  still.queued <- which(getPolyhedraObject()$ledger$df$status=="queued")
   if (length(still.queued)>0){
-    apply(.polyhedra$ledger$df[still.queued,], MARGIN = 1,
-          FUN=function(x){.polyhedra$ledger$updateStatus(source = x["source"],
+    apply(getPolyhedraObject()$ledger$df[still.queued,], MARGIN = 1,
+          FUN=function(x){getPolyhedraObject()$ledger$updateStatus(source = x["source"],
                                                          filename = x["filename"],
                                                          status = "skipped",
                                                          obs = "#TODO in next release")})
     #save skipped state in RDS file
-    .polyhedra$saveRDS()
+    getPolyhedraObject()$saveRDS()
   }
-  .polyhedra
+  getPolyhedraObject()
 }
 
 
@@ -1001,7 +1021,7 @@ scrapePolyhedraSources<- function(sources.config = .available.sources,
 #'#search within the polyhedron names from all sources
 #'cubes <- getAvailablePolyhedra(sources=available.sources,search.string="cube")
 getAvailableSources <- function(){
-  .polyhedra$getAvailableSources()
+  getPolyhedraObject()$getAvailableSources()
 }
 
 #' getAvailablePolyhedra()
@@ -1029,7 +1049,7 @@ getAvailableSources <- function(){
 #'cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
 
 getAvailablePolyhedra <- function(sources = names(.available.sources), search.string = NULL){
-  .polyhedra$getAvailablePolyhedra(sources = sources, search.string = search.string)
+  getPolyhedraObject()$getAvailablePolyhedra(sources = sources, search.string = search.string)
 }
 
 
@@ -1075,8 +1095,8 @@ getPercentilPolyhedraQuant <- function(percentil,quant.min=100){
 
 getPolyhedron <- function(source = "netlib", polyhedron.name) {
   ret <- NULL
-  if (exists(".polyhedra")) {
-    ret <- .polyhedra$getPolyhedron(source  =source, polyhedron.name = polyhedron.name)
+  if (exists(".polyhedra", envir=getUserEnv())) {
+    ret <- getPolyhedraObject()$getPolyhedron(source  =source, polyhedron.name = polyhedron.name)
   }
   ret
 }

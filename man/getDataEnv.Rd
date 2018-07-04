@@ -10,5 +10,5 @@ getDataEnv()
 .data.env
 }
 \description{
-get the current .data.env value
+Gets the current .data.env value
 }
