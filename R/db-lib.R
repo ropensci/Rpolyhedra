@@ -28,7 +28,6 @@ getDataDir <- function(data.env=getDataEnv()) {
 #' This function is used to set the data directories either to the package or the user home directory.
 #'
 #' @param env The type of environment to work with. Values are "PACKAGE" or "HOME" and it defaults to package
-#' @export
 setDataDirEnvironment <- function(env="PACKAGE") {
   if(env=="PACKAGE")
     .data.env <- "PACKAGE"
@@ -36,6 +35,25 @@ setDataDirEnvironment <- function(env="PACKAGE") {
     .data.env <- "HOME"
   else
     stop("Possible values are PACKAGE and HOME")
+  write(.data.env, file.path(getDataDir("HOME"), "environment.txt"))
+  assign(".data.env", value = .data.env, envir = getUserEnv())
+  .data.env
+}
+
+#' getDataDirEnv
+#'
+#' Gets the data dir environment
+#'
+#' @return the data dir environment
+getDataDirEnvironment <- function() {
+  if (!exists(".data.env", envir = getUserEnv())){
+    .data.env <- setDataDirEnvironment("PACKAGE")
+  }
+  if(!file.exists(file.path(getDataDir("HOME"), "environment.txt"))){
+    .data.env <- setDataDirEnvironment("PACKAGE")
+  }else{
+    .data.env <- setDataDirEnvironment(readLines(file.path(getDataDir("HOME"), "environment.txt"))[1])
+  }
   assign(".data.env", value = .data.env, envir = getUserEnv())
   .data.env
 }
@@ -67,7 +85,6 @@ getPackageDir <- function(){
 #'
 #' @param polyhedra_rds_filename filename of polyhedra database
 #' @return the path to the Polyhedra database file
-#' @export
 getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
   file.path(getDataDir(), polyhedra_rds_filename)
 }
@@ -78,8 +95,6 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
 #'
 #' @param polyhedra_preloaded_data filename of polyhedra preloaded data csv
 #' @return the path to the Polyhedra database file
-#' @export
-
 getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.preloaded.data.csv"){
   file.path(getDataDir(),polyhedra_preloaded_data)
 }
@@ -89,6 +104,8 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.prelo
 #' Asks the user where to set the system variable .data.env
 #'
 #' @param env The environment to run on, can be PACKAGE, HOME or NULL. If null, it asks the user for a an Environment.
+#' @usage
+#'     selectDataEnv(env=NA)
 #' @return .data.env
 #' @import futile.logger
 selectDataEnv <- function(env=NA) {
@@ -931,7 +948,8 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = getPolyhedraObject()
 #'
 #' @param env The environment to run on, can be PACKAGE, HOME or NA. If null, it asks the user for a an Environment.
 #' @usage
-#'     switchToFullDatabase(NA)
+#'     switchToFullDatabase(env=NA)
+#' @return .data.env
 #' @export
 
 switchToFullDatabase <- function(env=NA){
@@ -942,13 +960,11 @@ switchToFullDatabase <- function(env=NA){
 
 #' scrapePolyhedra()
 #'
-#' Method for obtaining polyhedra objects from text files of
+#' Gets polyhedra objects from text files of
 #' different sources, scheduling and scraping using predefined configurations
 #'
 #' @param scrape.config predefined configuration for scraping
 #' @param sources.config the sources that will be used by the function
-#' @export
-
 scrapePolyhedra <- function(scrape.config,
                 sources.config = .available.sources){
   scrapePolyhedraSources(max.quant.config.schedule = scrape.config[["max.quant.config.schedule"]],
@@ -972,7 +988,6 @@ scrapePolyhedra <- function(scrape.config,
 #' @usage
 #'     scrapePolyhedraSources(sources.config = .available.sources, max.quant.config.schedule = 0,
 #'     max.quant.scrape = 0, time2scrape.source = 30, retry.scrape = FALSE)
-#' @export
 scrapePolyhedraSources<- function(sources.config = .available.sources,
                                   max.quant.config.schedule = 0,
                                   max.quant.scrape = 0,

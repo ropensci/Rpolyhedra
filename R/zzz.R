@@ -42,9 +42,7 @@
                                                      retry.scrape = FALSE)
   assign(".available.scrapping.conf", value = .available.scrapping.conf, envir = asNamespace("Rpolyhedra"))
 
-  if (!exists(".data.env", envir = getUserEnv())){
-    setDataDirEnvironment("PACKAGE")
-  }
+  getDataDirEnvironment()
 
   if (!file.exists(getPreloadedDataFilename())){
     downloadRPolyhedraSupportingFiles()

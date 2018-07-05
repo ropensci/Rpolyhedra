@@ -12,7 +12,6 @@
 # XML::saveXML(polyhedronToXML(getPolyhedron("netlib", "cube")$state))
 #'
 #' @import XML
-#' @export
 polyhedronToXML <- function(polyhedron.state.defined)
 {
   stop("Not implemented")

@@ -4,7 +4,7 @@
 \alias{selectDataEnv}
 \title{selectDataEnv}
 \usage{
-selectDataEnv(env = NA)
+selectDataEnv(env=NA)
 }
 \arguments{
 \item{env}{The environment to run on, can be PACKAGE, HOME or NULL. If null, it asks the user for a an Environment.}
