@@ -2,7 +2,6 @@
 #' maxWithoutNA
 #' Function that returns NA if all elements are NA, and the max value not NA, if not.
 #' @param x vector parameter
-
 maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 
 
@@ -33,9 +32,6 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 #' @import futile.logger
 #' @import utils
 #' @importFrom R6 R6Class
-#' @export
-#'
-
 ScraperLedger.class <- R6::R6Class("ScraperLedger",
  public = list(
    states = NULL,
