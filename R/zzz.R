@@ -47,20 +47,6 @@
   if (!file.exists(getPreloadedDataFilename())){
     downloadRPolyhedraSupportingFiles()
   }
-  .polyhedra <- NULL
-  polyhedra.rds.file <- getPolyhedraRDSPath()
-  if (file.exists(polyhedra.rds.file)) {
-    polyhedra.candidate <- readRDS(polyhedra.rds.file)
-    if (isCompatiblePolyhedraRDS(polyhedra.candidate, halts = TRUE)){
-      .polyhedra <- polyhedra.candidate
-    }
-  }
-  if (is.null(.polyhedra)){
-    .polyhedra <- PolyhedraDatabase.class$new()
-  }
-
-  assign(".polyhedra", value = .polyhedra, envir = getUserEnv())
-  scrapePolyhedra(.available.scrapping.conf[["fulldb"]],
-                  sources.config = .available.sources)
+  updatePolyhedraDatabase()
 }
 
