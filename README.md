@@ -21,7 +21,9 @@ install.packages(c("futile.logger", "rgl", "stringr", "R6", "testthat", "devtool
 devtools::install_github("qbotics/Rpolyhedra")
 library(Rpolyhedra)
 # if want to switch to fullDB in user filespace, it will download the full database
-switchToFullDatabase()
+#switchToFullDatabase()
+# until V0.2.6 have to call it this way
+Rpolyhedra::switchToFullDatabase()
 
 ```
 

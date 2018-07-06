@@ -4,7 +4,13 @@
 \alias{switchToFullDatabase}
 \title{switchToFullDatabase()}
 \usage{
-switchToFullDatabase()
+switchToFullDatabase(env=NA)
+}
+\arguments{
+\item{env}{The environment to run on, can be PACKAGE, HOME or NA. If null, it asks the user for a an Environment.}
+}
+\value{
+.data.env
 }
 \description{
 Prompts user for changing database to fulldb in user filespace
