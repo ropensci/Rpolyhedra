@@ -229,7 +229,7 @@ downloadRPolyhedraSupportingFiles <- function(){
       tmp.db.path <- list.files(path = td, pattern="qbotics*")[1]
       files.to.copy <- list.files(file.path(td, tmp.db.path))
       #copy files
-      file.copy(from = file.path(td,tmp.db.path, files.to.copy), to=data.dir, recursive = TRUE)
+      file.copy(from = file.path(td,tmp.db.path, files.to.copy), to=getUserSpace(), recursive = TRUE)
       #delete tmp path
       unlink(file.path(td,tmp.db.path), recursive=TRUE)
       return(TRUE)
