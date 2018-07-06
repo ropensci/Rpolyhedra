@@ -12,6 +12,6 @@ scrapePolyhedra(scrape.config, sources.config = .available.sources)
 \item{sources.config}{the sources that will be used by the function}
 }
 \description{
-Method for obtaining polyhedra objects from text files of
+Gets polyhedra objects from text files of
 different sources, scheduling and scraping using predefined configurations
 }

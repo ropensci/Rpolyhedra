@@ -4,10 +4,13 @@
 \alias{getDataDir}
 \title{getDataDir}
 \usage{
-getDataDir(data.env = .data.env)
+getDataDir(data.env = getDataEnv())
 }
 \arguments{
 \item{data.env}{enviroment where data directory must be returned}
+}
+\value{
+dir where the package access polyhedra database
 }
 \description{
 Gets the path of Rpolyhedra data dir.

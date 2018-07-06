@@ -4,11 +4,14 @@
 \alias{selectDataEnv}
 \title{selectDataEnv}
 \usage{
-selectDataEnv()
+selectDataEnv(env=NA)
+}
+\arguments{
+\item{env}{The environment to run on, can be PACKAGE, HOME or NULL. If null, it asks the user for a an Environment.}
 }
 \value{
 .data.env
 }
 \description{
-Asks the user to download the supporting files
+Asks the user where to set the system variable .data.env
 }
