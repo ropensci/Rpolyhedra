@@ -219,8 +219,8 @@ downloadRPolyhedraSupportingFiles <- function(){
   if(checkDatabaseVersion() == "UPDATE")
   {
     if(getDataEnv() == "HOME"){
-      package.version <- getPackageVersion()
-      URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", package.version, sep="")
+      db.version <- getPackageDB()
+      URL <- paste("https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v", db.version, sep="")
       td <- tempdir()
       zipFile <- tempfile(tmpdir=td, fileext=".zip")
       #download file to tempfile
@@ -554,12 +554,20 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
 #'
 #' Obtains code version from the Description
 getPackageVersion <- function(){
-  paste(packageVersion("Rpolyhedra"), sep="")
+  as.character(packageVersion("Rpolyhedra"))
+}
+
+#' getPackageDB
+#'
+#' Obtains the database version from environment
+getPackageDB <- function(){
+  .package.db <-get(".package.db", envir = asNamespace("Rpolyhedra"))
+  .package.db[[getPackageVersion()]]
 }
 
 #' getDatabaseVersion
 #'
-#' Obtains the code version from the database version file
+#' Obtains the generation code version from the database version file
 getDatabaseVersion <- function(){
   version <- NULL
   version.file <- file.path(getDataDir(), "version")
@@ -634,7 +642,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     ledger         = NA,
     data           = NA,
     initialize = function() {
-      self$version        <- getPackageVersion()
+      self$version        <- getDatabaseVersion()
       self$ledger         <- ScraperLedger.class$new()
       self$sources.config <- list()
       self$data           <- list()
@@ -960,9 +968,11 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = getPolyhedraObject()
   error <- ""
 
   if (file.class[[1]]=="PolyhedraDatabase"){
-    compatible <- .polyhedra.candidate$getVersion()==getPackageVersion()
+    db.version <- .package.db[[getPackageVersion()]]
+    compatible <- .polyhedra.candidate$getVersion()==db.version
     if (!compatible){
-      error <- paste("Incompatible! DB version= ",.polyhedra.candidate$getVersion()," Code version= ",getPackageVersion(), ".", sep="")
+      error <- paste("Incompatible! DB version observed= ",.polyhedra.candidate$getVersion(),
+                     " expected ",db.version, ". Code version= ",getPackageVersion(), ".", sep="")
     }
   }
   else{
