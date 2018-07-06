@@ -181,7 +181,7 @@ updatePolyhedraDatabase <- function(){
   assign(".polyhedra", value = .polyhedra, envir = getUserEnv())
   .available.sources <- get(".available.sources", envir = asNamespace("Rpolyhedra"))
   .available.scrapping.conf <- get(".available.scrapping.conf", envir = asNamespace("Rpolyhedra"))
-  scrapePolyhedra(scrape.conf = .available.scrapping.conf[["dev-minimal"]],
+  scrapePolyhedra(scrape.conf = .available.scrapping.conf[["pkg-minimal"]],
                   sources.config = .available.sources)
 }
 
