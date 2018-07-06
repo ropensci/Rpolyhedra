@@ -21,6 +21,11 @@
 .onLoad <- function(libname, pkgname) {
 
   assign("RpolyhedraEnv", new.env(), asNamespace("Rpolyhedra"))
+  #package version db
+  .package.db <- list()
+  .package.db[["0.2.5"]] <- "0.2.5"
+  .package.db[["0.2.6"]] <- "0.2.5"
+  assign(".package.db", value = .package.db, envir = asNamespace("Rpolyhedra"))
   #setup Available sources
   .available.sources <- list()
   .available.sources[["netlib"]] <- PolyhedronScraperConfigurationNetlib.class$new()

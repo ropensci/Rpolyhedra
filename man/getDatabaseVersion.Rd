@@ -7,5 +7,5 @@
 getDatabaseVersion()
 }
 \description{
-Obtains the code version from the database version file
+Obtains the generation code version from the database version file
 }
