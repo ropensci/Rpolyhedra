@@ -42,7 +42,7 @@
                                                      retry.scrape = FALSE)
   assign(".available.scrapping.conf", value = .available.scrapping.conf, envir = asNamespace("Rpolyhedra"))
 
-  getDataDirEnvironment()
+  initDataDirEnvironment()
 
   if (!file.exists(getPreloadedDataFilename())){
     downloadRPolyhedraSupportingFiles()

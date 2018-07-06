@@ -1,3 +1,29 @@
+#' getUserSpace
+#'
+#' This function is used internally for accesing the local database path
+#' @param data.env enviroment where data directory must be returned
+#' @return path of user space
+getUserSpace <- function(){
+  file.path(path.expand("~"), ".R", "Rpolyhedra")
+}
+
+#' initDataDirEnvironment
+#'
+#' initialize data enviornment
+#'
+#' @return the data dir environment
+initDataDirEnvironment <- function() {
+  environment.filepath <- getEnvironmentFilepath()
+  if(!file.exists(environment.filepath)){
+    .data.env <- "PACKAGE"
+  }else{
+    .data.env <- readLines(environment.filepath)[1]
+  }
+  assign(".data.env", value = .data.env, envir = getUserEnv())
+  .data.env
+}
+
+
 #' getDataDir
 #'
 #' Gets the path of Rpolyhedra data dir.
@@ -5,13 +31,13 @@
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
 #' @param data.env enviroment where data directory must be returned
-#'
+#' @return dir where the package access polyhedra database
 getDataDir <- function(data.env=getDataEnv()) {
   data.dir <- ""
   if(data.env == "HOME")
   {
-    data.dir <- file.path(path.expand("~"), ".R", "Rpolyhedra")
-    if(dir.exists(data.dir) == FALSE) {
+    data.dir <- getUserSpace()
+    if(!dir.exists(data.dir)) {
       dir.create(data.dir, recursive=TRUE, showWarnings = FALSE)
     }
   }
@@ -21,42 +47,38 @@ getDataDir <- function(data.env=getDataEnv()) {
   data.dir
 }
 
-#' setDataDirEnv
+#' getEnvironmentFilepath
+#'
+#' Gets the filename where package data environment is persisted
+#' @return The environment filepath
+
+getEnvironmentFilepath <- function(){
+  file.path(getDataDir("HOME"), "environment.txt")
+}
+
+#' setDataDirEnvironment
 #'
 #' Sets the path of Rpolyhedra data dir.
 #'
 #' This function is used to set the data directories either to the package or the user home directory.
 #'
 #' @param env The type of environment to work with. Values are "PACKAGE" or "HOME" and it defaults to package
+#' @return the curruent .data.env
 setDataDirEnvironment <- function(env="PACKAGE") {
-  if(env=="PACKAGE")
-    .data.env <- "PACKAGE"
-  else if(env=="HOME")
-    .data.env <- "HOME"
-  else
+  if(env %in% c("PACKAGE","HOME")){
+    .data.env <- env
+  }
+  else{
     stop("Possible values are PACKAGE and HOME")
-  write(.data.env, file.path(getDataDir("HOME"), "environment.txt"))
+  }
+  if (file.exists(getUserSpace())){
+    write(.data.env, getEnvironmentFilepath())
+  }
   assign(".data.env", value = .data.env, envir = getUserEnv())
   .data.env
 }
 
-#' getDataDirEnv
-#'
-#' Gets the data dir environment
-#'
-#' @return the data dir environment
-getDataDirEnvironment <- function() {
-  if (!exists(".data.env", envir = getUserEnv())){
-    .data.env <- setDataDirEnvironment("PACKAGE")
-  }
-  if(!file.exists(file.path(getDataDir("HOME"), "environment.txt"))){
-    .data.env <- setDataDirEnvironment("PACKAGE")
-  }else{
-    .data.env <- setDataDirEnvironment(readLines(file.path(getDataDir("HOME"), "environment.txt"))[1])
-  }
-  assign(".data.env", value = .data.env, envir = getUserEnv())
-  .data.env
-}
+
 
 #' getUserEnv
 #'
@@ -96,7 +118,7 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
 #' @param polyhedra_preloaded_data filename of polyhedra preloaded data csv
 #' @return the path to the Polyhedra database file
 getPreloadedDataFilename <- function(polyhedra_preloaded_data = "polyhedra.preloaded.data.csv"){
-  file.path(getDataDir(),polyhedra_preloaded_data)
+  file.path(getDataDir(), polyhedra_preloaded_data)
 }
 
 #' selectDataEnv
@@ -130,7 +152,7 @@ selectDataEnv <- function(env=NA) {
       }
     }
   } else {
-    Rpolyhedra::setDataDirEnvironment(env)
+    setDataDirEnvironment(env)
   }
   #loads the database
   data.env <-getDataEnv()
