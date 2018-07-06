@@ -2,12 +2,15 @@
 % Please edit documentation in R/db-lib.R
 \name{setDataDirEnvironment}
 \alias{setDataDirEnvironment}
-\title{setDataDirEnv}
+\title{setDataDirEnvironment}
 \usage{
 setDataDirEnvironment(env = "PACKAGE")
 }
 \arguments{
 \item{env}{The type of environment to work with. Values are "PACKAGE" or "HOME" and it defaults to package}
+}
+\value{
+the curruent .data.env
 }
 \description{
 Sets the path of Rpolyhedra data dir.
