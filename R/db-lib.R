@@ -161,6 +161,7 @@ selectDataEnv <- function(env=NA) {
     }
     downloadRPolyhedraSupportingFiles()
   }
+  updatePolyhedraDatabase()
   .data.env
 }
 
@@ -254,6 +255,7 @@ copyFilesToExtData <- function(force = FALSE){
   dir.create(data.env.package,showWarnings = FALSE, recursive = TRUE)
   #check existing sources
   existing <- FALSE
+  .available.sources <- get(".available.sources",envir=asNamespace("Rpolyhedra"))
   for (source in names(.available.sources)){
     source.config <- .available.sources[[source]]
     dest.dir <- source.config$getBaseDir(data.env.package)
@@ -588,7 +590,7 @@ checkDatabaseVersion <- function(){
   if(is.null(database.version)) {
     status <- "UPDATE"
   }
-  package.version <- getPackageVersion()
+  package.version <- getPackageDB()
 
   if(!is.null(database.version))
   {
@@ -938,7 +940,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                         seed          = seed)
       ret
     },
-    schedulePolyhedraSources=function (sources.config=.available.sources,max.quant = 0, test = FALSE){
+    schedulePolyhedraSources=function (sources.config=get(".available.sources",envir=asNamespace("Rpolyhedra")),max.quant = 0, test = FALSE){
       for (source  in names(sources.config)){
         self$configPolyhedraSource(source.config = sources.config[[source]],
                                    max.quant = max.quant)
@@ -1014,7 +1016,7 @@ switchToFullDatabase <- function(env=NA){
 #' @param scrape.config predefined configuration for scraping
 #' @param sources.config the sources that will be used by the function
 scrapePolyhedra <- function(scrape.config,
-                sources.config = .available.sources){
+                sources.config = get(".available.sources",envir=asNamespace("Rpolyhedra"))){
   scrapePolyhedraSources(max.quant.config.schedule = scrape.config[["max.quant.config.schedule"]],
                          max.quant.scrape = scrape.config[["max.quant.scrape"]],
                          time2scrape.source = scrape.config[["time2scrape.source"]],
@@ -1036,7 +1038,7 @@ scrapePolyhedra <- function(scrape.config,
 #' @usage
 #'     scrapePolyhedraSources(sources.config = .available.sources, max.quant.config.schedule = 0,
 #'     max.quant.scrape = 0, time2scrape.source = 30, retry.scrape = FALSE)
-scrapePolyhedraSources<- function(sources.config = .available.sources,
+scrapePolyhedraSources<- function(sources.config = get(".available.sources",envir=asNamespace("Rpolyhedra")),
                                   max.quant.config.schedule = 0,
                                   max.quant.scrape = 0,
                                   time2scrape.source = 30,
@@ -1111,7 +1113,7 @@ getAvailableSources <- function(){
 #'
 #'cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
 
-getAvailablePolyhedra <- function(sources = names(.available.sources), search.string = NULL){
+getAvailablePolyhedra <- function(sources = names(get(".available.sources",envir=asNamespace("Rpolyhedra"))), search.string = NULL){
   getPolyhedraObject()$getAvailablePolyhedra(sources = sources, search.string = search.string)
 }
 
