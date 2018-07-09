@@ -1,7 +1,6 @@
 #' getUserSpace
 #'
 #' This function is used internally for accesing the local database path
-#' @param data.env enviroment where data directory must be returned
 #' @return path of user space
 getUserSpace <- function(){
   file.path(path.expand("~"), ".R", "Rpolyhedra")
@@ -161,6 +160,7 @@ selectDataEnv <- function(env=NA) {
     }
     downloadRPolyhedraSupportingFiles()
   }
+  updatePolyhedraDatabase()
   .data.env
 }
 
@@ -186,7 +186,7 @@ updatePolyhedraDatabase <- function(){
   assign(".polyhedra", value = .polyhedra, envir = getUserEnv())
   .available.sources <- get(".available.sources", envir = asNamespace("Rpolyhedra"))
   .available.scrapping.conf <- get(".available.scrapping.conf", envir = asNamespace("Rpolyhedra"))
-  scrapePolyhedra(scrape.conf = .available.scrapping.conf[["pkg-minimal"]],
+  scrapePolyhedra(scrape.config = .available.scrapping.conf[["pkg-minimal"]],
                   sources.config = .available.sources)
 }
 
