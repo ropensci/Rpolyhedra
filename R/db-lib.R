@@ -1055,7 +1055,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = getPolyhedraObject()
 #'
 #' Prompts user for changing database to fulldb in user filespace
 #'
-#' @param env The environment to run on, can be PACKAGE, HOME or NA. If null, it asks the user for a an Environment.
+#' @param env The environment to run on, can be PACKAGE, HOME or NA. If NA, it asks the user for a an Environment.
 #' @usage
 #'     switchToFullDatabase(env=NA)
 #' @return .data.env
