@@ -7,7 +7,7 @@
 updatePolyhedraDatabase()
 }
 \value{
-.data.env
+polyhedra db object
 }
 \description{
 Function for initializing database
