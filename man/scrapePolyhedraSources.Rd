@@ -4,7 +4,8 @@
 \alias{scrapePolyhedraSources}
 \title{scrapePolyhedraSources()}
 \usage{
-scrapePolyhedraSources(sources.config = .available.sources, max.quant.config.schedule = 0,
+scrapePolyhedraSources(sources.config = getPackageEnvir(".available.sources"),
+    max.quant.config.schedule = 0,
     max.quant.scrape = 0, time2scrape.source = 30, retry.scrape = FALSE)
 }
 \arguments{
@@ -17,6 +18,9 @@ scrapePolyhedraSources(sources.config = .available.sources, max.quant.config.sch
 \item{time2scrape.source}{time applied to scrape source}
 
 \item{retry.scrape}{should it retry scrape?}
+}
+\value{
+polyhedra db object
 }
 \description{
 Method for obtaining polyhedra objects from text files of
