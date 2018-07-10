@@ -4,13 +4,16 @@
 \alias{scrapePolyhedra}
 \title{scrapePolyhedra()}
 \usage{
-scrapePolyhedra(scrape.config, sources.config = get(".available.sources",
-  envir = asNamespace("Rpolyhedra")))
+scrapePolyhedra(scrape.config,
+  sources.config = getPackageEnvir(".available.sources"))
 }
 \arguments{
 \item{scrape.config}{predefined configuration for scraping}
 
 \item{sources.config}{the sources that will be used by the function}
+}
+\value{
+polyhedra db object
 }
 \description{
 Gets polyhedra objects from text files of

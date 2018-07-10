@@ -16,8 +16,7 @@ Suggests: knitr, rmarkdown,
     covr
 VignetteBuilder: knitr
 Depends: R (>= 3.0.0)
-Imports: methods,
-         futile.logger,
+Imports: futile.logger,
          rgl,
          stringr,
          R6,
