@@ -6,6 +6,11 @@
 \usage{
 setPackageEnvir(variable.name, value)
 }
+\arguments{
+\item{variable.name}{name of variable to be set}
+
+\item{value}{variable value}
+}
 \description{
 Set a variable from package environment
 }

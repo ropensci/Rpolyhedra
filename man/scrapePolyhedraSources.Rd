@@ -4,7 +4,8 @@
 \alias{scrapePolyhedraSources}
 \title{scrapePolyhedraSources()}
 \usage{
-scrapePolyhedraSources(sources.config = .available.sources, max.quant.config.schedule = 0,
+scrapePolyhedraSources(sources.config = getPackageEnvir(".available.sources"),
+    max.quant.config.schedule = 0,
     max.quant.scrape = 0, time2scrape.source = 30, retry.scrape = FALSE)
 }
 \arguments{
