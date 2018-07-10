@@ -6,9 +6,6 @@
 \usage{
 getUserSpace()
 }
-\arguments{
-\item{data.env}{enviroment where data directory must be returned}
-}
 \value{
 path of user space
 }
