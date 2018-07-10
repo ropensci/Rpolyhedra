@@ -250,7 +250,7 @@ updatePolyhedraDatabase <- function(){
   .available.sources <- getPackageEnvir(".available.sources")
   .available.scrapping.conf <- getPackageEnvir(".available.scrapping.conf")
 
-  scrapePolyhedra(scrape.config = .available.scrapping.conf[["pkg-minimal"]],
+  scrapePolyhedra(scrape.config = .available.scrapping.conf[["fulldb"]],
                   sources.config = .available.sources)
 }
 
