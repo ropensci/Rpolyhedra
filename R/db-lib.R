@@ -1,3 +1,47 @@
+#' getPackageEnvir
+#'
+#' Obtains a variable from package environment
+getPackageEnvir <- function(variable.name){
+  get(variable.name,envir=asNamespace("Rpolyhedra"))
+}
+
+#' setPackageEnvir
+#'
+#' Set a variable from package environment
+setPackageEnvir <- function(variable.name, value){
+  assign(x = variable.name, value = value, envir = asNamespace("Rpolyhedra"))
+}
+
+
+#' getUserEnvir
+#'
+#' Gets a writable environment for the package
+#'
+getUserEnvir <- function(variable.name) {
+  get(x=variable.name , envir = getPackageEnvir("RpolyhedraEnv"))
+}
+
+#' setUserEnvir
+#'
+#' Sets variable in the writable environment for the package
+#'
+setUserEnvir <- function(variable.name, value) {
+  assign(x=variable.name , value = value, envir = getPackageEnvir("RpolyhedraEnv"))
+}
+
+
+#' getDataEnv
+#'
+#' Gets the current .data.env value
+#'
+#' @return .data.env
+getDataEnv <- function() {
+  #get(".data.env", envir = getUserEnv())
+  getUserEnvir(".data.env")
+  #dev-package-env
+}
+
+
 #' getUserSpace
 #'
 #' This function is used internally for accesing the local database path
@@ -18,9 +62,15 @@ initDataDirEnvironment <- function() {
   }else{
     .data.env <- readLines(environment.filepath)[1]
   }
-  assign(".data.env", value = .data.env, envir = getUserEnv())
+
+  setUserEnvir(".data.env", value = .data.env)
+  #assign(".data.env", value = .data.env, envir = getUserEnv())
+  #dev-package-env
+
   .data.env
 }
+
+
 
 
 #' getDataDir
@@ -31,6 +81,7 @@ initDataDirEnvironment <- function() {
 #' is compiled in source or package directory.
 #' @param data.env enviroment where data directory must be returned
 #' @return dir where the package access polyhedra database
+
 getDataDir <- function(data.env=getDataEnv()) {
   data.dir <- ""
   if(data.env == "HOME")
@@ -70,19 +121,15 @@ setDataDirEnvironment <- function(env="PACKAGE") {
   if (file.exists(getUserSpace())){
     write(.data.env, getEnvironmentFilepath())
   }
-  assign(".data.env", value = .data.env, envir = getUserEnv())
+
+  setUserEnvir(".data.env", value = .data.env)
+  #assign(".data.env", value = .data.env, envir = getUserEnv())
+  #dev-package-env
+
   .data.env
 }
 
 
-
-#' getUserEnv
-#'
-#' Gets a writable environment for the package
-#'
-getUserEnv <- function() {
-  get("RpolyhedraEnv",envir=asNamespace("Rpolyhedra"))
-}
 
 
 #' getPackageDir
@@ -168,11 +215,15 @@ selectDataEnv <- function(env=NA) {
 #'
 #' Function for initializing database
 #'
-#' @return .data.env
+#'
+#' @return polyhedra db object
 
 updatePolyhedraDatabase <- function(){
   .polyhedra <- NULL
+
   polyhedra.rds.file <- getPolyhedraRDSPath()
+
+
   if (file.exists(polyhedra.rds.file)) {
     polyhedra.candidate <- readRDS(polyhedra.rds.file)
     if (isCompatiblePolyhedraRDS(polyhedra.candidate, halts = TRUE)){
@@ -183,21 +234,17 @@ updatePolyhedraDatabase <- function(){
     .polyhedra <- PolyhedraDatabase.class$new()
   }
 
-  assign(".polyhedra", value = .polyhedra, envir = getUserEnv())
-  .available.sources <- get(".available.sources", envir = asNamespace("Rpolyhedra"))
-  .available.scrapping.conf <- get(".available.scrapping.conf", envir = asNamespace("Rpolyhedra"))
+  setUserEnvir(".polyhedra", value = .polyhedra)
+  #assign(".polyhedra", value = .polyhedra, envir = getUserEnv())
+  #dev-package-env
+
+  .available.sources <- getPackageEnvir(".available.sources")
+  .available.scrapping.conf <- getPackageEnvir(".available.scrapping.conf")
+
   scrapePolyhedra(scrape.config = .available.scrapping.conf[["pkg-minimal"]],
                   sources.config = .available.sources)
 }
 
-#' getDataEnv
-#'
-#' Gets the current .data.env value
-#'
-#' @return .data.env
-getDataEnv <- function() {
-  get(".data.env", envir = getUserEnv())
-}
 
 #' getPolyhedraObject
 #'
@@ -205,7 +252,9 @@ getDataEnv <- function() {
 #'
 #' @return .polyhedra
 getPolyhedraObject <- function() {
-  get(".polyhedra", envir = getUserEnv())
+  getUserEnvir(".polyhedra")
+  #get(".polyhedra", envir = getUserEnv())
+  #dev-package-env
 }
 
 #' downloadRPolyhedraSupportingFiles
@@ -254,7 +303,7 @@ copyFilesToExtData <- function(force = FALSE){
   dir.create(data.env.package,showWarnings = FALSE, recursive = TRUE)
   #check existing sources
   existing <- FALSE
-  .available.sources <- get(".available.sources",envir=asNamespace("Rpolyhedra"))
+  .available.sources <- getPackageEnvir(".available.sources")
   for (source in names(.available.sources)){
     source.config <- .available.sources[[source]]
     dest.dir <- source.config$getBaseDir(data.env.package)
@@ -509,7 +558,7 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       error=function(e){
         error <- paste(e$message,collapse=",")
         futile.logger::flog.error(paste("catched error",error))
-        assign("error",error,envir = getUserEnv())
+        assign("error", error, envir = parent.env(environment()))
         status <- "exception"
         if (exists("scraped.polyhedron")){
           obs    <- scraped.polyhedron$getErrors()
@@ -562,9 +611,11 @@ getPackageVersion <- function(){
 #'
 #' Obtains the database version from environment
 getPackageDB <- function(){
-  .package.db <-get(".package.db", envir = asNamespace("Rpolyhedra"))
+  .package.db <-getPackageEnvir(".package.db")
   .package.db[[getPackageVersion()]]
 }
+
+
 
 #' getDatabaseVersion
 #'
@@ -814,7 +865,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         error=function(e){
           error <- paste(e$message,collapse=",")
           futile.logger::flog.error(paste("catched error",error))
-          assign("error",error,envir = getUserEnv())
+          assign("error", error, envir = parent.env(environment()))
           self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
         })
         current.polyhedron
@@ -868,7 +919,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         error=function(e){
           error <- paste(e$message,collapse=",")
           futile.logger::flog.error(paste("catched error",error))
-          assign("error",error,envir = getUserEnv())
+          assign("error", error, envir = parent.env(environment()))
           status <- "exception"
           obs    <- scraped.polyhedron$getErrors()
         })
@@ -889,7 +940,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           error=function(e){
             error <- paste(e$message,collapse=",")
             futile.logger::flog.error(paste("catched error",error))
-            assign("error",error,envir = getUserEnv())
+            assign("error", error, envir = parent.env(environment()))
             status <- "failed"
             obs    <- scraped.polyhedron$getErrors()
           })
@@ -939,7 +990,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                         seed          = seed)
       ret
     },
-    schedulePolyhedraSources=function (sources.config=get(".available.sources",envir=asNamespace("Rpolyhedra")),max.quant = 0, test = FALSE){
+    schedulePolyhedraSources=function (sources.config = getPackageEnvir(".available.sources"), max.quant = 0, test = FALSE){
       for (source  in names(sources.config)){
         self$configPolyhedraSource(source.config = sources.config[[source]],
                                    max.quant = max.quant)
@@ -1014,8 +1065,9 @@ switchToFullDatabase <- function(env=NA){
 #'
 #' @param scrape.config predefined configuration for scraping
 #' @param sources.config the sources that will be used by the function
+#' @return polyhedra db object
 scrapePolyhedra <- function(scrape.config,
-                sources.config = get(".available.sources",envir=asNamespace("Rpolyhedra"))){
+                sources.config = getPackageEnvir(".available.sources")){
   scrapePolyhedraSources(max.quant.config.schedule = scrape.config[["max.quant.config.schedule"]],
                          max.quant.scrape = scrape.config[["max.quant.scrape"]],
                          time2scrape.source = scrape.config[["time2scrape.source"]],
@@ -1034,10 +1086,11 @@ scrapePolyhedra <- function(scrape.config,
 #' @param max.quant.scrape number of files scrape
 #' @param time2scrape.source time applied to scrape source
 #' @param retry.scrape should it retry scrape?
+#' @return polyhedra db object
 #' @usage
 #'     scrapePolyhedraSources(sources.config = .available.sources, max.quant.config.schedule = 0,
 #'     max.quant.scrape = 0, time2scrape.source = 30, retry.scrape = FALSE)
-scrapePolyhedraSources<- function(sources.config = get(".available.sources",envir=asNamespace("Rpolyhedra")),
+scrapePolyhedraSources<- function(sources.config = getPackageEnvir(".available.sources"),
                                   max.quant.config.schedule = 0,
                                   max.quant.scrape = 0,
                                   time2scrape.source = 30,
@@ -1112,7 +1165,7 @@ getAvailableSources <- function(){
 #'
 #'cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
 
-getAvailablePolyhedra <- function(sources = names(get(".available.sources",envir=asNamespace("Rpolyhedra"))), search.string = NULL){
+getAvailablePolyhedra <- function(sources = names(getPackageEnvir(".available.sources")), search.string = NULL){
   getPolyhedraObject()$getAvailablePolyhedra(sources = sources, search.string = search.string)
 }
 
