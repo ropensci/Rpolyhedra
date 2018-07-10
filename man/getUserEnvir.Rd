@@ -6,6 +6,9 @@
 \usage{
 getUserEnvir(variable.name)
 }
+\arguments{
+\item{variable.name}{name of variable to be retrieved}
+}
 \description{
 Gets a writable environment for the package
 }

@@ -1,5 +1,7 @@
 #' getPackageEnvir
 #'
+#' @param variable.name  name of variable to be retrieved
+
 #' Obtains a variable from package environment
 getPackageEnvir <- function(variable.name){
   get(variable.name,envir=asNamespace("Rpolyhedra"))
@@ -8,6 +10,9 @@ getPackageEnvir <- function(variable.name){
 #' setPackageEnvir
 #'
 #' Set a variable from package environment
+#' @param variable.name  name of variable to be set
+#' @param value          variable value
+
 setPackageEnvir <- function(variable.name, value){
   assign(x = variable.name, value = value, envir = asNamespace("Rpolyhedra"))
 }
@@ -17,6 +22,7 @@ setPackageEnvir <- function(variable.name, value){
 #'
 #' Gets a writable environment for the package
 #'
+#' @param variable.name  name of variable to be retrieved
 getUserEnvir <- function(variable.name) {
   get(x=variable.name , envir = getPackageEnvir("RpolyhedraEnv"))
 }
@@ -25,6 +31,9 @@ getUserEnvir <- function(variable.name) {
 #'
 #' Sets variable in the writable environment for the package
 #'
+#' @param variable.name  name of variable to be set
+#' @param value          variable value
+
 setUserEnvir <- function(variable.name, value) {
   assign(x=variable.name , value = value, envir = getPackageEnvir("RpolyhedraEnv"))
 }
@@ -1088,7 +1097,8 @@ scrapePolyhedra <- function(scrape.config,
 #' @param retry.scrape should it retry scrape?
 #' @return polyhedra db object
 #' @usage
-#'     scrapePolyhedraSources(sources.config = .available.sources, max.quant.config.schedule = 0,
+#'     scrapePolyhedraSources(sources.config = getPackageEnvir(".available.sources"),
+#'     max.quant.config.schedule = 0,
 #'     max.quant.scrape = 0, time2scrape.source = 30, retry.scrape = FALSE)
 scrapePolyhedraSources<- function(sources.config = getPackageEnvir(".available.sources"),
                                   max.quant.config.schedule = 0,
@@ -1212,7 +1222,7 @@ getPercentilPolyhedraQuant <- function(percentil,quant.min=100){
 
 getPolyhedron <- function(source = "netlib", polyhedron.name) {
   ret <- NULL
-  if (exists(".polyhedra", envir=getUserEnv())) {
+  if (exists(".polyhedra", envir=getPackageEnvir("RpolyhedraEnv"))) {
     ret <- getPolyhedraObject()$getPolyhedron(source  =source, polyhedron.name = polyhedron.name)
   }
   ret

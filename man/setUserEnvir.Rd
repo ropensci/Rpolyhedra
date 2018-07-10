@@ -6,6 +6,11 @@
 \usage{
 setUserEnvir(variable.name, value)
 }
+\arguments{
+\item{variable.name}{name of variable to be set}
+
+\item{value}{variable value}
+}
 \description{
 Sets variable in the writable environment for the package
 }
