@@ -205,9 +205,11 @@ selectDataEnv <- function(env=NA) {
         accept.option <- readline(prompt="Unknown option. Agree [y/n]?:")
       }
     }
+  } else {
+    setDataDirEnvironment(env)
   }
-  #loads the database
   .data.env <-getDataEnv()
+  #loads the database
   if (.data.env=="HOME"){
     #create dir
     data.dir <- getUserSpace()
