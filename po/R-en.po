@@ -20,6 +20,10 @@ msgstr "Row for label"
 msgid "rpoly.already_defined"
 msgstr "already defined"
 
+msgid "rpoly.polyhedron_invalid_face"
+msgstr "Face defined with less than 3 vertices. "
+
+
 msgid "rpoly.scraping_issue"
 msgstr "Problem with scraping:"
 
