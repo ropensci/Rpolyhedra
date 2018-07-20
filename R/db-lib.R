@@ -1032,8 +1032,8 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate = getPolyhedraObject()
     db.version <- .package.db[[getPackageVersion()]]
     compatible <- .polyhedra.candidate$getVersion()==db.version
     if (!compatible){
-      error <- paste("Incompatible! DB version observed= ",.polyhedra.candidate$getVersion(),
-                     " expected ",db.version, ". Code version= ",getPackageVersion(), ".", sep="")
+      error <- paste("Incompatible! DB version observed = ",.polyhedra.candidate$getVersion(),
+                     " expected = ",db.version, ". Code version= ",getPackageVersion(), ".", sep="")
     }
   }
   else{
