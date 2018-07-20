@@ -20,6 +20,9 @@ msgstr "Registro para la etiqueta"
 msgid "rpoly.already_defined"
 msgstr "Ya definido"
 
+msgid "rpoly.polyhedron_invalid_face"
+msgstr "Cara definida con menos de 3 vertices"
+
 msgid "rpoly.scraping_issue"
 msgstr "Se presentó un problema recuperando datos:"
 

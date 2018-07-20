@@ -534,8 +534,8 @@ triangulate = function(force = FALSE) {
             current.vertex <- nrow(private$vertices.rgl)
             # the description considers vector referencing starting in 0.
             if (length(face) < 3) {
-                stop(paste("Problem with definition. Face defined with", length(face),
-                "vertex"))
+
+              stop(paste(gettext("rpoly.polyhedron_invalid_face", domain = "R-Rpolyhedra"),length(face)))
             }
             if (length(face) == 3) {
                 tmesh <- face
