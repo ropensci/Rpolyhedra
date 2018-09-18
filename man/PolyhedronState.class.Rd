@@ -18,7 +18,7 @@ This abstract class provide the basis from which polyhedron state class derivate
 
 \item{\code{source}}{polyhedron definition source}
 
-\item{\code{number}}{polyhedron number}
+\item{\code{file.id}}{polyhedron file id}
 }}
 
 \section{Methods}{
@@ -26,7 +26,7 @@ This abstract class provide the basis from which polyhedron state class derivate
 \describe{
   \item{\code{addError(current.error)}}{Adds an error to the error string and log it as info}
   \item{\code{scrape()}}{Scrapes the polyhedra folder files}
-  \item{\code{geSolid()}}{returns the object corresponding to the solid}
+  \item{\code{getSolid()}}{returns the object corresponding to the solid}
   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{creates a RGL representation of the object}
   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
 }

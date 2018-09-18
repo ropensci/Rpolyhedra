@@ -14,7 +14,7 @@ Scrapes polyhedra from a dmccooey file format
 \section{Methods}{
 
 \describe{
-  \item{\code{initialize(number, netlib.p3.lines)}}{Initializes the object, taking the number and PDH file as parameters}
+  \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes the object, taking the file.id and PDH file as parameters}
   \item{\code{scrape()}}{Scrapes data from dmccooey file format}
   \item{\code{scrapeValues(values.lines)}}{Scrapes values}
   \item{\code{scrapeVertices(vertices.lines)}}{Scrapes vertices}

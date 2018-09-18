@@ -16,7 +16,7 @@ Scraper configuration for Dmccoey source
 \describe{
   \item{\code{initialize()}}{initializes the object}
   \item{\code{getPolyhedraFiles(home.dir.data)}}{returns the file names on the netlib database}
-  \item{\code{scrape(polyhedron.number, polyhedron.filename)}}{scrapes the object}
+  \item{\code{scrape(polyhedron.file.id, polyhedron.filename)}}{scrapes the object}
 }
 }
 

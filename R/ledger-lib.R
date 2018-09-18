@@ -43,7 +43,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    initialize = function() {
      self$df <- data.frame(id           = character(),
                            source       = character(),
-                           number       = numeric(),
+                           file.id       = numeric(),
                            filename     = character(),
                            start.scrape = as.POSIXct(character()),
                            end.scrape   = as.POSIXct(character()),
@@ -74,7 +74,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        self$countStatusUse(status.field = status.field, status = default.status)
        states.row <- which(self$states$status.field %in% status.field &
                              self$states$status %in% default.status)
-       number <- self$states[states.row,"count"]
+       file.id <- self$states[states.row,"count"]
 
        #obtain preloaded.time2scrape
        row.preloaded.t2s <- which(self$preloaded.data$source == source &
@@ -90,7 +90,6 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          preloaded.time2scrape <- NA
        }
        self$df[r,c("id","source","filename","status")]<- c(r,source,filename,default.status)
-       self$df[r,c("number")]<- c(number)
        self$dirty <- TRUE
      }
      r

@@ -24,8 +24,8 @@ Scrapes polyhedra from a PHD file format.
 \section{Methods}{
 
 \describe{
-  \item{\code{initialize(number, netlib.p3.lines)}}{Initializes the object, taking the number and PDH file as parameters}
-  \item{\code{extract_fows_from_label(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
+  \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes the object, taking the file.id and PDH file as parameters}
+  \item{\code{extract_rows_from_label(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
   expected label as parameters}
   \item{\code{getLabels()}}{Gets the label from the polyhedron}
   \item{\code{scrapeNet(net.txt, offset = 0) }}{Scrape the net model}

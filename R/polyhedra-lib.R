@@ -6,22 +6,22 @@
 #' \describe{
 #'   \item{\code{addError(current.error)}}{Adds an error to the error string and log it as info}
 #'   \item{\code{scrape()}}{Scrapes the polyhedra folder files}
-#'   \item{\code{geSolid()}}{returns the object corresponding to the solid}
+#'   \item{\code{getSolid()}}{returns the object corresponding to the solid}
 #'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{creates a RGL representation of the object}
 #'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
 #' }
 #' @field errors Errors string
 #' @field source polyhedron definition source
-#' @field number polyhedron number
+#' @field file.id polyhedron file id
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @import rgl
 #' @importFrom R6 R6Class
 PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(
-source = NA, number = NA, errors = "",
-initialize = function(source, number) {
+source = NA, file.id = NA, errors = "",
+initialize = function(source, file.id) {
     self$source <- source
-    self$number <- number
+    self$file.id <- file.id
     self
 },
 addError = function(current.error) {
@@ -52,8 +52,8 @@ exportToXML = function(){
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(number, netlib.p3.lines)}}{Initializes the object, taking the number and PDH file as parameters}
-#'   \item{\code{extract_fows_from_label(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
+#'   \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes the object, taking the file.id and PDH file as parameters}
+#'   \item{\code{extract_rows_from_label(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
 #'   expected label as parameters}
 #'   \item{\code{getLabels()}}{Gets the label from the polyhedron}
 #'   \item{\code{scrapeNet(net.txt, offset = 0) }}{Scrape the net model}
@@ -74,12 +74,12 @@ exportToXML = function(){
 PolyhedronStateNetlibScraper.class <- R6::R6Class("PolyhedronStateNetlibScraper",
 inherit = PolyhedronState.class,
 public = list(netlib.p3.lines = NA, labels.rows = NA, labels.map = NA, errors = "",
-initialize = function(number, netlib.p3.lines) {
-    super$initialize(source= "netlib",number = number)
+initialize = function(file.id, netlib.p3.lines) {
+    super$initialize(source= "netlib",file.id = file.id)
     self$netlib.p3.lines <- netlib.p3.lines
     self$labels.map <- list()
     self
-}, extract_fows_from_label = function(label.number, expected.label) {
+}, extract_rows_from_label = function(label.number, expected.label) {
     observer.label <- self$netlib.p3.lines[self$labels.rows[label.number]]
     observer.label <- sub("\\:", "", observer.label)
     if (observer.label != expected.label) {
@@ -171,8 +171,8 @@ initialize = function(number, netlib.p3.lines) {
 }, getDataFromLabel = function(label) {
     r <- self$labels.map[[label]]
     ret <- NULL
-    if (!is.null(r)) ret <- self$netlib.p3.lines[self$extract_fows_from_label(r,
-    label)]
+    if (!is.null(r)) ret <- self$netlib.p3.lines[
+                                  self$extract_rows_from_label(r,label)]
     ret
 }, scrape = function() {
     # first check labels
@@ -183,8 +183,9 @@ initialize = function(number, netlib.p3.lines) {
     }
     self$setupLabelsOrder()
     name <- self$getDataFromLabel("name")
-    number <- self$getDataFromLabel("number")
-    futile.logger::flog.debug(paste("Scraping polyhedron", number, name))
+    file.id <- self$getDataFromLabel("number")
+
+    futile.logger::flog.debug(paste("Scraping polyhedron", file.id, name))
     symbol <- self$getDataFromLabel("symbol")
     dual <- self$getDataFromLabel("dual")
     sfaces <- self$getDataFromLabel("sfaces")
@@ -205,9 +206,13 @@ initialize = function(number, netlib.p3.lines) {
     #TODO
     dih <- NULL
     vertices <- self$scrapeVertices(vertices.txt)
-    ret <- PolyhedronStateDefined.class$new(source = self$source, number = number, name = name, symbol = symbol,
-    dual = dual, sfaces = sfaces,
-    svertices = svertices, net = net, solid = solid, hinges = hinges, dih = dih, vertices =vertices)
+
+
+    ret <- PolyhedronStateDefined.class$new(source = self$source, file.id = file.id, name = name,
+                  symbol = symbol,
+                  dual = dual, sfaces = sfaces, svertices = svertices,
+                  vertices =vertices, net = net, solid = solid,
+                  hinges = hinges, dih = dih)
     ret
 }, buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
     stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
@@ -224,7 +229,7 @@ exportToXML = function(){
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(number, netlib.p3.lines)}}{Initializes the object, taking the number and PDH file as parameters}
+#'   \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes the object, taking the file.id and PDH file as parameters}
 #'   \item{\code{scrape()}}{Scrapes data from dmccooey file format}
 #'   \item{\code{scrapeValues(values.lines)}}{Scrapes values}
 #'   \item{\code{scrapeVertices(vertices.lines)}}{Scrapes vertices}
@@ -251,8 +256,8 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
     regexp.values       = NA,
     regexp.vertex       = NA,
     regexp.faces        = NA,
-  initialize = function(number, polyhedra.dmccoey.lines){
-    super$initialize(source = "dmccooney", number)
+  initialize = function(file.id, polyhedra.dmccoey.lines){
+    super$initialize(source = "dmccooney", file.id)
     self$polyhedra.dmccoey.lines <- polyhedra.dmccoey.lines
     self$labels.map <- list()
     #init regexp
@@ -341,7 +346,7 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
       self$polyhedra.dmccoey.lines[2:lines.num] <- gsub("[[:space:]]","",self$polyhedra.dmccoey.lines[2:lines.num])
 
       name <- self$polyhedra.dmccoey.lines[1]
-      futile.logger::flog.debug(paste("Scraping dmccoey polyhedron", self$number,name))
+      futile.logger::flog.debug(paste("Scraping dmccoey polyhedron", self$file.id,name))
 
       #values
 
@@ -361,10 +366,11 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
 
 
 
-      ret <- PolyhedronStateDefined.class$new(source = self$source, number   = self$number,
-      name = name,
-      vertices = self$vertices.replaced,
-      solid    = self$faces)
+      ret <- PolyhedronStateDefined.class$new(
+                    source = self$source, file.id   = self$file.id,
+                    name = name,
+                    vertices = self$vertices.replaced,
+                    solid    = self$faces)
       ret
   }, buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
       stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
@@ -389,7 +395,7 @@ norm <- function(vector){
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(source, number,name, symbol, dual,
+#'   \item{\code{initialize(source, file.id, name, symbol, dual,
 #'               sfaces, svertices, net, solid, hinges, dih, vertices)}}{Initializes the object, taking defaults.}
 #'   \item{\code{scrape()}}{Do nothing as the object is defined}
 #'   \item{\code{getNet()}}{Gets the 2d net model}
@@ -403,9 +409,11 @@ norm <- function(vector){
 #'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{
 #'   Builds the RGL model, taking the object's size, the origin}
 #'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
+#'   \item{\code{serialize()}}{Gets a list representation out of the polyhedron object}
+#'
 #' }
 #' @field source polyhedron definition source
-#' @field number polyhedron arbitrary numeration (netlib|dmccooey)
+#' @field file.id polyhedron filename in original source (netlib|dmccooey)
 #' @field name polyhedron name       (netlib|dmccooey)
 #' @field symbol the eqn(1) input for two symbols separated by a tab; the Johnson symbol, and the Schlafli symbol (netlib)
 #' @field dual  the name of the dual polyhedron optionally followed by a horizontal tab and the number of the dual (netlib)
@@ -432,11 +440,11 @@ edges.check = NULL,
 vertices.rgl = NULL,
 solid.triangulated = NULL
 ),
-public = list(number = NA, source = NA, name = NA, symbol = NA, dual = NA, sfaces = NA, svertices = NA,
-net = NA, hinges = NA, solid = NA, dih = NA, vertices = NA, edges = NULL,
-initialize = function(source, number,
-name, vertices, solid, symbol=NULL, dual=NULL, sfaces=NULL, svertices = NULL, net = NULL,  hinges = NULL, dih = NULL) {
-    super$initialize(source = source,number = number)
+public = list(file.id = NA, source = NA, name = NA, symbol = NA, dual = NA, sfaces = NA, svertices = NA,
+              vertices = NA, net = NA, solid = NA, hinges = NA, dih = NA, edges = NULL,
+  initialize = function(source, file.id, name,
+                        vertices, solid, net = NULL, symbol=NULL, dual=NULL, sfaces=NULL, svertices = NULL, hinges = NULL, dih = NULL) {
+    super$initialize(source = source,file.id = file.id)
     self$name <- name
     self$vertices <- vertices
     self$solid <- solid
@@ -631,16 +639,82 @@ buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
   exportToXML = function()
   {
       polyhedronToXML(self)
+  },
+  serialize = function(){
+    ret <- list()
+    ret[["source"]]    <- self$source
+    ret[["name"]]      <- self$name
+    ret[["net"]]       <- self$net
+    ret[["file.id"]]   <- self$file.id
+    ret[["sfaces"]]    <- self$sfaces
+    ret[["vertices"]]  <- self$vertices
+    ret[["solid"]]     <- self$solid
+    ret[["svertices"]] <- self$svertices
+    ret[["symbol"]]    <- self$symbol
+    ret[["dual"]]      <- self$dual
+    #Private:
+    #edges.check: data.frame
+    #edges.cont: 6
+    #mass.center: -0.77777777691603 -0.833950387905475 -0.839177040579277
+    #solid.triangulated: list
+    #vertices.rgl: data.frame
+    ret
   }
 ))
 
+
+#' Polyhedron State Deserializer
+#'
+#' Polyhedron state for deserialize from database
+#'
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{\code{initialize(serialized.polyhedron)}}{Initializes the object.}
+#'   \item{\code{scrape()}}{Returns a State Defined}
+#'
+#' }
+#' @field serialized.polyhedron polyhedron definition serialized
+#' @format \code{\link{R6Class}} object.
+#' @docType class
+#' @import rgl testthat XML
+#' @importFrom R6 R6Class
+PolyhedronStateDeserializer.class <- R6::R6Class("PolyhedronStateDeserializer", inherit = PolyhedronState.class,
+  public = list(serialized.polyhedron = NA,
+                initialize = function(serialized.polyhedron){
+                  self$serialized.polyhedron <- serialized.polyhedron
+                  self
+                },
+                scrape = function(){
+                  sp <- self$serialized.polyhedron
+                  source    <- sp$source
+                  file.id   <- sp$file.id
+                  name      <- sp$name
+                  symbol    <- sp$symbol
+                  dual      <- sp$dual
+                  sfaces    <- sp$sfaces
+                  svertices <- sp$svertices
+                  vertices  <- sp$vertices
+                  net       <- sp$net
+                  solid     <- sp$solid
+                  hinges    <- sp$hindges
+                  dih       <- sp$dih
+
+                  ret <- PolyhedronStateDefined.class$new(source = source, file.id = file.id, name = name, symbol = symbol,
+                                                          dual = dual, sfaces = sfaces, svertices = svertices,
+                                                          vertices =vertices, net = net, solid = solid,
+                                                          hinges = hinges, dih = dih)
+                  ret
+                }))
 #' Polyhedron
 #'
 #' Polyhedron container class, which is accesible by the final users upon call to \code{getPolyhedron()}
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(number, state = NULL)}}{Initializes the object}
-#'   \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from the definition}}
+#'   \item{\code{initialize(file.id, state = NULL)}}{Initializes the object}
+#'   \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from the netlib definition}}
+#'   \item{\code{scrapeDmccoey(polyhedra.dmccoey.lines)}}{{Scrapes polyhedra from the dmccoey definition}}
+#'   \item{\code{deserialize(polyhedron.serialized)}}{{Deserialize polyhedron from definition}}
 #'   \item{\code{getName()}}{Gets the name from polyhedron definition}
 #'   \item{\code{getState()}}{Gets the state from polyhedron definition}
 #'   \item{\code{getSolid()}}{Gets the solid definition of polyhedron definition}
@@ -652,30 +726,38 @@ buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
 #'
 
 #' }
-#' @field number Polyhedron number
+#' @field file.id Polyhedron file.id
 #' @field state Polyhedron state
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @import rgl futile.logger testthat
 #' @importFrom R6 R6Class
-Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state = NA,
-initialize = function(number, state = NULL) {
-    self$number <- number
+Polyhedron.class <- R6::R6Class("Polyhedron", public = list(file.id = NA, state = NA,
+initialize = function(file.id, state = NULL) {
+    self$file.id <- file.id
     if (!is.null(state)) {
         self$state <- state
     }
     self
 },
 scrapeNetlib = function(netlib.p3.lines) {
-    self$state <- PolyhedronStateNetlibScraper.class$new(self$number, netlib.p3.lines)
+    self$state <- PolyhedronStateNetlibScraper.class$new(self$file.id, netlib.p3.lines)
     self$state <- self$state$scrape()
     self
 },
 scrapeDmccoey = function(polyhedra.dmccoey.lines) {
-    self$state <- PolyhedronStateDmccoeyScraper.class$new(self$number, polyhedra.dmccoey.lines)
+    self$state <- PolyhedronStateDmccoeyScraper.class$new(self$file.id, polyhedra.dmccoey.lines)
     self$state <- self$state$scrape()
     #Postprocess in defined state
     self
+},
+deserialize = function(serialized.polyhedron){
+
+  self$state   <- PolyhedronStateDeserializer.class$new(serialized.polyhedron)
+  self$state   <- self$state$scrape()
+  self$file.id <- serialized.polyhedron$file.id
+  #Postprocess in defined state
+  self
 },
 getName = function() {
     self$state$name

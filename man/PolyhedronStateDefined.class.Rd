@@ -16,7 +16,7 @@ Polyhedron state inside database.
 \describe{
 \item{\code{source}}{polyhedron definition source}
 
-\item{\code{number}}{polyhedron arbitrary numeration (netlib|dmccooey)}
+\item{\code{file.id}}{polyhedron filename in original source (netlib|dmccooey)}
 
 \item{\code{name}}{polyhedron name       (netlib|dmccooey)}
 
@@ -48,7 +48,7 @@ Polyhedron state inside database.
 \section{Methods}{
 
 \describe{
-  \item{\code{initialize(source, number,name, symbol, dual,
+  \item{\code{initialize(source, file.id, name, symbol, dual,
               sfaces, svertices, net, solid, hinges, dih, vertices)}}{Initializes the object, taking defaults.}
   \item{\code{scrape()}}{Do nothing as the object is defined}
   \item{\code{getNet()}}{Gets the 2d net model}
@@ -62,6 +62,8 @@ Polyhedron state inside database.
   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{
   Builds the RGL model, taking the object's size, the origin}
   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
+  \item{\code{serialize()}}{Gets a list representation out of the polyhedron object}
+
 }
 }
 
