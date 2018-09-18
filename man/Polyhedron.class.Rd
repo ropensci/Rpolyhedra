@@ -14,7 +14,7 @@ Polyhedron container class, which is accesible by the final users upon call to \
 \section{Fields}{
 
 \describe{
-\item{\code{number}}{Polyhedron number}
+\item{\code{file.id}}{Polyhedron file.id}
 
 \item{\code{state}}{Polyhedron state}
 }}
@@ -22,8 +22,10 @@ Polyhedron container class, which is accesible by the final users upon call to \
 \section{Methods}{
 
 \describe{
-  \item{\code{initialize(number, state = NULL)}}{Initializes the object}
-  \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from the definition}}
+  \item{\code{initialize(file.id, state = NULL)}}{Initializes the object}
+  \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from the netlib definition}}
+  \item{\code{scrapeDmccoey(polyhedra.dmccoey.lines)}}{{Scrapes polyhedra from the dmccoey definition}}
+  \item{\code{deserialize(polyhedron.serialized)}}{{Deserialize polyhedron from definition}}
   \item{\code{getName()}}{Gets the name from polyhedron definition}
   \item{\code{getState()}}{Gets the state from polyhedron definition}
   \item{\code{getSolid()}}{Gets the solid definition of polyhedron definition}
