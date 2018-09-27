@@ -23,7 +23,7 @@ polyhedronToJSON <- function(polyhedron.state.defined)
 #' persists a polyhedron to the defined path in a Zipped json format
 #'
 #' @param polyhedron.state.defined the polyhedron to get a representation from
-#' @param file.path
+#' @param file.path the path of the file to be persisted.
 #' @return the path or None
 # TODO examples
 #' @examples
@@ -45,7 +45,7 @@ persistPolyhedron <- function(polyhedron.state.defined, file.path)
 #'
 #' hydrates a polyhedron from the defined path
 #'
-#' @param file.path
+#' @param file.path the path of the file to be hydrated.
 #' @return polyhedron.state.defined
 #'
 hydratePolyhedron <- function(file.path)

@@ -6,6 +6,9 @@
 \usage{
 hydratePolyhedron(file.path)
 }
+\arguments{
+\item{file.path}{the path of the file to be hydrated.}
+}
 \value{
 polyhedron.state.defined
 }

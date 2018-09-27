@@ -8,6 +8,8 @@ persistPolyhedron(polyhedron.state.defined, file.path)
 }
 \arguments{
 \item{polyhedron.state.defined}{the polyhedron to get a representation from}
+
+\item{file.path}{the path of the file to be persisted.}
 }
 \value{
 the path or None
