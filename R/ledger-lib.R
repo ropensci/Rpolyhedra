@@ -64,6 +64,9 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      self$loadPreloadedData()
      self
    },
+   getAvailableSources = function(){
+    sort(unique(self$df$source))
+   },
    addFilename = function(source, filename){
      r <- NULL
      default.status <- "queued"

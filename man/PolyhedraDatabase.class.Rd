@@ -28,7 +28,7 @@ Scrapes all polyhedra in data folder to save a representation which is accesible
 \describe{
   \item{\code{initialize()}}{Initializes the object}
   \item{\code{existsSource(source)}}{Determines if the source exists on the database}
-  \item{\code{getSource(source, strict=False)}}{Retrieves a source by name}
+  \item{\code{getPolyhedraSourceDir(source)}}{Retrieves polyhedra dir of a source}
   \item{\code{addSource(source)}}{Adds a new source to the database}
   \item{\code{configPolyhedraRDSPath()}}{config path for rds database file}
   \item{\code{existsPolyhedron(source,polyhedron.name)}}{Determines if the polyhedron exists on the database}
