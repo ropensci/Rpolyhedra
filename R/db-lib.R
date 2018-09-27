@@ -383,7 +383,7 @@ PolyhedronScraperConfiguration.class <- R6::R6Class("PolyhedronScraperConfigurat
       self$name
     },
     getBaseDir = function(home.dir.data) {
-      file.path(home.dir.data, self$base.dir)
+      file.path(home.dir.data, "sources", self$base.dir)
     },
     getPolyhedraFiles = function(home.dir.data){
       stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
@@ -678,7 +678,7 @@ checkDatabaseVersion <- function(){
 #' \describe{
 #'   \item{\code{initialize()}}{Initializes the object}
 #'   \item{\code{existsSource(source)}}{Determines if the source exists on the database}
-#'   \item{\code{getSource(source, strict=False)}}{Retrieves a source by name}
+#'   \item{\code{getPolyhedraSourceDir(source)}}{Retrieves polyhedra dir of a source}
 #'   \item{\code{addSource(source)}}{Adds a new source to the database}
 #'   \item{\code{configPolyhedraRDSPath()}}{config path for rds database file}
 #'   \item{\code{existsPolyhedron(source,polyhedron.name)}}{Determines if the polyhedron exists on the database}
@@ -699,7 +699,7 @@ checkDatabaseVersion <- function(){
 #'
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import futile.logger
+#' @import futile.logger RJSONIO
 #' @importFrom R6 R6Class
 PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
   public = list(
@@ -707,12 +707,10 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     polyhedra.rds.file = NA,
     sources.config = NA,
     ledger         = NA,
-    data           = NA,
     initialize = function() {
       self$version        <- getDatabaseVersion()
       self$ledger         <- ScraperLedger.class$new()
       self$sources.config <- list()
-      self$data           <- list()
       self
     },
     getVersion = function(){
@@ -723,44 +721,46 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       self$polyhedra.rds.file
     },
     existsSource = function(source){
-      ret <- FALSE
-      if (length(self$data)>0){
-        ret <- source %in% names(self$data)
-      }
-      ret
-    },
-    getSource = function(source, strict = FALSE) {
-      ret <- NULL
-      if (strict & !self$existsSource(source)){
-        stop(paste("Source",source,"not available in polyhedra database"))
-      }
-      self$data[[source]]
+      source %in% self$getAvailableSources()
     },
     addSourceConfig = function(source.config) {
       source <- source.config$getName()
       if (!self$existsSource(source)){
         self$sources.config[[source]] <- source.config
-        self$data[[source]] <- list()
+        self$getPolyhedraSourceDir(source)
       }
       self
     },
     existsPolyhedron = function(source = "netlib",polyhedron.name) {
       ret <- FALSE
-      source.data <- self$getSource(source)
-      if (length(source.data)>0){
-        ret <- polyhedron.name %in% names(source.data)
+      file.path <- self$getPolyhedronFilename(source = source, polyhedron.name = polyhedron.name)
+      ret <- !is.null(file.path)
+      if (ret){
+        ret <- file.exists(file.path)
       }
       ret
     },
+    getPolyhedraSourceDir = function(source, create.dir = TRUE){
+      ret <- file.path(getDataDir(), "polyhedra",source)
+      if (create.dir){
+        dir.create(ret, showWarnings = FALSE, recursive = TRUE)
+      }
+      ret
+    },
+    getPolyhedronFilename = function(source, polyhedron.name){
+      paste(self$getPolyhedraSourceDir(source),self$ledger$getIdFilename(source, polyhedron.name))
+    },
     getPolyhedron = function(source = "netlib",polyhedron.name, strict = FALSE) {
-      source.data <- self$getSource(source)
+      data.dir <- self$getPolyhedraSourceDir(source=source)
       if (!self$existsPolyhedron(source,polyhedron.name)){
         message <- paste("Polyhedron",polyhedron.name,"not available in source",source)
         if (strict){
           stop(message)
         }
       }
-      serialized.polyhedron <- source.data[[polyhedron.name]]
+      #TODO use JSON
+      #serialized.polyhedron <- source.data[[polyhedron.name]]
+      serialized.polyhedron <- NULL
       ret <- NULL
       if (!is.null(serialized.polyhedron)){
         ret <- Polyhedron.class$new(file.id=NA)
@@ -771,13 +771,30 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     addPolyhedron = function(source="netlib",polyhedron.filename,
                              polyhedron,overwrite=FALSE) {
       polyhedron.name <- polyhedron$getName()
+      data.dir <- self$getPolyhedraSourceDir(source = source)
+
       prev.data <- self$getPolyhedron(source = source, polyhedron.name = polyhedron.name)
       if (!overwrite &!is.null(prev.data)){
         futile.logger::flog.info(paste("Polyhedron", polyhedron.name,"in source",source,"already in database"))
       }
       else {
         serialized.polyhedron <- polyhedron$state$serialize()
-        self$data[[source]][[polyhedron.name]]<- serialized.polyhedron
+        json.polyhedron <- RJSONIO::toJSON(x=serialized.polyhedron, pretty = TRUE)
+        if(!is.null(json.polyhedron)) {
+          tmp.dir <- file.path(tempdir=tempdir(), source)
+          dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
+
+          tmp.file.name <- file.path(tmp.dir, paste(polyhedron.name, ".json", sep=""))
+          tmp.file <- file(tmp.file.name, "w")
+          writeChar(object = json.polyhedron, con = tmp.file)
+          close(tmp.file)
+
+          zip(zipfile = file.path(data.dir, paste(polyhedron.name, ".json.zip", sep="")), files = tmp.file.name)
+          unlink(tmp.file)
+        }
+
+
+        #self$data[[source]][[polyhedron.name]]<- serialized.polyhedron
         futile.logger::flog.info(paste("Added polyhedron in file",polyhedron.name,"#|n", polyhedron$file.id, polyhedron.name,"in source",source,"to database"))
       }
       self$ledger$updateStatus(source = source,filename = polyhedron.filename,
@@ -881,7 +898,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       scrape.function <- function(polyhedra.dir, source.config, polyhedron.file.id, polyhedron.filename){
         source <- source.config$getName()
         current.polyhedron <- NULL
-        tryCatch({
+        #TODO add tryCatch after dev
+        #tryCatch({
           self$ledger$updateStatus(source = source,filename = polyhedron.filename,
                                  status = "scraping")
           current.polyhedron <- source.config$scrape(polyhedron.file.id = polyhedron.file.id, file.path(polyhedra.dir, polyhedron.filename))
@@ -895,13 +913,13 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
             errors <- current.polyhedron$getErrors()
             self$ledger$updateStatus(source,polyhedron.filename,status = "failed",obs=errors)
           }
-        },
-        error=function(e){
-          error <- paste(e$message,collapse=",")
-          futile.logger::flog.error(paste("catched error",error))
-          assign("error", error, envir = parent.env(environment()))
-          self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
-        })
+        # },
+        # error=function(e){
+        #   error <- paste(e$message,collapse=",")
+        #   futile.logger::flog.error(paste("catched error",error))
+        #   assign("error", error, envir = parent.env(environment()))
+        #   self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
+        # })
         current.polyhedron
       }
       if (time2scrape.source >0){
@@ -1031,7 +1049,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
     },
     getAvailableSources = function() {
-      names(self$data)
+      #TODO in ledger
+      self$ledger$getAvailableSources()
     },
     getAvailablePolyhedra = function(sources = self$getAvailableSources(),
                                      search.string = NULL,ignore.case=TRUE) {
