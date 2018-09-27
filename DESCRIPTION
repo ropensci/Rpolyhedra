@@ -15,15 +15,14 @@ RoxygenNote: 6.1.0
 Suggests: knitr, rmarkdown,
     covr
 VignetteBuilder: knitr
-Depends: R (>= 3.0.0)
+Depends: R (>= 3.4)
 Imports: futile.logger,
          rgl,
          stringr,
          R6,
          testthat, 
-         XML
+         RJSONIO
 Collate:
-  'xml-lib.R'
   'polyhedra-lib.R'
   'ledger-lib.R'
   'db-lib.R'
