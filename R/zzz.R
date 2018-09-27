@@ -44,6 +44,12 @@
   #dev-package-env
 
   .available.scrapping.conf <- list()
+  .available.scrapping.conf[["dev-tetrahedron"]] <- list(max.quant.config.schedule = 0,
+                                                     max.quant.scrape = 1,
+                                                     time2scrape.source = 2,
+                                                     #2 seconds of building/scraping polyhedra database for reasonable devs timing
+                                                     retry.scrape = FALSE)
+
   .available.scrapping.conf[["dev-minimal"]] <- list(max.quant.config.schedule = 0,
                                                      max.quant.scrape = 10,
                                                      time2scrape.source = 20,

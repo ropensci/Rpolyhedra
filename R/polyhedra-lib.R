@@ -694,11 +694,23 @@ PolyhedronStateDeserializer.class <- R6::R6Class("PolyhedronStateDeserializer", 
                   dual      <- sp$dual
                   sfaces    <- sp$sfaces
                   svertices <- sp$svertices
-                  vertices  <- sp$vertices
                   net       <- sp$net
                   solid     <- sp$solid
                   hinges    <- sp$hindges
                   dih       <- sp$dih
+
+                  # data.frame broken in JSON
+                  vertices  <- sp$vertices
+                  #vertices data.frame rebuilt
+                  #vertices <- NULL
+
+                  #for (i in 1:length(sp[["vertices"]])){
+                  #  vertices <- as.data.frame(cbind(vertices, sp[["vertices"]][[i]]))
+                  #  names(vertices)[i] <- names(sp[["vertices"]])[i]
+                    #debug
+                  #  vertices <<- vertices
+                  #}
+
 
                   ret <- PolyhedronStateDefined.class$new(source = source, file.id = file.id, name = name, symbol = symbol,
                                                           dual = dual, sfaces = sfaces, svertices = svertices,

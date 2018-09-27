@@ -4,7 +4,9 @@ context("Rpolyhedra-test")
 context("regular solids")
 test_that("Scrape test rpolyhedra 5 regular solids", {
   tasks <- getPolyhedraObject()$generateTestTasks(sources = "netlib",TestTaskClass = PolyhedronTestTaskScrape.class,
-                                        max.quant = 5)
+                                        # max.quant = 5)
+                                        #TODO change
+                                        max.quant = 1)
   for (task in tasks){
     task$run()
   }
