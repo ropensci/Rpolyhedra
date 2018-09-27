@@ -26,5 +26,6 @@ Collate:
   'polyhedra-lib.R'
   'ledger-lib.R'
   'db-lib.R'
+  'serialization-lib.R'
   'zzz.R'
 BugReports: https://github.com/qbotics/Rpolyhedra/issues
