@@ -253,7 +253,7 @@ updatePolyhedraDatabase <- function(){
   .available.scrapping.conf <- getPackageEnvir(".available.scrapping.conf")
 
 
-  scrapePolyhedra(scrape.config = .available.scrapping.conf[["dev-minimal"]],
+  scrapePolyhedra(scrape.config = .available.scrapping.conf[["dev-tetrahedron"]],
                   sources.config = .available.sources)
   #Change when release version
   # scrapePolyhedra(scrape.config = .available.scrapping.conf[["pkg-minimal"]],
@@ -586,7 +586,8 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       #debug gp
       #print(scraped.polyhedron)
       #print(expected.polyhedron)
-      #expected.polyhedron <<- expected.polyhedron
+      scraped.polyhedron <<- scraped.polyhedron
+      expected.polyhedron <<- expected.polyhedron
       #task <<- self
 
       expect_equal(scraped.polyhedron, expected.polyhedron)
@@ -760,8 +761,19 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       #TODO use JSON
       #serialized.polyhedron <- source.data[[polyhedron.name]]
-      serialized.polyhedron <- NULL
       ret <- NULL
+      zip.filename <- file.path(data.dir, paste(polyhedron.name, ".RDS.zip", sep=""))
+
+      serialized.polyhedron <- NULL
+      if(file.exists(zip.filename)) {
+        tmp.dir <- file.path(tempdir=tempdir(), source)
+        dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
+        json.filename <- paste(polyhedron.name, ".RDS", sep="")
+        tmp.filename <- file.path(tmp.dir, json.filename)
+        unzip(zipfile = zip.filename, files = json.filename, exdir = tmp.dir)
+        serialized.polyhedron <- readRDS(file = tmp.filename)
+        unlink(tmp.filename)
+      }
       if (!is.null(serialized.polyhedron)){
         ret <- Polyhedron.class$new(file.id=NA)
         ret$deserialize(serialized.polyhedron = serialized.polyhedron)
@@ -779,22 +791,14 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       else {
         serialized.polyhedron <- polyhedron$state$serialize()
-        json.polyhedron <- RJSONIO::toJSON(x=serialized.polyhedron, pretty = TRUE)
-        if(!is.null(json.polyhedron)) {
-          tmp.dir <- file.path(tempdir=tempdir(), source)
-          dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
+        tmp.dir <- file.path(tempdir=tempdir(), source)
+        dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
+        json.filename <- paste(polyhedron.name, ".RDS", sep="")
+        tmp.filename <- file.path(tmp.dir, json.filename)
+        saveRDS(object = serialized.polyhedron, ascii = TRUE, file=tmp.filename)
+        zip(zipfile = file.path(data.dir, paste(polyhedron.name, ".RDS.zip", sep="")), files = tmp.filename, flags="-j")
+        unlink(tmp.filename)
 
-          tmp.file.name <- file.path(tmp.dir, paste(polyhedron.name, ".json", sep=""))
-          tmp.file <- file(tmp.file.name, "w")
-          writeChar(object = json.polyhedron, con = tmp.file)
-          close(tmp.file)
-
-          zip(zipfile = file.path(data.dir, paste(polyhedron.name, ".json.zip", sep="")), files = tmp.file.name)
-          unlink(tmp.file)
-        }
-
-
-        #self$data[[source]][[polyhedron.name]]<- serialized.polyhedron
         futile.logger::flog.info(paste("Added polyhedron in file",polyhedron.name,"#|n", polyhedron$file.id, polyhedron.name,"in source",source,"to database"))
       }
       self$ledger$updateStatus(source = source,filename = polyhedron.filename,
@@ -855,6 +859,9 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                                              sources = sources,
                                                              max.quant = max.quant.retrieve,
                                                              order.by.vertices.faces = TRUE)
+      #debug
+      print(filenames2scrape)
+
       ret <- list()
       home.dir.data <- getDataDir()
       if (!is.null(filenames2scrape)){
@@ -867,10 +874,10 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           filenames2scrape <<- filenames2scrape
 
           if (max.quant < n){
-            sample.2.cover <- sort(sample(1:nrow(filenames2scrape),size = max.quant))
+            sample.2.cover <- sort(sample(1:n, size = max.quant))
           }
           else{
-            sample.2.cover <- 1:nrow(filenames2scrape)
+            sample.2.cover <- 1:n
           }
           filenames2scrape <- filenames2scrape[sample.2.cover,]
         }
