@@ -15,11 +15,5 @@ persistPolyhedron(polyhedron.state.defined, file.path)
 the path or None
 }
 \description{
-persists a polyhedron to the defined path in a Zipped json format
-}
-\examples{
-#get the representation of a cube (netlib library)
-library(Rpolyhedra)
-polyhedronToJSON(getPolyhedron("netlib", "cube")$state)
-
+persists a polyhedron to the defined path in a Zipped ascii RDS format
 }
