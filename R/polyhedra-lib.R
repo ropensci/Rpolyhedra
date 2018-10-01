@@ -640,6 +640,23 @@ buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
   {
       polyhedronToXML(self)
   },
+  expect_equal = function(polyhedron){
+
+    compatible <- !is.null(polyhedron$state$serialize)
+    if (compatible){
+      self.serialized <- self$serialize()
+      polyhedron.serialized <- polyhedron$getState()$serialize()
+      #check all same fields
+      expect_equal(names(polyhedron.serialized),names(self.serialized))
+      #check values for all fields
+      for (name in names(self.serialized)){
+        expect_equal(self.serialized[[name]],polyhedron.serialized[[name]])
+      }
+    }
+    else{
+      stop(paste("Not compatible polyhedron",polyhedron$getName()))
+    }
+  },
   serialize = function(){
     ret <- list()
     ret[["source"]]    <- self$source
@@ -698,19 +715,7 @@ PolyhedronStateDeserializer.class <- R6::R6Class("PolyhedronStateDeserializer", 
                   solid     <- sp$solid
                   hinges    <- sp$hindges
                   dih       <- sp$dih
-
-                  # data.frame broken in JSON
                   vertices  <- sp$vertices
-                  #vertices data.frame rebuilt
-                  #vertices <- NULL
-
-                  #for (i in 1:length(sp[["vertices"]])){
-                  #  vertices <- as.data.frame(cbind(vertices, sp[["vertices"]][[i]]))
-                  #  names(vertices)[i] <- names(sp[["vertices"]])[i]
-                    #debug
-                  #  vertices <<- vertices
-                  #}
-
 
                   ret <- PolyhedronStateDefined.class$new(source = source, file.id = file.id, name = name, symbol = symbol,
                                                           dual = dual, sfaces = sfaces, svertices = svertices,

@@ -1,41 +1,42 @@
 
-#' polyhedronToJSON()
+#' polyhedronToXML()
 #'
-#' Gets an JSON representation out of the polyhedron object
+#' Gets an XML representation out of the polyhedron object
 #'
 #' @param polyhedron.state.defined the polyhedron to get a representation from
-#' @return an JSON document, ready to be saved as a String File
+#' @return a XML document, ready to be saved as a String File
 # TODO examples
 #' @examples
 #' #get the representation of a cube (netlib library)
 #' library(Rpolyhedra)
-#' polyhedronToJSON(getPolyhedron("netlib", "cube")$state)
+#' polyhedronToXML(getPolyhedron("netlib", "cube")$state)
 #'
-#' @import RJSONIO
-polyhedronToJSON <- function(polyhedron.state.defined)
+#' @import XML
+#' @export
+polyhedronToXML <- function(polyhedron.state.defined)
 {
+  xml <- XML::xmlTree()
+  xml$addTag("polyhedron", close=FALSE)
 
+
+
+  xml$closeTag()
   stop("Not implemented")
 }
 
 #' persistPolyhedron
 #'
-#' persists a polyhedron to the defined path in a Zipped json format
+#' persists a polyhedron to the defined path in a Zipped ascii RDS format
 #'
 #' @param polyhedron.state.defined the polyhedron to get a representation from
 #' @param file.path the path of the file to be persisted.
 #' @return the path or None
-# TODO examples
-#' @examples
-#' #get the representation of a cube (netlib library)
-#' library(Rpolyhedra)
-#' polyhedronToJSON(getPolyhedron("netlib", "cube")$state)
 #'
 persistPolyhedron <- function(polyhedron.state.defined, file.path)
 {
-  polyhedron.json <- polyhedronToJSON(polyhedron.state.defined)
+  polyhedron.xml <- polyhedronToXML(polyhedron.state.defined)
   temp.file <- file(tempfile(pattern = "polyhedron", tmpdir = tempdir(), fileext = ""))
-  write(polyhedron.json)
+  write(polyhedron.xml)
 
   zip(file.path, temp.file)
   unlink(temp.file)

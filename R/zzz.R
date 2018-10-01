@@ -29,6 +29,7 @@
   .package.db <- list()
   .package.db[["0.2.5"]] <- "0.2.5"
   .package.db[["0.2.6"]] <- "0.2.6"
+  .package.db[["0.2.7"]] <- "0.2.7"
 
   setPackageEnvir(variable.name = ".package.db", .package.db)
   #assign(".package.db", value = .package.db, envir = asNamespace("Rpolyhedra"))
@@ -47,13 +48,13 @@
   .available.scrapping.conf[["dev-tetrahedron"]] <- list(max.quant.config.schedule = 0,
                                                      max.quant.scrape = 1,
                                                      time2scrape.source = 2,
-                                                     #2 seconds of building/scraping polyhedra database for reasonable devs timing
+                                                     #2 seconds of building/scraping polyhedra database for reasonable dev timing
                                                      retry.scrape = FALSE)
 
   .available.scrapping.conf[["dev-minimal"]] <- list(max.quant.config.schedule = 0,
                                                      max.quant.scrape = 10,
                                                      time2scrape.source = 20,
-                                                      #20 seconds of building/scraping polyhedra database for reasonable devs timing
+                                                      #20 seconds of building/scraping polyhedra database for reasonable dev timing
                                                      retry.scrape = FALSE)
   .available.scrapping.conf[["pkg-minimal"]] <- list(max.quant.config.schedule = 0,
                                                      max.quant.scrape = 0,
