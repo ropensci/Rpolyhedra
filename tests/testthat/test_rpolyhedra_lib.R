@@ -1,7 +1,5 @@
-context("Rpolyhedra-test")
-
 # Scrape tests
-context("regular solids")
+context("Regular solids")
 test_that("Scrape test rpolyhedra 5 regular solids", {
   tasks <- getPolyhedraObject()$generateTestTasks(sources = "netlib",
                                                   polyhedra.names = c("tetrahedron","octahedron","cube","dodecahedron","icosahedron"),
@@ -12,7 +10,7 @@ test_that("Scrape test rpolyhedra 5 regular solids", {
   }
 })
 
-context("scrape available polyhedra")
+context("Scrape available polyhedra")
 test_that("Scrape test rpolyhedra for 12% of available polyhedra", {
   tasks <- getPolyhedraObject()$generateTestTasks(TestTaskClass = PolyhedronTestTaskScrape.class,
                                         max.quant = getPercentilPolyhedraQuant(0.12,50))
@@ -22,7 +20,7 @@ test_that("Scrape test rpolyhedra for 12% of available polyhedra", {
   }
 })
 
-context("properties regular solids")
+context("Properties regular solids")
 test_that("test getting properties of scraped regular solids", {
   tetrahedron <- getPolyhedron(source = "netlib",polyhedron.name = "tetrahedron")
   tetrahedron$checkProperties(expected.vertices = 4, expected.faces = 4)

@@ -253,10 +253,9 @@ updatePolyhedraDatabase <- function(){
   .available.scrapping.conf <- getPackageEnvir(".available.scrapping.conf")
 
 
-  #scrapePolyhedra(scrape.config = .available.scrapping.conf[["dev-tetrahedron"]],
-  #                sources.config = .available.sources)
+  #"dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
   #Change when release version
-  scrapePolyhedra(scrape.config = .available.scrapping.conf[["dev-minimal"]],
+  scrapePolyhedra(scrape.config = .available.scrapping.conf[["pkg-minimal"]],
                    sources.config = .available.sources)
 }
 
@@ -791,8 +790,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         saveRDS(object = serialized.polyhedron, ascii = TRUE, file=tmp.filename)
         zip(zipfile = file.path(data.dir, paste(crc.name, ".RDS.zip", sep="")), files = tmp.filename, flags="-j")
         unlink(tmp.filename)
-
-        futile.logger::flog.info(paste("Added polyhedron in file",polyhedron.name,"#|n", polyhedron$file.id, polyhedron.name,"in source",source,"to database"))
+        futile.logger::flog.info(paste("Added polyhedron in file",polyhedron.name,"#|n", polyhedron$file.id, polyhedron.name,"in source",source,"to database with CRC",crc.name))
       }
       self$ledger$updateStatus(source = source, source.filename = source.filename,
                                status = "scraped", scraped.polyhedron = polyhedron)

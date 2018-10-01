@@ -16,5 +16,5 @@ dmccooey.com/polyhedra/*.js
 
 # polyhedra database should only be included in release commits
 # Release version
-polyhedra*.RDS
-*.zip
+#polyhedra*.RDS
+#*.zip
