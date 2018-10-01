@@ -63,6 +63,7 @@ Polyhedron state inside database.
   Builds the RGL model, taking the object's size, the origin}
   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
   \item{\code{serialize()}}{Gets a list representation out of the polyhedron object}
+  \item{\code{expect_equal()}}{Function which test equal values for all fields using serialize function}
 
 }
 }
