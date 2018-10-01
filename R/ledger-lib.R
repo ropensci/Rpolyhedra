@@ -108,13 +108,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      }
      r
    },
-   getCRCFilename = function(source, source.filename){
-     ret <- NULL
-     r <- which(self$df$source == source & self$df$source.filename == source.filename)
-     if (length(r)>0){
-       ret <- digest(self$df[2,"source.filename"],algo="crc32")
-     }
-     ret
+   getCRCPolyhedronName = function(source, polyhedron.name){
+     digest(polyhedron.name,algo="crc32")
    },
    updateStatus = function(source, source.filename, status, status.field = "status",
                            scraped.polyhedron = NA, obs =""){
@@ -178,11 +173,10 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    updateCalculatedFields = function(){
      resolveScrapedPreloaded <- function(x, field){maxWithoutNA(c(x[paste("scraped",field,sep=".")],
                                                                   x[paste("preloaded",field,sep=".")]))}
-     if (!"name" %in% names(self$df)){
+     if (!"vertices" %in% names(self$df)){
        self$dirty <- TRUE
      }
      if (self$dirty){
-       self$df$name     <-  apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="name")} )
        self$df$vertices <-  as.numeric(apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="vertices")}))
        self$df$faces    <-  as.numeric(apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="faces")}))
        self$dirty <- FALSE
@@ -190,16 +184,16 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    },
    getAvailablePolyhedra = function(sources = names(getPackageEnvir(".available.sources")),
                                     search.string = "",
-                                    ret.fields = c("source","name","vertices","faces","status"),
+                                    ret.fields = c("source","scraped.name","vertices","faces","status"),
                                     ignore.case = TRUE){
      self$updateCalculatedFields()
      if (is.null(ret.fields)){
        ret.fields <- 1:ncol(self$df)
      }
-     ret <- self$df[!is.na(self$df$name) & self$df$source %in% sources,
+     ret <- self$df[!is.na(self$df$scraped.name) & self$df$source %in% sources,
                     ret.fields]
      if (!is.null(search.string)) {
-       ret <- ret[grepl(search.string, ret$name,ignore.case = ignore.case),]
+       ret <- ret[grepl(search.string, ret$scraped.name,ignore.case = ignore.case),]
      }
      ret <- ret[order(ret$vertices,ret$faces,ret$source),]
      ret
@@ -287,7 +281,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        }
        ret <- self$df[filtred.rows,]
        if (order.by.vertices.faces){
-         ret <- ret[order(ret$vertices,ret$faces,ret$source,ret$name),]
+         ret <- ret[order(ret$vertices,ret$faces,ret$source,ret$scraped.name),]
        }
      }
      ret

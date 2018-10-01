@@ -733,7 +733,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     },
     existsPolyhedron = function(source = "netlib",polyhedron.name) {
       ret <- FALSE
-      file.path <- self$getPolyhedronFilename(source = source, polyhedron.name = polyhedron.name)
+      file.path <- self$getPolyhedronFilename(source = source, polyhedron.name = polyhedron.name, extension=".RDS.zip")
       ret <- !is.null(file.path)
       if (ret){
         ret <- file.exists(file.path)
@@ -741,18 +741,20 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       ret
     },
     getPolyhedraSourceDir = function(source, create.dir = TRUE){
-      ret <- file.path(getDataDir(), "polyhedra",source)
+      ret <- file.path(getDataDir(), "polyhedra",source,"/")
       if (create.dir){
         dir.create(ret, showWarnings = FALSE, recursive = TRUE)
       }
       ret
     },
-    getPolyhedronFilename = function(source, polyhedron.name){
-      paste(self$getPolyhedraSourceDir(source),self$ledger$getCRCFilename(source, polyhedron.name))
+    getPolyhedronFilename = function(source, polyhedron.name, extension){
+      paste(self$getPolyhedraSourceDir(source),
+            self$ledger$getCRCPolyhedronName(source = source, polyhedron.name = polyhedron.name),
+            extension, sep="")
     },
     getPolyhedron = function(source = "netlib",polyhedron.name, strict = FALSE) {
       data.dir <- self$getPolyhedraSourceDir(source=source)
-      if (!self$existsPolyhedron(source,polyhedron.name)){
+      if (!self$existsPolyhedron(source = source,polyhedron.name = polyhedron.name)){
         message <- paste("Polyhedron",polyhedron.name,"not available in source",source)
         if (strict){
           stop(message)
@@ -760,13 +762,12 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       #serialized.polyhedron <- source.data[[polyhedron.name]]
       ret <- NULL
-      zip.filename <- file.path(data.dir, paste(polyhedron.name, ".RDS.zip", sep=""))
-
+      crc.name <- self$ledger$getCRCPolyhedronName(source = source , polyhedron.name = polyhedron.name)
+      zip.filename <- file.path(data.dir, paste(crc.name, ".RDS.zip", sep=""))
       serialized.polyhedron <- NULL
       if(file.exists(zip.filename)) {
         tmp.dir <- file.path(tempdir=tempdir(), source)
         dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
-        crc.name <- self$ledger$getCRCFilename(source = source , source.filename = source.filename)
         serialized.filename <- paste(crc.name, ".RDS", sep="")
         tmp.filename <- file.path(tmp.dir, serialized.filename)
         unzip(zipfile = zip.filename, files = serialized.filename, exdir = tmp.dir)
@@ -788,7 +789,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         futile.logger::flog.info(paste("Polyhedron", polyhedron.name,"in source",source,"already in database"))
       }
       else {
-        crc.name <- self$ledger$getCRCFilename(source = source , source.filename = source.filename)
+        crc.name <- self$ledger$getCRCPolyhedronName(source = source , polyhedron.name = polyhedron.name)
         serialized.polyhedron <- polyhedron$state$serialize()
         tmp.dir <- file.path(tempdir=tempdir(), source)
         dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
@@ -860,7 +861,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                                              max.quant = max.quant.retrieve,
                                                              order.by.vertices.faces = TRUE)
       if (!is.null(polyhedra.names)){
-        filenames2scrape  <- filenames2scrape[filenames2scrape$name %in% polyhedra.names,]
+        filenames2scrape  <- filenames2scrape[filenames2scrape$scraped.name %in% polyhedra.names,]
       }
 
       ret <- list()
