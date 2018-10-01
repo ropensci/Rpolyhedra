@@ -6,7 +6,7 @@ test_that("Scrape test rpolyhedra 5 regular solids", {
   tasks <- getPolyhedraObject()$generateTestTasks(sources = "netlib",
                                                   polyhedra.names = c("tetrahedron","octahedron","cube","dodecahedron","icosahedron"),
                                                   TestTaskClass = PolyhedronTestTaskScrape.class,
-                                         max.quant = 5)
+                                                  max.quant = 5)
   for (task in tasks){
     task$run()
   }
