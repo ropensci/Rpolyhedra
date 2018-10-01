@@ -18,6 +18,6 @@ Gets an XML representation out of the polyhedron object
 \examples{
 #get the representation of a cube (netlib library)
 library(Rpolyhedra)
-polyhedronToXML(getPolyhedron("netlib", "cube")$state)
+polyhedronToXML(getPolyhedron("netlib", "cube")$getState())
 
 }

@@ -1,7 +1,7 @@
 Package: Rpolyhedra
 Type: Package
 Title: Polyhedra Database
-Version: 0.2.6
+Version: 0.2.7
 Authors@R: c(
     person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
     person("Leonardo","Belen",,"leobelen@gmail.com", c("aut","com","cph"))
@@ -21,7 +21,8 @@ Imports: futile.logger,
          stringr,
          R6,
          testthat, 
-         RJSONIO
+         XML,
+         digest
 Collate:
   'polyhedra-lib.R'
   'ledger-lib.R'
