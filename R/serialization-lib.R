@@ -9,19 +9,17 @@
 #' @examples
 #' #get the representation of a cube (netlib library)
 #' library(Rpolyhedra)
-#' polyhedronToXML(getPolyhedron("netlib", "cube")$state)
+#' polyhedronToXML(getPolyhedron("netlib", "cube")$getState())
 #'
 #' @import XML
 #' @export
 polyhedronToXML <- function(polyhedron.state.defined)
 {
   xml <- XML::xmlTree()
-  xml$addTag("polyhedron", close=FALSE)
-
-
-
-  xml$closeTag()
-  stop("Not implemented")
+  #xml$addTag("polyhedron", close=FALSE)
+  #xml$closeTag()
+  # TODO generate XML
+  xml
 }
 
 #' persistPolyhedron
