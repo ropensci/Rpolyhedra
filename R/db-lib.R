@@ -398,7 +398,7 @@ PolyhedronScraperConfiguration.class <- R6::R6Class("PolyhedronScraperConfigurat
 #' \describe{
 #'   \item{\code{initialize()}}{initializes the object}
 #'   \item{\code{getPolyhedraFiles(home.dir.data)}}{returns the file names on the netlib database}
-#'   \item{\code{scrape(polyhedron.file.id, polyhedron.filename)}}{scrapes the object}
+#'   \item{\code{scrape(polyhedron.file.id, source.filename)}}{scrapes the object}
 #' }
 #'
 #' @format \code{\link{R6Class}} object.
@@ -419,14 +419,17 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class("PolyhedronScraperConf
       polyhedra.files <- polyhedra.files[order(as.numeric(polyhedra.files))]
       polyhedra.files
     },
-    scrape = function(polyhedron.file.id, polyhedron.filename){
-      polyhedra.netlib.lines <- readLines(polyhedron.filename)
-      polyhedron.file.id <- polyhedron.filename
+    scrape = function(polyhedron.file.id, source.filename){
+      #debug
+      print(paste("netlib",source.filename))
+
+      polyhedra.netlib.lines <- readLines(source.filename)
+      polyhedron.file.id <- source.filename
       polyhedron.file.id <- strsplit(polyhedron.file.id,split = "/")[[1]]
       polyhedron.file.id <- polyhedron.file.id[length(polyhedron.file.id)]
       current.polyhedron <- Polyhedron.class$new(file.id=polyhedron.file.id)
       current.polyhedron$scrapeNetlib(netlib.p3.lines = polyhedra.netlib.lines)
-      futile.logger::flog.debug(paste("parsed", polyhedron.filename, "with name",
+      futile.logger::flog.debug(paste("parsed", source.filename, "with name",
                                       current.polyhedron$state$name))
       current.polyhedron
     }
@@ -440,7 +443,7 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class("PolyhedronScraperConf
 #' \describe{
 #'   \item{\code{initialize()}}{initializes the object}
 #'   \item{\code{getPolyhedraFiles(home.dir.data)}}{returns the file names on the netlib database}
-#'   \item{\code{scrape(polyhedron.file.id, polyhedron.filename)}}{scrapes the object}
+#'   \item{\code{scrape(polyhedron.file.id, source.filename)}}{scrapes the object}
 #' }
 #'
 #' @format \code{\link{R6Class}} object.
@@ -466,11 +469,15 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class("PolyhedronScraperCon
       polyhedra.files <- polyhedra.files[grep("\\.txt", polyhedra.files)]
       polyhedra.files
     },
-    scrape = function(polyhedron.file.id, polyhedron.filename){
-      polyhedra.dmccoey.lines <- readLines(polyhedron.filename)
+    scrape = function(polyhedron.file.id, source.filename){
+      #debug
+      print(paste("dmccooey",source.filename))
+      print(polyhedron.file.id)
+
+      polyhedra.dmccoey.lines <- readLines(source.filename)
       current.polyhedron <- Polyhedron.class$new(file.id=polyhedron.file.id)
       current.polyhedron$scrapeDmccoey(polyhedra.dmccoey.lines = polyhedra.dmccoey.lines)
-      futile.logger::flog.debug(paste("parsed", polyhedron.filename, "with name",
+      futile.logger::flog.debug(paste("parsed", source.filename, "with name",
                                       current.polyhedron$state$name))
       current.polyhedron
     }
@@ -548,15 +555,15 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
   public = list(
     polyhedra.dir = NA,
     polyhedron.file.id = NA,
-    polyhedron.filename = NA,
+    source.filename = NA,
     initialize = function(polyhedra.db, source.config, polyhedron.name,
                           polyhedra.dir, polyhedron.file.id,
-                          polyhedron.filename) {
+                          source.filename) {
       super$initialize(polyhedra.db = polyhedra.db, source.config = source.config,
                        polyhedron.name = polyhedron.name)
       self$polyhedra.dir       <- polyhedra.dir
       self$polyhedron.file.id   <- polyhedron.file.id
-      self$polyhedron.filename <- polyhedron.filename
+      self$source.filename <- source.filename
       self
     },
     run = function(){
@@ -564,7 +571,7 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       tryCatch({
         obs    <- ""
         scraped.polyhedron <- self$source.config$scrape(polyhedron.file.id = self$polyhedron.file.id,
-                                                   file.path(self$polyhedra.dir, self$polyhedron.filename))
+                                                   file.path(self$polyhedra.dir, self$source.filename))
         scraped.name <- scraped.polyhedron$getName()
         #scraped.polyhedron$getRGLModel(1, c(0, 0, 0))
         #futile.logger::flog.debug(paste("generated RGLModel"))
@@ -594,7 +601,7 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class("PolyhedronTestTaskEdges
   inherit = PolyhedronTestTask.class,
   public = list(
     initialize = function(polyhedra.db, source.config, polyhedron.name,
-                          polyhedra.dir, polyhedron.file.id, polyhedron.filename) {
+                          polyhedra.dir, polyhedron.file.id, source.filename) {
       super$initialize(polyhedra.db = polyhedra.db, source.config = source.config,
                        polyhedron.name = polyhedron.name)
       self
@@ -741,7 +748,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       ret
     },
     getPolyhedronFilename = function(source, polyhedron.name){
-      paste(self$getPolyhedraSourceDir(source),self$ledger$getIdFilename(source, polyhedron.name))
+      paste(self$getPolyhedraSourceDir(source),self$ledger$getCRCFilename(source, polyhedron.name))
     },
     getPolyhedron = function(source = "netlib",polyhedron.name, strict = FALSE) {
       data.dir <- self$getPolyhedraSourceDir(source=source)
@@ -759,7 +766,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       if(file.exists(zip.filename)) {
         tmp.dir <- file.path(tempdir=tempdir(), source)
         dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
-        serialized.filename <- paste(polyhedron.name, ".RDS", sep="")
+        crc.name <- self$ledger$getCRCFilename(source = source , source.filename = source.filename)
+        serialized.filename <- paste(crc.name, ".RDS", sep="")
         tmp.filename <- file.path(tmp.dir, serialized.filename)
         unzip(zipfile = zip.filename, files = serialized.filename, exdir = tmp.dir)
         serialized.polyhedron <- readRDS(file = tmp.filename)
@@ -771,29 +779,29 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       ret
     },
-    addPolyhedron = function(source="netlib",polyhedron.filename,
+    addPolyhedron = function(source="netlib", source.filename,
                              polyhedron,overwrite=FALSE) {
       polyhedron.name <- polyhedron$getName()
       data.dir <- self$getPolyhedraSourceDir(source = source)
-
       prev.data <- self$getPolyhedron(source = source, polyhedron.name = polyhedron.name)
       if (!overwrite &!is.null(prev.data)){
         futile.logger::flog.info(paste("Polyhedron", polyhedron.name,"in source",source,"already in database"))
       }
       else {
+        crc.name <- self$ledger$getCRCFilename(source = source , source.filename = source.filename)
         serialized.polyhedron <- polyhedron$state$serialize()
         tmp.dir <- file.path(tempdir=tempdir(), source)
         dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
-        serialized.filename <- paste(polyhedron.name, ".RDS", sep="")
+        serialized.filename <- paste(crc.name, ".RDS", sep="")
         tmp.filename <- file.path(tmp.dir, serialized.filename)
         saveRDS(object = serialized.polyhedron, ascii = TRUE, file=tmp.filename)
-        zip(zipfile = file.path(data.dir, paste(polyhedron.name, ".RDS.zip", sep="")), files = tmp.filename, flags="-j")
+        zip(zipfile = file.path(data.dir, paste(crc.name, ".RDS.zip", sep="")), files = tmp.filename, flags="-j")
         unlink(tmp.filename)
 
         futile.logger::flog.info(paste("Added polyhedron in file",polyhedron.name,"#|n", polyhedron$file.id, polyhedron.name,"in source",source,"to database"))
       }
-      self$ledger$updateStatus(source = source,filename = polyhedron.filename,
-                               status = "scraped",scraped.polyhedron = polyhedron)
+      self$ledger$updateStatus(source = source, source.filename = source.filename,
+                               status = "scraped", scraped.polyhedron = polyhedron)
       polyhedron
     },
     configPolyhedraSource = function(source.config, max.quant = 0) {
@@ -809,10 +817,10 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         }
         self$addSourceConfig(source.config)
         scheduled <- NULL
-        for (polyhedron.filename in polyhedra.files) {
-          if (is.null(self$ledger$getIdFilename(source = source,filename = polyhedron.filename))){
-            self$ledger$addFilename(source = source, filename = polyhedron.filename)
-            scheduled <- c(scheduled, polyhedron.filename)
+        for (source.filename in polyhedra.files) {
+          if (is.null(self$ledger$getIdFilename(source = source,source.filename = source.filename))){
+            self$ledger$addFilename(source = source, source.filename = source.filename)
+            scheduled <- c(scheduled, source.filename)
           }
         }
         if (length(scheduled)>0){
@@ -869,16 +877,19 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           filenames2scrape <- filenames2scrape[sample.2.cover,]
         }
         n <- nrow(filenames2scrape)
+        #debug
+        filenames2scrape <<- filenames2scrape
+
         for (r in c(1:n)){
           current.filename.data <- filenames2scrape[r,]
           source <- current.filename.data$source
           source.config <- self$sources.config[[source]]
           polyhedra.dir <- source.config$getBaseDir(home.dir.data)
           polyhedron.file.id <- current.filename.data$file.id
-          polyhedron.filename <- current.filename.data$filename
-          ret[[paste(source,polyhedron.filename,sep="|")]]<-
-                  covering.code(polyhedra.dir, source.config,
-                                polyhedron.file.id, polyhedron.filename)
+          source.filename <- current.filename.data$source.filename
+          ret[[paste(source,source.filename,sep="|")]]<-
+                  covering.code(polyhedra.dir = polyhedra.dir, source.config = source.config,
+                                polyhedron.file.id = polyhedron.file.id, source.filename = source.filename)
         }
         #after covering, save RDS
         self$saveRDS()
@@ -889,30 +900,30 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                       sources = names(self$sources.config),
                       max.quant = 0,
                       time2scrape.source = 30){
-      scrape.function <- function(polyhedra.dir, source.config, polyhedron.file.id, polyhedron.filename){
+      scrape.function <- function(polyhedra.dir, source.config, polyhedron.file.id, source.filename){
         source <- source.config$getName()
         current.polyhedron <- NULL
         #TODO add tryCatch after dev
         #tryCatch({
-          self$ledger$updateStatus(source = source,filename = polyhedron.filename,
+          self$ledger$updateStatus(source = source, source.filename = source.filename,
                                  status = "scraping")
-          current.polyhedron <- source.config$scrape(polyhedron.file.id = polyhedron.file.id, file.path(polyhedra.dir, polyhedron.filename))
+          current.polyhedron <- source.config$scrape(polyhedron.file.id = polyhedron.file.id, file.path(polyhedra.dir, source.filename))
           if (current.polyhedron$isChecked()){
             #current.polyhedron$getRGLModel(1, c(0, 0, 0))
             #futile.logger::flog.debug(paste("generated RGLModel"))
-            self$addPolyhedron(source=source, polyhedron.filename = polyhedron.filename,
+            self$addPolyhedron(source=source, source.filename = source.filename,
                                polyhedron = current.polyhedron)
           }
           else{
             errors <- current.polyhedron$getErrors()
-            self$ledger$updateStatus(source,polyhedron.filename,status = "failed",obs=errors)
+            self$ledger$updateStatus(source = source, source.filename= source.filename,status = "failed",obs=errors)
           }
         # },
         # error=function(e){
         #   error <- paste(e$message,collapse=",")
         #   futile.logger::flog.error(paste("catched error",error))
         #   assign("error", error, envir = parent.env(environment()))
-        #   self$ledger$updateStatus(source,polyhedron.filename,status = "exception",obs=error)
+        #   self$ledger$updateStatus(source = source,source.filename,status = "exception",obs=error)
         # })
         current.polyhedron
       }
@@ -953,11 +964,11 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         futile.logger::ERROR("There is no polyhedra database so test could not be runned")
         test <- FALSE
       }
-      test.function <- function(polyhedra.dir, source.config, polyhedron.file.id, polyhedron.filename){
+      test.function <- function(polyhedra.dir, source.config, polyhedron.file.id, source.filename){
         source <- source.config$getName()
         scraped.polyhedron <- NULL
         tryCatch({
-          scraped.polyhedron <- source.config$scrape(polyhedron.file.id = polyhedron.file.id, file.path(polyhedra.dir, polyhedron.filename))
+          scraped.polyhedron <- source.config$scrape(polyhedron.file.id = polyhedron.file.id, source.filename = file.path(polyhedra.dir, source.filename))
           polyhedron.name <- scraped.polyhedron$getName()
           status <- "testing"
           obs    <- ""
@@ -969,7 +980,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           status <- "exception"
           obs    <- scraped.polyhedron$getErrors()
         })
-        self$ledger$updateStatus(source,polyhedron.filename, status.field = "status.test", status = status, obs= obs)
+        self$ledger$updateStatus(source = source, source.filename = source.filename, status.field = "status.test", status = status, obs= obs)
         if (status=="testing"){
           tryCatch({
             res <- expect_true(self$existsPolyhedron(source = source,
@@ -990,7 +1001,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
             status <- "failed"
             obs    <- scraped.polyhedron$getErrors()
           })
-          self$ledger$updateStatus(source,polyhedron.filename, status.field = "status.test", status = status, obs= obs)
+          self$ledger$updateStatus(source = source, source.filename = source.filename, status.field = "status.test", status = status, obs= obs)
         }
         scraped.polyhedron
       }
@@ -1018,15 +1029,15 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         futile.logger::ERROR("There is no polyhedra database so test could not be runned")
         test <- FALSE
       }
-      test.task.gen.function <- function(polyhedra.dir, source.config, polyhedron.file.id, polyhedron.filename){
+      test.task.gen.function <- function(polyhedra.dir, source.config, polyhedron.file.id, source.filename){
         scraped.polyhedron <- NULL
         source <- source.config$getName()
-        polyhedron.ledger <- polyhedra.db.saved$ledger$df[polyhedra.db.saved$ledger$getIdFilename(source,polyhedron.filename),]
+        polyhedron.ledger <- polyhedra.db.saved$ledger$df[polyhedra.db.saved$ledger$getIdFilename(source,source.filename),]
         polyhedron.name   <- polyhedron.ledger$scraped.name
         task <- TestTaskClass$new(polyhedra.db = polyhedra.db.saved,
                                   source.config = source.config, polyhedron.name = polyhedron.name,
                                   polyhedra.dir = polyhedra.dir, polyhedron.file.id = polyhedron.file.id,
-                                  polyhedron.filename = polyhedron.filename)
+                                  source.filename = source.filename)
         task
       }
       ret <- self$cover(mode            = "test",
@@ -1168,7 +1179,7 @@ scrapePolyhedraSources<- function(sources.config = getPackageEnvir(".available.s
   if (length(still.queued)>0){
     apply(getPolyhedraObject()$ledger$df[still.queued,], MARGIN = 1,
           FUN=function(x){getPolyhedraObject()$ledger$updateStatus(source = x["source"],
-                                                         filename = x["filename"],
+                                                         source.filename = x["source.filename"],
                                                          status = "skipped",
                                                          obs = "#TODO in next release")})
     #save skipped state in RDS file

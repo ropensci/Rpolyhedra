@@ -15,9 +15,10 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 #' @section Methods:
 #' \describe{
 #'   \item{\code{initialize()}}{initializes the object}
-#'   \item{\code{addFilename(source, filename)}}{add filename to the ledger}
-#'   \item{\code{getIdFilename(source, filename)}}{Returns id/row of source and filenames parameters in the ledger}
-#'   \item{\code{updateStatus(source, filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
+#'   \item{\code{addFilename(source, source.filename)}}{add filename to the ledger}
+#'   \item{\code{getIdFilename(source, source.filename)}}{Returns id/row of source and filenames parameters in the ledger}
+#'   \item{\code{getCRCFilename(source, source.filename)}}{Returns CRC of the source filename for storing in db folder}
+#'   \item{\code{updateStatus(source, source.filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
 #'   \item{\code{savePreloadedData()}}{Internal method which saves a file with an estimation of time required time to scrape each filename}
 #'   \item{\code{loadPreloadedData()}}{Load a file with an estimation of time required time to scrape each filename}
 #'   \item{\code{getSizeToTimeScrape(sources, time2scrape = 60)}}{Estimates how much filenames could be scraped in a time frame, considering data retrieved with loadPreloadedData}
@@ -44,7 +45,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      self$df <- data.frame(id           = character(),
                            source       = character(),
                            file.id       = numeric(),
-                           filename     = character(),
+                           source.filename     = character(),
                            start.scrape = as.POSIXct(character()),
                            end.scrape   = as.POSIXct(character()),
                            status       = character(),
@@ -67,11 +68,11 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    getAvailableSources = function(){
     sort(unique(self$df$source))
    },
-   addFilename = function(source, filename){
+   addFilename = function(source, source.filename){
      r <- NULL
      default.status <- "queued"
-     if (is.null(self$getIdFilename(source, filename))){
-       futile.logger::flog.info(paste("Adding Filename to ledger ",source, filename))
+     if (is.null(self$getIdFilename(source, source.filename))){
+       futile.logger::flog.info(paste("Adding Filename to ledger ",source, source.filename))
        r <- nrow(self$df)+1
        status.field <- "status"
        self$countStatusUse(status.field = status.field, status = default.status)
@@ -81,7 +82,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
 
        #obtain preloaded.time2scrape
        row.preloaded.t2s <- which(self$preloaded.data$source == source &
-                                    self$preloaded.data$filename==filename)
+                                    self$preloaded.data$filename==source.filename)
        if (length(row.preloaded.t2s)==1){
          preloaded.data <- self$preloaded.data[row.preloaded.t2s,]
          self$df[r,c("preloaded.name")]<-
@@ -92,13 +93,13 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        else{
          preloaded.time2scrape <- NA
        }
-       self$df[r,c("id","source","filename","status")]<- c(r,source,filename,default.status)
+       self$df[r,c("id","source","source.filename","status")]<- c(r, source, source.filename, default.status)
        self$dirty <- TRUE
      }
      r
    },
-   getIdFilename = function(source, filename){
-     r <- which(self$df$source == source & self$df$filename == filename)
+   getIdFilename = function(source, source.filename){
+     r <- which(self$df$source == source & self$df$source.filename == source.filename)
      if (length(r)>0){
        self$df[r,"id"]
      }
@@ -107,7 +108,15 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      }
      r
    },
-   updateStatus = function(source, filename, status, status.field = "status",
+   getCRCFilename = function(source, source.filename){
+     ret <- NULL
+     r <- which(self$df$source == source & self$df$source.filename == source.filename)
+     if (length(r)>0){
+       ret <- digest(self$df[2,"source.filename"],algo="crc32")
+     }
+     ret
+   },
+   updateStatus = function(source, source.filename, status, status.field = "status",
                            scraped.polyhedron = NA, obs =""){
      if (is.null(obs)){
        obs <- ""
@@ -115,9 +124,9 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      if (!status.field %in% c("status","status.test"))
        stop(paste("Cannot update invalid status field",status.field))
      ret <- NULL
-     retrieved.id <- self$getIdFilename(source = source, filename = filename)
+     retrieved.id <- self$getIdFilename(source = source, source.filename = source.filename)
      if (length(retrieved.id)!=1){
-       stop(paste("There must be a unique row for",source,filename,"and have",length(retrieved.id)))
+       stop(paste("There must be a unique row for",source,source.filename,"and have",length(retrieved.id)))
      }
      if (status.field == "status"){
        end.scrape <- Sys.time()
@@ -196,7 +205,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      ret
    },
    savePreloadedData = function(){
-     preloaded.data <- self$df[!is.na(self$df$time.scraped),c("source","filename","scraped.name","scraped.vertices","scraped.faces","time.scraped")]
+     preloaded.data <- self$df[!is.na(self$df$time.scraped),c("source","source.filename","scraped.name","scraped.vertices","scraped.faces","time.scraped")]
      preloaded.data <- preloaded.data[order(preloaded.data$time.scraped,
                                                             preloaded.data$source,
                                                             preloaded.data$filename),]

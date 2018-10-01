@@ -19,9 +19,10 @@ For flexible and reproducible configuration for package development
 
 \describe{
   \item{\code{initialize()}}{initializes the object}
-  \item{\code{addFilename(source, filename)}}{add filename to the ledger}
-  \item{\code{getIdFilename(source, filename)}}{Returns id/row of source and filenames parameters in the ledger}
-  \item{\code{updateStatus(source, filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
+  \item{\code{addFilename(source, source.filename)}}{add filename to the ledger}
+  \item{\code{getIdFilename(source, source.filename)}}{Returns id/row of source and filenames parameters in the ledger}
+  \item{\code{getCRCFilename(source, source.filename)}}{Returns CRC of the source filename for storing in db folder}
+  \item{\code{updateStatus(source, source.filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
   \item{\code{savePreloadedData()}}{Internal method which saves a file with an estimation of time required time to scrape each filename}
   \item{\code{loadPreloadedData()}}{Load a file with an estimation of time required time to scrape each filename}
   \item{\code{getSizeToTimeScrape(sources, time2scrape = 60)}}{Estimates how much filenames could be scraped in a time frame, considering data retrieved with loadPreloadedData}
