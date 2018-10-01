@@ -420,9 +420,6 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class("PolyhedronScraperConf
       polyhedra.files
     },
     scrape = function(polyhedron.file.id, source.filename){
-      #debug
-      print(paste("netlib",source.filename))
-
       polyhedra.netlib.lines <- readLines(source.filename)
       polyhedron.file.id <- source.filename
       polyhedron.file.id <- strsplit(polyhedron.file.id,split = "/")[[1]]
@@ -470,10 +467,6 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class("PolyhedronScraperCon
       polyhedra.files
     },
     scrape = function(polyhedron.file.id, source.filename){
-      #debug
-      print(paste("dmccooey",source.filename))
-      print(polyhedron.file.id)
-
       polyhedra.dmccoey.lines <- readLines(source.filename)
       current.polyhedron <- Polyhedron.class$new(file.id=polyhedron.file.id)
       current.polyhedron$scrapeDmccoey(polyhedra.dmccoey.lines = polyhedra.dmccoey.lines)
@@ -878,9 +871,6 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           filenames2scrape <- filenames2scrape[sample.2.cover,]
         }
         n <- nrow(filenames2scrape)
-        #debug
-        filenames2scrape <<- filenames2scrape
-
         for (r in c(1:n)){
           current.filename.data <- filenames2scrape[r,]
           source <- current.filename.data$source
@@ -904,8 +894,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       scrape.function <- function(polyhedra.dir, source.config, polyhedron.file.id, source.filename){
         source <- source.config$getName()
         current.polyhedron <- NULL
-        #TODO add tryCatch after dev
-        #tryCatch({
+        tryCatch({
           self$ledger$updateStatus(source = source, source.filename = source.filename,
                                  status = "scraping")
           current.polyhedron <- source.config$scrape(polyhedron.file.id = polyhedron.file.id, file.path(polyhedra.dir, source.filename))
@@ -919,13 +908,13 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
             errors <- current.polyhedron$getErrors()
             self$ledger$updateStatus(source = source, source.filename= source.filename,status = "failed",obs=errors)
           }
-        # },
-        # error=function(e){
-        #   error <- paste(e$message,collapse=",")
-        #   futile.logger::flog.error(paste("catched error",error))
-        #   assign("error", error, envir = parent.env(environment()))
-        #   self$ledger$updateStatus(source = source,source.filename,status = "exception",obs=error)
-        # })
+        },
+        error=function(e){
+          error <- paste(e$message,collapse=",")
+          futile.logger::flog.error(paste("catched error",error))
+          assign("error", error, envir = parent.env(environment()))
+          self$ledger$updateStatus(source = source,source.filename,status = "exception",obs=error)
+        })
         current.polyhedron
       }
       if (time2scrape.source >0){
@@ -988,9 +977,6 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                               polyhedron.name = polyhedron.name))
             db.polyhedron <- self$getPolyhedron(source = source,
                                                 polyhedron.name = polyhedron.name)
-            #debug
-            #scraped.polyhedron <<- scraped.polyhedron
-            #db.polyhedron <<- db.polyhedron
             scraped.polyhedron$state$inferEdges()
             expect_equal(scraped.polyhedron,db.polyhedron)
             status <- "tested"
