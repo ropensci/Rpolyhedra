@@ -3,10 +3,10 @@ context("Rpolyhedra-test")
 # Scrape tests
 context("regular solids")
 test_that("Scrape test rpolyhedra 5 regular solids", {
-  tasks <- getPolyhedraObject()$generateTestTasks(sources = "netlib",TestTaskClass = PolyhedronTestTaskScrape.class,
-                                        # max.quant = 5)
-                                        #TODO change
-                                        max.quant = 1)
+  tasks <- getPolyhedraObject()$generateTestTasks(sources = "netlib",
+                                                  polyhedra.names = c("tetrahedron","octahedron","cube","dodecahedron","icosahedron"),
+                                                  TestTaskClass = PolyhedronTestTaskScrape.class,
+                                         max.quant = 5)
   for (task in tasks){
     task$run()
   }
