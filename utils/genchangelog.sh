@@ -1,1 +1,1 @@
-git log --oneline --decorate  > ../changelog.txt
+git log --oneline --decorate  > ../ChangeLog
