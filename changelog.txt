@@ -1,4 +1,7 @@
-bb302c6 (HEAD -> master, origin/dev-leobelen) changed R badge to 3.4.0 in Readme.md)
+723d156 (HEAD -> dev-leobelen, origin/dev-leobelen) added a changelog generator
+beec66c (origin/master, origin/HEAD) Merge remote-tracking branch 'origin/master'
+2a6a198 expect equal in documentation
+bb302c6 (master) changed R badge to 3.4.0 in Readme.md)
 d513dd5 (tag: v0.2.7) Release version 0.2.7
 6b40908 [bugfix] XML and db version to 0.2.7
 998c091 removed debugging infrastructure
