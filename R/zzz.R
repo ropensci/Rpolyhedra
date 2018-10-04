@@ -30,6 +30,7 @@
   .package.db[["0.2.5"]] <- "0.2.5"
   .package.db[["0.2.6"]] <- "0.2.6"
   .package.db[["0.2.7"]] <- "0.2.7"
+  .package.db[["0.2.8"]] <- "0.2.8"
 
   setPackageEnvir(variable.name = ".package.db", .package.db)
   #assign(".package.db", value = .package.db, envir = asNamespace("Rpolyhedra"))

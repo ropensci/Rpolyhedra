@@ -17,7 +17,7 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
 #'   \item{\code{initialize()}}{initializes the object}
 #'   \item{\code{addFilename(source, source.filename)}}{add filename to the ledger}
 #'   \item{\code{getIdFilename(source, source.filename)}}{Returns id/row of source and filenames parameters in the ledger}
-#'   \item{\code{getCRCFilename(source, source.filename)}}{Returns CRC of the source filename for storing in db folder}
+#'   \item{\code{getCRCPolyhedronName(source, polyheron.name)}}{Returns CRC of the polyhedron.name for storing in db folder}
 #'   \item{\code{updateStatus(source, source.filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
 #'   \item{\code{savePreloadedData()}}{Internal method which saves a file with an estimation of time required time to scrape each filename}
 #'   \item{\code{loadPreloadedData()}}{Load a file with an estimation of time required time to scrape each filename}
@@ -55,6 +55,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                            status.test        = character(),
                            obs                = character(),
                            git.commit         = character(),
+                           crc.filename       = character(),
                            time.scraped       = numeric(),
                            preloaded.name        = character(),
                            preloaded.vertices    = numeric(),
@@ -109,7 +110,18 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      r
    },
    getCRCPolyhedronName = function(source, polyhedron.name){
-     digest(polyhedron.name,algo="crc32")
+     r <- which(self$df$source == source & tolower(self$df$scraped.name) == tolower(polyhedron.name))
+     ret <- NULL
+     if (length(r)>0){
+       ret <- self$df[r,"crc.filename"]
+       if (is.na(ret)){
+         ret <- NULL
+       }
+     }
+     if (is.null(ret)){
+       ret <- digest(tolower(polyhedron.name),algo="crc32")
+     }
+     ret
    },
    updateStatus = function(source, source.filename, status, status.field = "status",
                            scraped.polyhedron = NA, obs =""){
@@ -139,13 +151,28 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          values.numeric.update <- c(time.scraped)
          #in a different commands for not converting it to character
          if (status %in% "scraped"){
-           #TODO Check scraped.name = preloaded name
            scraped.name <- scraped.polyhedron$getName()
            scraped.vertices <- nrow(scraped.polyhedron$getState()$getVertices(solid = TRUE))
            scraped.faces    <- length(scraped.polyhedron$getState()$getSolid())
-
-           fields.update <- c(fields.update, "scraped.name")
-           values.update <- c(values.update, scraped.name)
+           crc.filename     <- self$getCRCPolyhedronName(source = source, polyhedron.name = scraped.name)
+           #Check scraped.name = preloaded name
+           error <- ""
+           preloaded.name <- self$df[retrieved.id, "preloaded.name"]
+           scraped.name.lower <- tolower(scraped.name)
+           existing.polyhedron.name.rows <- which(self$df$source == source &
+                                                    scraped.name.lower %in% tolower(self$df$scraped.name))
+           if (length(existing.polyhedron.name.rows)>0){
+             error <- paste(error, "Scraped name must be unique for source and exists in rows",
+                            paste(existing.polyhedron.name.rows,collapse=","))
+           }
+           if (scraped.name.lower != tolower(preloaded.name)){
+             error <- paste(error,"Scraped name is",scraped.name,"and preloaded name is",preloaded.name)
+           }
+           if (nchar(error)>0){
+             stop(error)
+           }
+           fields.update <- c(fields.update, "scraped.name","crc.filename")
+           values.update <- c(values.update, scraped.name.lower, crc.filename)
            fields.numeric.update <-c(fields.numeric.update, "scraped.vertices", "scraped.faces")
            values.numeric.update <- c(values.numeric.update,scraped.vertices,scraped.faces)
          }
