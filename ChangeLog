@@ -1,0 +1,155 @@
+2344280 (HEAD -> dev-leobelen) Merge remote-tracking branch 'origin/master' into dev-leobelen
+ec6df0c [bugfix] changed changelog file name to respond to CRAN standards
+05b749c (tag: v0.2.8, origin/master, origin/dev-0.3.0, origin/HEAD) Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.3.0
+7fb219f (origin/dev-leobelen) move genchangelog.sh to utils for better hqndling
+0474dd4 Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.3.0
+723d156 added a changelog generator
+1f1172e v0.2.8 now polyhedra names are case insensitive
+beec66c Merge remote-tracking branch 'origin/master'
+2a6a198 expect equal in documentation
+bb302c6 (master) changed R badge to 3.4.0 in Readme.md)
+d513dd5 (tag: v0.2.7) Release version 0.2.7
+6b40908 [bugfix] XML and db version to 0.2.7
+998c091 removed debugging infrastructure
+fb65995 CRC generated filename for scraped polyhedron
+c5f6625 Changed filename in ledger to source.filename when is name of scraped sources
+a1d7dbb test working without comparing R6 objects
+961d45a added more functions to the package'
+bd698ce now polyhedra database works with RDS in ascii per polyhedron
+56d128f added an addPolyhedron working with json zip files
+d457377 added changes to Rpolyhedra
+0596c11 (origin/serialize-R6) Implementing #22. By now, polyhedron are serialized and deserialized in RDS
+a5d70a9 Merge remote-tracking branch 'origin/dev-leobelen' into bugfix-R6
+c7c6727 (origin/dev-package-env) rpoly.polyhedron_invalid_face
+f1536cf rpoly.polyhedron_invalid_face
+27ea70a minor changes
+5fde000 solved a problem with switchToFullDB in which forcing an environment did not change it
+19a80f9 (tag: v0.2.6) regenerated db for v0.2.6
+73915c1 [bugfix] package documentation
+bbe0336 encapsulated environment functions
+c0c4465 Merge remote-tracking branch 'origin/dev-leobelen' into dev-package-env
+a890dfd removed methods from Imports in the DESCRIPTION file to comply with CRAN rules
+f35a879 added documentation changes to comply with cran
+d2c7c36 Update polyhedra database after switch
+43e12b1 v0.2.6 with db v0.2.5
+afd547d Merge remote-tracking branch 'origin/dev-package-env' into dev-package-env
+cfe8b67 pkg-minimal config for v0.2.6
+ddac524 [bugfix] data.dir for downloading
+482ca41 environment.txt to Rpolyhedra.env
+3142707 pkg-minimal for v0.2.6
+1df85c6 [bugfix] does not create home directory until user confirmation
+0e6cc46 db generated v.0.2.6
+f96fbc6 Generating db v0.2.6
+7daefb1 [bugfix] reading .data.env from userspace when it is available
+984f00b missing page added
+3ec3fe7 solved a documentation problem, removed unneeded exports, and added support for a persistent file path storage
+71f3cde added documentation to switchToFullDatabase and modified the tests to call getPolyhedraObject()
+9a31b90 changes to better support memory management
+f0377fd (origin/dev-remote-db) now it reloads the .polyhedra object after switchToFullDatabase()
+fe1f936 workaround for #17 until next release
+7212c9c #17 closed
+420a56f Solved the issue indicated in #17"
+15534a7 [bugfix] can change .data.env but have to access without exporting selectDataEnv
+1f11691 (tag: v0.2.5) solved a problem with downloadRPolyhedraSupportingFiles not being called when selecting fullDB
+c7b7a1c environment changes to allow the modification of package wide variables
+17fbc64 [bugfix] in filenames for polyhedra.RDS
+17ff330 moved on to file.path on db-lib.R
+f737781 minor changes removing debug info
+2e894dc Corrected v0.2.5 from fulldb branch
+da16a77 Merge remote-tracking branch 'origin/RpolyhedraFullDB' into RpolyhedraFullDB
+74e2561 fulldb for v0.2.5
+e4055f7 V0.2.5 with pkg-minimal db
+8ad3989 V0.2.5 with pkg-minimal db
+c422a2e generating pkg-minimal
+c8bb580 added travis awareness for the user download message
+a07a7e5 added travis awareness for the user download message
+0cf9bb9 added a message banner to ask users to download supporting data
+cf2c5be [bugfix] isCompatiblePolyhedraRDS
+c8aca54 [bugfix] in package initialization
+bb77b72 After document update
+fe47db5 [bugfix] For DB regeneration
+66ac96f compatibity issues on Windows
+e2a87f8 changed the package version identification procedure
+f25bf06 changed the package version identification procedure
+2e6b6a1 changed the package version identification procedure
+c95cbdd changed the package version identification procedure
+9a728c0 now it downloads the full database from an external repository. Also the XML export function has been disabled and pushed to v0.2.6
+a3fd847 Removed example for avoding error in CHECK. #15
+fe7ee97 removed DB files from gitignore
+304ddf5 Corrected Observations from devtools::check
+3607f70 Corrected Observations from devtools::check
+e94b211 [bugfix] Test first for preloaded data csv than RDS file
+285fd0c bugfix XML testcase. But generated an issue #15
+f27136e finnishing #3 compabilities issues and dev coding and documentation
+10c842e Generating FullDB polyhedra for V0.2.5 and samples for test cases #3 #14
+01a1e1f changes to db-lib.R
+2045495 version compatibility checking
+7ee9636 added more xml infra
+e0818d0 Corrected a type
+0219fc4 incremental changes
+3d38dd0 supporting files removed to an external project and now they will be living on the home
+25bf2e5 Merged solution for getPackageName in RpolyhedraFullDB
+8e38139 (origin/dev-rr) [bugfix] getPackageName imports methods
+c7a7fb7 solving TRAVIS problem with getPolyhedraRDSPath
+42f61f6 now it knows about the real package name
+7ee756e changes to db-lib.R
+64a4d65 solved data access problem
+0debc6d Solved Directory problem for RpolyhedraFullDB
+3f01afd better way to access to data folder
+ed78ff1 merged with master
+d84d352 changes to xml-lib
+8c4615f Changed Package name in DESCRIPTION for having 2 differents packages installed
+1edde25 Merge branch 'dev-rr' into RpolyhedraFullDB
+3133091 removed debug code
+2b12f21 Merge branch 'dev-rr' into RpolyhedraFullDB
+e36d0d6 checkVertices
+8b13c5b It is seemed not needed to change Package name in DESCRIPTION
+6140195 renamed package name in zzz
+c5519c3 configuration for FullDatabse scraping on first run
+3467e1d (tag: v0.2.4) New Release. Solving unnecesary RDS file saving
+e1925d9 Merge tag 'v0.2.3'
+cc72848 (tag: v0.2.3) Release version including vertices and faces and skipped polyhedra in getAvailablePolyhedra
+ca1a150 Release version including vertices and faces and skipped polyhedra in getAvailablePolyhedra
+dd1f816 Considering vertices and faces for ordering scraping
+5143cf5 renamed preloaded complexity to preloaded data
+3cde4a3 Merge branch 'dev-rr' of github.com:qbotics/Rpolyhedra into dev-rr
+a5b975b complexities and names for all polyhedra
+aa50318 Minimum setup for passing tests in Travis
+ee871ce [bugfix] updateCalculatedFields. enabled Exception in scraper
+a2ee9d9 getAvailablePolyhedra Gives more Info
+57f6686 Included preloaded data of vertices & faces
+65d6f97 Scraped vertices and edges
+84abf90 (tag: v0.2.2) Update README.md
+9b818f1 Update README.md
+d1dda28 Update README.md
+df64088 Minor changes to README.md
+6b02d99 Badges added to README.md
+022bcfb release updated in DESCRIPTION
+12c1ce8 [bugfix] RGL didn't render
+27c5f3f (tag: v0.2.1) Removed bigger polyhedron files while waiting for a fancy solution to package size
+5a2e20f Vignette corrected
+4aede80 Vignette corrected
+c37cc3e (tag: v0.2.0) v0.2.0
+0be3b32 [refactoring] Renamed record as ledger and splitted in different code. Added required documentation
+e56c386 added Rpolyhedra vignettes (uppercase)
+5009469 removed lowercase rpolyhedra vignettes
+a2b07a4 [bugfix] in getAvailablePolyhedra when no data for a source
+cc42891 Changes to v0.2.0
+d7109eb (tag: V0.1.0) Merge remote-tracking branch 'origin/master' into dev-kenarab
+b8a4561 regenerated rpolyhedra
+ab6e6eb examples for private methods removed
+50062de some more examples for uploading to CRAN
+eb0bd94 LICENCE file correction
+4c4956b corrections for CRAN application round 2
+7010196 corrections for CRAN application round 2
+b3645fc implemented some lintr corrections
+d710c70 after formatR
+4cfa735 submission V0.1.0 CRAN compliant
+00a8d4c submission V0.1.0 CRAN compliant
+5b71cd5 passed checks for CRAN
+4afb178 Update README.md
+d707077 mail corrected
+fae77f4 [bugfix] fancy way of accesing data dir
+f20c817 README with example of 5 regular polyhedra
+77d9d09 version 0.1.0
+e42e566 Initial commit
