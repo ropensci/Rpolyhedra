@@ -477,19 +477,18 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class("PolyhedronScraperCon
 
 #' getGitCommit
 #' get the last git commit sha
-## @import git2r
+#' @param long.version determines if the complete version of the sha will be returned.
+#' @import git2r
 #' @return String with git commit sha
 #'
-getGitCommit <- function(){
+getGitCommit <- function(long.version=FALSE){
   #TODO: replace with git2r when issue #2 is resolved.
-  #git2r::commits()[[1]]@sha
-  if (file.exists(".git")){
-    git_id<-system("git log --pretty=format:'%h' -n 1",intern=TRUE)[1]
+  git.sha <- git2r::commits()[[1]]@sha
+  if(long.version==FALSE)
+  {
+    git.sha <- substr(git.sha, 1, 7)
   }
-  else{
-    git_id<-NA
-  }
-  git_id
+  git.sha
 }
 
 
