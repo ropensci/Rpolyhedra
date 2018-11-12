@@ -2,7 +2,7 @@
 #' maxWithoutNA
 #' Function that returns NA if all elements are NA, and the max value not NA, if not.
 #' @param x vector parameter
-maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm=TRUE), NA)
+maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm = TRUE), NA)
 
 
 #' ScraperLedger
@@ -73,36 +73,48 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      r <- NULL
      default.status <- "queued"
      if (is.null(self$getIdFilename(source, source.filename))){
-       futile.logger::flog.info(paste("Adding Filename to ledger ",source, source.filename))
-       r <- nrow(self$df)+1
+       futile.logger::flog.info(paste("Adding Filename to ledger ",
+                                      source,
+                                      source.filename))
+       r <- nrow(self$df) + 1
        status.field <- "status"
-       self$countStatusUse(status.field = status.field, status = default.status)
+       self$countStatusUse(status.field = status.field,
+                           status = default.status)
        states.row <- which(self$states$status.field %in% status.field &
                              self$states$status %in% default.status)
-       file.id <- self$states[states.row,"count"]
+       file.id <- self$states[states.row, "count"]
 
        #obtain preloaded.time2scrape
        row.preloaded.t2s <- which(self$preloaded.data$source == source &
-                                    self$preloaded.data$filename==source.filename)
-       if (length(row.preloaded.t2s)==1){
-         preloaded.data <- self$preloaded.data[row.preloaded.t2s,]
-         self$df[r,c("preloaded.name")]<-
-           as.character(preloaded.data[,3])
-         self$df[r,c("preloaded.vertices","preloaded.faces","preloaded.time2scrape")]<-
-           c(preloaded.data[,4:6])
+                          self$preloaded.data$filename == source.filename)
+       if (length(row.preloaded.t2s) == 1){
+         preloaded.data <- self$preloaded.data[row.preloaded.t2s, ]
+         self$df[r, c("preloaded.name")] <-
+           as.character(preloaded.data[, 3])
+         self$df[r, c("preloaded.vertices",
+                     "preloaded.faces",
+                     "preloaded.time2scrape")] <-
+           c(preloaded.data[, 4:6])
        }
        else{
          preloaded.time2scrape <- NA
        }
-       self$df[r,c("id","source","source.filename","status")]<- c(r, source, source.filename, default.status)
+       self$df[r, c("id",
+                   "source",
+                   "source.filename",
+                   "status")] <- c(r,
+                                  source,
+                                  source.filename,
+                                  default.status)
        self$dirty <- TRUE
      }
      r
    },
    getIdFilename = function(source, source.filename){
-     r <- which(self$df$source == source & self$df$source.filename == source.filename)
-     if (length(r)>0){
-       self$df[r,"id"]
+     r <- which(self$df$source == source &
+                  self$df$source.filename == source.filename)
+     if (length(r) > 0){
+       self$df[r, "id"]
      }
      else{
        r <- NULL
@@ -110,30 +122,41 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      r
    },
    getCRCPolyhedronName = function(source, polyhedron.name){
-     r <- which(self$df$source == source & tolower(self$df$scraped.name) == tolower(polyhedron.name))
+     r <- which(self$df$source == source & tolower(self$df$scraped.name)
+                == tolower(polyhedron.name))
      ret <- NULL
-     if (length(r)>0){
-       ret <- self$df[r,"crc.filename"]
-       if (is.na(ret)){
+     if (length(r) > 0){
+       ret <- self$df[r, "crc.filename"]
+       if (is.na(ret)) {
          ret <- NULL
        }
      }
-     if (is.null(ret)){
-       ret <- digest(tolower(polyhedron.name),algo="crc32")
+     if (is.null(ret)) {
+       ret <- digest(tolower(polyhedron.name),
+                     algo = "crc32")
      }
      ret
    },
-   updateStatus = function(source, source.filename, status, status.field = "status",
-                           scraped.polyhedron = NA, obs =""){
+   updateStatus = function(source, source.filename,
+                           status,
+                           status.field = "status",
+                           scraped.polyhedron = NA,
+                           obs = ""){
      if (is.null(obs)){
        obs <- ""
      }
-     if (!status.field %in% c("status","status.test"))
-       stop(paste("Cannot update invalid status field",status.field))
+     if (!status.field %in% c("status", "status.test"))
+       stop(paste("Cannot update invalid status field",
+                  status.field))
      ret <- NULL
-     retrieved.id <- self$getIdFilename(source = source, source.filename = source.filename)
-     if (length(retrieved.id)!=1){
-       stop(paste("There must be a unique row for",source,source.filename,"and have",length(retrieved.id)))
+     retrieved.id <- self$getIdFilename(source = source,
+                                        source.filename = source.filename)
+     if (length(retrieved.id) != 1){
+       stop(paste("There must be a unique row for",
+                  source,
+                  source.filename,
+                  "and have",
+                  length(retrieved.id)))
      }
      if (status.field == "status"){
        end.scrape <- Sys.time()
@@ -141,96 +164,131 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          fields.update <- c("start.scrape")
          values.update <- as.character(end.scrape)
        }
-       if (status %in% c("scraped","failed","skipped","exception")){
-         start.scrape  <- self$df[retrieved.id,"start.scrape"]
-         time.scraped  <- round(as.numeric(end.scrape - start.scrape),3)
+       if (status %in% c("scraped", "failed", "skipped", "exception")){
+         start.scrape  <- self$df[retrieved.id, "start.scrape"]
+         time.scraped  <- round(as.numeric(end.scrape - start.scrape), 3)
 
          fields.update <- c("end.scrape",  "git.commit")
          values.update <- c(as.character(end.scrape), getGitCommit())
-         fields.numeric.update <-c("time.scraped")
+         fields.numeric.update <- c("time.scraped")
          values.numeric.update <- c(time.scraped)
          #in a different commands for not converting it to character
          if (status %in% "scraped"){
            scraped.name <- scraped.polyhedron$getName()
-           scraped.vertices <- nrow(scraped.polyhedron$getState()$getVertices(solid = TRUE))
+           scraped.vertices <- nrow(scraped.polyhedron$getState()$
+                                      getVertices(solid = TRUE))
            scraped.faces    <- length(scraped.polyhedron$getState()$getSolid())
-           crc.filename     <- self$getCRCPolyhedronName(source = source, polyhedron.name = scraped.name)
+           crc.filename     <- self$getCRCPolyhedronName(source = source,
+                                             polyhedron.name = scraped.name)
            #Check scraped.name = preloaded name
            error <- ""
            preloaded.name <- self$df[retrieved.id, "preloaded.name"]
            scraped.name.lower <- tolower(scraped.name)
            existing.polyhedron.name.rows <- which(self$df$source == source &
-                                                    scraped.name.lower %in% tolower(self$df$scraped.name))
-           if (length(existing.polyhedron.name.rows)>0){
-             error <- paste(error, "Scraped name must be unique for source and exists in rows",
-                            paste(existing.polyhedron.name.rows,collapse=","))
+                            scraped.name.lower %in%
+                              tolower(self$df$scraped.name))
+           if (length(existing.polyhedron.name.rows) > 0){
+             error <- paste(error, "Scraped name must be unique for " +
+                            "source and exists in rows",
+                            paste(existing.polyhedron.name.rows,
+                                  collapse = ","))
            }
            if (scraped.name.lower != tolower(preloaded.name)){
-             error <- paste(error,"Scraped name is",scraped.name,"and preloaded name is",preloaded.name)
+             error <- paste(error,
+                            "Scraped name is",
+                            scraped.name,
+                            "and preloaded name is",
+                            preloaded.name)
            }
-           if (nchar(error)>0){
+           if (nchar(error) > 0){
              stop(error)
            }
-           fields.update <- c(fields.update, "scraped.name","crc.filename")
+           fields.update <- c(fields.update, "scraped.name", "crc.filename")
            values.update <- c(values.update, scraped.name.lower, crc.filename)
-           fields.numeric.update <-c(fields.numeric.update, "scraped.vertices", "scraped.faces")
-           values.numeric.update <- c(values.numeric.update,scraped.vertices,scraped.faces)
+           fields.numeric.update <- c(fields.numeric.update,
+                                     "scraped.vertices", "scraped.faces")
+           values.numeric.update <- c(values.numeric.update,
+                                      scraped.vertices,
+                                      scraped.faces)
          }
-         self$df[retrieved.id, fields.numeric.update] <-values.numeric.update
+         self$df[retrieved.id, fields.numeric.update] <-
+           values.numeric.update
        }
      }
      if (status.field == "status.test"){
        #status.test only possible value
-       if (status %in% c("tested","testing","failed")){
+       if (status %in% c("tested", "testing", "failed")){
          fields.update <- NULL
          values.update <- NULL
        }
      }
 
-     fields.update  <- c(fields.update,status.field,"obs")
-     values.update  <- c(values.update,status,obs)
+     fields.update  <- c(fields.update, status.field, "obs")
+     values.update  <- c(values.update, status, obs)
 
-     self$df[retrieved.id,fields.update] <- values.update
-     ret <- self$df[retrieved.id,]
+     self$df[retrieved.id, fields.update] <- values.update
+     ret <- self$df[retrieved.id, ]
      #count status uses
-     self$countStatusUse(status.field,status)
+     self$countStatusUse(status.field, status)
      self$dirty <- TRUE
      ret
    },
    updateCalculatedFields = function(){
-     resolveScrapedPreloaded <- function(x, field){maxWithoutNA(c(x[paste("scraped",field,sep=".")],
-                                                                  x[paste("preloaded",field,sep=".")]))}
+     resolveScrapedPreloaded <- function(x, field){
+       maxWithoutNA(c(x[paste("scraped", field, sep = "." )],
+                      x[paste("preloaded", field, sep = ".")]))
+       }
      if (!"vertices" %in% names(self$df)){
        self$dirty <- TRUE
      }
      if (self$dirty){
-       self$df$vertices <-  as.numeric(apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="vertices")}))
-       self$df$faces    <-  as.numeric(apply(self$df,MARGIN = 1, FUN=function(x){resolveScrapedPreloaded(x=x, field="faces")}))
+       self$df$vertices <-  as.numeric(apply(self$df, MARGIN = 1,
+                               FUN = function(x) {
+                                 resolveScrapedPreloaded(x = x,
+                                                         field = "vertices")
+                                 }))
+       self$df$faces    <-  as.numeric(apply(self$df, MARGIN = 1,
+                               FUN = function(x) {
+                                 resolveScrapedPreloaded(x = x,
+                                                         field = "faces")
+                                 }))
        self$dirty <- FALSE
      }
    },
-   getAvailablePolyhedra = function(sources = names(getPackageEnvir(".available.sources")),
-                                    search.string = "",
-                                    ret.fields = c("source","scraped.name","vertices","faces","status"),
-                                    ignore.case = TRUE){
+   getAvailablePolyhedra = function(sources = names(
+           getPackageEnvir(".available.sources")),
+           search.string = "",
+           ret.fields = c("source", "scraped.name", "vertices",
+                          "faces", "status"),
+           ignore.case = TRUE){
+
      self$updateCalculatedFields()
-     if (is.null(ret.fields)){
+     if (is.null(ret.fields)) {
        ret.fields <- 1:ncol(self$df)
      }
      ret <- self$df[!is.na(self$df$scraped.name) & self$df$source %in% sources,
                     ret.fields]
      if (!is.null(search.string)) {
-       ret <- ret[grepl(search.string, ret$scraped.name,ignore.case = ignore.case),]
+       ret <- ret[grepl(search.string,
+                        ret$scraped.name,
+                        ignore.case = ignore.case), ]
      }
-     ret <- ret[order(ret$vertices,ret$faces,ret$source),]
+     ret <- ret[order(ret$vertices, ret$faces, ret$source), ]
      ret
    },
    savePreloadedData = function(){
-     preloaded.data <- self$df[!is.na(self$df$time.scraped),c("source","source.filename","scraped.name","scraped.vertices","scraped.faces","time.scraped")]
+     preloaded.data <- self$df[!is.na(self$df$time.scraped),
+                               c("source",
+                                 "source.filename",
+                                 "scraped.name",
+                                 "scraped.vertices",
+                                 "scraped.faces",
+                                 "time.scraped")]
      preloaded.data <- preloaded.data[order(preloaded.data$time.scraped,
-                                                            preloaded.data$source,
-                                                            preloaded.data$filename),]
-     names(preloaded.data)[3:6]<-c("name","vertices","faces","time2scrape")
+                            preloaded.data$source,
+                            preloaded.data$filename), ]
+     names(preloaded.data)[3:6] <- c("name", "vertices",
+                                     "faces", "time2scrape")
      write.csv(preloaded.data, self$preloaded.data.filename,
                row.names = FALSE)
      preloaded.data
@@ -241,13 +299,15 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      self$preloaded.data
    },
    getSizeToTimeScrape = function(sources, time2scrape = 60){
-     pre.comp.source <- self$preloaded.data[self$preloaded.data$source %in% sources,]
+     pre.comp.source <- self$preloaded.data[self$preloaded.data$source %in%
+                                              sources, ]
      pre.comp.source <- pre.comp.source[order(pre.comp.source$vertices,
                                               pre.comp.source$faces,
                                               pre.comp.source$source,
-                                              pre.comp.source$filename),]
+                                              pre.comp.source$filename), ]
+
      pre.comp.source$cummsum <- cumsum(pre.comp.source$time2scrape)
-     length(which(pre.comp.source$cummsum<time2scrape))
+     length(which(pre.comp.source$cummsum < time2scrape))
    },
    resetStatesMetrics = function(){
      self$states <- data.frame(status.field = character(),
@@ -256,17 +316,18 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                                stringsAsFactors = FALSE)
      self$states
    },
-   countStatusUse = function(status.field,status){
+   countStatusUse = function(status.field, status){
      status.row <- which(self$states$status.field %in% status.field &
                            self$states$status %in% status)
-     if (length(status.row)==0){
+     if (length(status.row) == 0){
        status.row <- nrow(self$states) + 1
        count <- 1
      }
      else {
-       count <- self$states[status.row,"count"]+1
+       count <- self$states[status.row, "count"] + 1
      }
-     self$states[status.row, c("status.field","status")] <- c(status.field,status)
+     self$states[status.row, c("status.field", "status")] <-
+       c(status.field, status)
      self$states[status.row, "count"] <- count
      self$states
    },
@@ -275,19 +336,19 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                                      max.quant = 0,
                                      order.by.vertices.faces = FALSE){
      #status in queued, scraped, exception, retry, skipped
-     allowed.status<- NULL
+     allowed.status <- NULL
      if (mode == "scrape.retry"){
-       allowed.status <- c("queued","exception","failed")
+       allowed.status <- c("queued", "exception", "failed")
      }
      if (mode == "scrape.queued"){
-       allowed.status <- c("queued","scraping")
+       allowed.status <- c("queued", "scraping")
      }
      if (mode == "test"){
        allowed.status <- "scraped"
      }
      if (mode == "skipped"){
        #special mode skipped for intentionally avoid scraping
-       allowed.status <- c("skipped","scraping")
+       allowed.status <- c("skipped", "scraping")
      }
      self$getFilenamesStatus(status = allowed.status,
                              sources = sources,
@@ -302,16 +363,18 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      filtred.rows <- which(self$df$source %in% sources &
                              self$df$status %in% status)
      ret <- NULL
-     if (length(filtred.rows)>0){
-       if (max.quant >0){
-         filtred.rows <- filtred.rows[1:min(max.quant,length(filtred.rows))]
+     if (length(filtred.rows) > 0){
+       if (max.quant > 0){
+         filtred.rows <- filtred.rows[1:min(max.quant,
+                                            length(filtred.rows))]
        }
-       ret <- self$df[filtred.rows,]
+       ret <- self$df[filtred.rows, ]
        if (order.by.vertices.faces){
-         ret <- ret[order(ret$vertices,ret$faces,ret$source,ret$scraped.name),]
+         ret <- ret[order(ret$vertices, ret$faces,
+                          ret$source,
+                          ret$scraped.name), ]
        }
      }
      ret
    }
  ))
-
