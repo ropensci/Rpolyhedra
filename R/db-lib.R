@@ -179,14 +179,14 @@ selectDataEnv <- function(env=NA) {
       return(TRUE)
     }
     accept.option <- readline(
-      prompt = "Full Database needs to download data to home folder. " +
-      "Agree [y/n]?:")
+      prompt = paste("Full Database needs to download data to home folder. ",
+      "Agree [y/n]?:"))
     retry <- TRUE
     while (retry) {
       answer <- tolower(accept.option[1])
       if (answer == "n") {
-        futile.logger::flog.info("Working on demo DB. You can call" +
-                                 "selectDataEnv to use the full database.")
+        futile.logger::flog.info(paste("Working on demo DB. You can call",
+                                 "selectDataEnv to use the full database."))
         setDataDirEnvironment("PACKAGE")
         retry <- FALSE
       } else if (answer == "y") {
@@ -326,7 +326,7 @@ copyFilesToExtData <- function(force = FALSE){
     }
   }
   if (existing & !force){
-    stop(paste("Cannot copy files: they exists in destination. Call " +
+    stop(paste("Cannot copy files: they exists in destination. Call ",
                  "the function with force=TRUE or remove them manually"))
   }
   #clean dirs
@@ -1023,8 +1023,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         }
       }else{
         # if database doesn't exists setup test as false
-        futile.logger::ERROR("There is no polyhedra database so " +
-                               "test could not be runned")
+        futile.logger::ERROR(paste("There is no polyhedra database so ",
+                               "test could not be runned"))
         test <- FALSE
       }
       test.function <- function(polyhedra.dir,
@@ -1098,8 +1098,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         }
       }else{
         # if database doesn't exists setup test as false
-        futile.logger::ERROR("There is no polyhedra database so test " +
-                               "could not be runned")
+        futile.logger::ERROR(paste("There is no polyhedra database so test ",
+                                   "could not be runned"))
         test <- FALSE
       }
       test.task.gen.function <- function(polyhedra.dir, source.config,

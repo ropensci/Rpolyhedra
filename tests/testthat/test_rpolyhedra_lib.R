@@ -53,8 +53,8 @@ test_that("test getting properties of scraped regular solids", {
 
 
 context("Edges Consistency")
-test_that("test check edges consistency for 7% of " +
-            "available polyhedra", {
+test_that(paste("test check edges consistency for 12% of",
+            "available polyhedra"), {
   tasks <- getPolyhedraObject()$
     generateTestTasks(TestTaskClass = PolyhedronTestTaskEdgesConsistency.class,
                     max.quant = getPercentilPolyhedraQuant(0.12, 50))

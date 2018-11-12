@@ -188,7 +188,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                             scraped.name.lower %in%
                               tolower(self$df$scraped.name))
            if (length(existing.polyhedron.name.rows) > 0){
-             error <- paste(error, "Scraped name must be unique for " +
+             error <- paste(error, "Scraped name must be unique for ",
                             "source and exists in rows",
                             paste(existing.polyhedron.name.rows,
                                   collapse = ","))
