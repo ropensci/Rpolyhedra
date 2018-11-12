@@ -38,11 +38,22 @@ Polyhedron state inside database.
 
 \item{\code{vertices}}{Polyhedron vertices list (netlib|dmccooey)}
 
+\item{\code{transformation.matrix}}{transformation matrix for calculations and visualizing polyhedron
+Private}
+
+\item{\code{mass.center}}{polyhedron mass center}
+
+\item{\code{edges.cont}}{Edges count}
+
+\item{\code{edges.check}}{Edges check degree property}
+
+\item{\code{vertices.id.3d}}{vertices definition for solid 3d object}
+
+\item{\code{vertices.centered}}{centered vertices for applying transformation matrices}
+
 \item{\code{vertices.rgl}}{Polyhedron triangulated vertices list for RGL}
 
 \item{\code{solid.triangulated}}{Polyhedron solid (triangulated) for RGL visualization}
-
-\item{\code{mass.center}}{polyhedron mass center}
 }}
 
 \section{Methods}{
@@ -53,14 +64,14 @@ Polyhedron state inside database.
   \item{\code{scrape()}}{Do nothing as the object is defined}
   \item{\code{getNet()}}{Gets the 2d net model}
   \item{\code{getSolid()}}{Gets the solid representation}
-  \item{\code{triangulate(force = FALSE)}}{Generates the triangular faces model for generating tmesh }
+  \item{\code{triangulate(force = FALSE, vertices)}}{Generates the triangular faces model for generating tmesh }
   \item{\code{getBoundingBox(vertices.3d)}}{Gets the bounding box of the object}
   \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates the object's Mass Center for parameter
         vertices}
-  \item{\code{getNormalizedSize()}}{Normalizes the volume of the object to a tetrahedron bounding box}#'
-  \item{\code{getPositionedVertices(size,origin)}}{Returns the vertices adjusted to size and origin parameters}#'
-  \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{
-  Builds the RGL model, taking the object's size, the origin}
+  \item{\code{getNormalizedSize(size, vertices.id.3d = private$vertices.id.3d)}}{Normalizes the volume of the object to a tetrahedron bounding box}#'
+  \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
+  \item{\code{getTransformedVertices(vertices, transformation.matrix)}}{Returns the vertices adjusted with transformation matrix}
+  \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
   \item{\code{serialize()}}{Gets a list representation out of the polyhedron object}
   \item{\code{expect_equal()}}{Function which test equal values for all fields using serialize function}
