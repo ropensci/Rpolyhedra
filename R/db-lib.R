@@ -494,8 +494,7 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
 #' @return String with git commit sha
 #'
 getGitCommit <- function(long.version = FALSE){
-  #TODO: replace with git2r when issue #2 is resolved.
-  git.sha <- git2r::commits()[[1]]@sha
+  git.sha <- git2r::commits()[[1]]$sha
   if (long.version == FALSE) {
     git.sha <- substr(git.sha, 1, 7)
   }
