@@ -7,9 +7,10 @@
 checkDatabaseVersion()
 }
 \value{
-"UPDATE" if an update is required, "NO_ACTION_REQUIRED" otherwise.
+"UPDATE" if an update is required, "NO_ACTION_REQUIRED"
+     otherwise.
 }
 \description{
-Determines if there is a need for a database update by checking the version file of both
-the package and the database installation.
+Determines if there is a need for a database update by checking the
+version file of both the package and the database installation.
 }
