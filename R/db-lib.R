@@ -640,7 +640,11 @@ getPackageVersion <- function(){
 #' Obtains the database version from environment
 getPackageDB <- function(){
   .package.db <- getPackageEnvir(".package.db")
-  .package.db[[getPackageVersion()]]
+  ret <- .package.db[[getPackageVersion()]]
+  if (is.null(ret)){
+    ret <- getPackageVersion()
+  }
+  ret
 }
 
 
@@ -1171,7 +1175,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
   error <- ""
 
   if (file.class[[1]] == "PolyhedraDatabase"){
-    db.version <- .package.db[[getPackageVersion()]]
+    db.version <- getPackageDB()
     compatible <- !is.null(db.version)
     if (compatible){
       compatible <- .polyhedra.candidate$getVersion() == db.version
