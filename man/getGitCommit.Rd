@@ -8,7 +8,8 @@ get the last git commit sha}
 getGitCommit(long.version = FALSE)
 }
 \arguments{
-\item{long.version}{determines if the complete version of the sha will be returned.}
+\item{long.version}{determines if the complete version of the sha will
+be returned.}
 }
 \value{
 String with git commit sha

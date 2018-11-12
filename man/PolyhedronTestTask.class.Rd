@@ -9,8 +9,8 @@
 PolyhedronTestTask.class
 }
 \description{
-Is an abstract class for specifying TestTask to make R6 iteration methods like cover
-complaint with testhat infrastructure
+Is an abstract class for specifying TestTask to make R6 iteration methods
+like cover complaint with testhat infrastructure
 }
 \section{Methods}{
 

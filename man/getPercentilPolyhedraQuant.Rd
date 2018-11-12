@@ -8,7 +8,8 @@ returns polyhedra quantity of parameter percentil}
 getPercentilPolyhedraQuant(percentil, quant.min = 100)
 }
 \arguments{
-\item{percentil}{is the percentil which must be applied to estimate the figure}
+\item{percentil}{is the percentil which must be applied
+to estimate the figure}
 
 \item{quant.min}{minimum quantity of files to return}
 }
