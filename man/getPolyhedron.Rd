@@ -9,17 +9,21 @@ getPolyhedron(source = "netlib", polyhedron.name)
 \arguments{
 \item{source}{source name}
 
-\item{polyhedron.name}{a valid name of a polyhedron in the database. Current names can be found with getAvailablePolyhedra()}
+\item{polyhedron.name}{a valid name of a polyhedron in
+the database. Current names can be found with getAvailablePolyhedra()}
 }
 \value{
 polyhedron R6 object
 }
 \description{
-Gets a polyhedron from the database. It returns an R6 Class with all its characteristics and functions.
-The object returned, of type Polyhedron.class, allows to the user to get access to all the functionality provided.
+Gets a polyhedron from the database. It returns an R6 Class
+with all its characteristics and functions.
+The object returned, of type Polyhedron.class, allows to the
+user to get access to all the functionality provided.
 }
 \examples{
-tetrahedron <- getPolyhedron(source="netlib", polyhedron.name = 'tetrahedron')
+tetrahedron <- getPolyhedron(source="netlib",
+       polyhedron.name = 'tetrahedron')
 
 # returns name of polyhedra
 tetrahedron$getName()

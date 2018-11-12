@@ -11,7 +11,8 @@
 #'
 #' @docType package
 #' @name Rpolyhedra
-#' @import R6 futile.logger testthat
+#' @importFrom R6 R6Class
+#' @importFrom futile.logger flog.info
 #' @author Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Javier Belen <leobelen@gmail.com>
 
 #' Executes code while loading the package.

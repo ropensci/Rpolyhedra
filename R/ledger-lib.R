@@ -30,8 +30,9 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm = TRUE), NA)
 #'
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import futile.logger
-#' @import utils digest
+#' @importFrom futile.logger flog.info
+#' @importFrom utils read.csv
+#' @importFrom digest digest
 #' @importFrom R6 R6Class
 #' @export
 ScraperLedger.class <- R6::R6Class("ScraperLedger",
@@ -132,7 +133,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
        }
      }
      if (is.null(ret)) {
-       ret <- digest(tolower(polyhedron.name),
+       ret <- digest::digest(tolower(polyhedron.name),
                      algo = "crc32")
      }
      ret

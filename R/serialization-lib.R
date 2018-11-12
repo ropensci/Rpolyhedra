@@ -12,7 +12,7 @@
 #' library(Rpolyhedra)
 #' polyhedronToXML(getPolyhedron("netlib", "cube")$getState())
 #'
-#' @import XML
+#' @importFrom XML xmlTree
 #' @export
 polyhedronToXML <- function(polyhedron.state.defined) {
   xml <- XML::xmlTree()

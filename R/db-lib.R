@@ -172,7 +172,7 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data =
 #' @usage
 #'     selectDataEnv(env=NA)
 #' @return .data.env
-#' @import futile.logger
+#' @importFrom futile.logger flog.info
 selectDataEnv <- function(env=NA) {
   if (is.na(env)) {
     if (!is.na(Sys.getenv(x = "ON_TRAVIS", unset = NA))) {
@@ -271,7 +271,9 @@ getPolyhedraObject <- function() {
 #' Downloads the files from the remote location
 #'
 #' @return TRUE if sucessfull, FALSE otherwise
-#' @import utils
+#' @importFrom utils unzip
+#' @importFrom utils download.file
+#' @importFrom utils zip
 #' @export
 downloadRPolyhedraSupportingFiles <- function(){
   if (checkDatabaseVersion() == "UPDATE") {
@@ -284,7 +286,7 @@ downloadRPolyhedraSupportingFiles <- function(){
       td <- tempdir()
       zipFile <- tempfile(tmpdir = td, fileext = ".zip")
       #download file to tempfile
-      download.file(URL, destfile = zipFile, mode = "wb")
+      utils::download.file(URL, destfile = zipFile, mode = "wb")
       utils::unzip(zipfile = zipFile, exdir = td)
       tmp.db.path <- list.files(path = td, pattern = "qbotics*")[1]
       files.to.copy <- list.files(file.path(td, tmp.db.path))
@@ -305,8 +307,7 @@ downloadRPolyhedraSupportingFiles <- function(){
 #'
 #' @param force indicate if existings directories must be overwritten
 #' @return TRUE if sucessfull
-#' @import utils
-#' @import futile.logger
+#' @importFrom futile.logger flog.info
 copyFilesToExtData <- function(force = FALSE){
   polyhedra.ledger <- getPolyhedraObject()$
     ledger$getAvailablePolyhedra(ret.fields = NULL)
@@ -373,7 +374,7 @@ copyFilesToExtData <- function(force = FALSE){
 #' \describe{
 #'   \item{\code{initialize()}}{Initializes the object}
 #' }
-#' @import     futile.logger
+#' @importFrom     futile.logger flog.info
 #' @importFrom R6 R6Class
 PolyhedronScraperConfiguration.class <- R6::R6Class(
   "PolyhedronScraperConfiguration",
@@ -409,7 +410,7 @@ PolyhedronScraperConfiguration.class <- R6::R6Class(
 #'
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import futile.logger
+#' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
   "PolyhedronScraperConfigurationNetlib",
@@ -452,7 +453,7 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
 #'
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import stringr futile.logger
+#' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
   "PolyhedronScraperConfigurationDmccoey",
@@ -489,7 +490,7 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
 #' get the last git commit sha
 #' @param long.version determines if the complete version of the sha will
 #'         be returned.
-#' @import git2r
+#' @importFrom git2r commits
 #' @return String with git commit sha
 #'
 getGitCommit <- function(long.version = FALSE){
@@ -547,7 +548,7 @@ PolyhedronTestTask.class <- R6::R6Class("PolyhedronTestTask",
 #'
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import futile.logger
+#' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 #'
 
@@ -623,8 +624,9 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class(
 #' getPackageVersion
 #'
 #' Obtains code version from the Description
+#' @importFrom utils packageVersion
 getPackageVersion <- function(){
-  as.character(packageVersion("Rpolyhedra"))
+  as.character(utils::packageVersion("Rpolyhedra"))
 }
 
 #' getPackageDB
@@ -697,8 +699,8 @@ checkDatabaseVersion <- function(){
 #'   by that source and name}
 #'   \item{\code{configPolyhedraSource(source.config, max.quant)}}{Scrapes all
 #'   polyhedra in the given directory for adding to db or testing}
-#'   \item{\code{schedulePolyhedraSources(sources.config,max.quant, test)}}
-#'   {Scrapes files applying parameter sources.config}
+#'   \item{\code{schedulePolyhedraSources(sources.config,max.quant,
+#'   test)}}{Scrapes files applying parameter sources.config}
 #'   \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves
 #'   all polyhedron within the source those names match with search.string}
 #' }
@@ -710,7 +712,8 @@ checkDatabaseVersion <- function(){
 #'
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import futile.logger
+#' @importFrom futile.logger flog.info
+#' @importFrom utils zip
 #' @importFrom R6 R6Class
 PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
   public = list(
@@ -1153,7 +1156,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
 #' @param halts indicates whether it has to halt execution when it
 #' is not compatible
 #'
-#' @import futile.logger
+#' @importFrom futile.logger flog.info
 isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
                                        getPolyhedraObject(),
                                      halts = FALSE){
@@ -1323,7 +1326,7 @@ getAvailableSources <- function(){
 #' Gets the list of names of available polyhedra and its status in
 #' the polyhedra database, which can be later called with getPolyhedron
 #'
-#' @import futile.logger
+#' @importFrom futile.logger flog.info
 #' @param sources A source of polyhedra. Available sources are netlib, dmccooey
 #' @param search.string A search string
 #' @return polyhedra names vector
@@ -1369,7 +1372,7 @@ getPercentilPolyhedraQuant <- function(percentil, quant.min = 100){
 #' @param source source name
 #' @param polyhedron.name  a valid name of a polyhedron in
 #' the database. Current names can be found with getAvailablePolyhedra()
-#' @import futile.logger
+#' @importFrom futile.logger flog.info
 #' @export
 #' @return polyhedron R6 object
 #' @export
