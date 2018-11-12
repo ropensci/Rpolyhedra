@@ -3,7 +3,8 @@
 #'
 #' Gets an XML representation out of the polyhedron object
 #'
-#' @param polyhedron.state.defined the polyhedron to get a representation from
+#' @param polyhedron.state.defined the polyhedron to get a
+#'        representation from
 #' @return a XML document, ready to be saved as a String File
 # TODO examples
 #' @examples
@@ -13,8 +14,7 @@
 #'
 #' @import XML
 #' @export
-polyhedronToXML <- function(polyhedron.state.defined)
-{
+polyhedronToXML <- function(polyhedron.state.defined) {
   xml <- XML::xmlTree()
   #xml$addTag("polyhedron", close=FALSE)
   #xml$closeTag()
@@ -30,10 +30,10 @@ polyhedronToXML <- function(polyhedron.state.defined)
 #' @param file.path the path of the file to be persisted.
 #' @return the path or None
 #'
-persistPolyhedron <- function(polyhedron.state.defined, file.path)
-{
+persistPolyhedron <- function(polyhedron.state.defined, file.path) {
   polyhedron.xml <- polyhedronToXML(polyhedron.state.defined)
-  temp.file <- file(tempfile(pattern = "polyhedron", tmpdir = tempdir(), fileext = ""))
+  temp.file <- file(tempfile(pattern = "polyhedron",
+                             tmpdir = tempdir(), fileext = ""))
   write(polyhedron.xml)
 
   zip(file.path, temp.file)
@@ -51,5 +51,3 @@ hydratePolyhedron <- function(file.path)
 {
 
 }
-
-

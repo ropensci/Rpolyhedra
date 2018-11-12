@@ -31,3 +31,4 @@ Collate:
   'serialization-lib.R'
   'zzz.R'
 BugReports: https://github.com/qbotics/Rpolyhedra/issues
+URL: https://github.com/qbotics/Rpolyhedra
