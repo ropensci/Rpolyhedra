@@ -9,7 +9,8 @@
 PolyhedronTestTaskScrape.class
 }
 \description{
-A Test task for comparing a new scrape with an already scraped polyhedron in database
+A Test task for comparing a new scrape with an already scraped polyhedron
+in the database
 }
 \section{Methods}{
 

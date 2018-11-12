@@ -7,7 +7,8 @@
 polyhedronToXML(polyhedron.state.defined)
 }
 \arguments{
-\item{polyhedron.state.defined}{the polyhedron to get a representation from}
+\item{polyhedron.state.defined}{the polyhedron to get a
+representation from}
 }
 \value{
 a XML document, ready to be saved as a String File

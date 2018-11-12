@@ -20,5 +20,6 @@ available.sources <- getAvailableSources()
 available.polyhedra <- getAvailablePolyhedra(sources=available.sources)
 
 #search within the polyhedron names from all sources
-cubes <- getAvailablePolyhedra(sources=available.sources,search.string="cube")
+cubes <- getAvailablePolyhedra(sources=available.sources,
+        search.string="cube")
 }

@@ -9,7 +9,8 @@
 PolyhedraDatabase.class
 }
 \description{
-Scrapes all polyhedra in data folder to save a representation which is accesible by the final users upon call to \code{getPolyhedron()}.
+Scrapes all polyhedra in data folder to save a representation which
+is accesible by the final users upon call to \code{getPolyhedron()}.
 }
 \section{Fields}{
 
@@ -27,19 +28,25 @@ Scrapes all polyhedra in data folder to save a representation which is accesible
 
 \describe{
   \item{\code{initialize()}}{Initializes the object}
-  \item{\code{existsSource(source)}}{Determines if the source exists on the database}
-  \item{\code{getPolyhedraSourceDir(source)}}{Retrieves polyhedra dir of a source}
+  \item{\code{existsSource(source)}}{Determines if the source exists on
+  the database}
+  \item{\code{getPolyhedraSourceDir(source)}}{Retrieves polyhedra dir
+  of a source}
   \item{\code{addSource(source)}}{Adds a new source to the database}
   \item{\code{configPolyhedraRDSPath()}}{config path for rds database file}
-  \item{\code{existsPolyhedron(source,polyhedron.name)}}{Determines if the polyhedron exists on the database}
-  \item{\code{getPolyhedron(source, polyhedron.name, strict)}}{Retrieves a polyhedron by source and name}
-  \item{\code{addPolyhedron(source,polyhedron,overwrite)}}{Adds a polyhedron by source and name, if orverwrite is TRUE,
-          it will update any existing one by that source and name}
-  \item{\code{configPolyhedraSource(source.config, max.quant)}}{Scrapes all polyhedra in the given
-          directory for adding to db or testing}
-  \item{\code{schedulePolyhedraSources(sources.config,max.quant, test)}}{Scrapes files applying parameter sources.config}
-  \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves all polyhedron within the source those names
-          match with search.string}
+  \item{\code{existsPolyhedron(source,polyhedron.name)}}{Determines if
+  the polyhedron exists on the database}
+  \item{\code{getPolyhedron(source, polyhedron.name, strict)}}{Retrieves
+  a polyhedron by source and name}
+  \item{\code{addPolyhedron(source,polyhedron,overwrite)}}{Adds a polyhedron
+  by source and name, if orverwrite is TRUE, it will update any existing one
+  by that source and name}
+  \item{\code{configPolyhedraSource(source.config, max.quant)}}{Scrapes all
+  polyhedra in the given directory for adding to db or testing}
+  \item{\code{schedulePolyhedraSources(sources.config,max.quant,
+  test)}}{Scrapes files applying parameter sources.config}
+  \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves
+  all polyhedron within the source those names match with search.string}
 }
 }
 

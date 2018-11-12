@@ -22,7 +22,8 @@ Imports: futile.logger,
          R6,
          testthat, 
          XML,
-         digest
+         digest,
+         git2r
 Collate:
   'db-lib.R'
   'polyhedra-lib.R'
@@ -30,3 +31,4 @@ Collate:
   'serialization-lib.R'
   'zzz.R'
 BugReports: https://github.com/qbotics/Rpolyhedra/issues
+URL: https://github.com/qbotics/Rpolyhedra

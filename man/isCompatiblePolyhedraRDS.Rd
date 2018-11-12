@@ -10,7 +10,8 @@ isCompatiblePolyhedraRDS(.polyhedra.candidate = getPolyhedraObject(),
 \arguments{
 \item{.polyhedra.candidate}{polyhedra db to test}
 
-\item{halts}{indicates whether it has to halt execution when it is not compatible}
+\item{halts}{indicates whether it has to halt execution when it
+is not compatible}
 }
 \description{
 Tests if the polyhedra RDS is compatible with the current format
