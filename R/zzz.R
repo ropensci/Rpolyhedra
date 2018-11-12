@@ -28,6 +28,7 @@
 
   #package version db
   .package.db <- list()
+  #It is not necesary to put trivial compatibility
   .package.db[["0.2.5"]] <- "0.2.5"
 
   setPackageEnvir(variable.name = ".package.db", .package.db)
