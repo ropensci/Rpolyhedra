@@ -52,7 +52,8 @@ for (polyhedron.name in polyhedra.2.draw$scraped.name) {
   y.pos <- round(polyhedron.scale * cos(current.angle), 2)
   tm <- tm %*% translationMatrix(x.pos,y.pos,0)
   print(paste("Drawing ",polyhedron.name," rotated ", round(current.angle,2), 
-  		" in (1,0,0) axis. Translated to (",x.pos,",",y.pos,",0)", sep = ""))  
+  		" in (1,0,0) axis. Translated to (",x.pos,",",y.pos,",0)", 
+  		" with color ",polyhedron.colors[i], sep = ""))  
   shape.rgl <- polyhedron$getRGLModel(transformation.matrix = tm)
   shade3d(shape.rgl, color = polyhedron.colors[i])
   i <- i + 1
