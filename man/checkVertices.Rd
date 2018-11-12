@@ -4,12 +4,12 @@
 \alias{checkVertices}
 \title{checkVertices()}
 \usage{
-checkVertices(vertices, positioned.vertices, triangulated.solid)
+checkVertices(vertices, transformed.vertices, triangulated.solid)
 }
 \arguments{
 \item{vertices}{vertices dataframe for checking}
 
-\item{positioned.vertices}{positioned vertices dataframe for checking}
+\item{transformed.vertices}{positioned vertices dataframe for checking}
 
 \item{triangulated.solid}{triangulated.solid for checking}
 }
