@@ -22,9 +22,6 @@
 .onLoad <- function(libname, pkgname) {
 
   setPackageEnvir(variable.name = "RpolyhedraEnv", new.env())
-  #assign("RpolyhedraEnv", new.env(), asNamespace("Rpolyhedra"))
-  #dev-package-env
-
 
   #package version db
   .package.db <- list()
@@ -32,8 +29,7 @@
   .package.db[["0.2.5"]] <- "0.2.5"
 
   setPackageEnvir(variable.name = ".package.db", .package.db)
-  #assign(".package.db", value = .package.db, envir = asNamespace("Rpolyhedra"))
-  #dev-package-env
+
 
   #setup Available sources
   .available.sources <- list()
@@ -43,9 +39,7 @@
     PolyhedronScraperConfigurationDmccoey.class$new()
 
   setPackageEnvir(variable.name = ".available.sources", .available.sources)
-  #assign(".available.sources", value = .available.sources,
-  #envir = asNamespace("Rpolyhedra"))
-  #dev-package-env
+
 
   .available.scrapping.conf <- list()
   .available.scrapping.conf[["dev-tetrahedron"]] <-
@@ -76,13 +70,8 @@
 
   setPackageEnvir(variable.name = ".available.scrapping.conf",
                   .available.scrapping.conf)
-  #assign(".available.scrapping.conf", value = .available.scrapping.conf,
-  # envir = asNamespace("Rpolyhedra"))
-  #dev-package-env
-
 
   initDataDirEnvironment()
-
 
   if (!file.exists(getPreloadedDataFilename())){
     downloadRPolyhedraSupportingFiles()

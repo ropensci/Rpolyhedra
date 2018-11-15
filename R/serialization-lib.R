@@ -47,7 +47,6 @@ persistPolyhedron <- function(polyhedron.state.defined, file.path) {
 #' @param file.path the path of the file to be hydrated.
 #' @return polyhedron.state.defined
 #'
-hydratePolyhedron <- function(file.path)
-{
+hydratePolyhedron <- function(file.path) {
 
 }
