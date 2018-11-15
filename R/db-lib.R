@@ -262,8 +262,6 @@ updatePolyhedraDatabase <- function(){
 #' @return .polyhedra
 getPolyhedraObject <- function() {
   getUserEnvir(".polyhedra")
-  #get(".polyhedra", envir = getUserEnv())
-  #dev-package-env
 }
 
 #' downloadRPolyhedraSupportingFiles
@@ -497,7 +495,7 @@ getGitCommit <- function(long.version = FALSE){
   #TODO: replace with git2r when issue #2 is resolved.
   #git2r::commits()[[1]]@sha
   if (file.exists(".git")){
-    git.sha<-system("git log --pretty=format:'%h' -n 1",intern=TRUE)[1]
+    git.sha <- system("git log --pretty=format:'%h' -n 1", intern = TRUE)[1]
   }
   else{
     git.sha <- NA
@@ -583,8 +581,6 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
                       self$polyhedron.file.id,
                       file.path(self$polyhedra.dir, self$source.filename))
         scraped.name <- scraped.polyhedron$getName()
-        #scraped.polyhedron$getRGLModel(1, c(0, 0, 0))
-        #futile.logger::flog.debug(paste("generated RGLModel"))
         status <- "testing"
       },
       error = function(e){
@@ -790,9 +786,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           stop(message)
         }
       }
-      #serialized.polyhedron <- source.data[[polyhedron.name]]
       ret <- NULL
-      crc.name <- self$ledger$getCRCPolyhedronName(source = source ,
+      crc.name <- self$ledger$getCRCPolyhedronName(source = source,
                     polyhedron.name = polyhedron.name)
       zip.filename <- file.path(data.dir, paste(crc.name, ".RDS.zip", sep = ""))
       serialized.polyhedron <- NULL
@@ -818,7 +813,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       data.dir <- self$getPolyhedraSourceDir(source = source)
       prev.data <- self$getPolyhedron(source = source,
                                       polyhedron.name = polyhedron.name)
-      if (!overwrite &!is.null(prev.data)){
+      if (!overwrite & !is.null(prev.data)){
         futile.logger::flog.info(paste("Polyhedron",
                                        polyhedron.name,
                                        "in source",
@@ -972,8 +967,6 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
             file.path(polyhedra.dir,
                       source.filename))
           if (current.polyhedron$isChecked()){
-            #current.polyhedron$getRGLModel(1, c(0, 0, 0))
-            #futile.logger::flog.debug(paste("generated RGLModel"))
             self$addPolyhedron(source = source,
                                source.filename = source.filename,
                                polyhedron = current.polyhedron)

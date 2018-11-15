@@ -9,7 +9,8 @@
 Polyhedron.class
 }
 \description{
-Polyhedron container class, which is accesible by the final users upon call to \code{getPolyhedron()}
+Polyhedron container class, which is accesible by the final users upon call
+to \code{getPolyhedron()}
 }
 \section{Fields}{
 
@@ -23,17 +24,23 @@ Polyhedron container class, which is accesible by the final users upon call to \
 
 \describe{
   \item{\code{initialize(file.id, state = NULL)}}{Initializes the object}
-  \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from the netlib definition}}
-  \item{\code{scrapeDmccoey(polyhedra.dmccoey.lines)}}{{Scrapes polyhedra from the dmccoey definition}}
-  \item{\code{deserialize(polyhedron.serialized)}}{{Deserialize polyhedron from definition}}
+  \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from
+  the netlib definition}}
+  \item{\code{scrapeDmccoey(polyhedra.dmccoey.lines)}}{{Scrapes polyhedra
+   from the dmccoey definition}}
+  \item{\code{deserialize(polyhedron.serialized)}}{{Deserialize polyhedron
+   from definition}}
   \item{\code{getName()}}{Gets the name from polyhedron definition}
   \item{\code{getState()}}{Gets the state from polyhedron definition}
-  \item{\code{getSolid()}}{Gets the solid definition of polyhedron definition}
+  \item{\code{getSolid()}}{Gets the solid definition of polyhedron
+  definition}
   \item{\code{isChecked()}}{Returns TRUE is polyhedron is checked}
   \item{\code{getErrors()}}{Returns errors collected in checking process}
   \item{\code{getRGLModel(transformation.matrix)}}{Builds the RGL model}
-  \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
-  \item{\code{checkProperties(expected.vertices, expected.faces)}}{check polyhedron basic properties}
+  \item{\code{exportToXML()}}{Gets an XML representation out of the
+  polyhedron object}
+  \item{\code{checkProperties(expected.vertices,
+  expected.faces)}}{check polyhedron basic properties}
 
 }
 }

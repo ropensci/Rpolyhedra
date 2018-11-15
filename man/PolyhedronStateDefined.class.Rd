@@ -16,29 +16,35 @@ Polyhedron state inside database.
 \describe{
 \item{\code{source}}{polyhedron definition source}
 
-\item{\code{file.id}}{polyhedron filename in original source (netlib|dmccooey)}
+\item{\code{file.id}}{polyhedron filename in original
+source (netlib|dmccooey)}
 
-\item{\code{name}}{polyhedron name       (netlib|dmccooey)}
+\item{\code{name}}{polyhedron name (netlib|dmccooey)}
 
-\item{\code{symbol}}{the eqn(1) input for two symbols separated by a tab; the Johnson symbol, and the Schlafli symbol (netlib)}
+\item{\code{symbol}}{the eqn(1) input for two symbols separated by a tab;
+the Johnson symbol, and the Schlafli symbol (netlib)}
 
-\item{\code{dual}}{the name of the dual polyhedron optionally followed by a horizontal tab and the number of the dual (netlib)}
+\item{\code{dual}}{the name of the dual polyhedron optionally followed
+by a horizontal tab and the number of the dual (netlib)}
 
 \item{\code{sfaces}}{polyhedron solid face list (netlib)}
 
 \item{\code{svertices}}{polyhedron solid vertice list (netlib)}
 
-\item{\code{net}}{polyhedron 2D net model with vertices defined for a planar representation (netlib)}
+\item{\code{net}}{polyhedron 2D net model with vertices defined for
+a planar representation (netlib)}
 
 \item{\code{hinges}}{Polyhedron hinge list (netlib)}
 
-\item{\code{solid}}{polyhedron list of edges which generate a solid (netlib|dmccooey)}
+\item{\code{solid}}{polyhedron list of edges which generate a
+solid (netlib|dmccooey)}
 
 \item{\code{dih}}{Dih attribute (netlib)}
 
 \item{\code{vertices}}{Polyhedron vertices list (netlib|dmccooey)}
 
-\item{\code{transformation.matrix}}{transformation matrix for calculations and visualizing polyhedron
+\item{\code{transformation.matrix}}{transformation matrix for
+ calculations and visualizing polyhedron
 Private}
 
 \item{\code{mass.center}}{polyhedron mass center}
@@ -49,32 +55,46 @@ Private}
 
 \item{\code{vertices.id.3d}}{vertices definition for solid 3d object}
 
-\item{\code{vertices.centered}}{centered vertices for applying transformation matrices}
+\item{\code{vertices.centered}}{centered vertices for applying
+transformation matrices}
 
 \item{\code{vertices.rgl}}{Polyhedron triangulated vertices list for RGL}
 
-\item{\code{solid.triangulated}}{Polyhedron solid (triangulated) for RGL visualization}
+\item{\code{solid.triangulated}}{Polyhedron solid (triangulated)
+for RGL visualization}
 }}
 
 \section{Methods}{
 
 \describe{
   \item{\code{initialize(source, file.id, name, symbol, dual,
-              sfaces, svertices, net, solid, hinges, dih, vertices)}}{Initializes the object, taking defaults.}
+              sfaces, svertices, net, solid, hinges, dih, vertices)}}{
+              Initializes the object, taking defaults.}
   \item{\code{scrape()}}{Do nothing as the object is defined}
   \item{\code{getNet()}}{Gets the 2d net model}
   \item{\code{getSolid()}}{Gets the solid representation}
-  \item{\code{triangulate(force = FALSE, vertices)}}{Generates the triangular faces model for generating tmesh }
-  \item{\code{getBoundingBox(vertices.3d)}}{Gets the bounding box of the object}
-  \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates the object's Mass Center for parameter
+  \item{\code{triangulate(force = FALSE, vertices)}}{Generates
+   the triangular faces model for generating tmesh }
+  \item{\code{getBoundingBox(vertices.3d)}}{Gets the bounding box of
+  the object}
+  \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates
+  the object's Mass Center for parameter
         vertices}
-  \item{\code{getNormalizedSize(size, vertices.id.3d = private$vertices.id.3d)}}{Normalizes the volume of the object to a tetrahedron bounding box}#'
-  \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
-  \item{\code{getTransformedVertices(vertices, transformation.matrix)}}{Returns the vertices adjusted with transformation matrix}
+  \item{\code{getNormalizedSize(size, vertices.id.3d =
+  private$vertices.id.3d)}}{Normalizes the volume of the object to a
+  tetrahedron bounding box}
+  \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
+  transformation matrix to polyhedron}
+  \item{\code{getTransformedVertices(vertices,
+  transformation.matrix)}}{Returns the vertices
+  adjusted with transformation matrix}
   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
-  \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
-  \item{\code{serialize()}}{Gets a list representation out of the polyhedron object}
-  \item{\code{expect_equal()}}{Function which test equal values for all fields using serialize function}
+  \item{\code{exportToXML()}}{Gets an XML representation out of
+  the polyhedron object}
+  \item{\code{serialize()}}{Gets a list representation out
+  of the polyhedron object}
+  \item{\code{expect_equal()}}{Function which test equal values
+  for all fields using serialize function}
 
 }
 }
