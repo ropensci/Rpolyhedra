@@ -121,7 +121,7 @@ scrapeNet = function(net.txt, offset = 0) {
     "faces, but having", length(faces) - 1))
     net <- list()
     cont <- 1
-    for (f in c(2:length(net.txt))) {
+    for (f in seq_along(length(net.txt))) {
         cf <- strsplit(net.txt[f], " ")[[1]]
         net[[cont]] <- as.numeric(cf[2:length(cf)]) + offset
         cont <- cont + 1
@@ -156,7 +156,7 @@ scrapeVertices = function(vertices.txt) {
                            stringsAsFactors = FALSE)
     cont <- 1
     n.vertices <- length(vertices.txt)
-    for (f in c(2:n.vertices)) {
+    for (f in seq_along(n.vertices)) {
         cf <- strsplit(vertices.txt[f], " ")[[1]]
         cf.outbrackets <- as.numeric(sapply(cf,
                             FUN = function(x)
@@ -181,7 +181,7 @@ scrapeVertices = function(vertices.txt) {
     vertices
 },
 setupLabelsOrder = function() {
-    for (r in c(1:length(self$labels.rows))) {
+    for (r in seq_along(length(self$labels.rows))) {
         p3.line <- self$labels.rows[r]
         current.label <- self$netlib.p3.lines[p3.line]
         current.label <- sub(":", "", current.label, fixed = TRUE)
@@ -358,7 +358,7 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class(
           vertex.coords <- gsub("\\(|\\)", "", vertex.coords)
           self$vertices[vertex.row, ] <- vertex.coords
           vertex.coords.replaced <- NULL
-          for (d in 1:length(vertex.coords)) {
+          for (d in seq_along(length(vertex.coords))) {
               value.code <- vertex.coords[d]
               if (length(grep(regexp.code.sign, value.code)) > 0){
                   parity <- -1
@@ -634,11 +634,11 @@ inferEdges = function(force.recalculation = FALSE){
                                           count = numeric())
         self$edges <- list()
         private$edges.cont <- 0
-        for (f.number in 1:length(self$solid)){
+        for (f.number in seq_along(length(self$solid))){
             f <- self$solid[[f.number]]
             degree.f <- length(f)
             v.ant <- f[degree.f]
-            for (it.v in c(1:length(f))){
+            for (it.v in seq_along(length(f))){
                 v <- f[it.v]
                 if (v > v.ant){
                     v1 <- v.ant
@@ -728,7 +728,7 @@ triangulate = function(force = FALSE) {
               sep = "")
               last.v <- length(face)
               tmesh <- NULL
-              for (v in 1:length(face)) {
+              for (v in seq_along(length(face))) {
                   tmesh <- c(tmesh, face[last.v], face[v], extra.vertex.id)
                   last.v <- v
               }
