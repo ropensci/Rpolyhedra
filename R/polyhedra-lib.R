@@ -603,24 +603,14 @@ adjustVertices = function(normalize.size = TRUE){
   private$vertices.id.3d <- sort(unique(unlist(self$solid)))
   self$vertices.centered <- self$vertices
   mass.center <- self$calculateMassCenter(
-    vertices.id.3d = private$vertices.id.3d,
-    applyTransformation = FALSE)
-
-  #debug
-  print(self$vertices.centered[7:10,1:3])
-  print(mass.center)
-
+                  vertices.id.3d = private$vertices.id.3d,
+                  applyTransformation = FALSE)
   vapply(private$vertices.id.3d, FUN = function(x){
           self$vertices.centered[x, 1:3] <-
             self$vertices.centered[x, 1:3] - mass.center
           TRUE
           },
          FUN.VALUE = logical(1))
-
-  #debug
-  print(self$vertices.centered[7:10,1:3])
-  stop("debug adjust vertices")
-
   private$mass.center <- self$calculateMassCenter(
     vertices.id.3d = private$vertices.id.3d,
     applyTransformation = FALSE)
