@@ -117,11 +117,13 @@ scrapeNet = function(net.txt, offset = 0) {
     first.line <- strsplit(net.txt[1], split = " ")[[1]]
     faces <- as.numeric(first.line[1])
     max.degree <- as.numeric(first.line[2])
-    if (faces != length(net.txt) - 1) self$addError(paste("declared ", faces,
-    "faces, but having", length(faces) - 1))
+    if (faces != length(net.txt) - 1){
+      self$addError(paste("declared ", faces,
+        "faces, but having", length(faces) - 1))
+    }
     net <- list()
     cont <- 1
-    for (f in seq_along(length(net.txt))) {
+    for (f in seq_len(length(net.txt))) {
         cf <- strsplit(net.txt[f], " ")[[1]]
         net[[cont]] <- as.numeric(cf[2:length(cf)]) + offset
         cont <- cont + 1
@@ -156,7 +158,7 @@ scrapeVertices = function(vertices.txt) {
                            stringsAsFactors = FALSE)
     cont <- 1
     n.vertices <- length(vertices.txt)
-    for (f in seq_along(n.vertices)) {
+    for (f in seq_len(n.vertices)) {
         cf <- strsplit(vertices.txt[f], " ")[[1]]
         cf.outbrackets <- as.numeric(sapply(cf,
                             FUN = function(x)
@@ -181,7 +183,7 @@ scrapeVertices = function(vertices.txt) {
     vertices
 },
 setupLabelsOrder = function() {
-    for (r in seq_along(length(self$labels.rows))) {
+    for (r in seq_len(length(self$labels.rows))) {
         p3.line <- self$labels.rows[r]
         current.label <- self$netlib.p3.lines[p3.line]
         current.label <- sub(":", "", current.label, fixed = TRUE)
@@ -227,6 +229,7 @@ scrape = function() {
 
     futile.logger::flog.debug(paste("Scraping polyhedron",
                                     file.id, name))
+
     symbol <- self$getDataFromLabel("symbol")
     dual <- self$getDataFromLabel("dual")
     sfaces <- self$getDataFromLabel("sfaces")
@@ -358,7 +361,7 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class(
           vertex.coords <- gsub("\\(|\\)", "", vertex.coords)
           self$vertices[vertex.row, ] <- vertex.coords
           vertex.coords.replaced <- NULL
-          for (d in seq_along(length(vertex.coords))) {
+          for (d in seq_len(length(vertex.coords))) {
               value.code <- vertex.coords[d]
               if (length(grep(regexp.code.sign, value.code)) > 0){
                   parity <- -1
@@ -634,11 +637,19 @@ inferEdges = function(force.recalculation = FALSE){
                                           count = numeric())
         self$edges <- list()
         private$edges.cont <- 0
-        for (f.number in seq_along(length(self$solid))){
+        #debug
+        print(seq_len(length(self$solid)))
+        print(self$solid)
+
+        for (f.number in seq_len(length(self$solid))){
             f <- self$solid[[f.number]]
             degree.f <- length(f)
             v.ant <- f[degree.f]
-            for (it.v in seq_along(length(f))){
+            #debug
+            print(f)
+            print(seq_len(length(f)))
+
+            for (it.v in seq_len(length(f))){
                 v <- f[it.v]
                 if (v > v.ant){
                     v1 <- v.ant
@@ -663,6 +674,9 @@ inferEdges = function(force.recalculation = FALSE){
                 v.ant <- v
             }
         }
+        #debug
+        edges.check <<- private$edges.check
+        stop("debug edges.check")
     }
     self
 },
@@ -677,12 +691,12 @@ checkEdgesConsistency = function(){
                     FUN = function(x)
                       paste(names(x), x, sep = "=>", collapse = ",")),
                     collapse = "|")
-            self$addError(paste("For",
-                    self$source,
-                    self$name,
-                    paste("faces definition is wrong as there ",
-                          "are edges with count diff to 2:"),
-                    error.edges))
+            self$addError(current.error = paste("For",
+                            self$source,
+                            self$name,
+                            paste("faces definition is wrong as there",
+                                  "are edges with count diff to 2:"),
+                            error.edges))
         }
         ret <- private$edges.check[rows.error, ]
     }
@@ -728,7 +742,7 @@ triangulate = function(force = FALSE) {
               sep = "")
               last.v <- length(face)
               tmesh <- NULL
-              for (v in seq_along(length(face))) {
+              for (v in seq_len(length(face))) {
                   tmesh <- c(tmesh, face[last.v], face[v], extra.vertex.id)
                   last.v <- v
               }
@@ -1008,6 +1022,9 @@ isChecked = function(){
     if (!is.null(inconsistent.edges)){
         ret <- nrow(inconsistent.edges) == 0
     }
+    #debug. For analysing when inconsistent.edges
+    #ret <- TRUE
+
     ret
 },
 getRGLModel = function(transformation.matrix = NULL) {
