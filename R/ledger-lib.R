@@ -143,6 +143,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                            status.field = "status",
                            scraped.polyhedron = NA,
                            obs = ""){
+     scraped.name.lower <- ""
      if (is.null(obs)){
        obs <- ""
      }
@@ -186,20 +187,22 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
            preloaded.name <- self$df[retrieved.id, "preloaded.name"]
            scraped.name.lower <- tolower(scraped.name)
            existing.polyhedron.name.rows <- which(self$df$source == source &
-                            scraped.name.lower %in%
-                              tolower(self$df$scraped.name))
+                                      self$df$scraped.name==scraped.name.lower)
            if (length(existing.polyhedron.name.rows) > 0){
-             error <- paste(error, "Scraped name must be unique for ",
+             error <- paste(error, "Scraped name ", scraped.name.lower,"must be unique for ",
                             "source and exists in rows",
                             paste(existing.polyhedron.name.rows,
                                   collapse = ","))
            }
-           if (scraped.name.lower != tolower(preloaded.name)){
-             error <- paste(error,
-                            "Scraped name is",
-                            scraped.name,
-                            "and preloaded name is",
-                            preloaded.name)
+
+           if (!is.na(preloaded.name)){
+             if (scraped.name.lower != tolower(preloaded.name)){
+               error <- paste(error,
+                              "Scraped name is",
+                              scraped.name,
+                              "and preloaded name is",
+                              preloaded.name)
+             }
            }
            if (nchar(error) > 0){
              stop(error)
@@ -223,10 +226,13 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          values.update <- NULL
        }
      }
-
      fields.update  <- c(fields.update, status.field, "obs")
      values.update  <- c(values.update, status, obs)
 
+     futile.logger::flog.info(paste("Updating ledger for",source.filename, scraped.name.lower,
+                                    paste(fields.update, values.update,
+                                          sep = "=",
+                                          collapse = "|")))
      self$df[retrieved.id, fields.update] <- values.update
      ret <- self$df[retrieved.id, ]
      #count status uses

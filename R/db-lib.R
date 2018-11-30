@@ -221,10 +221,11 @@ selectDataEnv <- function(env=NA) {
 #'
 #' Function for initializing database
 #'
+#' @param source.filenames if not null specify which source filenames to scrape
 #'
 #' @return polyhedra db object
 
-updatePolyhedraDatabase <- function(){
+updatePolyhedraDatabase <- function(source.filenames = NULL){
   .polyhedra <- NULL
 
   polyhedra.rds.file <- getPolyhedraRDSPath()
@@ -251,6 +252,7 @@ updatePolyhedraDatabase <- function(){
   #"dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
   #Change when release version
   scrapePolyhedra(scrape.config = .available.scrapping.conf[["pkg-minimal"]],
+                  source.filenames = source.filenames,
                    sources.config = .available.sources)
 }
 
@@ -703,9 +705,9 @@ checkDatabaseVersion <- function(){
 #'   \item{\code{addPolyhedron(source,polyhedron,overwrite)}}{Adds a polyhedron
 #'   by source and name, if orverwrite is TRUE, it will update any existing one
 #'   by that source and name}
-#'   \item{\code{configPolyhedraSource(source.config, max.quant)}}{Scrapes all
+#'   \item{\code{configPolyhedraSource(source.config, source.filenames, max.quant)}}{Scrapes all
 #'   polyhedra in the given directory for adding to db or testing}
-#'   \item{\code{schedulePolyhedraSources(sources.config,max.quant,
+#'   \item{\code{schedulePolyhedraSources(sources.config, source.filenames, max.quant,
 #'   test)}}{Scrapes files applying parameter sources.config}
 #'   \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves
 #'   all polyhedron within the source those names match with search.string}
@@ -851,13 +853,16 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                scraped.polyhedron = polyhedron)
       polyhedron
     },
-    configPolyhedraSource = function(source.config, max.quant = 0) {
+    configPolyhedraSource = function(source.config, source.filenames= NULL, max.quant = 0) {
       source <- source.config$getName()
       home.dir.data <- getDataDir()
       self$configPolyhedraRDSPath()
       futile.logger::flog.debug(paste("configuring source", source))
       polyhedra.dir   <- source.config$getBaseDir(home.dir.data)
       polyhedra.files <- source.config$getPolyhedraFiles(home.dir.data)
+      if (!is.null(source.filenames)){
+        polyhedra.files <- polyhedra.files[polyhedra.files %in% source.filenames]
+      }
       if (length(polyhedra.files) > 0) {
         if (max.quant > 0){
           polyhedra.files <- polyhedra.files[1:min(max.quant,
@@ -957,7 +962,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                   polyhedron.file.id, source.filename){
         source <- source.config$getName()
         current.polyhedron <- NULL
-        tryCatch({
+        #tryCatch({
           self$ledger$updateStatus(source = source,
                                    source.filename = source.filename,
                                    status = "scraping")
@@ -976,16 +981,16 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                      source.filename = source.filename,
                                      status = "failed", obs = errors)
           }
-        },
-        error = function(e){
-          error <- paste(e$message, collapse = ",")
-          futile.logger::flog.error(paste("catched error", error))
-          assign("error", error, envir = parent.env(environment()))
-          self$ledger$updateStatus(source = source,
-                                   source.filename,
-                                   status = "exception",
-                                   obs = error)
-        })
+        # },
+        # error = function(e){
+        #   error <- paste(e$message, collapse = ",")
+        #   futile.logger::flog.error(paste("catched error", error))
+        #   assign("error", error, envir = parent.env(environment()))
+        #   self$ledger$updateStatus(source = source,
+        #                            source.filename,
+        #                            status = "exception",
+        #                            obs = error)
+        # })
         current.polyhedron
       }
       if (time2scrape.source > 0){
@@ -1132,12 +1137,15 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     },
     schedulePolyhedraSources = function (sources.config =
                                          getPackageEnvir(".available.sources"),
+                                         source.filenames= NULL,
                                        max.quant = 0,
                                        test = FALSE){
       for (source  in names(sources.config)){
         self$configPolyhedraSource(source.config = sources.config[[source]],
+                                   source.filenames = source.filenames,
                                    max.quant = max.quant)
       }
+      self
     },
     getAvailableSources = function() {
       #TODO in ledger
@@ -1230,15 +1238,18 @@ switchToFullDatabase <- function(env = NA){
 #' predefined configurations
 #'
 #' @param scrape.config predefined configuration for scraping
+#' @param source.filenames if not null specify which source filenames to scrape
 #' @param sources.config the sources that will be used by the function
 #' @return polyhedra db object
 scrapePolyhedra <- function(scrape.config,
+                            source.filenames = NULL,
                 sources.config = getPackageEnvir(".available.sources")){
   scrapePolyhedraSources(max.quant.config.schedule =
                      scrape.config[["max.quant.config.schedule"]],
                    max.quant.scrape = scrape.config[["max.quant.scrape"]],
                    time2scrape.source = scrape.config[["time2scrape.source"]],
                    sources.config = sources.config,
+                   source.filenames = source.filenames,
                    retry.scrape = scrape.config[["retry.scrape"]])
 
 }
@@ -1252,6 +1263,7 @@ scrapePolyhedra <- function(scrape.config,
 #' @param max.quant.config.schedule number of files to schedule
 #' @param max.quant.scrape number of files scrape
 #' @param time2scrape.source time applied to scrape source
+#' @param source.filenames if not null specify which source filenames to scrape
 #' @param retry.scrape should it retry scrape?
 #' @return polyhedra db object
 #' @usage
@@ -1264,12 +1276,15 @@ scrapePolyhedraSources <- function(sources.config =
                                   max.quant.config.schedule = 0,
                                   max.quant.scrape = 0,
                                   time2scrape.source = 30,
+                                  source.filenames = NULL,
                                   retry.scrape = FALSE){
   futile.logger::flog.debug(paste("Scheduling",
                                   max.quant.config.schedule,
                                   "polyhedra for scraping"))
   getPolyhedraObject()$schedulePolyhedraSources(sources.config =
                                                   sources.config,
+                                                source.filenames =
+                                                  source.filenames,
                                       max.quant = max.quant.config.schedule)
   if (retry.scrape){
     mode <- "scrape.retry"
