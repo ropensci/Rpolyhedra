@@ -346,7 +346,7 @@ copyFilesToExtData <- function(force = FALSE){
 
   #copy polyhedra source files
   cont <- 0
-  for (i in c(1:nrow(polyhedra.ledger.scraped))){
+  for (i in seq_len(nrow(polyhedra.ledger.scraped))){
     current.polyhedron <- polyhedra.ledger.scraped[i, ]
     source.config <- .available.sources[[current.polyhedron$source]]
     dest.dir <- source.config$getBaseDir(data.env.package)
