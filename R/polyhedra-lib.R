@@ -124,7 +124,7 @@ scrapeNet = function(net.txt, offset = 0) {
     net <- list()
     cont <- 1
     for (f in seq_len(length(net.txt))) {
-        if (f >1){
+        if (f > 1){
           #First line processed above
           cf <- strsplit(net.txt[f], " ")[[1]]
           net[[cont]] <- as.numeric(cf[2:length(cf)]) + offset
@@ -161,27 +161,32 @@ scrapeVertices = function(vertices.txt) {
                            stringsAsFactors = FALSE)
     cont <- 1
     n.vertices <- length(vertices.txt)
-    for (f in seq_len(n.vertices)) {
-        cf <- strsplit(vertices.txt[f], " ")[[1]]
-        cf.outbrackets <- as.numeric(sapply(cf,
-                            FUN = function(x)
-                              self$extractCFOutBrackets(x)))
-        cf.inbrackets <- stringr::str_extract(cf, "\\[([:graph:]*)\\]")
-        cf.inbrackets <- sub("\\[", "", cf.inbrackets)
-        cf.inbrackets <- sub("\\]", "", cf.inbrackets)
-        futile.logger::flog.debug(paste("parsing vertex ", f, "/", n.vertices,
-        " ", paste(cf.outbrackets, collapse = ","), " ", paste(cf.inbrackets,
-        collapse = ","), sep = ""))
-        vertices[cont, "Pos3D_1"] <- cf.outbrackets[1]
-        vertices[cont, "Pos3D_2"] <- cf.outbrackets[2]
-        vertices[cont, "Pos3D_3"] <- cf.outbrackets[3]
-        vertices[cont, "Pos3D_1_exp"] <- eval(parse(text = cf.inbrackets[1]))
-        vertices[cont, "Pos3D_2_exp"] <- eval(parse(text = cf.inbrackets[2]))
-        vertices[cont, "Pos3D_3_exp"] <- eval(parse(text = cf.inbrackets[3]))
-        vertices[cont, "Pos3D_1_exp_text"] <- cf.inbrackets[1]
-        vertices[cont, "Pos3D_2_exp_text"] <- cf.inbrackets[2]
-        vertices[cont, "Pos3D_3_exp_text"] <- cf.inbrackets[3]
-        cont <- cont + 1
+    for (v in seq_len(n.vertices)) {
+        if (v > 1){
+          #First line processed above
+
+          cf <- strsplit(vertices.txt[v], " ")[[1]]
+          cf.outbrackets <- as.numeric(vapply(cf,
+                                              FUN = function(x)
+                                                self$extractCFOutBrackets(x),
+                                              FUN.VALUE = character(1)))
+          cf.inbrackets <- stringr::str_extract(cf, "\\[([:graph:]*)\\]")
+          cf.inbrackets <- sub("\\[", "", cf.inbrackets)
+          cf.inbrackets <- sub("\\]", "", cf.inbrackets)
+          futile.logger::flog.debug(paste("parsing vertex ", f, "/", n.vertices,
+                                          " ", paste(cf.outbrackets, collapse = ","), " ", paste(cf.inbrackets,
+                                                                                                 collapse = ","), sep = ""))
+          vertices[cont, "Pos3D_1"] <- cf.outbrackets[1]
+          vertices[cont, "Pos3D_2"] <- cf.outbrackets[2]
+          vertices[cont, "Pos3D_3"] <- cf.outbrackets[3]
+          vertices[cont, "Pos3D_1_exp"] <- eval(parse(text = cf.inbrackets[1]))
+          vertices[cont, "Pos3D_2_exp"] <- eval(parse(text = cf.inbrackets[2]))
+          vertices[cont, "Pos3D_3_exp"] <- eval(parse(text = cf.inbrackets[3]))
+          vertices[cont, "Pos3D_1_exp_text"] <- cf.inbrackets[1]
+          vertices[cont, "Pos3D_2_exp_text"] <- cf.inbrackets[2]
+          vertices[cont, "Pos3D_3_exp_text"] <- cf.inbrackets[3]
+          cont <- cont + 1
+        }
     }
     vertices
 },
@@ -600,10 +605,22 @@ adjustVertices = function(normalize.size = TRUE){
   mass.center <- self$calculateMassCenter(
     vertices.id.3d = private$vertices.id.3d,
     applyTransformation = FALSE)
-  sapply(private$vertices.id.3d, FUN = function(x){
+
+  #debug
+  print(self$vertices.centered[7:10,1:3])
+  print(mass.center)
+
+  vapply(private$vertices.id.3d, FUN = function(x){
           self$vertices.centered[x, 1:3] <-
             self$vertices.centered[x, 1:3] - mass.center
-          })
+          TRUE
+          },
+         FUN.VALUE = logical(1))
+
+  #debug
+  print(self$vertices.centered[7:10,1:3])
+  stop("debug adjust vertices")
+
   private$mass.center <- self$calculateMassCenter(
     vertices.id.3d = private$vertices.id.3d,
     applyTransformation = FALSE)

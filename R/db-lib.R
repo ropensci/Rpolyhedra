@@ -250,7 +250,7 @@ updatePolyhedraDatabase <- function(){
 
   #"dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
   #Change when release version
-  scrapePolyhedra(scrape.config = .available.scrapping.conf[["pkg-minimal"]],
+  scrapePolyhedra(scrape.config = .available.scrapping.conf[["dev-minimal"]],
                    sources.config = .available.sources)
 }
 
