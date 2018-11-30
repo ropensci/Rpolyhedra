@@ -604,7 +604,7 @@ public = list(file.id = NA,
       self$addError(paste("Solid definition not found"))
     }
     self$transformation.matrix <- identityMatrix()
-    if (nchar(self$errors)==0){
+    if (nchar(self$errors) == 0){
       self$adjustVertices(normalize.size = normalize.size)
     }
     self
