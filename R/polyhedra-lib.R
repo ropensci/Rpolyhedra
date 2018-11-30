@@ -16,7 +16,6 @@
 #' @field file.id polyhedron file id
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import rgl
 #' @importFrom R6 R6Class
 PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(
 source = NA, file.id = NA, errors = "",
@@ -74,7 +73,8 @@ exportToXML = function(){
 #' @field labels.map Labels - Map of content
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import stringr futile.logger
+#' @importFrom futile.logger flog.info
+#' @importFrom stringr str_extract
 #' @importFrom R6 R6Class
 PolyhedronStateNetlibScraper.class <- R6::R6Class(
   "PolyhedronStateNetlibScraper",
@@ -173,9 +173,17 @@ scrapeVertices = function(vertices.txt) {
           cf.inbrackets <- stringr::str_extract(cf, "\\[([:graph:]*)\\]")
           cf.inbrackets <- sub("\\[", "", cf.inbrackets)
           cf.inbrackets <- sub("\\]", "", cf.inbrackets)
-          futile.logger::flog.debug(paste("parsing vertex ", f, "/", n.vertices,
-                                          " ", paste(cf.outbrackets, collapse = ","), " ", paste(cf.inbrackets,
-                                                                                                 collapse = ","), sep = ""))
+          futile.logger::flog.debug(paste("parsing vertex ",
+                                          f,
+                                          "/",
+                                          n.vertices,
+                                          " ",
+                                          paste(cf.outbrackets,
+                                                collapse = ","),
+                                          " ",
+                                          paste(cf.inbrackets,
+                                                collapse = ","),
+                                          sep = ""))
           vertices[cont, "Pos3D_1"] <- cf.outbrackets[1]
           vertices[cont, "Pos3D_2"] <- cf.outbrackets[2]
           vertices[cont, "Pos3D_3"] <- cf.outbrackets[3]
@@ -298,7 +306,7 @@ exportToXML = function(){
 #' }
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import stringr futile.logger
+#' @importFrom  futile.logger flog.info
 #' @importFrom R6 R6Class
 PolyhedronStateDmccoeyScraper.class <- R6::R6Class(
   "PolyhedronStateDmccoeyScraper",
@@ -544,7 +552,10 @@ norm <- function(vector){
 #' for RGL visualization
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import rgl testthat XML
+#' @importFrom futile.logger flog.debug
+#' @importFrom rgl identityMatrix
+#' @importFrom rgl transform3d
+#' @importFrom rgl asHomogeneous
 #' @importFrom R6 R6Class
 PolyhedronStateDefined.class <- R6::R6Class(
   "PolyhedronStateDefined",
@@ -903,7 +914,6 @@ buildRGL = function(transformation.matrix = NULL) {
 #' @field serialized.polyhedron polyhedron definition serialized
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import rgl testthat XML
 #' @importFrom R6 R6Class
 PolyhedronStateDeserializer.class <- R6::R6Class(
   "PolyhedronStateDeserializer",
@@ -973,7 +983,6 @@ PolyhedronStateDeserializer.class <- R6::R6Class(
 #' @field state Polyhedron state
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import rgl futile.logger testthat
 #' @importFrom R6 R6Class
 Polyhedron.class <- R6::R6Class("Polyhedron",
   public = list(file.id = NA, state = NA,
@@ -1053,8 +1062,6 @@ checkProperties = function(expected.vertices, expected.faces){
 #' @param triangulated.solid triangulated.solid for checking
 #' @return checked positioned vertices
 #' @importFrom stats runif
-
-
 checkVertices <- function(vertices, transformed.vertices, triangulated.solid){
   triangulated.solid <- sort(unique(unlist(triangulated.solid)))
   set.seed(sum(vertices[, 1:3]))
