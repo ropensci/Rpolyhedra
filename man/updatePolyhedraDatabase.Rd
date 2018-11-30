@@ -4,7 +4,10 @@
 \alias{updatePolyhedraDatabase}
 \title{updatePolyhedraDatabase}
 \usage{
-updatePolyhedraDatabase()
+updatePolyhedraDatabase(source.filenames = NULL)
+}
+\arguments{
+\item{source.filenames}{if not null specify which source filenames to scrape}
 }
 \value{
 polyhedra db object
