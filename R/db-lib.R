@@ -931,8 +931,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           }
           filenames2scrape <- filenames2scrape[sample.2.cover, ]
         }
-        n <- nrow(filenames2scrape)
-        for (r in c(1:n)){
+        for (r in seq_along(nrow(filenames2scrape))){
           current.filename.data <- filenames2scrape[r, ]
           source <- current.filename.data$source
           source.config <- self$sources.config[[source]]
