@@ -1066,7 +1066,7 @@ checkVertices <- function(vertices, transformed.vertices, triangulated.solid){
   triangulated.solid <- sort(unique(unlist(triangulated.solid)))
   set.seed(sum(vertices[, 1:3]))
   transformed.vertices.rows <- intersect(triangulated.solid,
-                                         1:nrow(transformed.vertices))
+                                         seq_len(nrow(transformed.vertices)))
   row <- transformed.vertices.rows[trunc(runif(1, 1,
                                                length(transformed.vertices.rows)
                                                + 1 - 0.1 ^ 9))]

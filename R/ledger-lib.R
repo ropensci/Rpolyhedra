@@ -265,7 +265,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
 
      self$updateCalculatedFields()
      if (is.null(ret.fields)) {
-       ret.fields <- 1:ncol(self$df)
+       ret.fields <- seq_len(ncol(self$df))
      }
      ret <- self$df[!is.na(self$df$scraped.name) & self$df$source %in% sources,
                     ret.fields]
