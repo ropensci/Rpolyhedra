@@ -124,9 +124,12 @@ scrapeNet = function(net.txt, offset = 0) {
     net <- list()
     cont <- 1
     for (f in seq_len(length(net.txt))) {
-        cf <- strsplit(net.txt[f], " ")[[1]]
-        net[[cont]] <- as.numeric(cf[2:length(cf)]) + offset
-        cont <- cont + 1
+        if (f >1){
+          #First line processed above
+          cf <- strsplit(net.txt[f], " ")[[1]]
+          net[[cont]] <- as.numeric(cf[2:length(cf)]) + offset
+          cont <- cont + 1
+        }
     }
     net
 },
@@ -637,18 +640,10 @@ inferEdges = function(force.recalculation = FALSE){
                                           count = numeric())
         self$edges <- list()
         private$edges.cont <- 0
-        #debug
-        print(seq_len(length(self$solid)))
-        print(self$solid)
-
         for (f.number in seq_len(length(self$solid))){
             f <- self$solid[[f.number]]
             degree.f <- length(f)
             v.ant <- f[degree.f]
-            #debug
-            print(f)
-            print(seq_len(length(f)))
-
             for (it.v in seq_len(length(f))){
                 v <- f[it.v]
                 if (v > v.ant){
@@ -674,9 +669,6 @@ inferEdges = function(force.recalculation = FALSE){
                 v.ant <- v
             }
         }
-        #debug
-        edges.check <<- private$edges.check
-        stop("debug edges.check")
     }
     self
 },
