@@ -600,8 +600,11 @@ public = list(file.id = NA,
     self$net <- net
     self$hinges <- hinges
     self$dih <- dih
+    self$addError(paste("Solid definition not found"))
     self$transformation.matrix <- identityMatrix()
-    self$adjustVertices(normalize.size = normalize.size)
+    if (nchar(self$errors)==0){
+      self$adjustVertices(normalize.size = normalize.size)
+    }
     self
 },
 scrape = function() {
@@ -777,7 +780,9 @@ getBoundingBox = function(
         vertices.id.3d = private$vertices.id.3d) {
   vertices.def <- self$getTransformedVertices(self$vertices.centered,
         transformation.matrix = transformation.matrix)
+
   vertices.def <- vertices.def[private$vertices.id.3d, ]
+
   vertices.def.min <- apply(vertices.def, MARGIN = 2, FUN = min)
   vertices.def.max <- apply(vertices.def, MARGIN = 2, FUN = max)
   rbind(vertices.def.min, vertices.def.max)

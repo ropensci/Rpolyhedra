@@ -962,7 +962,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                   polyhedron.file.id, source.filename){
         source <- source.config$getName()
         current.polyhedron <- NULL
-        #tryCatch({
+        tryCatch({
           self$ledger$updateStatus(source = source,
                                    source.filename = source.filename,
                                    status = "scraping")
@@ -981,16 +981,16 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                      source.filename = source.filename,
                                      status = "failed", obs = errors)
           }
-        # },
-        # error = function(e){
-        #   error <- paste(e$message, collapse = ",")
-        #   futile.logger::flog.error(paste("catched error", error))
-        #   assign("error", error, envir = parent.env(environment()))
-        #   self$ledger$updateStatus(source = source,
-        #                            source.filename,
-        #                            status = "exception",
-        #                            obs = error)
-        # })
+        },
+        error = function(e){
+          error <- paste(e$message, collapse = ",")
+          futile.logger::flog.error(paste("catched error", error))
+          assign("error", error, envir = parent.env(environment()))
+          self$ledger$updateStatus(source = source,
+                                   source.filename,
+                                   status = "exception",
+                                   obs = error)
+        })
         current.polyhedron
       }
       if (time2scrape.source > 0){
