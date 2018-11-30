@@ -1014,9 +1014,6 @@ isChecked = function(){
     if (!is.null(inconsistent.edges)){
         ret <- nrow(inconsistent.edges) == 0
     }
-    #debug. For analysing when inconsistent.edges
-    #ret <- TRUE
-
     ret
 },
 getRGLModel = function(transformation.matrix = NULL) {
@@ -1035,7 +1032,6 @@ checkProperties = function(expected.vertices, expected.faces){
     expect_equal(length(faces), expected.faces)
     vertices.solid <- which(row.names(self$state$vertices) %in% unlist(faces))
     expect_equal(length(vertices.solid), expected.vertices)
-
     #check Edges consistency
     self$state$checkEdgesConsistency()
     self
