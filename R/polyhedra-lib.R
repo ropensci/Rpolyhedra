@@ -600,7 +600,9 @@ public = list(file.id = NA,
     self$net <- net
     self$hinges <- hinges
     self$dih <- dih
-    self$addError(paste("Solid definition not found"))
+    if (is.null(self$solid)){
+      self$addError(paste("Solid definition not found"))
+    }
     self$transformation.matrix <- identityMatrix()
     if (nchar(self$errors)==0){
       self$adjustVertices(normalize.size = normalize.size)
