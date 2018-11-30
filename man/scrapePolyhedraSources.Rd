@@ -18,6 +18,8 @@ scrapePolyhedraSources(sources.config =
 
 \item{time2scrape.source}{time applied to scrape source}
 
+\item{source.filenames}{if not null specify which source filenames to scrape}
+
 \item{retry.scrape}{should it retry scrape?}
 }
 \value{

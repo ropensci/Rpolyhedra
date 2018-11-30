@@ -41,9 +41,9 @@ is accesible by the final users upon call to \code{getPolyhedron()}.
   \item{\code{addPolyhedron(source,polyhedron,overwrite)}}{Adds a polyhedron
   by source and name, if orverwrite is TRUE, it will update any existing one
   by that source and name}
-  \item{\code{configPolyhedraSource(source.config, max.quant)}}{Scrapes all
+  \item{\code{configPolyhedraSource(source.config, source.filenames, max.quant)}}{Scrapes all
   polyhedra in the given directory for adding to db or testing}
-  \item{\code{schedulePolyhedraSources(sources.config,max.quant,
+  \item{\code{schedulePolyhedraSources(sources.config, source.filenames, max.quant,
   test)}}{Scrapes files applying parameter sources.config}
   \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves
   all polyhedron within the source those names match with search.string}

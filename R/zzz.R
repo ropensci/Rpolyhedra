@@ -78,4 +78,7 @@
   }
 
   updatePolyhedraDatabase()
+  # updatePolyhedraDatabase(source.filenames =
+  #                           c("BorromeanRings.txt","Cairo16A.txt",
+  #                             "Cairo16B1.txt","Cairo16C6.txt"))
 }
