@@ -187,10 +187,10 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
            preloaded.name <- self$df[retrieved.id, "preloaded.name"]
            scraped.name.lower <- tolower(scraped.name)
            existing.polyhedron.name.rows <- which(self$df$source == source &
-                                      self$df$scraped.name==scraped.name.lower)
+                                    self$df$scraped.name == scraped.name.lower)
            if (length(existing.polyhedron.name.rows) > 0){
-             error <- paste(error, "Scraped name ", scraped.name.lower,"must be unique for ",
-                            "source and exists in rows",
+             error <- paste(error, "Scraped name ", scraped.name.lower,
+                            "must be unique for source and exists in rows",
                             paste(existing.polyhedron.name.rows,
                                   collapse = ","))
            }
@@ -229,7 +229,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      fields.update  <- c(fields.update, status.field, "obs")
      values.update  <- c(values.update, status, obs)
 
-     futile.logger::flog.debug(paste("Updating ledger for",source.filename, scraped.name.lower,
+     futile.logger::flog.debug(paste("Updating ledger for", source.filename,
+                                     scraped.name.lower,
                                     paste(fields.update, values.update,
                                           sep = "=",
                                           collapse = "|")))

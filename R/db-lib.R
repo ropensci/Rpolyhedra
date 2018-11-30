@@ -242,8 +242,6 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
   }
 
   setUserEnvir(".polyhedra", value = .polyhedra)
-  #assign(".polyhedra", value = .polyhedra, envir = getUserEnv())
-  #dev-package-env
 
   .available.sources <- getPackageEnvir(".available.sources")
   .available.scrapping.conf <- getPackageEnvir(".available.scrapping.conf")
@@ -853,7 +851,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                scraped.polyhedron = polyhedron)
       polyhedron
     },
-    configPolyhedraSource = function(source.config, source.filenames= NULL, max.quant = 0) {
+    configPolyhedraSource = function(source.config, source.filenames= NULL,
+                                     max.quant = 0) {
       source <- source.config$getName()
       home.dir.data <- getDataDir()
       self$configPolyhedraRDSPath()
@@ -861,7 +860,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       polyhedra.dir   <- source.config$getBaseDir(home.dir.data)
       polyhedra.files <- source.config$getPolyhedraFiles(home.dir.data)
       if (!is.null(source.filenames)){
-        polyhedra.files <- polyhedra.files[polyhedra.files %in% source.filenames]
+        polyhedra.files <- polyhedra.files[
+                      polyhedra.files %in% source.filenames]
       }
       if (length(polyhedra.files) > 0) {
         if (max.quant > 0){
