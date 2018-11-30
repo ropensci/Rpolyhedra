@@ -229,7 +229,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      fields.update  <- c(fields.update, status.field, "obs")
      values.update  <- c(values.update, status, obs)
 
-     futile.logger::flog.info(paste("Updating ledger for",source.filename, scraped.name.lower,
+     futile.logger::flog.debug(paste("Updating ledger for",source.filename, scraped.name.lower,
                                     paste(fields.update, values.update,
                                           sep = "=",
                                           collapse = "|")))
