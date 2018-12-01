@@ -7,7 +7,8 @@
 scrapePolyhedraSources(sources.config =
          getPackageEnvir(".available.sources"),
     max.quant.config.schedule = 0,
-    max.quant.scrape = 0, time2scrape.source = 30, retry.scrape = FALSE)
+    max.quant.scrape = 0, time2scrape.source = 30,
+    source.filenames = NULL, retry.scrape = FALSE)
 }
 \arguments{
 \item{sources.config}{the sources that will be used by the function}
