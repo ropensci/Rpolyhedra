@@ -26,6 +26,7 @@ This abstract class provide the basis from which polyhedron state class derivate
 \describe{
   \item{\code{addError(current.error)}}{Adds an error to the error string and log it as info}
   \item{\code{scrape()}}{Scrapes the polyhedra folder files}
+  \item{\code{getName()}}{returns polyhedron name}
   \item{\code{getSolid()}}{returns the object corresponding to the solid}
   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
   \item{\code{buildRGL(transformation.matrix)}}{creates a RGL representation of the object}

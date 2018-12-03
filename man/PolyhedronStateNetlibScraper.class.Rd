@@ -34,6 +34,7 @@ Scrapes polyhedra from a PHD file format.
   \item{\code{setupLabelsOrder()}}{Sets up the order of labels included in PHD file}
   \item{\code{getDataFromLabel(label)}}{Gets data from the Label}
   \item{\code{scrape()}}{Scrapes the data from the PHD file}
+  \item{\code{getName()}}{returns polyhedron name}
   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
 }
