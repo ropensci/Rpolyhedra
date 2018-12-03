@@ -6,6 +6,7 @@
 #' \describe{
 #'   \item{\code{addError(current.error)}}{Adds an error to the error string and log it as info}
 #'   \item{\code{scrape()}}{Scrapes the polyhedra folder files}
+#'   \item{\code{getName()}}{returns polyhedron name}
 #'   \item{\code{getSolid()}}{returns the object corresponding to the solid}
 #'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
 #'   \item{\code{buildRGL(transformation.matrix)}}{creates a RGL representation of the object}
@@ -31,6 +32,9 @@ addError = function(current.error) {
 },
 scrape = function() {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
+},
+getName = function() {
+  stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
 getSolid = function() {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
@@ -65,6 +69,7 @@ exportToXML = function(){
 #'   \item{\code{setupLabelsOrder()}}{Sets up the order of labels included in PHD file}
 #'   \item{\code{getDataFromLabel(label)}}{Gets data from the Label}
 #'   \item{\code{scrape()}}{Scrapes the data from the PHD file}
+#'   \item{\code{getName()}}{returns polyhedron name}
 #'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
 #'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
 #' }
@@ -231,6 +236,9 @@ getDataFromLabel = function(label) {
               self$extract_rows_from_label(r, label)]
     ret
 },
+getName = function() {
+  self$getDataFromLabel("name")
+},
 scrape = function() {
     # first check labels
     self$labels.rows <- grep("\\:", self$netlib.p3.lines)
@@ -297,6 +305,7 @@ exportToXML = function(){
 #'   \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes
 #'   the object, taking the file.id and PDH file as parameters}
 #'   \item{\code{scrape()}}{Scrapes data from dmccooey file format}
+#'   \item{\code{getName()}}{returns polyhedron name}
 #'   \item{\code{scrapeValues(values.lines)}}{Scrapes values}
 #'   \item{\code{scrapeVertices(vertices.lines)}}{Scrapes vertices}
 #'   \item{\code{scrapeFaces(face.lines)}}{Scrapes faces}
@@ -465,6 +474,9 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class(
                     solid    = self$faces)
       ret
   },
+  getName = function() {
+    self$polyhedra.dmccoey.lines[1]
+  },
   applyTransformationMatrix = function(transformation.matrix){
     stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
   },
@@ -495,6 +507,7 @@ norm <- function(vector){
 #'               sfaces, svertices, net, solid, hinges, dih, vertices)}}{
 #'               Initializes the object, taking defaults.}
 #'   \item{\code{scrape()}}{Do nothing as the object is defined}
+#'   \item{\code{getName()}}{returns polyhedron name}
 #'   \item{\code{getNet()}}{Gets the 2d net model}
 #'   \item{\code{getSolid()}}{Gets the solid representation}
 #'   \item{\code{triangulate(force = FALSE, vertices)}}{Generates
@@ -611,6 +624,9 @@ public = list(file.id = NA,
 },
 scrape = function() {
     self
+},
+getName = function() {
+  self$name
 },
 getSymbol = function() {
     self$symbol
@@ -1023,7 +1039,7 @@ deserialize = function(serialized.polyhedron){
   self
 },
 getName = function() {
-    self$state$name
+    self$state$getName()
 },
 getState = function() {
     self$state

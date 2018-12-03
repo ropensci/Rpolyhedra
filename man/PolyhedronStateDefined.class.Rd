@@ -71,6 +71,7 @@ for RGL visualization}
               sfaces, svertices, net, solid, hinges, dih, vertices)}}{
               Initializes the object, taking defaults.}
   \item{\code{scrape()}}{Do nothing as the object is defined}
+  \item{\code{getName()}}{returns polyhedron name}
   \item{\code{getNet()}}{Gets the 2d net model}
   \item{\code{getSolid()}}{Gets the solid representation}
   \item{\code{triangulate(force = FALSE, vertices)}}{Generates
