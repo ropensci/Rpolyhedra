@@ -1,52 +1,65 @@
 
+#' convertDFToXML()
+#'
+#' Allows to the creation of xml excerpts out of a data.frame.
+#'
+#' @param df the dataframe to convert
+#' @param name the tag for the new section
+#' @param node the node that will be acting as parent.
+#' @return the node with the dataframe in it
+#' @importFrom XML newXMLNode
+convertDFToXML <- function(df, name, node) {
+  # Iterate over all rows
+  lapply(1:nrow(df),
+         function(rowi) {
+           r <- XML::newXMLNode(name, parent=node)   # Create row tag
+           for(var in names(df)) {   # Iterate over variables
+             if(!is.na(df[rowi, var])) {
+              XML::newXMLNode(var, df[rowi, var], parent = r)
+             }
+           }
+         })
+  node
+}
+
+
+
 #' polyhedronToXML()
 #'
 #' Gets an XML representation out of the polyhedron object
 #'
-#' @param polyhedron.state.defined the polyhedron to get a
-#'        representation from
-#' @return a XML document, ready to be saved as a String File
-# TODO examples
+#' @param polyhedron.state.defined the polyhedron to get a representation from
+#' @return an XML document, ready to be converted to String with XML::saveXML()
 #' @examples
 #' #get the representation of a cube (netlib library)
 #' library(Rpolyhedra)
-#' polyhedronToXML(getPolyhedron("netlib", "cube")$getState())
+#' XML::saveXML(polyhedronToXML(getPolyhedron("netlib", "cube")$state))
 #'
-#' @importFrom XML xmlTree
+#' @import XML
 #' @export
-polyhedronToXML <- function(polyhedron.state.defined) {
-  xml <- XML::xmlTree()
-  #xml$addTag("polyhedron", close=FALSE)
-  #xml$closeTag()
-  # TODO generate XML
-  xml
+polyhedronToXML <- function(polyhedron.state.defined)
+{
+  # Start empty XML document tree
+  doc <- XML::newXMLDoc()
+
+  #TODO: Apply tranformation matrix
+  positioned.vertices <- polyhedron.state.defined$state$vertices
+  vertices <- polyhedron.state.defined$state$vertices
+  faces <- polyhedron.state.defined$solid
+  # Start by adding a document tag at the root of the XML file
+  rootNode <- XML::newXMLNode("polyhedron", doc=doc, attrs=c(name=polyhedron.state.defined$name, dual=polyhedron.state.defined$dual))
+  verticesNode <- XML::newXMLNode("vertices", doc = doc, parent = rootNode, attrs=c(name=polyhedron.state.defined$name))
+  verticesNode <- convertDFToXML(df = polyhedron.state.defined$vertices, name= "vertice", node = verticesNode)
+  facesNode <- XML::newXMLNode("faces", doc = doc, parent = rootNode)
+  for (face.id in seq_len(length(faces))) {
+    face <- faces[face.id]
+    faceNode <- XML::newXMLNode("face", doc = doc, parent = facesNode, attrs=c(id=face.id, definition=paste(face[[1]], collapse=",")))
+  }
+  doc
 }
 
-#' persistPolyhedron
-#'
-#' persists a polyhedron to the defined path in a Zipped ascii RDS format
-#'
-#' @param polyhedron.state.defined the polyhedron to get a representation from
-#' @param file.path the path of the file to be persisted.
-#' @return the path or None
-#'
-persistPolyhedron <- function(polyhedron.state.defined, file.path) {
-  polyhedron.xml <- polyhedronToXML(polyhedron.state.defined)
-  temp.file <- file(tempfile(pattern = "polyhedron",
-                             tmpdir = tempdir(), fileext = ""))
-  write(polyhedron.xml)
 
-  zip(file.path, temp.file)
-  unlink(temp.file)
-}
 
-#' hydratePolyhedron
-#'
-#' hydrates a polyhedron from the defined path
-#'
-#' @param file.path the path of the file to be hydrated.
-#' @return polyhedron.state.defined
-#'
-hydratePolyhedron <- function(file.path) {
 
-}
+
+
