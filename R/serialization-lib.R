@@ -13,10 +13,10 @@ convertDFToXML <- function(df, name, node) {
   lapply(1:nrow(df),
          function(rowi) {
            r <- XML::newXMLNode(name, parent=node)   # Create row tag
-           for(var in names(df)) {   # Iterate over variables
+            for(var in names(df)) {   # Iterate over variables
              if(!is.na(df[rowi, var])) {
               XML::newXMLNode(var, df[rowi, var], parent = r)
-             }
+            }
            }
          })
   node
@@ -37,24 +37,37 @@ convertDFToXML <- function(df, name, node) {
 #'
 #' @import XML
 #' @export
-polyhedronToXML <- function(polyhedron.state.defined)
+polyhedronToXML <- function(polyhedron.state.defined, is.transformed.vertices=TRUE)
 {
   # Start empty XML document tree
   doc <- XML::newXMLDoc()
 
-  #TODO: Apply tranformation matrix
-  positioned.vertices <- polyhedron.state.defined$state$vertices
-  vertices <- polyhedron.state.defined$state$vertices
+  if ( is.transformed.vertices ) {
+    vertices <- polyhedron.state.defined$getTransformedVertices()
+    applied.transformation.matrix <- polyhedron.state.defined$transformation.matrix
+
+  } else {
+    vertices <- polyhedron.state.defined$vertices[,1:3]
+    applied.transformation.matrix <- identityMatrix()
+  }
+  vertices <- as.data.frame(vertices)
+
+  names(vertices) <- c("x", "y", "z")
+
+  applied.transformation.matrix <- as.data.frame(applied.transformation.matrix)
+
   faces <- polyhedron.state.defined$solid
   # Start by adding a document tag at the root of the XML file
   rootNode <- XML::newXMLNode("polyhedron", doc=doc, attrs=c(name=polyhedron.state.defined$name, dual=polyhedron.state.defined$dual))
-  verticesNode <- XML::newXMLNode("vertices", doc = doc, parent = rootNode, attrs=c(name=polyhedron.state.defined$name))
-  verticesNode <- convertDFToXML(df = polyhedron.state.defined$vertices, name= "vertice", node = verticesNode)
+  verticesNode <- XML::newXMLNode("vertices", doc = doc, parent = rootNode)
+  verticesNode <- convertDFToXML(df = vertices, name= "vertex", node = verticesNode)
   facesNode <- XML::newXMLNode("faces", doc = doc, parent = rootNode)
   for (face.id in seq_len(length(faces))) {
     face <- faces[face.id]
     faceNode <- XML::newXMLNode("face", doc = doc, parent = facesNode, attrs=c(id=face.id, definition=paste(face[[1]], collapse=",")))
   }
+  identityMatrixNode <- XML::newXMLNode("identityMatrix", doc = doc, parent = rootNode)
+  identityMatrixNode <- convertDFToXML(df = applied.transformation.matrix, name= "row", node = identityMatrixNode)
   doc
 }
 

@@ -95,5 +95,3 @@ context("XML export")
 test_that("test xml can be exported", {
   polyhedronToXML(getPolyhedron("netlib", "cube")$getState())
   })
-
-
