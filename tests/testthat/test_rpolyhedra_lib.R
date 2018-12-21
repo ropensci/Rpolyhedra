@@ -2,29 +2,42 @@
 context("ledger")
 test_that("create minimal ledger", {
   ledger <- ScraperLedger.class$new()
-  cube <- getPolyhedron(source = "netlib", polyhedron.name = "cube")
-  cube$state$name = "cube_test"
-  #we copy over the database's df as to be able to test something
-  ledger$df <- getPolyhedraObject()$ledger$df
-  ledger1 <- ledger$clone()
-  ledger$resetStatesMetrics()
-  ledger$updateCalculatedFields()
+  #initialize variables
+  source.config.netlib <- getPackageEnvir(".available.sources")[["netlib"]]
 
-  ledger.count <- nrow(ledger$loadPreloadedData())
-  ledger.crc = ledger$getCRCPolyhedronName(source = "netlib", polyhedron.name = "cube")
-  ledger$getAvailableSources()
-  ledger$getAvailablePolyhedra()
-  ledger$getFilenamesStatus("scraped")
+  scrapeInLedger <- function(ledger, source.config, filename){
+    #Simulates scrape desired behavior
+    polyhedra.dir <- source.config$getBaseDir(getPackageDir())
+    source <- source.config$getName()
+    ledger$addFilename(source = source, source.filename = filename)
+    ledger$updateStatus(source = source,
+                        source.filename = filename,
+                        status = "scraping")
+    scraped.polyhedron <- source.config$scrape(
+      polyhedron.file.id = filename,
+      file.path(polyhedra.dir,
+                filename))
+    ledger$updateStatus(source = source,
+                        source.filename = filename,
+                        status = "scraped",
+                        scraped.polyhedron = scraped.polyhedron)
+  }
+  #Fill ledger
+  scrapeInLedger(ledger = ledger, source.config = source.config.netlib, filename = "0")
+  scrapeInLedger(ledger = ledger, source.config = source.config.netlib, filename = "1")
+  scrapeInLedger(ledger = ledger, source.config = source.config.netlib, filename = "2")
+
+  # Execute functions
+  ledger.crc   <-  ledger$getCRCPolyhedronName(source = "netlib", polyhedron.name = "tetrahedron")
+  expect_equal(ledger$getAvailableSources(), "netlib")
+  expect_equal(ledger$getAvailablePolyhedra()$scraped.name, c("tetrahedron", "octahedron", "cube"))
+  expect_equal(unique(ledger$getFilenamesStatus(status = "scraped")$status), "scraped")
+  expect_equal(unique(ledger$getFilenamesStatusMode(mode = "test")$status), "scraped")
+
   ledger$countStatusUse(status.field = "status", status = "scraped")
-  ledger$getFilenamesStatusMode(mode="test")
 
-  ledger$getIdFilename(source = "netlib", source.filename = "0")
-  ledger$addFilename(source = "netlib", source.filename = "1001")
-  ledger$updateStatus(source = "netlib", source.filename = "1001",
-        status = "scraped", status.field = "status",
-        scraped.polyhedron = cube,
-        obs = "just a test")
   })
+
 
 context("Regular solids")
 test_that("Scrape test rpolyhedra 5 regular solids", {
@@ -93,7 +106,8 @@ test_that(paste("test check edges consistency for 12% of",
 
 context("XML export")
 test_that("test xml can be exported", {
-  polyhedronToXML(getPolyhedron("netlib", "cube")$getState())
+  xml.polyhedron <- polyhedronToXML(getPolyhedron("netlib", "tetrahedron")$getState())
+  expect_equal(as.numeric(nchar(XML::getChildrenStrings(xml.polyhedron))), 538)
   })
 
 
