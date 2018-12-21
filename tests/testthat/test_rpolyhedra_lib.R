@@ -38,6 +38,25 @@ test_that("create minimal ledger", {
 
   })
 
+context("db")
+test_that("create minimal db", {
+  expect_equal(selectDataEnv("PACKAGE"), "PACKAGE")
+  source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()
+  source.config.dmccooey <- PolyhedronScraperConfigurationDmccoey.class$new()
+  expect_equal(source.config.netlib$getBaseDir("destdir"), "destdir/sources/www.netlib.org/polyhedra/")
+  expect_equal(source.config.dmccooey$getBaseDir("destdir"), "destdir/sources/dmccooey.com/polyhedra/")
+
+  db <- PolyhedraDatabase.class$new()
+  #FIXME for building testcase: cannot exist polyhedron if it is not in the database.
+  db$existsPolyhedron(source = "netlib", polyhedron.name = "tetrahedron")
+  db$getPolyhedronFilename(source = "netlib", polyhedron.name = "tetrahedron",
+                        extension = ".RDS.zip")
+  #test sources
+  db$addSourceConfig(source.config = source.config.netlib)
+  db$configPolyhedraSource(source.config = source.config.netlib, source.filenames = as.character(0:10))
+  db$scrape(mode = "scrape.queued",sources = "netlib",max.quant = 3)
+  expect_equal(db$getAvailablePolyhedra()$scraped.name, c("tetrahedron", "octahedron", "cube"))
+})
 
 context("Regular solids")
 test_that("Scrape test rpolyhedra 5 regular solids", {
@@ -59,7 +78,6 @@ test_that("Scrape test rpolyhedra for 12% of available polyhedra", {
   tasks <- getPolyhedraObject()$
     generateTestTasks(TestTaskClass = PolyhedronTestTaskScrape.class,
     max.quant = getPercentilPolyhedraQuant(0.12, 50))
-
   for (task in tasks){
     task$run()
   }
