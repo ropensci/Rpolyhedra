@@ -51,6 +51,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                            end.scrape   = as.POSIXct(character()),
                            status       = character(),
                            scraped.name = character(),
+                           symbol       = character(),
                            scraped.vertices   = numeric(),
                            scraped.faces      = numeric(),
                            status.test        = character(),
@@ -177,6 +178,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          #in a different commands for not converting it to character
          if (status %in% "scraped"){
            scraped.name <- scraped.polyhedron$getName()
+           symbol       <- scraped.polyhedron$getState()$getSymbol()
            scraped.vertices <- nrow(scraped.polyhedron$getState()$
                                       getVertices(solid = TRUE))
            scraped.faces    <- length(scraped.polyhedron$getState()$getSolid())
@@ -207,8 +209,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
            if (nchar(error) > 0){
              stop(error)
            }
-           fields.update <- c(fields.update, "scraped.name", "crc.filename")
-           values.update <- c(values.update, scraped.name.lower, crc.filename)
+           fields.update <- c(fields.update, "scraped.name", "symbol", "crc.filename")
+           values.update <- c(values.update, scraped.name.lower, symbol, crc.filename)
            fields.numeric.update <- c(fields.numeric.update,
                                      "scraped.vertices", "scraped.faces")
            values.numeric.update <- c(values.numeric.update,
@@ -260,13 +262,19 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                                  resolveScrapedPreloaded(x = x,
                                                          field = "faces")
                                  }))
+       self$df$faces    <-  as.numeric(apply(self$df, MARGIN = 1,
+                                             FUN = function(x) {
+                                               resolveScrapedPreloaded(x = x,
+                                                                       field = "faces")
+                                             }))
+
        self$dirty <- FALSE
      }
    },
    getAvailablePolyhedra = function(sources = names(
            getPackageEnvir(".available.sources")),
            search.string = "",
-           ret.fields = c("source", "scraped.name", "vertices",
+           ret.fields = c("source", "scraped.name", "symbol", "vertices",
                           "faces", "status"),
            ignore.case = TRUE){
 
