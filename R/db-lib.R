@@ -174,6 +174,7 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data =
 #' @return .data.env
 #' @importFrom futile.logger flog.info
 selectDataEnv <- function(env=NA) {
+  retVal <- "SUCCESS"
   if (is.na(env)) {
     if (!is.na(Sys.getenv(x = "ON_TRAVIS", unset = NA))) {
       return(TRUE)
@@ -211,10 +212,16 @@ selectDataEnv <- function(env=NA) {
     if (!dir.exists(data.dir)) {
       dir.create(data.dir, recursive = TRUE, showWarnings = FALSE)
     }
-    downloadRPolyhedraSupportingFiles()
+    retVal <- downloadRPolyhedraSupportingFiles()
   }
-  updatePolyhedraDatabase()
-  .data.env
+  if(retVal == "SUCCESS") {
+    updatePolyhedraDatabase()
+  } else {
+    setDataDirEnvironment("HOME")
+  }
+
+
+  retVal
 }
 
 #' updatePolyhedraDatabase
@@ -274,6 +281,7 @@ getPolyhedraObject <- function() {
 #' @importFrom utils zip
 #' @export
 downloadRPolyhedraSupportingFiles <- function(){
+  retVal <- "SUCCESS"
   if (checkDatabaseVersion() == "UPDATE") {
     if (getDataEnv() == "HOME"){
       db.version <- getPackageDB()
@@ -284,19 +292,30 @@ downloadRPolyhedraSupportingFiles <- function(){
       td <- tempdir()
       zipFile <- tempfile(tmpdir = td, fileext = ".zip")
       #download file to tempfile
-      utils::download.file(URL, destfile = zipFile, mode = "wb")
-      utils::unzip(zipfile = zipFile, exdir = td)
-      tmp.db.path <- list.files(path = td, pattern = "qbotics*")[1]
-      files.to.copy <- list.files(file.path(td, tmp.db.path))
-      #copy files
-      file.copy(from = file.path(td, tmp.db.path, files.to.copy),
-                to = getUserSpace(), recursive = TRUE)
-      #delete tmp path
-      unlink(file.path(td, tmp.db.path), recursive = TRUE)
-      return(TRUE)
+      oldw <- getOption("warn")
+      options(warn = -1)
+      retVal <-  tryCatch({
+        utils::download.file(URL, destfile = zipFile, mode = "wb")
+        "SUCCESS"
+      }, error = function(e) {
+        "NOT_AVAILABLE"
+      })
+      options(warn = oldw)
+      if(retVal  == "SUCCESS")
+      {
+        utils::unzip(zipfile = zipFile, exdir = td)
+        tmp.db.path <- list.files(path = td, pattern = "qbotics*")[1]
+        files.to.copy <- list.files(file.path(td, tmp.db.path))
+        #copy files
+        file.copy(from = file.path(td, tmp.db.path, files.to.copy),
+                  to = getUserSpace(), recursive = TRUE)
+        #delete tmp path
+        unlink(file.path(td, tmp.db.path), recursive = TRUE)
+      }
+
     }
   }
-  return(TRUE)
+  retVal
 }
 
 #' copyFilesToExtData
@@ -1242,7 +1261,11 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
 #' @export
 
 switchToFullDatabase <- function(env = NA){
-  selectDataEnv(env = env)
+  retVal <- selectDataEnv(env = env)
+  if(retVal == "NOT_AVAILABLE")
+  {
+    futile.logger::flog.error("Full Database not available yet.");
+  }
 }
 
 
