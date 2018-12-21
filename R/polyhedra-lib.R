@@ -179,7 +179,7 @@ scrapeVertices = function(vertices.txt) {
           cf.inbrackets <- sub("\\[", "", cf.inbrackets)
           cf.inbrackets <- sub("\\]", "", cf.inbrackets)
           futile.logger::flog.debug(paste("parsing vertex ",
-                                          f,
+                                          v,
                                           "/",
                                           n.vertices,
                                           " ",
