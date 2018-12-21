@@ -75,7 +75,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      r <- NULL
      default.status <- "queued"
      if (is.null(self$getIdFilename(source, source.filename))){
-       futile.logger::flog.info(paste("Adding Filename to ledger ",
+       futile.logger::flog.debug(paste("Adding Filename to ledger ",
                                       source,
                                       source.filename))
        r <- nrow(self$df) + 1
