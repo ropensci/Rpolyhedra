@@ -599,7 +599,7 @@ public = list(file.id = NA,
               transformation.matrix = NA,
   initialize = function(source, file.id, name,
                         vertices, solid, net = NULL,
-                        symbol=NULL, dual=NULL, sfaces=NULL,
+                        symbol="", dual=NULL, sfaces=NULL,
                         svertices = NULL, hinges = NULL, dih = NULL,
                         normalize.size = TRUE) {
     super$initialize(source = source, file.id = file.id)
