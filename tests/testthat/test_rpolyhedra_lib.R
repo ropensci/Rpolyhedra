@@ -137,7 +137,8 @@ test_that(paste("test check edges consistency for 12% of",
 context("RGL")
 test_that("Build RGL model for polyhedra",{
                   hexagonal.prism <- getPolyhedron("netlib","hexagonal prism")
-                  hexagonal.prism$getState()$buildRGL()
+                  rgl <- hexagonal.prism$getState()$buildRGL()
+                  expect_equal(dim(rgl$vb),c(4,36))
                 })
 
 context("XML export")
