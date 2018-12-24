@@ -1,29 +1,33 @@
 
-context("db lib functions")
-test_that("test on db lib functions", {
+context("db-lib")
+test_that("create minimal db", {
+  initDataDirEnvironment()
+  expect_equal(selectDataEnv("PACKAGE"), "SUCCESS")
+  source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()
+  source.config.dmccooey <- PolyhedronScraperConfigurationDmccoey.class$new()
+  expect_equal(source.config.netlib$getBaseDir("destdir"), "destdir/sources/www.netlib.org/polyhedra/")
+  expect_equal(source.config.dmccooey$getBaseDir("destdir"), "destdir/sources/dmccooey.com/polyhedra/")
 
-  setUserEnvir("testUser", "testUser")
-  testthat::expect_equal(Rpolyhedra:::getUserEnvir(variable.name="testUser"), "testUser")
-  testthat::expect_equal(setDataDirEnvironment(env = "PACKAGE"), "PACKAGE")
-  testthat::expect_equal(Rpolyhedra:::getDataEnv(), "PACKAGE")
-  testthat::expect(!is.null(getUserSpace()), failure_message =   "getUserSpace cannot be null")
-  testthat::expect_equal(initDataDirEnvironment(), "PACKAGE")
-  testthat::expect(!is.null(getDataDir()), failure_message = "getDataDir cannot be null")
-  testthat::expect(!is.null(getEnvironmentFilepath()), failure_message = "getEnvironmentFilepath cannot be null")
-  testthat::expect(!is.null(getPackageDir()), failure_message = "getPackageDir cannot be null")
-  testthat::expect(!is.null(getPolyhedraRDSPath()), failure_message = "getPolyhedraRDSPath cannot be null")
-  testthat::expect(!is.null(getPreloadedDataFilename()), failure_message = "getPreloadedDataFilename cannot be null")
-  testthat::expect_equal(selectDataEnv(env = "PACKAGE"), "SUCCESS")
-  testthat::expect(!is.null(updatePolyhedraDatabase()), failure_message = "updatePolyhedraDatabase cannot be null")
-  testthat::expect(!is.null(getPolyhedraObject()), failure_message = "getPolyhedraObject cannot be null")
-  testthat::expect(downloadRPolyhedraSupportingFiles()=="SUCCESS")
-  testthat::expect_error(copyFilesToExtData(FALSE))
-  testthat::expect(!is.null(getGitCommit()))
-  testthat::expect(!is.null(getPackageVersion()))
-  testthat::expect(!is.null(getPackageDB()))
-  testthat::expect(!is.null(getDatabaseVersion()))
-  testthat::expect(!is.null(checkDatabaseVersion()))
-  testthat::expect(isCompatiblePolyhedraRDS()==TRUE)
-  testthat::expect(switchToFullDatabase(env="PACKAGE")=="PACKAGE")
-  testthat::expect(!is.null(scrapePolyhedraSources()))
+  db <- PolyhedraDatabase.class$new()
+  #FIXME for building testcase: cannot exist polyhedron if it is not in the database.
+  db$existsPolyhedron(source = "netlib", polyhedron.name = "tetrahedron")
+  db$getPolyhedronFilename(source = "netlib", polyhedron.name = "tetrahedron",
+                           extension = ".RDS.zip")
+  #test sources
+  db$addSourceConfig(source.config = source.config.netlib)
+  db$addSourceConfig(source.config = source.config.dmccooey)
+  db$configPolyhedraSource(source.config = source.config.netlib, source.filenames = NULL)
+  db$configPolyhedraSource(source.config = source.config.dmccooey, source.filenames = NULL)
+  db$scrape(mode = "scrape.queued",sources = "netlib",max.quant = 3)
+  db$scrape(mode = "scrape.queued",sources = "dmccooey",max.quant = 3)
+  expect_equal(db$getAvailablePolyhedra()$scraped.name,
+               c("tetrahedron", "octahedron", "cube",
+                 "10-truncated triakis icosahedron (canonical)",
+                 "4-5-truncated deltoidal hexecontahedron with truncation depth chosen",
+                 "132-pentagon polyhedron"
+               ))
+  #TODO
+  #testRR
+  #generateTestTasks
 })
+
