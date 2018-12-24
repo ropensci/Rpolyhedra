@@ -68,22 +68,9 @@ scrapePolyhedraSources <- function(sources.config =
   getPolyhedraObject()$scrape(mode = mode,
                               max.quant = max.quant.scrape,
                               time2scrape.source = time2scrape.source,
-                              pretend = FALSE)
-  #All files not scraped in building, marked as skipped
-  still.queued <- which(getPolyhedraObject()$ledger$df$status == "queued")
-  if (length(still.queued) > 0){
-    apply(getPolyhedraObject()$ledger$df[still.queued, ], MARGIN = 1,
-          FUN = function(x) {
-            getPolyhedraObject()$ledger$
-              updateStatus(source = x["source"],
-                           source.filename = x["source.filename"],
-                           status = "skipped",
-                           obs = "#TODO in next release")
-          }
-    )
-    #save skipped state in RDS file
-    getPolyhedraObject()$saveRDS()
-  }
+                              pretend = FALSE,
+                              skip.still.queued = TRUE
+                              )
   getPolyhedraObject()
 }
 
