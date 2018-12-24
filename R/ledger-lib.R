@@ -210,10 +210,17 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
              stop(error)
            }
 
-           fields.update <- c(fields.update, "scraped.name", "symbol", "crc.filename")
-           values.update <- c(values.update, scraped.name.lower, symbol, crc.filename)
+           fields.update <- c(fields.update,
+                              "scraped.name",
+                              "symbol",
+                              "crc.filename")
+           values.update <- c(values.update,
+                              scraped.name.lower,
+                              symbol,
+                              crc.filename)
            fields.numeric.update <- c(fields.numeric.update,
-                                     "scraped.vertices", "scraped.faces")
+                                     "scraped.vertices",
+                                     "scraped.faces")
            values.numeric.update <- c(values.numeric.update,
                                       scraped.vertices,
                                       scraped.faces)
@@ -264,10 +271,10 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
                                                          field = "faces")
                                  }))
        self$df$faces    <-  as.numeric(apply(self$df, MARGIN = 1,
-                                             FUN = function(x) {
-                                               resolveScrapedPreloaded(x = x,
-                                                                       field = "faces")
-                                             }))
+                                 FUN = function(x) {
+                                   resolveScrapedPreloaded(x = x,
+                                                   field = "faces")
+                                 }))
 
        self$dirty <- FALSE
      }

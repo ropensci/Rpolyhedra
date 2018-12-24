@@ -151,7 +151,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         }
         else {
           crc.name <- self$ledger$getCRCPolyhedronName(source = source,
-                                                       polyhedron.name = polyhedron.name)
+                 polyhedron.name = polyhedron.name)
           serialized.polyhedron <- polyhedron$state$serialize()
           tmp.dir <- file.path(tempdir = tempdir(), source)
           dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
@@ -499,8 +499,3 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                         ignore.case = ignore.case)
     }
   ))
-
-
-
-
-
