@@ -246,35 +246,3 @@ getGitCommit <- function(long.version = FALSE){
 }
 
 
-#' getPackageVersion
-#'
-#' Obtains code version from the Description
-#' @importFrom utils packageVersion
-getPackageVersion <- function(){
-  as.character(utils::packageVersion("Rpolyhedra"))
-}
-
-#' getPackageDB
-#'
-#' Obtains the database version from environment
-getPackageDB <- function(){
-  .package.db <- getPackageEnvir(".package.db")
-  ret <- .package.db[[getPackageVersion()]]
-  if (is.null(ret)){
-    ret <- getPackageVersion()
-  }
-  ret
-}
-
-
-
-#' getDatabaseVersion
-#'
-#' Obtains the generation code version from the database version file
-getDatabaseVersion <- function(){
-  version <- NULL
-  version.file <- file.path(getDataDir(), "version")
-  if (file.exists(version.file))
-    version <- readLines(version.file, n = 1)
-  version
-}
