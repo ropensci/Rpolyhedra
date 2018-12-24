@@ -142,7 +142,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       prev.data <- self$getPolyhedron(source = source,
                                       polyhedron.name = polyhedron.name)
       if (!overwrite & !is.null(prev.data) & !pretend){
-      futile.logger::flog.info(paste("Polyhedron",
+        futile.logger::flog.info(paste("Polyhedron",
                                      polyhedron.name,
                                      "in source",
                                      source,
