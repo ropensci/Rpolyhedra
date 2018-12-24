@@ -9,15 +9,15 @@
 #' @param sources.config the sources that will be used by the function
 #' @return polyhedra db object
 scrapePolyhedra <- function(scrape.config,
-                            source.filenames = NULL,
-                            sources.config = getPackageEnvir(".available.sources")){
+                source.filenames = NULL,
+                sources.config = getPackageEnvir(".available.sources")) {
   scrapePolyhedraSources(max.quant.config.schedule =
-                           scrape.config[["max.quant.config.schedule"]],
-                         max.quant.scrape = scrape.config[["max.quant.scrape"]],
-                         time2scrape.source = scrape.config[["time2scrape.source"]],
-                         sources.config = sources.config,
-                         source.filenames = source.filenames,
-                         retry.scrape = scrape.config[["retry.scrape"]])
+               scrape.config[["max.quant.config.schedule"]],
+             max.quant.scrape = scrape.config[["max.quant.scrape"]],
+             time2scrape.source = scrape.config[["time2scrape.source"]],
+             sources.config = sources.config,
+             source.filenames = source.filenames,
+             retry.scrape = scrape.config[["retry.scrape"]])
 
 }
 
@@ -50,11 +50,11 @@ scrapePolyhedraSources <- function(sources.config =
                                   max.quant.config.schedule,
                                   "polyhedra for scraping"))
   getPolyhedraObject()$schedulePolyhedraSources(sources.config =
-                                                  sources.config,
-                                                source.filenames =
-                                                  source.filenames,
-                                                max.quant = max.quant.config.schedule,
-                                                pretend = FALSE)
+                          sources.config,
+                        source.filenames =
+                          source.filenames,
+                        max.quant = max.quant.config.schedule,
+                        pretend = FALSE)
   if (retry.scrape){
     mode <- "scrape.retry"
   }
@@ -133,10 +133,10 @@ getAvailableSources <- function(){
 #'cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
 
 getAvailablePolyhedra <- function(sources =
-                                    names(getPackageEnvir(".available.sources")),
-                                  search.string = NULL){
+                      names(getPackageEnvir(".available.sources")),
+                      search.string = NULL){
   getPolyhedraObject()$getAvailablePolyhedra(sources = sources,
-                                             search.string = search.string)
+                      search.string = search.string)
 }
 
 #' getPolyhedron()

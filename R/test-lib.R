@@ -15,19 +15,19 @@
 #'
 
 PolyhedronTestTask.class <- R6::R6Class("PolyhedronTestTask",
-                                        public = list(
-                                          polyhedra.db = NA,
-                                          source.config = NA,
-                                          polyhedron.name = NA,
-                                          initialize = function(polyhedra.db, source.config, polyhedron.name) {
-                                            self$polyhedra.db    <- polyhedra.db
-                                            self$source.config   <- source.config
-                                            self$polyhedron.name <- polyhedron.name
-                                            self
-                                          },
-                                          run = function(){
-                                            stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
-                                          }))
+public = list(
+  polyhedra.db = NA,
+  source.config = NA,
+  polyhedron.name = NA,
+  initialize = function(polyhedra.db, source.config, polyhedron.name) {
+    self$polyhedra.db    <- polyhedra.db
+    self$source.config   <- source.config
+    self$polyhedron.name <- polyhedron.name
+    self
+  },
+  run = function(){
+    stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
+  }))
 
 #' PolyhedronTestTaskScrape
 #'
@@ -48,47 +48,47 @@ PolyhedronTestTask.class <- R6::R6Class("PolyhedronTestTask",
 #'
 
 PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
-                                              inherit = PolyhedronTestTask.class,
-                                              public = list(
-                                                polyhedra.dir = NA,
-                                                polyhedron.file.id = NA,
-                                                source.filename = NA,
-                                                initialize = function(polyhedra.db, source.config, polyhedron.name,
-                                                                      polyhedra.dir, polyhedron.file.id,
-                                                                      source.filename) {
-                                                  super$initialize(polyhedra.db = polyhedra.db,
-                                                                   source.config = source.config,
-                                                                   polyhedron.name = polyhedron.name)
-                                                  self$polyhedra.dir       <- polyhedra.dir
-                                                  self$polyhedron.file.id   <- polyhedron.file.id
-                                                  self$source.filename <- source.filename
-                                                  self
-                                                },
-                                                run = function(){
-                                                  source <- self$source.config$getName()
-                                                  tryCatch({
-                                                    obs    <- ""
-                                                    scraped.polyhedron <- self$source.config$scrape(polyhedron.file.id =
-                                                                                                      self$polyhedron.file.id,
-                                                                                                    file.path(self$polyhedra.dir, self$source.filename))
-                                                    scraped.name <- scraped.polyhedron$getName()
-                                                    status <- "testing"
-                                                  },
-                                                  error = function(e){
-                                                    error <- paste(e$message, collapse = ",")
-                                                    futile.logger::flog.error(paste("catched error", error))
-                                                    assign("error", error, envir = parent.env(environment()))
-                                                    status <- "exception"
-                                                    if (exists("scraped.polyhedron")){
-                                                      obs    <- scraped.polyhedron$getErrors()
-                                                    }
-                                                  })
-                                                  expected.polyhedron <-
-                                                    self$polyhedra.db$getPolyhedron(source = source,
-                                                                                    polyhedron.name = scraped.name)
+  inherit = PolyhedronTestTask.class,
+  public = list(
+    polyhedra.dir = NA,
+    polyhedron.file.id = NA,
+    source.filename = NA,
+    initialize = function(polyhedra.db, source.config, polyhedron.name,
+                          polyhedra.dir, polyhedron.file.id,
+                          source.filename) {
+      super$initialize(polyhedra.db = polyhedra.db,
+                       source.config = source.config,
+                       polyhedron.name = polyhedron.name)
+      self$polyhedra.dir       <- polyhedra.dir
+      self$polyhedron.file.id   <- polyhedron.file.id
+      self$source.filename <- source.filename
+      self
+    },
+    run = function(){
+      source <- self$source.config$getName()
+      tryCatch({
+        obs    <- ""
+        scraped.polyhedron <- self$source.config$scrape(polyhedron.file.id =
+                        self$polyhedron.file.id,
+                        file.path(self$polyhedra.dir, self$source.filename))
+        scraped.name <- scraped.polyhedron$getName()
+        status <- "testing"
+      },
+      error = function(e){
+        error <- paste(e$message, collapse = ",")
+        futile.logger::flog.error(paste("catched error", error))
+        assign("error", error, envir = parent.env(environment()))
+        status <- "exception"
+        if (exists("scraped.polyhedron")){
+          obs    <- scraped.polyhedron$getErrors()
+        }
+      })
+      expected.polyhedron <-
+        self$polyhedra.db$getPolyhedron(source = source,
+                                        polyhedron.name = scraped.name)
 
-                                                  expected.polyhedron$getState()$expect_equal(scraped.polyhedron)
-                                                }))
+      expected.polyhedron$getState()$expect_equal(scraped.polyhedron)
+    }))
 
 #' PolyhedronTestTaskEdgesConsistency
 #'
