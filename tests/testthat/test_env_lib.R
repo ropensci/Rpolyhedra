@@ -6,10 +6,6 @@ test_that("test on env lib functions", {
   testthat::expect_equal(setDataDirEnvironment(env = "PACKAGE"), "PACKAGE")
   testthat::expect_equal(getDataEnv(), "PACKAGE")
 
-  setPackageEnvir(variable.name = ".tmp", value = "test")
-  testthat::expect_equal(getPackageEnvir(".tmp"), "test")
-  setPackageEnvir(".tmp",NULL)
-
   testthat::expect(!is.null(getUserSpace()), failure_message =   "getUserSpace cannot be null")
   testthat::expect_equal(initDataDirEnvironment(), "PACKAGE")
   testthat::expect(!is.null(getDataDir()), failure_message = "getDataDir cannot be null")

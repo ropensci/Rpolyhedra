@@ -18,8 +18,10 @@ test_that("create minimal db", {
   db$addSourceConfig(source.config = source.config.dmccooey)
   db$configPolyhedraSource(source.config = source.config.netlib, source.filenames = NULL)
   db$configPolyhedraSource(source.config = source.config.dmccooey, source.filenames = NULL)
-  db$scrape(mode = "scrape.queued",sources = "netlib",max.quant = 3)
-  db$scrape(mode = "scrape.queued",sources = "dmccooey",max.quant = 3)
+  db$scrape(mode = "scrape.queued",sources = "netlib",max.quant = 3,
+            skip.still.queued = FALSE)
+  db$scrape(mode = "scrape.queued",sources = "dmccooey",max.quant = 3,
+            skip.still.queued = FALSE)
   expect_equal(db$getAvailablePolyhedra()$scraped.name,
                c("tetrahedron", "octahedron", "cube",
                  "10-truncated triakis icosahedron (canonical)",

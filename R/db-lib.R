@@ -294,7 +294,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                       sources = names(self$sources.config),
                       max.quant = 0,
                       time2scrape.source = 30,
-                      pretend = TRUE){
+                      pretend = TRUE,
+                      skip.still.queued = FALSE){
       scrape.function <- function(polyhedra.dir, source.config,
                                   polyhedron.file.id, source.filename){
         source <- source.config$getName()
@@ -356,11 +357,31 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                         max.quant.time,
                                         "max.quant.scrape (min) =",
                                         max.quant.scrape))
-      self$cover(mode          = mode,
+      ret <- self$cover(mode   = mode,
                  sources       = sources,
                  covering.code = scrape.function,
                  max.quant     = max.quant.scrape,
                  pretend       = pretend)
+      if (skip.still.queued){
+        #All files not scraped in building, marked as skipped
+        still.queued <- which(self$ledger$df$status == "queued")
+        if (length(still.queued) > 0){
+          apply(self$ledger$df[still.queued, ], MARGIN = 1,
+                FUN = function(x) {
+                  self$ledger$
+                    updateStatus(source = x["source"],
+                                 source.filename = x["source.filename"],
+                                 status = "skipped",
+                                 obs = "#TODO in next release")
+                }
+          )
+          if (!pretend){
+            #save skipped state in RDS file
+            getPolyhedraObject()$saveRDS()
+          }
+        }
+      }
+      ret
     },
     testRR = function(sources = names(self$sources.config),
                     max.quant = 0){
