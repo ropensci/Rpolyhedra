@@ -41,7 +41,7 @@ test_that("create minimal ledger", {
 context("db")
 test_that("create minimal db", {
   initDataDirEnvironment()
-  expect_equal(selectDataEnv("PACKAGE"), "PACKAGE")
+  expect_equal(selectDataEnv("PACKAGE"), "SUCCESS")
   source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()
   source.config.dmccooey <- PolyhedronScraperConfigurationDmccoey.class$new()
   expect_equal(source.config.netlib$getBaseDir("destdir"), "destdir/sources/www.netlib.org/polyhedra/")
@@ -144,5 +144,5 @@ test_that("Build RGL model for polyhedra",{
 context("XML export")
 test_that("test xml can be exported", {
   xml.polyhedron <- polyhedronToXML(getPolyhedron("netlib", "tetrahedron")$getState())
-  expect_equal(as.numeric(nchar(XML::getChildrenStrings(xml.polyhedron))), 538)
+  expect_equal(as.numeric(nchar(XML::getChildrenStrings(xml.polyhedron))), 406)
   })
