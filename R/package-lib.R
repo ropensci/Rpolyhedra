@@ -72,12 +72,12 @@ downloadRPolyhedraSupportingFiles <- function(){
       retVal <-  tryCatch({
         utils::download.file(URL, destfile = zipFile, mode = "wb")
         "SUCCESS"
-      }, error = function(e) {
+      }
+      , error = function(e) {
         "NOT_AVAILABLE"
       })
       options(warn = oldw)
-      if(retVal  == "SUCCESS")
-      {
+      if (retVal  == "SUCCESS") {
         utils::unzip(zipfile = zipFile, exdir = td)
         tmp.db.path <- list.files(path = td, pattern = "qbotics*")[1]
         files.to.copy <- list.files(file.path(td, tmp.db.path))
@@ -87,7 +87,6 @@ downloadRPolyhedraSupportingFiles <- function(){
         #delete tmp path
         unlink(file.path(td, tmp.db.path), recursive = TRUE)
       }
-
     }
   }
   retVal
@@ -371,8 +370,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
 
 switchToFullDatabase <- function(env = NA){
   retVal <- selectDataEnv(env = env)
-  if(retVal == "NOT_AVAILABLE")
-  {
+  if (retVal == "NOT_AVAILABLE") {
     futile.logger::flog.error("Full Database not available yet.");
   }
   env

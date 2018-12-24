@@ -176,7 +176,7 @@ selectDataEnv <- function(env=NA) {
       answer <- tolower(accept.option[1])
       if (answer == "n") {
         futile.logger::flog.info(paste("Working on demo DB. You can call",
-                                       "selectDataEnv to use the full database."))
+                  "selectDataEnv to use the full database."))
         setDataDirEnvironment("PACKAGE")
         retry <- FALSE
       } else if (answer == "y") {
@@ -203,7 +203,8 @@ selectDataEnv <- function(env=NA) {
     }
     retVal <- downloadRPolyhedraSupportingFiles()
   }
-  if(retVal == "SUCCESS") {
+
+  if (retVal == "SUCCESS") {
     updatePolyhedraDatabase()
   } else {
     setDataDirEnvironment("PACKAGE")
