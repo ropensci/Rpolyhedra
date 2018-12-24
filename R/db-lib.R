@@ -141,22 +141,22 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       data.dir <- self$getPolyhedraSourceDir(source = source)
       prev.data <- self$getPolyhedron(source = source,
                                       polyhedron.name = polyhedron.name)
-      if (!pretend){
-        if (!overwrite & !is.null(prev.data)){
-        futile.logger::flog.info(paste("Polyhedron",
-                                       polyhedron.name,
-                                       "in source",
-                                       source,
-                                       "already in database"))
-        }
-        else {
-          crc.name <- self$ledger$getCRCPolyhedronName(source = source,
-                 polyhedron.name = polyhedron.name)
-          serialized.polyhedron <- polyhedron$state$serialize()
-          tmp.dir <- file.path(tempdir = tempdir(), source)
-          dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
-          serialized.filename <- paste(crc.name, ".RDS", sep = "")
-          tmp.filename <- file.path(tmp.dir, serialized.filename)
+      if (!overwrite & !is.null(prev.data) & !pretend){
+      futile.logger::flog.info(paste("Polyhedron",
+                                     polyhedron.name,
+                                     "in source",
+                                     source,
+                                     "already in database"))
+      }
+      else {
+        crc.name <- self$ledger$getCRCPolyhedronName(source = source,
+               polyhedron.name = polyhedron.name)
+        serialized.polyhedron <- polyhedron$state$serialize()
+        tmp.dir <- file.path(tempdir = tempdir(), source)
+        dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
+        serialized.filename <- paste(crc.name, ".RDS", sep = "")
+        tmp.filename <- file.path(tmp.dir, serialized.filename)
+        if (!pretend){
           saveRDS(object = serialized.polyhedron, ascii = TRUE,
                   file = tmp.filename)
           zip(zipfile = file.path(data.dir, paste(crc.name,
@@ -164,16 +164,17 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                                   sep = "")),
               files = tmp.filename, flags = "-j")
           unlink(tmp.filename)
-          futile.logger::flog.info(paste("Added polyhedron in file",
-                                         polyhedron.name,
-                                         "#|n",
-                                         polyhedron$file.id,
-                                         polyhedron.name,
-                                         "in source",
-                                         source,
-                                         "to database with CRC",
-                                         crc.name))
         }
+        futile.logger::flog.info(paste(ifelse(pretend,"[pretend]",""),
+                                       "Added polyhedron in file",
+                                       polyhedron.name,
+                                       "#|n",
+                                       polyhedron$file.id,
+                                       polyhedron.name,
+                                       "in source",
+                                       source,
+                                       "to database with CRC",
+                                       crc.name))
       }
       self$ledger$updateStatus(source = source,
                                source.filename = source.filename,
@@ -218,14 +219,12 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         }
 
       }
-      if (!pretend){
-        self$saveRDS()
-      }
+      self$saveRDS(pretend = pretend)
       self
     },
-    saveRDS = function(){
+    saveRDS = function(pretend = TRUE){
       ret <- NULL
-      if (self$ledger$dirty){
+      if (self$ledger$dirty & !pretend){
         self$ledger$updateCalculatedFields()
         futile.logger::flog.info(paste("Saving RDS in file",
                                        self$polyhedra.rds.file))
@@ -284,9 +283,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                 source.filename = source.filename)
         }
         #after covering, save RDS
-        if (!pretend){
-          self$saveRDS()
-        }
+        self$saveRDS(pretend = pretend)
       }
       ret
     },
@@ -375,10 +372,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                  obs = "#TODO in next release")
                 }
           )
-          if (!pretend){
-            #save skipped state in RDS file
-            getPolyhedraObject()$saveRDS()
-          }
+          #save skipped state in RDS file
+          self$saveRDS(pretend = pretend)
         }
       }
       ret
