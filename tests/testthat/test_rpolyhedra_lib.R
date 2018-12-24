@@ -40,6 +40,7 @@ test_that("create minimal ledger", {
 
 context("db")
 test_that("create minimal db", {
+  initDataDirEnvironment()
   expect_equal(selectDataEnv("PACKAGE"), "PACKAGE")
   source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()
   source.config.dmccooey <- PolyhedronScraperConfigurationDmccoey.class$new()
@@ -53,9 +54,20 @@ test_that("create minimal db", {
                         extension = ".RDS.zip")
   #test sources
   db$addSourceConfig(source.config = source.config.netlib)
-  db$configPolyhedraSource(source.config = source.config.netlib, source.filenames = as.character(0:10))
+  db$addSourceConfig(source.config = source.config.dmccooey)
+  db$configPolyhedraSource(source.config = source.config.netlib, source.filenames = NULL)
+  db$configPolyhedraSource(source.config = source.config.dmccooey, source.filenames = NULL)
   db$scrape(mode = "scrape.queued",sources = "netlib",max.quant = 3)
-  expect_equal(db$getAvailablePolyhedra()$scraped.name, c("tetrahedron", "octahedron", "cube"))
+  db$scrape(mode = "scrape.queued",sources = "dmccooey",max.quant = 3)
+  expect_equal(db$getAvailablePolyhedra()$scraped.name,
+               c("tetrahedron", "octahedron", "cube",
+                 "10-truncated triakis icosahedron (canonical)",
+      "4-5-truncated deltoidal hexecontahedron with truncation depth chosen",
+                 "132-pentagon polyhedron"
+               ))
+  #TODO
+  #testRR
+  #generateTestTasks
 })
 
 context("Regular solids")
@@ -121,6 +133,13 @@ test_that(paste("test check edges consistency for 12% of",
     task$run()
   }
 })
+
+context("RGL")
+test_that("Build RGL model for polyhedra",{
+                  hexagonal.prism <- getPolyhedron("netlib","hexagonal prism")
+                  rgl <- hexagonal.prism$getState()$buildRGL()
+                  expect_equal(dim(rgl$vb),c(4,36))
+                })
 
 context("XML export")
 test_that("test xml can be exported", {

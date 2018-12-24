@@ -209,6 +209,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
            if (nchar(error) > 0){
              stop(error)
            }
+
            fields.update <- c(fields.update, "scraped.name", "symbol", "crc.filename")
            values.update <- c(values.update, scraped.name.lower, symbol, crc.filename)
            fields.numeric.update <- c(fields.numeric.update,

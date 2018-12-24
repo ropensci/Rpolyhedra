@@ -249,7 +249,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
 
   #"dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
   #Change when release version
-  scrapePolyhedra(scrape.config = .available.scrapping.conf[["dev-minimal"]],
+  scrapePolyhedra(scrape.config = .available.scrapping.conf[["pkg-minimal"]],
                   source.filenames = source.filenames,
                    sources.config = .available.sources)
 }
@@ -814,15 +814,15 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       data.dir <- self$getPolyhedraSourceDir(source = source)
       prev.data <- self$getPolyhedron(source = source,
                                       polyhedron.name = polyhedron.name)
-      if (!overwrite & !is.null(prev.data) & !pretend){
+      if (!pretend){
+        if (!overwrite & !is.null(prev.data)){
         futile.logger::flog.info(paste("Polyhedron",
                                        polyhedron.name,
                                        "in source",
                                        source,
                                        "already in database"))
-      }
-      else {
-        if (!pretend){
+        }
+        else {
           crc.name <- self$ledger$getCRCPolyhedronName(source = source,
                                                        polyhedron.name = polyhedron.name)
           serialized.polyhedron <- polyhedron$state$serialize()
@@ -983,7 +983,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
           if (current.polyhedron$isChecked()){
             self$addPolyhedron(source = source,
                                source.filename = source.filename,
-                               polyhedron = current.polyhedron)
+                               polyhedron = current.polyhedron,
+                               pretend = pretend)
           }
           else{
             errors <- current.polyhedron$getErrors()
@@ -1130,9 +1131,6 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         polyhedron.ledger <- polyhedra.db.saved$ledger$
           df[polyhedra.db.saved$ledger$getIdFilename(source, source.filename), ]
         polyhedron.name   <- polyhedron.ledger$scraped.name
-        #debug
-        polyhedron.ledger <<- polyhedron.ledger
-
         task <- TestTaskClass$new(polyhedra.db = polyhedra.db.saved,
                                   source.config = source.config,
                                   polyhedron.name = polyhedron.name,

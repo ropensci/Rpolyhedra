@@ -255,6 +255,9 @@ scrape = function() {
                                     file.id, name))
 
     symbol <- self$getDataFromLabel("symbol")
+    if (is.null(symbol)){
+      symbol <- ""
+    }
     dual <- self$getDataFromLabel("dual")
     sfaces <- self$getDataFromLabel("sfaces")
     svertices <- self$getDataFromLabel("svertices")
@@ -606,6 +609,9 @@ public = list(file.id = NA,
     self$name <- name
     self$vertices <- vertices
     self$solid <- solid
+    if (is.null(symbol)){
+      symbol <- ""
+    }
     self$symbol <- symbol
     self$dual <- dual
     self$sfaces <- sfaces
@@ -942,39 +948,39 @@ PolyhedronStateDeserializer.class <- R6::R6Class(
   "PolyhedronStateDeserializer",
   inherit = PolyhedronState.class,
   public = list(serialized.polyhedron = NA,
-                initialize = function(serialized.polyhedron){
-                  self$serialized.polyhedron <- serialized.polyhedron
-                  self
-                },
-                scrape = function(){
-                  sp <- self$serialized.polyhedron
-                  source    <- sp$source
-                  file.id   <- sp$file.id
-                  name      <- sp$name
-                  symbol    <- sp$symbol
-                  dual      <- sp$dual
-                  sfaces    <- sp$sfaces
-                  svertices <- sp$svertices
-                  net       <- sp$net
-                  solid     <- sp$solid
-                  hinges    <- sp$hindges
-                  dih       <- sp$dih
-                  vertices  <- sp$vertices
+  initialize = function(serialized.polyhedron){
+    self$serialized.polyhedron <- serialized.polyhedron
+    self
+  },
+  scrape = function(){
+    sp <- self$serialized.polyhedron
+    source    <- sp$source
+    file.id   <- sp$file.id
+    name      <- sp$name
+    symbol    <- sp$symbol
+    dual      <- sp$dual
+    sfaces    <- sp$sfaces
+    svertices <- sp$svertices
+    net       <- sp$net
+    solid     <- sp$solid
+    hinges    <- sp$hindges
+    dih       <- sp$dih
+    vertices  <- sp$vertices
 
-                  ret <- PolyhedronStateDefined.class$new(source = source,
-                                  file.id = file.id,
-                                  name = name,
-                                  symbol = symbol,
-                                  dual = dual,
-                                  sfaces = sfaces,
-                                  svertices = svertices,
-                                  vertices = vertices,
-                                  net = net,
-                                  solid = solid,
-                                  hinges = hinges,
-                                  dih = dih)
-                  ret
-                }))
+    ret <- PolyhedronStateDefined.class$new(source = source,
+                    file.id = file.id,
+                    name = name,
+                    symbol = symbol,
+                    dual = dual,
+                    sfaces = sfaces,
+                    svertices = svertices,
+                    vertices = vertices,
+                    net = net,
+                    solid = solid,
+                    hinges = hinges,
+                    dih = dih)
+    ret
+  }))
 #' Polyhedron
 #'
 #' Polyhedron container class, which is accesible by the final users upon call
