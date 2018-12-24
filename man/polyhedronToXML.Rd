@@ -4,7 +4,7 @@
 \alias{polyhedronToXML}
 \title{polyhedronToXML()}
 \usage{
-polyhedronToXML(polyhedron.state.defined)
+polyhedronToXML(polyhedron.state.defined, is.transformed.vertices = TRUE)
 }
 \arguments{
 \item{polyhedron.state.defined}{the polyhedron to get a representation from}
