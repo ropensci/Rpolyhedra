@@ -25,10 +25,14 @@ Imports: futile.logger,
          digest,
          git2r
 Collate:
-  'db-lib.R'
   'polyhedra-lib.R'
   'ledger-lib.R'
+  'db-lib.R'
+  'env-lib.R'
+  'package-lib.R'
   'serialization-lib.R'
+  'public-lib.R'
+  'test-lib.R'
   'zzz.R'
 BugReports: https://github.com/qbotics/Rpolyhedra/issues
 URL: https://github.com/qbotics/Rpolyhedra
