@@ -214,14 +214,6 @@ selectDataEnv <- function(env=NA) {
   retVal
 }
 
-#' getPolyhedraObject
-#'
-#' Gets the polyhedra object
-#'
-#' @return .polyhedra
-getPolyhedraObject <- function() {
-  getUserEnvir(".polyhedra")
-}
 
 #' getGitCommit
 #' get the last git commit sha

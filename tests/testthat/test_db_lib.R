@@ -21,7 +21,7 @@ test_that("create minimal db", {
   db$scrape(mode = "scrape.queued",sources = "netlib",max.quant = 3,
             skip.still.queued = FALSE)
   db$scrape(mode = "scrape.queued",sources = "dmccooey",max.quant = 3,
-            skip.still.queued = FALSE)
+            skip.still.queued = TRUE)
   expect_equal(db$getAvailablePolyhedra()$scraped.name,
                c("tetrahedron", "octahedron", "cube",
                  "10-truncated triakis icosahedron (canonical)",
