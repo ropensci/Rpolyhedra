@@ -57,6 +57,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
 #' @export
 downloadRPolyhedraSupportingFiles <- function(){
   retVal <- "SUCCESS"
+
   if (checkDatabaseVersion() == "UPDATE") {
     if (getDataEnv() == "HOME"){
       db.version <- getPackageDB()
@@ -152,8 +153,14 @@ copyFilesToExtData <- function(force = FALSE){
   futile.logger::flog.info(paste("Copied", cont,
                                  "polyhedra sources files to",
                                  data.env.package))
+  #debug
+  print(paste("Copied", cont,
+              "polyhedra sources files to",
+              data.env.package))
+
   #copy RDS
   file.copy(file.path(data.env.home, "polyhedra.RDS"), data.env.package)
+
   TRUE
 }
 
@@ -374,4 +381,37 @@ switchToFullDatabase <- function(env = NA){
     futile.logger::flog.error("Full Database not available yet.");
   }
   env
+}
+
+#' getPackageVersion
+#'
+#' Obtains code version from the Description
+#' @importFrom utils packageVersion
+getPackageVersion <- function(){
+  as.character(utils::packageVersion("Rpolyhedra"))
+}
+
+#' getPackageDB
+#'
+#' Obtains the database version from environment
+getPackageDB <- function(){
+  .package.db <- getPackageEnvir(".package.db")
+  ret <- .package.db[[getPackageVersion()]]
+  if (is.null(ret)){
+    ret <- getPackageVersion()
+  }
+  ret
+}
+
+
+
+#' getDatabaseVersion
+#'
+#' Obtains the generation code version from the database version file
+getDatabaseVersion <- function(){
+  version <- NULL
+  version.file <- file.path(getDataDir(), "version")
+  if (file.exists(version.file))
+    version <- readLines(version.file, n = 1)
+  version
 }

@@ -1,14 +1,14 @@
 context("env-lib")
-test_that("test on db lib functions", {
+test_that("test on env lib functions", {
 
   setUserEnvir("testUser", "testUser")
   testthat::expect_equal(getUserEnvir(variable.name="testUser"), "testUser")
   testthat::expect_equal(setDataDirEnvironment(env = "PACKAGE"), "PACKAGE")
   testthat::expect_equal(getDataEnv(), "PACKAGE")
 
-  testthat::expect_equal(setPackageEnvir(".tmp","test"))
-  testthat::expect_equal(getPackageEnvir(".tmp"))
-  testthat::expect_equal(setPackageEnvir(".tmp",NULL))
+  setPackageEnvir(variable.name = ".tmp", value = "test")
+  testthat::expect_equal(getPackageEnvir(".tmp"), "test")
+  setPackageEnvir(".tmp",NULL)
 
   testthat::expect(!is.null(getUserSpace()), failure_message =   "getUserSpace cannot be null")
   testthat::expect_equal(initDataDirEnvironment(), "PACKAGE")
@@ -16,19 +16,11 @@ test_that("test on db lib functions", {
   testthat::expect(!is.null(getEnvironmentFilepath()), failure_message = "getEnvironmentFilepath cannot be null")
   testthat::expect(!is.null(getPackageDir()), failure_message = "getPackageDir cannot be null")
   testthat::expect(!is.null(getPolyhedraRDSPath()), failure_message = "getPolyhedraRDSPath cannot be null")
-  testthat::expect(!is.null(getPreloadedDataFilename()), failure_message = "getPreloadedDataFilename cannot be null")
   testthat::expect_equal(selectDataEnv(env = "PACKAGE"), "SUCCESS")
   #selectDataEnv(env=NA) cannot be tested because prompt
-  testthat::expect(!is.null(updatePolyhedraDatabase()), failure_message = "updatePolyhedraDatabase cannot be null")
   testthat::expect(!is.null(getPolyhedraObject()), failure_message = "getPolyhedraObject cannot be null")
-  testthat::expect(downloadRPolyhedraSupportingFiles()=="SUCCESS")
-  testthat::expect_error(copyFilesToExtData(FALSE))
-  testthat::expect(!is.null(getGitCommit()))
-  testthat::expect(!is.null(getPackageVersion()))
-  testthat::expect(!is.null(getPackageDB()))
-  testthat::expect(!is.null(getDatabaseVersion()))
   testthat::expect(!is.null(checkDatabaseVersion()))
   testthat::expect(isCompatiblePolyhedraRDS()==TRUE)
-  testthat::expect(switchToFullDatabase(env="PACKAGE")=="PACKAGE")
   testthat::expect(!is.null(scrapePolyhedraSources()))
+  testthat::expect(!is.null(getGitCommit()))
 })
