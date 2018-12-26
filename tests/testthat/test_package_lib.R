@@ -1,9 +1,12 @@
 
 context("package-lib")
 
-setup(tmp.package.dir <<-
-          file.path(getDataDir(data.env = "PACKAGE"), ".tmp/"))
-setup(tmp.home.dir <<- file.path(getUserSpace(), ".tmp/"))
+setup(assign(".tmp.package.dir",
+          file.path(getDataDir(data.env = "PACKAGE"), ".tmp/"),
+          env = parent.frame()))
+setup(assign(".tmp.home.dir",
+             file.path(getUserSpace(), ".tmp/"),
+             env = parent.frame()))
 
 
 test_that("test on package lib functions", {
@@ -13,7 +16,7 @@ test_that("test on package lib functions", {
                    failure_message = "updatePolyhedraDatabase cannot be null")
   with_mock(
        "Rpolyhedra::getUserSpace" = function(){
-            tmp.home.dir
+            .tmp.home.dir
          },
        testthat::expect(
        with_mock(
@@ -33,7 +36,7 @@ test_that("test on package lib functions", {
   testthat::expect_equal(copyFilesToExtData(force = FALSE,
                                             source.folder =
                                               getDataDir(data.env =  "HOME"),
-                                            dest.folder = tmp.package.dir),
+                                            dest.folder = .tmp.package.dir),
                                                    TRUE)
 
 
@@ -44,6 +47,8 @@ test_that("test on package lib functions", {
   testthat::expect(switchToFullDatabase(env = "PACKAGE") == "PACKAGE")
 })
 
-teardown(unlink(tmp.package.dir, recursive = TRUE))
-teardown(unlink(tmp.home.dir, recursive = TRUE))
+teardown(unlink(.tmp.package.dir, recursive = TRUE))
+teardown(unlink(.tmp.home.dir, recursive = TRUE))
+teardown(rm(".tmp.package.dir", envir =.GlobalEnv))
+teardown(rm(".tmp.home.dir", envir = .GlobalEnv))
 
