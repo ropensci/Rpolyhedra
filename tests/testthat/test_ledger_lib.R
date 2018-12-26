@@ -22,16 +22,23 @@ test_that("create minimal ledger", {
                         scraped.polyhedron = scraped.polyhedron)
   }
   #Fill ledger
-  scrapeInLedger(ledger = ledger, source.config = source.config.netlib, filename = "0")
-  scrapeInLedger(ledger = ledger, source.config = source.config.netlib, filename = "1")
-  scrapeInLedger(ledger = ledger, source.config = source.config.netlib, filename = "2")
+  scrapeInLedger(ledger = ledger, source.config = source.config.netlib,
+                 filename = "0")
+  scrapeInLedger(ledger = ledger, source.config = source.config.netlib,
+                 filename = "1")
+  scrapeInLedger(ledger = ledger, source.config = source.config.netlib,
+                 filename = "2")
 
   # Execute functions
-  ledger.crc   <-  ledger$getCRCPolyhedronName(source = "netlib", polyhedron.name = "tetrahedron")
+  ledger.crc   <-  ledger$getCRCPolyhedronName(source = "netlib",
+                                               polyhedron.name = "tetrahedron")
   expect_equal(ledger$getAvailableSources(), "netlib")
-  expect_equal(ledger$getAvailablePolyhedra()$scraped.name, c("tetrahedron", "octahedron", "cube"))
-  expect_equal(unique(ledger$getFilenamesStatus(status = "scraped")$status), "scraped")
-  expect_equal(unique(ledger$getFilenamesStatusMode(mode = "test")$status), "scraped")
+  expect_equal(ledger$getAvailablePolyhedra()$scraped.name,
+                                        c("tetrahedron", "octahedron", "cube"))
+  expect_equal(unique(ledger$getFilenamesStatus(status = "scraped")$status),
+                                        "scraped")
+  expect_equal(unique(ledger$getFilenamesStatusMode(mode = "test")$status),
+                                        "scraped")
 
   ledger$countStatusUse(status.field = "status", status = "scraped")
 
