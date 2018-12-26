@@ -27,7 +27,7 @@
 #'   the polyhedron exists on the database}
 #'   \item{\code{getPolyhedron(source, polyhedron.name, strict)}}{Retrieves
 #'   a polyhedron by source and name}
-#'   \item{\code{addPolyhedron(source, polyhedron, overwrite, saveOnChange = FALSE)}}{Adds a polyhedron
+#'   \item{\code{addPolyhedron(source, polyhedron, overwrite, save.on.change = FALSE)}}{Adds a polyhedron
 #'   by source and name, if orverwrite is TRUE, it will update any existing one
 #'   by that source and name}
 #'   \item{\code{configPolyhedraSource(source.config, source.filenames, max.quant)}}{Scrapes all
@@ -35,14 +35,14 @@
 #'   \item{\code{schedulePolyhedraSources(sources.config, source.filenames, max.quant,
 #'   test)}}{Scrapes files applying parameter sources.config}
 #'   \item{\code{cover(sources, covering.code, polyhedra.names = NULL,
-#'                     max.quant = 0, saveOnChange = FALSE, seed = NULL)}{Cover all polyhedron with specified code}
+#'                     max.quant = 0, save.on.change = FALSE, seed = NULL)}{Cover all polyhedron with specified code}
 #'   \item{\code{scrape(mode = "scrape.queued",
 #'                      sources = names(self$sources.config),
 #'                      max.quant = 0, time2scrape.source = 30,
-#'                      saveOnChange = FALSE, skip.still.queued = FALSE)}
+#'                      save.on.change = FALSE, skip.still.queued = FALSE)}
 #'                      {Scrape file with specified parameters}
 #'
-#'   \item{\code{saveRDS = function(saveOnChange = TRUE)}{ Save state in file when specified}
+#'   \item{\code{saveRDS = function(save.on.change = TRUE)}{ Save state in file when specified}
 #'   \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves
 #'   all polyhedron within the source those names match with search.string}
 #' }
@@ -145,12 +145,12 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     },
     addPolyhedron = function(source="netlib", source.filename,
                              polyhedron, overwrite = FALSE,
-                             saveOnChange = FALSE) {
+                             save.on.change = FALSE) {
       polyhedron.name <- polyhedron$getName()
       data.dir <- self$getPolyhedraSourceDir(source = source)
       prev.data <- self$getPolyhedron(source = source,
                                       polyhedron.name = polyhedron.name)
-      if (!overwrite & !is.null(prev.data) & !saveOnChange){
+      if (!overwrite & !is.null(prev.data) & !save.on.change){
         futile.logger::flog.info(paste("Polyhedron",
                                      polyhedron.name,
                                      "in source",
@@ -165,7 +165,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
         serialized.filename <- paste(crc.name, ".RDS", sep = "")
         tmp.filename <- file.path(tmp.dir, serialized.filename)
-        if (!saveOnChange){
+        if (!save.on.change){
           saveRDS(object = serialized.polyhedron, ascii = TRUE,
                   file = tmp.filename)
           zip(zipfile = file.path(data.dir, paste(crc.name,
@@ -174,7 +174,8 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
               files = tmp.filename, flags = "-j")
           unlink(tmp.filename)
         }
-        futile.logger::flog.info(paste(ifelse(saveOnChange, "[saveOnChange]", ""),
+        futile.logger::flog.info(paste(ifelse(save.on.change,
+                                              "[save.on.change]", ""),
                                        "Added polyhedron in file",
                                        polyhedron.name,
                                        "#|n",
@@ -193,7 +194,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     },
     configPolyhedraSource = function(source.config, source.filenames= NULL,
                                      max.quant = 0,
-                                     saveOnChange = FALSE) {
+                                     save.on.change = FALSE) {
       source <- source.config$getName()
       home.dir.data <- getDataDir()
       self$configPolyhedraRDSPath()
@@ -228,12 +229,12 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         }
 
       }
-      self$saveRDS(saveOnChange = saveOnChange)
+      self$saveRDS(save.on.change = save.on.change)
       self
     },
-    saveRDS = function(saveOnChange = TRUE){
+    saveRDS = function(save.on.change = TRUE){
       ret <- NULL
-      if (self$ledger$dirty & !saveOnChange){
+      if (self$ledger$dirty & save.on.change){
         self$ledger$updateCalculatedFields()
         futile.logger::flog.info(paste("Saving RDS in file",
                                        self$polyhedra.rds.file))
@@ -246,7 +247,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                      covering.code,
                      polyhedra.names = NULL,
                      max.quant=0,
-                     saveOnChange = FALSE,
+                     save.on.change = FALSE,
                      seed = NULL){
       self$configPolyhedraRDSPath()
       if (!is.null(seed)){
@@ -292,7 +293,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                 source.filename = source.filename)
         }
         #after covering, save RDS
-        self$saveRDS(saveOnChange = saveOnChange)
+        self$saveRDS(save.on.change = save.on.change)
       }
       ret
     },
@@ -300,7 +301,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                       sources = names(self$sources.config),
                       max.quant = 0,
                       time2scrape.source = 30,
-                      saveOnChange = FALSE,
+                      save.on.change = FALSE,
                       skip.still.queued = FALSE){
       scrape.function <- function(polyhedra.dir, source.config,
                                   polyhedron.file.id, source.filename){
@@ -318,7 +319,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
             self$addPolyhedron(source = source,
                                source.filename = source.filename,
                                polyhedron = current.polyhedron,
-                               saveOnChange = saveOnChange)
+                               save.on.change = save.on.change)
           }
           else{
             errors <- current.polyhedron$getErrors()
@@ -363,11 +364,11 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                         max.quant.time,
                                         "max.quant.scrape (min) =",
                                         max.quant.scrape))
-      ret <- self$cover(mode   = mode,
-                 sources       = sources,
-                 covering.code = scrape.function,
-                 max.quant     = max.quant.scrape,
-                 saveOnChange       = saveOnChange)
+      ret <- self$cover(mode    = mode,
+                 sources        = sources,
+                 covering.code  = scrape.function,
+                 max.quant      = max.quant.scrape,
+                 save.on.change = save.on.change)
       if (skip.still.queued){
         #All files not scraped in building, marked as skipped
         still.queued <- which(self$ledger$df$status == "queued")
@@ -382,7 +383,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                 }
           )
           #save skipped state in RDS file
-          self$saveRDS(saveOnChange = saveOnChange)
+          self$saveRDS(save.on.change = save.on.change)
         }
       }
       ret
@@ -504,12 +505,12 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                          source.filenames= NULL,
                                          max.quant = 0,
                                          test = FALSE,
-                                         saveOnChange = FALSE){
+                                         save.on.change = FALSE){
       for (source  in names(sources.config)){
-        self$configPolyhedraSource(source.config = sources.config[[source]],
+        self$configPolyhedraSource(source.config    = sources.config[[source]],
                                    source.filenames = source.filenames,
-                                   max.quant = max.quant,
-                                   saveOnChange = saveOnChange)
+                                   max.quant        = max.quant,
+                                   save.on.change   = save.on.change)
       }
       self
     },

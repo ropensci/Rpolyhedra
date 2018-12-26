@@ -64,7 +64,7 @@ scrapePolyhedraSources <- function(sources.config =
                         source.filenames =
                           source.filenames,
                         max.quant = max.quant.config.schedule,
-                        pretend = FALSE)
+                        save.on.change = FALSE)
   if (retry.scrape){
     mode <- "scrape.retry"
   }
@@ -78,7 +78,7 @@ scrapePolyhedraSources <- function(sources.config =
   getPolyhedraObject()$scrape(mode = mode,
                               max.quant = max.quant.scrape,
                               time2scrape.source = time2scrape.source,
-                              pretend = FALSE,
+                              save.on.change = FALSE,
                               skip.still.queued = TRUE
                               )
   getPolyhedraObject()
