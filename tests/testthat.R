@@ -7,5 +7,10 @@ library(rgl)
 
 #Change threshold to ERROR. Comment out/change if verbosity required for development
 futile.logger::flog.threshold(futile.logger::ERROR)
-c
+
+#' getDataDirMockedTest mocked function for a temp dest folder for testing proposes
+
+
+
 test_check("Rpolyhedra")
+

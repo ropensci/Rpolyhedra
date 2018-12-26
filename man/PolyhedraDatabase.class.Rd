@@ -38,13 +38,20 @@ is accesible by the final users upon call to \code{getPolyhedron()}.
   the polyhedron exists on the database}
   \item{\code{getPolyhedron(source, polyhedron.name, strict)}}{Retrieves
   a polyhedron by source and name}
-  \item{\code{addPolyhedron(source,polyhedron,overwrite)}}{Adds a polyhedron
+  \item{\code{addPolyhedron(source, polyhedron, overwrite, save.on.change = FALSE)}}{Adds a polyhedron
   by source and name, if orverwrite is TRUE, it will update any existing one
   by that source and name}
   \item{\code{configPolyhedraSource(source.config, source.filenames, max.quant)}}{Scrapes all
   polyhedra in the given directory for adding to db or testing}
   \item{\code{schedulePolyhedraSources(sources.config, source.filenames, max.quant,
   test)}}{Scrapes files applying parameter sources.config}
+  \item{\code{cover(sources, covering.code, polyhedra.names = NULL,
+                    max.quant = 0, save.on.change = FALSE, seed = NULL)}}{Cover all polyhedron with specified code}
+  \item{\code{scrape(mode = "scrape.queued",
+                     sources = names(self$sources.config),
+                     max.quant = 0, time2scrape.source = 30,
+                     save.on.change = FALSE, skip.still.queued = FALSE)}}{Scrape file with specified parameters}
+  \item{\code{saveRDS = function(save.on.change = TRUE)}}{Save state in file when specified}
   \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves
   all polyhedron within the source those names match with search.string}
 }

@@ -23,8 +23,6 @@ test_that("Scrape test rpolyhedra for 12% of available polyhedra", {
   for (task in tasks){
     task$run()
   }
-  # workarround to get generateTestTasks coverage reflected in covr
-  expect_equal(1, 1)
 })
 
 context("polyhedra- Properties regular solids")
