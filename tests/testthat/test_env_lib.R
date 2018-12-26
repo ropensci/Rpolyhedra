@@ -18,6 +18,9 @@ test_that("test on env lib functions", {
   testthat::expect(!is.null(getPolyhedraRDSPath()),
                    failure_message = "getPolyhedraRDSPath cannot be null")
   testthat::expect_equal(selectDataEnv(env = "PACKAGE"), "SUCCESS")
+  testthat::expect_equal(selectDataEnv(prompt.value = "n"), "SUCCESS")
+
+
   #selectDataEnv(env=NA) cannot be tested because prompt
   testthat::expect(!is.null(getPolyhedraObject()),
                    failure_message = "getPolyhedraObject cannot be null")

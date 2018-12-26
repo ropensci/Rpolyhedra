@@ -158,22 +158,26 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
 #' Asks the user where to set the system variable .data.env
 #'
 #' @param env The environment to run on, can be PACKAGE, HOME or NULL. If null, it asks the user for a an Environment.
+#' @param prompt.value If specified, no prompt is shown
 #' @usage
-#'     selectDataEnv(env=NA)
+#'     selectDataEnv(env=NA, prompt.value = NULL)
 #' @return .data.env
 #' @importFrom futile.logger flog.info
-selectDataEnv <- function(env=NA) {
+selectDataEnv <- function(env=NA, prompt.value = NULL) {
   retVal <- "SUCCESS"
   if (is.na(env)) {
     if (!is.na(Sys.getenv(x = "ON_TRAVIS", unset = NA))) {
       return(TRUE)
     }
-    accept.option <- readline(
-      prompt = paste("Full Database needs to download data to home folder. ",
-                     "Agree [y/n]?:"))
+    if (is.null(prompt.value)){
+      prompt.value <- readline(
+        prompt = paste("Full Database needs to download data to home folder. ",
+                       "Agree [y/n]?:"))
+    }
+
     retry <- TRUE
     while (retry) {
-      answer <- tolower(accept.option[1])
+      answer <- tolower(prompt.value[1])
       if (answer == "n") {
         futile.logger::flog.info(paste("Working on demo DB. You can call",
                   "selectDataEnv to use the full database."))
@@ -187,7 +191,7 @@ selectDataEnv <- function(env=NA) {
         retry <- TRUE
       }
       if (retry) {
-        accept.option <- readline(prompt = "Unknown option. Agree [y/n]?:")
+        prompt.value <- readline(prompt = "Unknown option. Agree [y/n]?:")
       }
     }
   } else {

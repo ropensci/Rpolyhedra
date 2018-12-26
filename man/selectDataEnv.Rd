@@ -4,10 +4,12 @@
 \alias{selectDataEnv}
 \title{selectDataEnv}
 \usage{
-selectDataEnv(env=NA)
+selectDataEnv(env=NA, prompt.value = NULL)
 }
 \arguments{
 \item{env}{The environment to run on, can be PACKAGE, HOME or NULL. If null, it asks the user for a an Environment.}
+
+\item{prompt.value}{If specified, no prompt is shown}
 }
 \value{
 .data.env
