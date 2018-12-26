@@ -31,6 +31,7 @@ convertDFToXML <- function(df, name, node) {
 #' Gets an XML representation out of the polyhedron object
 #'
 #' @param polyhedron.state.defined the polyhedron to get a representation from
+#' @param is.transformed.vertices  flag which states if vertices are in original position or transformationMatrix applied
 #' @return an XML document, ready to be converted to String with XML::saveXML()
 #' @examples
 #' #get the representation of a cube (netlib library)

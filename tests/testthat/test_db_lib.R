@@ -11,21 +11,21 @@ test_that("create minimal db", {
                "destdir/sources/dmccooey.com/polyhedra/")
 
   db <- PolyhedraDatabase.class$new()
-  #FIXME for building testcase: cannot exist polyhedron if it is not in the database.
+  #FIXME for building testcase: polyhedroncannot exist
+  # if it is not in the database.
   db$existsPolyhedron(source = "netlib", polyhedron.name = "tetrahedron")
   db$getPolyhedronFilename(source = "netlib", polyhedron.name = "tetrahedron",
                            extension = ".RDS.zip")
   #test sources
   db$addSourceConfig(source.config = source.config.netlib)
   db$addSourceConfig(source.config = source.config.dmccooey)
-  db$configPolyhedraSource(source.config = source.config.netlib,
+
+  db$schedulePolyhedraSources(sources.config = getPackageEnvir(".available.sources"),
                            source.filenames = NULL)
-  db$configPolyhedraSource(source.config = source.config.dmccooey,
-                           source.filenames = NULL)
-  db$scrape(mode = "scrape.queued",sources = "netlib",max.quant = 3,
-            skip.still.queued = FALSE)
-  db$scrape(mode = "scrape.queued",sources = "dmccooey",max.quant = 3,
-            skip.still.queued = TRUE)
+  db$scrape(mode = "scrape.queued", sources = "netlib", max.quant = 3,
+            skip.still.queued = FALSE, saveOnChange = FALSE)
+  db$scrape(mode = "scrape.queued", sources = "dmccooey", max.quant = 3,
+            skip.still.queued = TRUE, saveOnChange = FALSE)
   expect_equal(db$getAvailablePolyhedra()$scraped.name,
                c("tetrahedron", "octahedron", "cube",
                  "10-truncated triakis icosahedron (canonical)",
