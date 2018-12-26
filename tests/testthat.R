@@ -13,4 +13,3 @@ futile.logger::flog.threshold(futile.logger::ERROR)
 
 
 test_check("Rpolyhedra")
-

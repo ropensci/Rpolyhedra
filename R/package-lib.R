@@ -123,7 +123,8 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env =  "HOME"),
     }
   }
   if (existing & !force){
-    stop(paste("Cannot copy files: they exists in destination", dest.folder.source," Call ",
+    stop(paste("Cannot copy files: they exists in destination",
+               dest.folder.source, " Call ",
                "the function with force=TRUE or remove them manually"))
   }
   #clean dirs

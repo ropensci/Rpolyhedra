@@ -8,6 +8,7 @@
 #' @param node the node that will be acting as parent.
 #' @return the node with the dataframe in it
 #' @importFrom XML newXMLNode
+#' @importFrom XML newXMLNode
 convertDFToXML <- function(df, name, node) {
   # Iterate over all rows
   lapply(seq_len(nrow(df)),
@@ -38,7 +39,8 @@ convertDFToXML <- function(df, name, node) {
 #' library(Rpolyhedra)
 #' XML::saveXML(polyhedronToXML(getPolyhedron("netlib", "cube")$state))
 #'
-#' @import XML
+#' @importFrom XML newXMLDoc
+#' @importFrom XML newXMLNode
 #' @export
 polyhedronToXML <- function(polyhedron.state.defined,
                             is.transformed.vertices=TRUE) {
