@@ -378,7 +378,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
 switchToFullDatabase <- function(env = NA){
   retVal <- selectDataEnv(env = env)
   if (retVal == "NOT_AVAILABLE") {
-    futile.logger::flog.error("Full Database not available yet.");
+    futile.logger::flog.error("Full Database not available yet.")
   }
   env
 }

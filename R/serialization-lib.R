@@ -10,7 +10,7 @@
 #' @importFrom XML newXMLNode
 convertDFToXML <- function(df, name, node) {
   # Iterate over all rows
-  lapply(1:nrow(df),
+  lapply(seq_len(nrow(df)),
          function(rowi) {
            # Create row tag
            r <- XML::newXMLNode(name, parent = node)
