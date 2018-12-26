@@ -151,7 +151,7 @@ getAvailablePolyhedra <- function(sources =
 #' @return polyhedron R6 object
 #' @export
 #' @examples
-#' tetrahedron <- getPolyhedron(source="netlib",
+#' tetrahedron <- getPolyhedron(source = 'netlib',
 #'        polyhedron.name = 'tetrahedron')
 #'
 #' # returns name of polyhedra
