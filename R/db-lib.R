@@ -163,7 +163,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         dir.create(tmp.dir, showWarnings = FALSE, recursive = TRUE)
         serialized.filename <- paste(crc.name, ".RDS", sep = "")
         tmp.filename <- file.path(tmp.dir, serialized.filename)
-        if (!save.on.change){
+        if (save.on.change){
           saveRDS(object = serialized.polyhedron, ascii = TRUE,
                   file = tmp.filename)
           zip(zipfile = file.path(data.dir, paste(crc.name,
