@@ -22,7 +22,7 @@ The object returned, of type Polyhedron.class, allows to the
 user to get access to all the functionality provided.
 }
 \examples{
-tetrahedron <- getPolyhedron(source="netlib",
+tetrahedron <- getPolyhedron(source = 'netlib',
        polyhedron.name = 'tetrahedron')
 
 # returns name of polyhedra
