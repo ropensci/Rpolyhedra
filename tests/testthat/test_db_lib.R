@@ -37,6 +37,11 @@ test_that("create minimal db", {
     "4-5-truncated deltoidal hexecontahedron with truncation depth chosen",
                  "132-pentagon polyhedron"
                ))
+  #TODO understand why generateTestTasks doesn't get covered by covr package
+  tasks <- db$
+    generateTestTasks(TestTaskClass = PolyhedronTestTaskScrape.class,
+                      max.quant = 3)
+  expect_equal(length(tasks), 3)
   #TODO
   #testRR
 })

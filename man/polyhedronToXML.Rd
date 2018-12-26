@@ -8,6 +8,8 @@ polyhedronToXML(polyhedron.state.defined, is.transformed.vertices = TRUE)
 }
 \arguments{
 \item{polyhedron.state.defined}{the polyhedron to get a representation from}
+
+\item{is.transformed.vertices}{flag which states if vertices are in original position or transformationMatrix applied}
 }
 \value{
 an XML document, ready to be converted to String with XML::saveXML()

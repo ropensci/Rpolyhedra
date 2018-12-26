@@ -95,72 +95,70 @@ downloadRPolyhedraSupportingFiles <- function(){
 
 #' copyFilesToExtData
 #'
-#' Copies files from the home directory to the package one to build a preconfigured package.
+#' Copies files from/to the home directory to the package one to build a preconfigured package.
 #'
+#' @param source.folder folder of polyhedra data sources
+#' @param dest.folder   folder of polyhedra data destination
 #' @param force indicate if existings directories must be overwritten
 #' @return TRUE if sucessfull
 #' @importFrom futile.logger flog.info
-copyFilesToExtData <- function(force = FALSE){
+copyFilesToExtData <- function(source.folder = getDataDir(data.env =  "HOME"),
+                               dest.folder = getDataDir(data.env = "PACKAGE"),
+                               force = FALSE){
   polyhedra.ledger <- getPolyhedraObject()$
     ledger$getAvailablePolyhedra(ret.fields = NULL)
   polyhedra.ledger.scraped <-
     polyhedra.ledger[polyhedra.ledger$status == "scraped", ]
-  data.env.home <- getDataDir(data.env = "HOME")
-  data.env.package <- getDataDir(data.env = "PACKAGE")
-  dir.create(data.env.package, showWarnings = FALSE, recursive = TRUE)
+  source.folder <- getDataDir(data.env = "HOME")
+
+  dir.create(dest.folder, showWarnings = FALSE, recursive = TRUE)
   #check existing sources
   existing <- FALSE
   .available.sources <- getPackageEnvir(".available.sources")
   for (source in names(.available.sources)){
     source.config <- .available.sources[[source]]
-    dest.dir <- source.config$getBaseDir(data.env.package)
-    if (file.exists(dest.dir)){
+    dest.folder.source <- source.config$getBaseDir(dest.folder)
+    if (file.exists(dest.folder.source)){
       existing <- TRUE
     }
   }
   if (existing & !force){
-    stop(paste("Cannot copy files: they exists in destination. Call ",
+    stop(paste("Cannot copy files: they exists in destination", dest.folder.source," Call ",
                "the function with force=TRUE or remove them manually"))
   }
   #clean dirs
   for (source in names(.available.sources)){
     source.config <- .available.sources[[source]]
-    dest.dir <- source.config$getBaseDir(data.env.package)
-    if (file.exists(dest.dir)){
-      unlink(dest.dir, recursive = TRUE)
+    dest.folder.source <- source.config$getBaseDir(dest.folder)
+    if (file.exists(dest.folder.source)){
+      unlink(dest.folder.source, recursive = TRUE)
     }
-    dir.create(dest.dir, showWarnings = FALSE, recursive = TRUE)
+    dir.create(dest.folder.source, showWarnings = FALSE, recursive = TRUE)
   }
   #copy files
   #copy version
-  file.copy(file.path(data.env.home, "version"), data.env.package,
+  file.copy(file.path(source.folder, "version"), dest.folder,
             overwrite = TRUE)
-  file.copy(file.path(data.env.home, "polyhedra.preloaded.data.csv"),
-            data.env.package, overwrite = TRUE)
+  file.copy(file.path(source.folder, "polyhedra.preloaded.data.csv"),
+            dest.folder, overwrite = TRUE)
 
   #copy polyhedra source files
   cont <- 0
   for (i in seq_len(nrow(polyhedra.ledger.scraped))){
     current.polyhedron <- polyhedra.ledger.scraped[i, ]
     source.config <- .available.sources[[current.polyhedron$source]]
-    dest.dir <- source.config$getBaseDir(data.env.package)
-    if (file.copy(file.path(source.config$getBaseDir(data.env.home),
-                            current.polyhedron$filename),
-                  dest.dir)){
+    dest.folder.source <- source.config$getBaseDir(dest.folder)
+    if (file.copy(file.path(source.config$getBaseDir(source.folder),
+                            current.polyhedron$source.filename),
+                  dest.folder.source)){
       cont <- cont + 1
     }
   }
   futile.logger::flog.info(paste("Copied", cont,
                                  "polyhedra sources files to",
-                                 data.env.package))
-  #debug
-  print(paste("Copied", cont,
-              "polyhedra sources files to",
-              data.env.package))
-
+                                 dest.folder))
   #copy RDS
-  file.copy(file.path(data.env.home, "polyhedra.RDS"), data.env.package)
-
+  file.copy(file.path(source.folder, "polyhedra.RDS"), dest.folder)
   TRUE
 }
 

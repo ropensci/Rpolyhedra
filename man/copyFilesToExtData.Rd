@@ -4,14 +4,19 @@
 \alias{copyFilesToExtData}
 \title{copyFilesToExtData}
 \usage{
-copyFilesToExtData(force = FALSE)
+copyFilesToExtData(source.folder = getDataDir(data.env = "HOME"),
+  dest.folder = getDataDir(data.env = "PACKAGE"), force = FALSE)
 }
 \arguments{
+\item{source.folder}{folder of polyhedra data sources}
+
+\item{dest.folder}{folder of polyhedra data destination}
+
 \item{force}{indicate if existings directories must be overwritten}
 }
 \value{
 TRUE if sucessfull
 }
 \description{
-Copies files from the home directory to the package one to build a preconfigured package.
+Copies files from/to the home directory to the package one to build a preconfigured package.
 }

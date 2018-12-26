@@ -35,14 +35,12 @@
 #'   \item{\code{schedulePolyhedraSources(sources.config, source.filenames, max.quant,
 #'   test)}}{Scrapes files applying parameter sources.config}
 #'   \item{\code{cover(sources, covering.code, polyhedra.names = NULL,
-#'                     max.quant = 0, save.on.change = FALSE, seed = NULL)}{Cover all polyhedron with specified code}
+#'                     max.quant = 0, save.on.change = FALSE, seed = NULL)}}{Cover all polyhedron with specified code}
 #'   \item{\code{scrape(mode = "scrape.queued",
 #'                      sources = names(self$sources.config),
 #'                      max.quant = 0, time2scrape.source = 30,
-#'                      save.on.change = FALSE, skip.still.queued = FALSE)}
-#'                      {Scrape file with specified parameters}
-#'
-#'   \item{\code{saveRDS = function(save.on.change = TRUE)}{ Save state in file when specified}
+#'                      save.on.change = FALSE, skip.still.queued = FALSE)}}{Scrape file with specified parameters}
+#'   \item{\code{saveRDS = function(save.on.change = TRUE)}}{Save state in file when specified}
 #'   \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves
 #'   all polyhedron within the source those names match with search.string}
 #' }
