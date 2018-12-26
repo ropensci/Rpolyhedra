@@ -6,21 +6,26 @@ test_that("test on package lib functions", {
                    failure_message = "updatePolyhedraDatabase cannot be null")
   with_mock(
        "Rpolyhedra::getUserSpace" = function(){
-            file.path(getUserSpace(),".tmp/")
+            file.path(getUserSpace(), ".tmp/")
          },
        testthat::expect(
        with_mock(
          "Rpolyhedra::getDataEnv" = function(){
-           "HOME"},
+           "HOME"
+           }
+         ,
          with_mock(
-           "Rpolyhedra::checkDatabaseVersion" = function(){"UPDATE"},
+           "Rpolyhedra::checkDatabaseVersion" = function(){
+             "UPDATE"
+             }
+           ,
            downloadRPolyhedraSupportingFiles() %in%
                   c("SUCCESS", "NOT_AVAILABLE")
      )), failure_message = "downloadRPolyhedraSupportingFiles error"))
 
    with_mock(
      "Rpolyhedra::getDataDir" = function() {
-       file.path(getDataDir(),".tmp/")
+       file.path(getDataDir(), ".tmp/")
       },
     testthat::expect_error(copyFilesToExtData(FALSE))
     )
@@ -30,5 +35,5 @@ test_that("test on package lib functions", {
   testthat::expect(!is.null(getPackageDB()))
   testthat::expect(!is.null(getDatabaseVersion()))
 
-  testthat::expect(switchToFullDatabase(env="PACKAGE")=="PACKAGE")
+  testthat::expect(switchToFullDatabase(env = "PACKAGE") == "PACKAGE")
 })

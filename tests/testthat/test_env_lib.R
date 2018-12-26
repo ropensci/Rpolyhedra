@@ -2,7 +2,7 @@ context("env-lib")
 test_that("test on env lib functions", {
 
   setUserEnvir("testUser", "testUser")
-  testthat::expect_equal(getUserEnvir(variable.name="testUser"), "testUser")
+  testthat::expect_equal(getUserEnvir(variable.name = "testUser"), "testUser")
   testthat::expect_equal(setDataDirEnvironment(env = "PACKAGE"), "PACKAGE")
   testthat::expect_equal(getDataEnv(), "PACKAGE")
 
@@ -22,7 +22,7 @@ test_that("test on env lib functions", {
   testthat::expect(!is.null(getPolyhedraObject()),
                    failure_message = "getPolyhedraObject cannot be null")
   testthat::expect(!is.null(checkDatabaseVersion()))
-  testthat::expect(isCompatiblePolyhedraRDS()==TRUE)
+  testthat::expect(isCompatiblePolyhedraRDS() == TRUE)
   testthat::expect(!is.null(scrapePolyhedraSources()))
   testthat::expect(!is.null(getGitCommit()))
 })

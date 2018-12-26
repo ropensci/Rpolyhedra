@@ -23,6 +23,8 @@ test_that("Scrape test rpolyhedra for 12% of available polyhedra", {
   for (task in tasks){
     task$run()
   }
+  # workarround to get generateTestTasks coverage reflected in covr
+  expect_equal(1, 1)
 })
 
 context("polyhedra- Properties regular solids")
@@ -65,9 +67,8 @@ test_that(paste("test check edges consistency for 12% of",
 })
 
 context("polyhedra- RGL")
-test_that("Build RGL model for polyhedra",{
-    hexagonal.prism <- getPolyhedron("netlib","hexagonal prism")
+test_that("Build RGL model for polyhedra", {
+    hexagonal.prism <- getPolyhedron("netlib", "hexagonal prism")
     rgl <- hexagonal.prism$getState()$buildRGL()
-    expect_equal(dim(rgl$vb),c(4,36))
+    expect_equal(dim(rgl$vb), c(4, 36))
   })
-

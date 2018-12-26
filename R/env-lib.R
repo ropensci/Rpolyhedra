@@ -236,4 +236,3 @@ getGitCommit <- function(long.version = FALSE){
   }
   git.sha
 }
-
