@@ -1,12 +1,3 @@
-#' getPolyhedraObject
-#'
-#' Gets the polyhedra object
-#'
-#' @return .polyhedra
-#' @export
-getPolyhedraObject <- function() {
-  getUserEnvir(".polyhedra")
-}
 
 #' scrapePolyhedra()
 #'

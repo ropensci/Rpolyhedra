@@ -54,7 +54,6 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
 #' @importFrom utils unzip
 #' @importFrom utils download.file
 #' @importFrom utils zip
-#' @export
 downloadRPolyhedraSupportingFiles <- function(){
   retVal <- "SUCCESS"
 
