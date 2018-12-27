@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 #' PolyhedraDatabase
 #'
 #' Scrapes all polyhedra in data folder to save a representation which
@@ -495,7 +485,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                         covering.code   = test.task.gen.function,
                         polyhedra.names = polyhedra.names,
                         max.quant       = max.quant,
-                        seed          = seed)
+                        seed            = seed)
       ret
     },
     schedulePolyhedraSources = function (sources.config =
