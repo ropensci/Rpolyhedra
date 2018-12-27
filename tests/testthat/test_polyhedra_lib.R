@@ -3,17 +3,23 @@
 context("polyhedra- Check package db")
 test_that("Check pkg-minimal size and objects", {
   available.polyhedra <- getAvailablePolyhedra()
-  expect_equal(nrow(available.polyhedra[available.polyhedra$source=="netlib",]),119)
-  expect_equal(nrow(available.polyhedra[available.polyhedra$source=="dmccooey",]),9)
+  expect_equal(
+    nrow(available.polyhedra[available.polyhedra$source == "netlib", ]),
+    119)
+  expect_equal(
+    nrow(available.polyhedra[available.polyhedra$source == "dmccooey", ]),
+    9)
   .polyhedra <- getPolyhedraObject()
   sources.netlib.dir <- .polyhedra$getPolyhedraSourceDir(source = "netlib")
   polyhedra.rds.netlib <- dir(sources.netlib.dir)
-  polyhedra.rds.netlib <- polyhedra.rds.netlib[grep("\\.RDS\\.zip", polyhedra.rds.netlib)]
+  polyhedra.rds.netlib <- polyhedra.rds.netlib[
+              grep("\\.RDS\\.zip", polyhedra.rds.netlib)]
   expect_equal(length(polyhedra.rds.netlib), 119)
 
   sources.dmccooey.dir <- .polyhedra$getPolyhedraSourceDir(source = "dmccooey")
   polyhedra.rds.dmccooey <- dir(sources.dmccooey.dir)
-  polyhedra.rds.dmccooey <- polyhedra.rds.dmccooey[grep("\\.RDS\\.zip", polyhedra.rds.dmccooey)]
+  polyhedra.rds.dmccooey <- polyhedra.rds.dmccooey[
+                grep("\\.RDS\\.zip", polyhedra.rds.dmccooey)]
   expect_equal(length(polyhedra.rds.dmccooey), 9)
 })
 

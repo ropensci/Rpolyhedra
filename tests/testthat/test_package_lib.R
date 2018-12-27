@@ -49,6 +49,5 @@ test_that("test on package lib functions", {
 
 teardown(unlink(.tmp.package.dir, recursive = TRUE))
 teardown(unlink(.tmp.home.dir, recursive = TRUE))
-teardown(rm(".tmp.package.dir", envir =.GlobalEnv))
+teardown(rm(".tmp.package.dir", envir = .GlobalEnv))
 teardown(rm(".tmp.home.dir", envir = .GlobalEnv))
-
