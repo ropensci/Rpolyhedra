@@ -3,6 +3,7 @@
 export(getAvailablePolyhedra)
 export(getAvailableSources)
 export(getPolyhedron)
+export(polyhedronToXML)
 export(switchToFullDatabase)
 importFrom(R6,R6Class)
 importFrom(XML,newXMLDoc)
