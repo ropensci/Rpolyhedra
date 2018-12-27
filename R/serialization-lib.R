@@ -41,6 +41,7 @@ convertDFToXML <- function(df, name, node) {
 #'
 #' @importFrom XML newXMLDoc
 #' @importFrom XML newXMLNode
+#' @export
 polyhedronToXML <- function(polyhedron.state.defined,
                             is.transformed.vertices=TRUE) {
   # Start empty XML document tree
