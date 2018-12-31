@@ -18,6 +18,7 @@
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(
 source = NA, file.id = NA, errors = "",
 initialize = function(source, file.id) {
@@ -81,6 +82,7 @@ exportToXML = function(){
 #' @importFrom futile.logger flog.info
 #' @importFrom stringr str_extract
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronStateNetlibScraper.class <- R6::R6Class(
   "PolyhedronStateNetlibScraper",
 inherit = PolyhedronState.class,
@@ -320,6 +322,7 @@ exportToXML = function(){
 #' @docType class
 #' @importFrom  futile.logger flog.info
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronStateDmccoeyScraper.class <- R6::R6Class(
   "PolyhedronStateDmccoeyScraper",
   inherit = PolyhedronState.class,
@@ -492,8 +495,12 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class(
 )
 
 
-#' norm calculates norm of a vector
+#' norm
+#'
+#' Calculates the norm of a vector
+#'
 #' @param vector numeric vector
+#' @noRd
 #'
 norm <- function(vector){
     sqrt(sum(vector * vector))
@@ -573,6 +580,7 @@ norm <- function(vector){
 #' @importFrom rgl transform3d
 #' @importFrom rgl asHomogeneous
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronStateDefined.class <- R6::R6Class(
   "PolyhedronStateDefined",
   inherit = PolyhedronState.class,
@@ -944,6 +952,7 @@ buildRGL = function(transformation.matrix = NULL) {
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronStateDeserializer.class <- R6::R6Class(
   "PolyhedronStateDeserializer",
   inherit = PolyhedronState.class,
@@ -1013,6 +1022,7 @@ PolyhedronStateDeserializer.class <- R6::R6Class(
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom R6 R6Class
+#' @noRd
 Polyhedron.class <- R6::R6Class("Polyhedron",
   public = list(file.id = NA, state = NA,
 initialize = function(file.id, state = NULL) {
@@ -1091,6 +1101,7 @@ checkProperties = function(expected.vertices, expected.faces){
 #' @param triangulated.solid triangulated.solid for checking
 #' @return checked positioned vertices
 #' @importFrom stats runif
+#' @noRd
 checkVertices <- function(vertices, transformed.vertices, triangulated.solid){
   triangulated.solid <- sort(unique(unlist(triangulated.solid)))
   set.seed(sum(vertices[, 1:3]))

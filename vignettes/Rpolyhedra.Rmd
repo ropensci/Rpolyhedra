@@ -7,69 +7,55 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
-#Introduction
+# Introduction
 This package is a curation made based on the poly package found on http://www.netlib.org/polyhedra/ ([Original Help message](poly_original_help_message.html)), and the polyhedra database found on http://dmccooey.com/polyhedra, both of which provide polyhedra databases on its own format. As such, Rpolyhedra provides with the following:
 
 1. A module to scrape the polyhedra for the different sources found with features for incremental correction of issues found and to be found in scraping process.
 1. A database of the scraped polyhedra.
 1. An R6 polyhedron representation with 'rgl' package visualizing capabilites. 
 
-#Usage
+# Usage
 
 For final users, the package provides a common interface for accesing public polyhedra databases, analize properties, compare and visualize them with RGL. 
 
 For advanced users, the package provides a simplified set of R6 objects to scrape and compare polyhedra databases. 
-
-##Scrape polyhedra
-In order to scrape, the following code can be executed to retrieve all polyhedra from the original files produced by the poly command. 
-
-```R
+```{r setup, include=FALSE}
 library(rgl)
 library(Rpolyhedra)
-polyhedra <- scrapePolyhedraSources(sources.config = PolyhedronScraperConfigurationNetlib.class$new(), max.quant = 5)
-```
-
-With following code, based on preloaded estimated scraping time, a batch of maximum filenames that could be scraped in 30 seconds will be scraped.
-
-```R
-library(rgl)
-library(Rpolyhedra)
-polyhedra <- scrapePolyhedraSources(sources.config = PolyhedronScraperConfigurationNetlib.class$new(), time2scrape.source = 30)
+setupKnitr()
 ```
 
 
-##Get available polyhedra
+## Get available polyhedra
 Once the original files had been processed, a simple call to ```getAvailablePolyhedra()``` retrieves a list of the available polyhedra with properties and status in the polyhedra database:
 
-```R 
-library(rgl)
-library(Rpolyhedra)
-getAvailablePolyhedra()
+```{r availablePolyhedra}
+#show only the first 10 polyhedra.
+head(getAvailablePolyhedra(), n = 10)
 ```
 
-##Retrieve a polyhedron
+## Retrieve a polyhedron
 The access to a particular polyhedron can be done with a call to ```getPolyhedron(<<source>>, <<polyhedron.name>>)```, which returns a Polyhedron object. For example, to retrieve a cube from the netlib database, the call would be:
 
-```R 
-library(rgl)
-library(Rpolyhedra)
+```{r getPolyhedron}
 cube <- getPolyhedron(source = "netlib", polyhedron.name = "cube")
 ```
 
-#A demo
+# A demo
 To try package funcionality, a simple demo can be executed which shows the 5 regular polyhedra.
 
-```R 
-library(rgl)
-library(Rpolyhedra)
+```{r demo, webgl=TRUE}
 polyhedra.2.draw <- getAvailablePolyhedra(source = "netlib")
 polyhedra.2.draw <- polyhedra.2.draw[polyhedra.2.draw$scraped.name %in%
-                                       c("tetrahedron","octahedron","cube","icosahedron","dodecahedron"),]
+        c("tetrahedron",
+          "octahedron",
+          "cube",
+          "icosahedron",
+          "dodecahedron"),]
 
 n <- nrow(polyhedra.2.draw)
 polyhedron.colors <- rainbow(n)
 polyhedron.scale <- 5
-
 open3d()
 par3d(FOV = 1)
 rgl.bg( sphere =FALSE, fogtype = "none", color=c("black"))

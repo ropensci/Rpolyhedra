@@ -4,6 +4,7 @@
 #'
 #' @param polyhedra_preloaded_data filename of polyhedra preloaded data csv
 #' @return the path to the Polyhedra database file
+#' @noRd
 getPreloadedDataFilename <- function(polyhedra_preloaded_data =
                                        "polyhedra.preloaded.data.csv"){
   file.path(getDataDir(), polyhedra_preloaded_data)
@@ -14,9 +15,8 @@ getPreloadedDataFilename <- function(polyhedra_preloaded_data =
 #' Function for initializing database
 #'
 #' @param source.filenames if not null specify which source filenames to scrape
-#'
 #' @return polyhedra db object
-
+#' @noRd
 updatePolyhedraDatabase <- function(source.filenames = NULL){
   .polyhedra <- NULL
 
@@ -54,6 +54,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
 #' @importFrom utils unzip
 #' @importFrom utils download.file
 #' @importFrom utils zip
+#' @noRd
 downloadRPolyhedraSupportingFiles <- function(){
   retVal <- "SUCCESS"
 
@@ -101,6 +102,7 @@ downloadRPolyhedraSupportingFiles <- function(){
 #' @param force indicate if existings directories must be overwritten
 #' @return TRUE if sucessfull
 #' @importFrom futile.logger flog.info
+#' @noRd
 copyFilesToExtData <- function(source.folder = getDataDir(data.env =  "HOME"),
                                dest.folder = getDataDir(data.env = "PACKAGE"),
                                force = FALSE){
@@ -173,6 +175,7 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env =  "HOME"),
 #' }
 #' @importFrom     futile.logger flog.info
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronScraperConfiguration.class <- R6::R6Class(
   "PolyhedronScraperConfiguration",
   public = list(
@@ -209,6 +212,7 @@ PolyhedronScraperConfiguration.class <- R6::R6Class(
 #' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
   "PolyhedronScraperConfigurationNetlib",
   inherit = PolyhedronScraperConfiguration.class,
@@ -252,6 +256,7 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
 #' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
   "PolyhedronScraperConfigurationDmccoey",
   inherit = PolyhedronScraperConfiguration.class,
@@ -290,6 +295,7 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
 #'
 #' @return "UPDATE" if an update is required, "NO_ACTION_REQUIRED"
 #'      otherwise.
+#' @noRd
 checkDatabaseVersion <- function(){
   status <- NULL
   database.version <- getDatabaseVersion()
@@ -310,11 +316,12 @@ checkDatabaseVersion <- function(){
 #' isCompatiblePolyhedraRDS()
 #'
 #' Tests if the polyhedra RDS is compatible with the current format
+#'
 #' @param .polyhedra.candidate polyhedra db to test
 #' @param halts indicates whether it has to halt execution when it
 #' is not compatible
-#'
 #' @importFrom futile.logger flog.info
+#' @noRd
 isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
                                        getPolyhedraObject(),
                                      halts = FALSE){
@@ -361,30 +368,13 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
 }
 
 
-#' switchToFullDatabase()
-#'
-#' Prompts user for changing database to fulldb in
-#' user filespace
-#'
-#' @param env The environment to run on, can be PACKAGE,
-#' HOME or NA. If NA, it asks the user for a an Environment.
-#' @usage
-#'     switchToFullDatabase(env=NA)
-#' @return .data.env
-#' @export
 
-switchToFullDatabase <- function(env = NA){
-  retVal <- selectDataEnv(env = env)
-  if (retVal == "NOT_AVAILABLE") {
-    futile.logger::flog.error("Full Database not available yet.")
-  }
-  env
-}
 
 #' getPackageVersion
 #'
 #' Obtains code version from the Description
 #' @importFrom utils packageVersion
+#' @noRd
 getPackageVersion <- function(){
   as.character(utils::packageVersion("Rpolyhedra"))
 }
@@ -392,6 +382,7 @@ getPackageVersion <- function(){
 #' getPackageDB
 #'
 #' Obtains the database version from environment
+#' @noRd
 getPackageDB <- function(){
   .package.db <- getPackageEnvir(".package.db")
   ret <- .package.db[[getPackageVersion()]]
@@ -401,11 +392,10 @@ getPackageDB <- function(){
   ret
 }
 
-
-
 #' getDatabaseVersion
 #'
 #' Obtains the generation code version from the database version file
+#' @noRd
 getDatabaseVersion <- function(){
   version <- NULL
   version.file <- file.path(getDataDir(), "version")

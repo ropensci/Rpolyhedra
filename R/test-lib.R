@@ -12,8 +12,7 @@
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom R6 R6Class
-#'
-
+#' @noRd
 PolyhedronTestTask.class <- R6::R6Class("PolyhedronTestTask",
 public = list(
   polyhedra.db = NA,
@@ -45,8 +44,7 @@ public = list(
 #' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
-#'
-
+#' @noRd
 PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
   inherit = PolyhedronTestTask.class,
   public = list(
@@ -93,7 +91,10 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
 #' PolyhedronTestTaskEdgesConsistency
 #'
 #' A Test task for running edges consistency test for current polyhedron
-
+#'
+#' @format \code{\link{R6Class}} object.
+#' @docType class
+#' @noRd
 PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class(
   "PolyhedronTestTaskEdgesConsistency",
   inherit = PolyhedronTestTask.class,
@@ -116,11 +117,12 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class(
 
 
 #' getPercentilPolyhedraQuant
-#' returns polyhedra quantity of parameter percentil
-#' @param percentil is the percentil which must be applied
-#' to estimate the figure
-#' @param quant.min minimum quantity of files to return
 #'
+#' Returns polyhedra quantity of parameter percentil
+#' @param percentil is the percentil which must be applied
+#'        to estimate the figure
+#' @param quant.min minimum quantity of files to return
+#' @noRd
 getPercentilPolyhedraQuant <- function(percentil, quant.min = 100){
   max(round(percentil * nrow(getAvailablePolyhedra())), quant.min)
 }

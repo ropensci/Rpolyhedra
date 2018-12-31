@@ -1,3 +1,12 @@
+#' getPolyhedraObject
+#'
+#' Gets the polyhedra object
+#'
+#' @return .polyhedra
+#' @export
+getPolyhedraObject <- function() {
+  getUserEnvir(".polyhedra")
+}
 
 #' scrapePolyhedra()
 #'
@@ -170,4 +179,24 @@ getPolyhedron <- function(source = "netlib", polyhedron.name) {
                                               polyhedron.name = polyhedron.name)
   }
   ret
+}
+
+#' switchToFullDatabase()
+#'
+#' Prompts user for changing database to fulldb in
+#' user filespace
+#'
+#' @param env The environment to run on, can be PACKAGE,
+#' HOME or NA. If NA, it asks the user for a an Environment.
+#' @usage
+#'     switchToFullDatabase(env=NA)
+#' @return .data.env
+#' @export
+#'
+switchToFullDatabase <- function(env = NA){
+  retVal <- selectDataEnv(env = env)
+  if (retVal == "NOT_AVAILABLE") {
+    futile.logger::flog.error("Full Database not available yet.")
+  }
+  env
 }
