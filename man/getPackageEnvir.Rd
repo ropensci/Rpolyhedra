@@ -7,9 +7,8 @@
 getPackageEnvir(variable.name)
 }
 \arguments{
-\item{variable.name}{name of variable to be retrieved
-Obtains a variable from package environment}
+\item{variable.name}{name of variable to be retrieved}
 }
 \description{
-getPackageEnvir
+Obtains a variable from package environment
 }

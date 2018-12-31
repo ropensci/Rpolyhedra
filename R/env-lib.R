@@ -1,8 +1,8 @@
 #' getPackageEnvir
 #'
-#' @param variable.name  name of variable to be retrieved
-
 #' Obtains a variable from package environment
+#' @param variable.name  name of variable to be retrieved
+#' @noRD
 getPackageEnvir <- function(variable.name){
   get(variable.name, envir = asNamespace("Rpolyhedra"))
 }
@@ -10,9 +10,10 @@ getPackageEnvir <- function(variable.name){
 #' setPackageEnvir
 #'
 #' Set a variable from package environment
+#'
+#' @noRd
 #' @param variable.name  name of variable to be set
 #' @param value          variable value
-
 setPackageEnvir <- function(variable.name, value){
   assign(x = variable.name, value = value, envir = asNamespace("Rpolyhedra"))
 }
@@ -23,6 +24,7 @@ setPackageEnvir <- function(variable.name, value){
 #' Gets a writable environment for the package
 #'
 #' @param variable.name  name of variable to be retrieved
+#' @noRd
 getUserEnvir <- function(variable.name) {
   get(x = variable.name, envir = getPackageEnvir("RpolyhedraEnv"))
 }
@@ -33,7 +35,7 @@ getUserEnvir <- function(variable.name) {
 #'
 #' @param variable.name  name of variable to be set
 #' @param value          variable value
-
+#' @noRd
 setUserEnvir <- function(variable.name, value) {
   assign(x = variable.name, value = value, envir =
            getPackageEnvir("RpolyhedraEnv"))
@@ -45,6 +47,7 @@ setUserEnvir <- function(variable.name, value) {
 #' Gets the current .data.env value
 #'
 #' @return .data.env
+#' @noRd
 getDataEnv <- function() {
   getUserEnvir(".data.env")
 }
@@ -54,6 +57,7 @@ getDataEnv <- function() {
 #'
 #' This function is used internally for accesing the local database path
 #' @return path of user space
+#' @noRd
 getUserSpace <- function(){
   file.path(path.expand("~"), ".R", "Rpolyhedra")
 }
@@ -63,6 +67,7 @@ getUserSpace <- function(){
 #' initialize data enviornment
 #'
 #' @return the data dir environment
+#' @noRd
 initDataDirEnvironment <- function() {
   environment.filepath <- getEnvironmentFilepath()
   if (!file.exists(environment.filepath)){
@@ -75,9 +80,6 @@ initDataDirEnvironment <- function() {
   .data.env
 }
 
-
-
-
 #' getDataDir
 #'
 #' Gets the path of Rpolyhedra data dir.
@@ -86,7 +88,7 @@ initDataDirEnvironment <- function() {
 #' is compiled in source or package directory.
 #' @param data.env enviroment where data directory must be returned
 #' @return dir where the package access polyhedra database
-
+#' @noRd
 getDataDir <- function(data.env = getDataEnv()) {
   data.dir <- ""
   if (data.env == "HOME") {
@@ -101,7 +103,7 @@ getDataDir <- function(data.env = getDataEnv()) {
 #'
 #' Gets the filename where package data environment is persisted
 #' @return The environment filepath
-
+#' @noRd
 getEnvironmentFilepath <- function(){
   file.path(getDataDir("HOME"), "Rpolyhedra.env")
 }
@@ -114,6 +116,7 @@ getEnvironmentFilepath <- function(){
 #'
 #' @param env The type of environment to work with. Values are "PACKAGE" or "HOME" and it defaults to package
 #' @return the curruent .data.env
+#' @noRd
 setDataDirEnvironment <- function(env = "PACKAGE") {
   if (env %in% c("PACKAGE", "HOME")) {
     .data.env <- env
@@ -129,12 +132,10 @@ setDataDirEnvironment <- function(env = "PACKAGE") {
   .data.env
 }
 
-
-
-
 #' getPackageDir
 #'
 #' Gets the path of package data.
+#' @noRd
 getPackageDir <- function(){
   home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
   data.subdir <- file.path("inst", "extdata/")
@@ -149,6 +150,7 @@ getPackageDir <- function(){
 #'
 #' @param polyhedra_rds_filename filename of polyhedra database
 #' @return the path to the Polyhedra database file
+#' @noRd
 getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
   file.path(getDataDir(), polyhedra_rds_filename)
 }
@@ -163,6 +165,7 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
 #'     selectDataEnv(env=NA, prompt.value = NULL)
 #' @return .data.env
 #' @importFrom futile.logger flog.info
+#' @noRd
 selectDataEnv <- function(env=NA, prompt.value = NULL) {
   retVal <- "SUCCESS"
   if (is.na(env)) {
@@ -218,14 +221,13 @@ selectDataEnv <- function(env=NA, prompt.value = NULL) {
   retVal
 }
 
-
 #' getGitCommit
 #' get the last git commit sha
 #' @param long.version determines if the complete version of the sha will
 #'         be returned.
 #' @importFrom git2r commits
 #' @return String with git commit sha
-#'
+#' @noRd
 getGitCommit <- function(long.version = FALSE){
   #TODO: replace with git2r when issue #2 is resolved.
   #git2r::commits()[[1]]@sha
@@ -246,6 +248,7 @@ getGitCommit <- function(long.version = FALSE){
 #' Gets the polyhedra object
 #'
 #' @return .polyhedra
+#' @noRd
 getPolyhedraObject <- function() {
   getUserEnvir(".polyhedra")
 }

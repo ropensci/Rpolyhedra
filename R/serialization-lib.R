@@ -8,7 +8,7 @@
 #' @param node the node that will be acting as parent.
 #' @return the node with the dataframe in it
 #' @importFrom XML newXMLNode
-#' @importFrom XML newXMLNode
+#' @noRd
 convertDFToXML <- function(df, name, node) {
   # Iterate over all rows
   lapply(seq_len(nrow(df)),
@@ -24,8 +24,6 @@ convertDFToXML <- function(df, name, node) {
          })
   node
 }
-
-
 
 #' polyhedronToXML()
 #'
