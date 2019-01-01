@@ -20,5 +20,5 @@ polyhedra db object
 \description{
 Gets polyhedra objects from text files of
 different sources, scheduling and scraping using
-predefined configurations
+predefined configurations.
 }

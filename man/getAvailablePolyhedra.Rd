@@ -7,7 +7,7 @@
 getAvailablePolyhedra(sources, search.string)
 }
 \arguments{
-\item{sources}{A source of polyhedra. Available sources are netlib, dmccooey}
+\item{sources}{A string vector containing the source, which can be obtained from getAvailableSources().}
 
 \item{search.string}{A search string}
 }
@@ -29,4 +29,7 @@ available.netlib.polyhedra <- getAvailablePolyhedra(sources="netlib")
 #search within the polyhedron names
 
 cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
+}
+\seealso{
+getAvailableSources
 }

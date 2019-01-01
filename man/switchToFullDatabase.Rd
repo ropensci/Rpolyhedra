@@ -15,5 +15,6 @@ HOME or NA. If NA, it asks the user for a an Environment.}
 }
 \description{
 Prompts user for changing database to fulldb in
-user filespace
+user filespace. Also, allows the user to switch back to
+the package database, which is a minimal one for testing purposes.
 }

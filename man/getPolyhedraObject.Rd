@@ -10,5 +10,8 @@ getPolyhedraObject()
 .polyhedra
 }
 \description{
-Gets the polyhedra object
+Return the polyhedra database handler.
+}
+\seealso{
+PolyhedraDatabase.class
 }

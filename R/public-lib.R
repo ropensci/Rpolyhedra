@@ -1,6 +1,7 @@
 #' getPolyhedraObject
 #'
-#' Gets the polyhedra object
+#' Return the polyhedra database handler.
+#' @seealso PolyhedraDatabase.class
 #'
 #' @return .polyhedra
 #' @export
@@ -12,7 +13,7 @@ getPolyhedraObject <- function() {
 #'
 #' Gets polyhedra objects from text files of
 #' different sources, scheduling and scraping using
-#' predefined configurations
+#' predefined configurations.
 #'
 #' @param scrape.config predefined configuration for scraping
 #' @param source.filenames if not null specify which source filenames to scrape
@@ -33,8 +34,9 @@ scrapePolyhedra <- function(scrape.config,
 
 #' scrapePolyhedraSources()
 #'
-#' Method for obtaining polyhedra objects from text files of
-#' different sources, scheduling and scraping
+#' Scrapes polyhedra objects from text files of
+#' different sources, in order to make them available to the
+#' package.
 #'
 #' @param sources.config the sources that will be used by the function
 #' @param max.quant.config.schedule number of files to schedule
@@ -87,9 +89,12 @@ scrapePolyhedraSources <- function(sources.config =
 
 #' getAvailableSources()
 #'
-#' Gets the list of names of available sources in database
+#' Gets the list of names of available sources in database to be used later as
+#' references to the package.
 #'
-#' @return sources string vector
+#' @seealso getAvailablePolyhedra, getPolyhedron
+#'
+#' @return sources string vector, which can be obtained from getAvailableSources()
 #' @export
 #' @examples
 #' #gets all sources in the database
@@ -110,8 +115,9 @@ getAvailableSources <- function(){
 #' Gets the list of names of available polyhedra and its status in
 #' the polyhedra database, which can be later called with getPolyhedron
 #'
+#' @seealso getAvailableSources
 #' @importFrom futile.logger flog.info
-#' @param sources A source of polyhedra. Available sources are netlib, dmccooey
+#' @param sources A string vector containing the source, which can be obtained from getAvailableSources().
 #' @param search.string A search string
 #' @return polyhedra names vector
 #' @export
@@ -143,9 +149,10 @@ getAvailablePolyhedra <- function(sources =
 #' The object returned, of type Polyhedron.class, allows to the
 #' user to get access to all the functionality provided.
 #'
-#' @param source source name
+#' @seealso getAvailablePolyhedra, getAvailableSources
+#' @param source string vector, which can be obtained from getAvailableSources()
 #' @param polyhedron.name  a valid name of a polyhedron in
-#' the database. Current names can be found with getAvailablePolyhedra()
+#'        the database. Current names can be found with getAvailablePolyhedra()
 #' @importFrom futile.logger flog.info
 #' @export
 #' @return polyhedron R6 object
@@ -184,7 +191,8 @@ getPolyhedron <- function(source = "netlib", polyhedron.name) {
 #' switchToFullDatabase()
 #'
 #' Prompts user for changing database to fulldb in
-#' user filespace
+#' user filespace. Also, allows the user to switch back to
+#' the package database, which is a minimal one for testing purposes.
 #'
 #' @param env The environment to run on, can be PACKAGE,
 #' HOME or NA. If NA, it asks the user for a an Environment.
@@ -192,7 +200,6 @@ getPolyhedron <- function(source = "netlib", polyhedron.name) {
 #'     switchToFullDatabase(env=NA)
 #' @return .data.env
 #' @export
-#'
 switchToFullDatabase <- function(env = NA){
   retVal <- selectDataEnv(env = env)
   if (retVal == "NOT_AVAILABLE") {
