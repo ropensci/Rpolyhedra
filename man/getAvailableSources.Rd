@@ -7,10 +7,11 @@
 getAvailableSources()
 }
 \value{
-sources string vector
+sources string vector, which can be obtained from getAvailableSources()
 }
 \description{
-Gets the list of names of available sources in database
+Gets the list of names of available sources in database to be used later as
+references to the package.
 }
 \examples{
 #gets all sources in the database
@@ -22,4 +23,7 @@ available.polyhedra <- getAvailablePolyhedra(sources=available.sources)
 #search within the polyhedron names from all sources
 cubes <- getAvailablePolyhedra(sources=available.sources,
         search.string="cube")
+}
+\seealso{
+getAvailablePolyhedra, getPolyhedron
 }

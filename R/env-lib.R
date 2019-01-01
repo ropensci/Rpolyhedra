@@ -2,7 +2,7 @@
 #'
 #' Obtains a variable from package environment
 #' @param variable.name  name of variable to be retrieved
-#' @noRD
+#' @noRd
 getPackageEnvir <- function(variable.name){
   get(variable.name, envir = asNamespace("Rpolyhedra"))
 }

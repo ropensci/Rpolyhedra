@@ -7,7 +7,7 @@
 getPolyhedron(source = "netlib", polyhedron.name)
 }
 \arguments{
-\item{source}{source name}
+\item{source}{string vector, which can be obtained from getAvailableSources()}
 
 \item{polyhedron.name}{a valid name of a polyhedron in
 the database. Current names can be found with getAvailablePolyhedra()}
@@ -42,4 +42,7 @@ tetrahedron.state$getSolid()
 
 # List of faces of net representation (2D)
 tetrahedron.state$getNet()
+}
+\seealso{
+getAvailablePolyhedra, getAvailableSources
 }

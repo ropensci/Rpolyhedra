@@ -27,6 +27,7 @@ scrapePolyhedraSources(sources.config =
 polyhedra db object
 }
 \description{
-Method for obtaining polyhedra objects from text files of
-different sources, scheduling and scraping
+Scrapes polyhedra objects from text files of
+different sources, in order to make them available to the
+package.
 }
