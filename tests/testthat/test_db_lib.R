@@ -6,9 +6,9 @@ test_that("create minimal db", {
   source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()
   source.config.dmccooey <- PolyhedronScraperConfigurationDmccoey.class$new()
   expect_equal(source.config.netlib$getBaseDir("destdir"),
-               "destdir/sources/www.netlib.org/polyhedra/")
+               file.path("destdir", "sources", "www.netlib.org", "polyhedra"))
   expect_equal(source.config.dmccooey$getBaseDir("destdir"),
-               "destdir/sources/dmccooey.com/polyhedra/")
+               file.path("destdir", "sources", "dmccooey.com", "polyhedra"))
   expect_equal(length(source.config.netlib$getPolyhedraFiles(getDataDir())),
                119)
   expect_equal(length(source.config.dmccooey$getPolyhedraFiles(getDataDir())),
