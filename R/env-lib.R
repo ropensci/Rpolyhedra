@@ -219,7 +219,7 @@ selectDataEnv <- function(env=NA, downloadDatabase = TRUE, prompt.value = NULL) 
   } else {
     setDataDirEnvironment("PACKAGE")
   }
-  retVal
+  getDataEnv()
 }
 
 #' getGitCommit

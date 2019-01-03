@@ -2,7 +2,7 @@
 context("db-lib")
 test_that("create minimal db", {
   initDataDirEnvironment()
-  expect_equal(selectDataEnv("PACKAGE"), "SUCCESS")
+  expect_equal(selectDataEnv("PACKAGE"), "PACKAGE")
   source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()
   source.config.dmccooey <- PolyhedronScraperConfigurationDmccoey.class$new()
   expect_equal(source.config.netlib$getBaseDir("destdir"),
