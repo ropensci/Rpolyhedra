@@ -167,7 +167,8 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
 #' @return .data.env
 #' @importFrom futile.logger flog.info
 #' @noRd
-selectDataEnv <- function(env=NA, downloadDatabase = TRUE, prompt.value = NULL) {
+selectDataEnv <- function(env=NA, downloadDatabase = TRUE,
+                          prompt.value = NULL) {
   retVal <- "SUCCESS"
   if (is.na(env)) {
     if (!is.na(Sys.getenv(x = "ON_TRAVIS", unset = NA))) {

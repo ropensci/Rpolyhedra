@@ -45,7 +45,7 @@ test_that("test on package lib functions", {
   testthat::expect(!is.null(getPackageDB()))
   testthat::expect(!is.null(getDatabaseVersion()))
 
-  testthat::expect_equal(switchToFullDatabase(env = "PACKAGE"),"PACKAGE")
+  testthat::expect_equal(switchToFullDatabase(env = "PACKAGE"), "PACKAGE")
 })
 
 teardown(unlink(.tmp.package.dir, recursive = TRUE))
