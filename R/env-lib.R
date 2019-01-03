@@ -161,12 +161,13 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
 #'
 #' @param env The environment to run on, can be PACKAGE, HOME or NULL. If null, it asks the user for a an Environment.
 #' @param prompt.value If specified, no prompt is shown
+#' @param downloadDatabase If specified, when changing to HOME env, downloads the database from fulldb repo.
 #' @usage
 #'     selectDataEnv(env=NA, prompt.value = NULL)
 #' @return .data.env
 #' @importFrom futile.logger flog.info
 #' @noRd
-selectDataEnv <- function(env=NA, prompt.value = NULL) {
+selectDataEnv <- function(env=NA, downloadDatabase = TRUE, prompt.value = NULL) {
   retVal <- "SUCCESS"
   if (is.na(env)) {
     if (!is.na(Sys.getenv(x = "ON_TRAVIS", unset = NA))) {
@@ -208,7 +209,9 @@ selectDataEnv <- function(env=NA, prompt.value = NULL) {
     if (!dir.exists(data.dir)) {
       dir.create(data.dir, recursive = TRUE, showWarnings = FALSE)
     }
-    retVal <- downloadRPolyhedraSupportingFiles()
+    if (downloadDatabase){
+      retVal <- downloadRPolyhedraSupportingFiles()
+    }
   }
 
   if (retVal == "SUCCESS") {
@@ -216,8 +219,6 @@ selectDataEnv <- function(env=NA, prompt.value = NULL) {
   } else {
     setDataDirEnvironment("PACKAGE")
   }
-
-
   retVal
 }
 
