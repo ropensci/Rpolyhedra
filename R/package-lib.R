@@ -110,7 +110,6 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env =  "HOME"),
     ledger$getAvailablePolyhedra(ret.fields = NULL)
   polyhedra.ledger.scraped <-
     polyhedra.ledger[polyhedra.ledger$status == "scraped", ]
-  source.folder <- getDataDir(data.env = "HOME")
 
   dir.create(dest.folder, showWarnings = FALSE, recursive = TRUE)
   #check existing sources
