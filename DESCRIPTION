@@ -1,7 +1,7 @@
 Package: Rpolyhedra
 Type: Package
 Title: Polyhedra Database
-Version: 0.2.6
+Version: 0.4.0
 Authors@R: c(
     person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
     person("Leonardo","Belen",,"leobelen@gmail.com", c("aut","com","cph"))
@@ -11,21 +11,28 @@ Description: A polyhedra database scraped from various sources as R6 objects and
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: knitr, rmarkdown,
     covr
 VignetteBuilder: knitr
-Depends: R (>= 3.0.0)
+Depends: R (>= 3.4)
 Imports: futile.logger,
          rgl,
          stringr,
          R6,
          testthat, 
-         XML
+         XML,
+         digest,
+         git2r
 Collate:
-  'xml-lib.R'
   'polyhedra-lib.R'
   'ledger-lib.R'
   'db-lib.R'
+  'env-lib.R'
+  'package-lib.R'
+  'serialization-lib.R'
+  'public-lib.R'
+  'test-lib.R'
   'zzz.R'
 BugReports: https://github.com/qbotics/Rpolyhedra/issues
+URL: https://github.com/qbotics/Rpolyhedra
