@@ -217,10 +217,11 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
   inherit = PolyhedronScraperConfiguration.class,
   public = list(
     initialize = function(name) {
-      super$initialize(name = "netlib", base.dir = "www.netlib.org/polyhedra/")
+      super$initialize(name = "netlib",
+                       base.dir = file.path("www.netlib.org", "polyhedra"))
     },
     getPolyhedraFiles = function(home.dir.data){
-      # wget -r -np -k http://www.netlib.org/polyhedra/ data/www.netlib.org/
+      # wget -r -np -k http://www.netlib.org/polyhedra/ data/www.netlib.org
       polyhedra.dir   <- self$getBaseDir(home.dir.data)
       polyhedra.files <- dir(polyhedra.dir)
       polyhedra.files <- polyhedra.files[grep("[0-9]+", polyhedra.files)]
@@ -261,7 +262,8 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
   inherit = PolyhedronScraperConfiguration.class,
   public = list(
     initialize = function(name) {
-      super$initialize(name = "dmccooey", base.dir = "dmccooey.com/polyhedra/")
+      super$initialize(name = "dmccooey",
+                       base.dir = file.path("dmccooey.com", "polyhedra"))
       self
     },
     getPolyhedraFiles = function(home.dir.data){
