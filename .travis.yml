@@ -1,6 +1,10 @@
 language: r
 cache: packages
 warnings_are_errors: false
+os:
+  - linux
+  - osx
+  - windows
 r:
   - release
 before_install:
