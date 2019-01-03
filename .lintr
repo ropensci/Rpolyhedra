@@ -1,0 +1,5 @@
+linters: with_defaults(
+    multiple_dots_linter = NULL,
+    camel_case_linter = NULL,
+    NULL
+  )

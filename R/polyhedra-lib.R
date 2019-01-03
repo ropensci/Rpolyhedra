@@ -6,22 +6,24 @@
 #' \describe{
 #'   \item{\code{addError(current.error)}}{Adds an error to the error string and log it as info}
 #'   \item{\code{scrape()}}{Scrapes the polyhedra folder files}
-#'   \item{\code{geSolid()}}{returns the object corresponding to the solid}
-#'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{creates a RGL representation of the object}
+#'   \item{\code{getName()}}{returns polyhedron name}
+#'   \item{\code{getSolid()}}{returns the object corresponding to the solid}
+#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
+#'   \item{\code{buildRGL(transformation.matrix)}}{creates a RGL representation of the object}
 #'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
 #' }
 #' @field errors Errors string
 #' @field source polyhedron definition source
-#' @field number polyhedron number
+#' @field file.id polyhedron file id
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import rgl
 #' @importFrom R6 R6Class
+#' @noRd
 PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(
-source = NA, number = NA, errors = "",
-initialize = function(source, number) {
+source = NA, file.id = NA, errors = "",
+initialize = function(source, file.id) {
     self$source <- source
-    self$number <- number
+    self$file.id <- file.id
     self
 },
 addError = function(current.error) {
@@ -32,13 +34,19 @@ addError = function(current.error) {
 scrape = function() {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
+getName = function() {
+  stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
+},
 getSolid = function() {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
-checkEdgesConsistency=function(){
+checkEdgesConsistency = function(){
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
-buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
+applyTransformationMatrix = function(transformation.matrix){
+  stop("Abstract class")
+},
+buildRGL = function(transformation.matrix) {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
 exportToXML = function(){
@@ -52,8 +60,8 @@ exportToXML = function(){
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(number, netlib.p3.lines)}}{Initializes the object, taking the number and PDH file as parameters}
-#'   \item{\code{extract_fows_from_label(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
+#'   \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes the object, taking the file.id and PDH file as parameters}
+#'   \item{\code{extract_rows_from_label(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
 #'   expected label as parameters}
 #'   \item{\code{getLabels()}}{Gets the label from the polyhedron}
 #'   \item{\code{scrapeNet(net.txt, offset = 0) }}{Scrape the net model}
@@ -62,130 +70,196 @@ exportToXML = function(){
 #'   \item{\code{setupLabelsOrder()}}{Sets up the order of labels included in PHD file}
 #'   \item{\code{getDataFromLabel(label)}}{Gets data from the Label}
 #'   \item{\code{scrape()}}{Scrapes the data from the PHD file}
-#'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{Builds the \code{RGL} mmodel}
+#'   \item{\code{getName()}}{returns polyhedron name}
+#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
+#'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
 #' }
 #' @field netlib.p3.lines The path to the PHD files
 #' @field labels.rows Labels - row of appearance
 #' @field labels.map Labels - Map of content
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import stringr futile.logger
+#' @importFrom futile.logger flog.info
+#' @importFrom stringr str_extract
 #' @importFrom R6 R6Class
-PolyhedronStateNetlibScraper.class <- R6::R6Class("PolyhedronStateNetlibScraper",
+#' @noRd
+PolyhedronStateNetlibScraper.class <- R6::R6Class(
+  "PolyhedronStateNetlibScraper",
 inherit = PolyhedronState.class,
-public = list(netlib.p3.lines = NA, labels.rows = NA, labels.map = NA, errors = "",
-initialize = function(number, netlib.p3.lines) {
-    super$initialize(source= "netlib",number = number)
+public = list(netlib.p3.lines = NA,
+              labels.rows = NA,
+              labels.map = NA,
+              errors = "",
+initialize = function(file.id, netlib.p3.lines) {
+    super$initialize(source = "netlib", file.id = file.id)
     self$netlib.p3.lines <- netlib.p3.lines
     self$labels.map <- list()
     self
-}, extract_fows_from_label = function(label.number, expected.label) {
+},
+extract_rows_from_label = function(label.number, expected.label) {
     observer.label <- self$netlib.p3.lines[self$labels.rows[label.number]]
     observer.label <- sub("\\:", "", observer.label)
     if (observer.label != expected.label) {
-        current.error <- paste(self$errors, "In label#", label.number, "Expected label was",
-        expected.label, " and observed was", observer.label)
+        current.error <- paste(self$errors, "In label#",
+                        label.number, "Expected label was",
+                        expected.label, " and observed was", observer.label)
         self$addError(current.error)
     }
     first.data.row <- self$labels.rows[label.number]
     last.data.row <- self$labels.rows[label.number + 1]
     ret <- 0
     if (first.data.row > last.data.row) {
-        self$addError(paste("for label", expected.label, "no valid rows: (fr, lr)",
+        self$addError(paste("for label", expected.label,
+                            "no valid rows: (fr, lr)",
         first.data.row, last.data.row))
-    } else ret <- c((first.data.row + 1):(last.data.row - 1))
+    } else {
+      ret <- c( (first.data.row + 1): (last.data.row - 1))
+    }
     ret
-}, getLabels = function() {
+},
+getLabels = function() {
     self$netlib.p3.lines[self$labels.rows]
-}, scrapeNet = function(net.txt, offset = 0) {
+},
+scrapeNet = function(net.txt, offset = 0) {
     first.line <- strsplit(net.txt[1], split = " ")[[1]]
     faces <- as.numeric(first.line[1])
     max.degree <- as.numeric(first.line[2])
-    if (faces != length(net.txt) - 1) self$addError(paste("declared ", faces,
-    "faces, but having", length(faces) - 1))
+    if (faces != length(net.txt) - 1){
+      self$addError(paste("declared ", faces,
+        "faces, but having", length(faces) - 1))
+    }
     net <- list()
     cont <- 1
-    for (f in c(2:length(net.txt))) {
-        cf <- strsplit(net.txt[f], " ")[[1]]
-        net[[cont]] <- as.numeric(cf[2:length(cf)]) + offset
-        cont <- cont + 1
+    for (f in seq_len(length(net.txt))) {
+        if (f > 1){
+          #First line processed above
+          cf <- strsplit(net.txt[f], " ")[[1]]
+          net[[cont]] <- as.numeric(cf[2:length(cf)]) + offset
+          cont <- cont + 1
+        }
     }
     net
-}, extractCFOutBrackets = function(x) {
+},
+extractCFOutBrackets = function(x) {
     open.bracket.pos <- which(strsplit(x, "")[[1]] == "[")
     ret <- x
     if (length(open.bracket.pos) > 0) {
         ret <- substr(x, 1, open.bracket.pos - 1)
     }
     ret
-}, scrapeVertices = function(vertices.txt) {
+},
+scrapeVertices = function(vertices.txt) {
     first.line <- strsplit(vertices.txt[1], split = " ")[[1]]
     vertices.count <- as.numeric(first.line[1])
     max.degree <- as.numeric(first.line[2])
-    if (vertices.count != length(vertices.txt) - 1) self$addError(paste("declared ",
-    vertices.count, "vertices.count, but having", length(vertices.count) -
-    1, elements))
-    vertices <- data.frame(Pos3D_1 = numeric(), Pos3D_2 = numeric(), Pos3D_3 = numeric(),
-    Pos3D_1_exp = numeric(), Pos3D_2_exp = numeric(), Pos3D_3_exp = numeric(),
-    Pos3D_1_exp_text = numeric(), Pos3D_2_exp_text = numeric(), Pos3D_3_exp_text = numeric(),
-    stringsAsFactors = FALSE)
+    if (vertices.count != length(vertices.txt) - 1) {
+      self$addError(paste("declared ",
+          vertices.count, "vertices.count, but having", length(vertices.count) -
+          1, elements))
+    }
+    vertices <- data.frame(Pos3D_1 = numeric(), Pos3D_2 = numeric(),
+                           Pos3D_3 = numeric(),
+                           Pos3D_1_exp = numeric(),
+                           Pos3D_2_exp = numeric(),
+                           Pos3D_3_exp = numeric(),
+                           Pos3D_1_exp_text = numeric(),
+                           Pos3D_2_exp_text = numeric(),
+                           Pos3D_3_exp_text = numeric(),
+                           stringsAsFactors = FALSE)
     cont <- 1
     n.vertices <- length(vertices.txt)
-    for (f in c(2:n.vertices)) {
-        cf <- strsplit(vertices.txt[f], " ")[[1]]
-        cf.outbrackets <- as.numeric(sapply(cf, FUN = function(x) self$extractCFOutBrackets(x)))
-        cf.inbrackets <- stringr::str_extract(cf, "\\[([:graph:]*)\\]")
-        cf.inbrackets <- sub("\\[", "", cf.inbrackets)
-        cf.inbrackets <- sub("\\]", "", cf.inbrackets)
-        futile.logger::flog.debug(paste("parsing vertex ", f, "/", n.vertices,
-        " ", paste(cf.outbrackets, collapse = ","), " ", paste(cf.inbrackets,
-        collapse = ","), sep = ""))
-        vertices[cont, "Pos3D_1"] <- cf.outbrackets[1]
-        vertices[cont, "Pos3D_2"] <- cf.outbrackets[2]
-        vertices[cont, "Pos3D_3"] <- cf.outbrackets[3]
-        vertices[cont, "Pos3D_1_exp"] <- eval(parse(text = cf.inbrackets[1]))
-        vertices[cont, "Pos3D_2_exp"] <- eval(parse(text = cf.inbrackets[2]))
-        vertices[cont, "Pos3D_3_exp"] <- eval(parse(text = cf.inbrackets[3]))
-        vertices[cont, "Pos3D_1_exp_text"] <- cf.inbrackets[1]
-        vertices[cont, "Pos3D_2_exp_text"] <- cf.inbrackets[2]
-        vertices[cont, "Pos3D_3_exp_text"] <- cf.inbrackets[3]
-        cont <- cont + 1
+    for (v in seq_len(n.vertices)) {
+        if (v > 1){
+          #First line processed above
+
+          cf <- strsplit(vertices.txt[v], " ")[[1]]
+          cf.outbrackets <- as.numeric(vapply(cf,
+                                              FUN = function(x)
+                                                self$extractCFOutBrackets(x),
+                                              FUN.VALUE = character(1)))
+          cf.inbrackets <- stringr::str_extract(cf, "\\[([:graph:]*)\\]")
+          cf.inbrackets <- sub("\\[", "", cf.inbrackets)
+          cf.inbrackets <- sub("\\]", "", cf.inbrackets)
+          futile.logger::flog.debug(paste("parsing vertex ",
+                                          v,
+                                          "/",
+                                          n.vertices,
+                                          " ",
+                                          paste(cf.outbrackets,
+                                                collapse = ","),
+                                          " ",
+                                          paste(cf.inbrackets,
+                                                collapse = ","),
+                                          sep = ""))
+          vertices[cont, "Pos3D_1"] <- cf.outbrackets[1]
+          vertices[cont, "Pos3D_2"] <- cf.outbrackets[2]
+          vertices[cont, "Pos3D_3"] <- cf.outbrackets[3]
+          vertices[cont, "Pos3D_1_exp"] <- eval(parse(text = cf.inbrackets[1]))
+          vertices[cont, "Pos3D_2_exp"] <- eval(parse(text = cf.inbrackets[2]))
+          vertices[cont, "Pos3D_3_exp"] <- eval(parse(text = cf.inbrackets[3]))
+          vertices[cont, "Pos3D_1_exp_text"] <- cf.inbrackets[1]
+          vertices[cont, "Pos3D_2_exp_text"] <- cf.inbrackets[2]
+          vertices[cont, "Pos3D_3_exp_text"] <- cf.inbrackets[3]
+          cont <- cont + 1
+        }
     }
     vertices
-}, setupLabelsOrder = function() {
-    for (r in c(1:length(self$labels.rows))) {
+},
+setupLabelsOrder = function() {
+    for (r in seq_len(length(self$labels.rows))) {
         p3.line <- self$labels.rows[r]
         current.label <- self$netlib.p3.lines[p3.line]
         current.label <- sub(":", "", current.label, fixed = TRUE)
-        if (current.label %in% self$labels.map[[current.label]]) stop(paste(gettext("rpoly.row_for_label",
-        domain = "R-Rpolyhedra"), current.label, gettext("rpoly.already_defined",
-        domain = "R-Rpolyhedra")))
+        if (current.label %in% self$labels.map[[current.label]]) {
+          stop(paste(gettext("rpoly.row_for_label",
+            domain = "R-Rpolyhedra"), current.label,
+            gettext("rpoly.already_defined",
+            domain = "R-Rpolyhedra")))
+        }
         self$labels.map[[current.label]] <- r
-        futile.logger::flog.debug(paste("Assign order", r, "row", self$labels.rows[r],
-        "to", current.label))
+        futile.logger::flog.debug(paste("Assign order",
+                                        r,
+                                        "row",
+                                        self$labels.rows[r],
+                                        "to",
+                                        current.label))
     }
-    futile.logger::flog.debug(paste(names(self$labels.map), lapply(self$labels.map,
-    FUN = function(x) self$netlib.p3.lines[self$labels.rows[x]]), collapse = "|",
-    sep = "=>"))
+    futile.logger::flog.debug(paste(names(self$labels.map),
+        lapply(self$labels.map,
+        FUN = function(x)
+          self$netlib.p3.lines[self$labels.rows[x]]), collapse = "|",
+        sep = "=>"))
     self$labels.map
-}, getDataFromLabel = function(label) {
+},
+getDataFromLabel = function(label) {
     r <- self$labels.map[[label]]
     ret <- NULL
-    if (!is.null(r)) ret <- self$netlib.p3.lines[self$extract_fows_from_label(r,
-    label)]
+    if (!is.null(r)) ret <- self$netlib.p3.lines[
+              self$extract_rows_from_label(r, label)]
     ret
-}, scrape = function() {
+},
+getName = function() {
+  self$getDataFromLabel("name")
+},
+scrape = function() {
     # first check labels
     self$labels.rows <- grep("\\:", self$netlib.p3.lines)
     if (nchar(self$errors) > 0) {
-        stop(paste(gettext("rpoly.scraping_issue", domain = "R-Rpolyhedra"),
+        stop(paste(gettext("rpoly.scraping_issue",
+                           domain = "R-Rpolyhedra"),
         self$errors))
     }
     self$setupLabelsOrder()
     name <- self$getDataFromLabel("name")
-    number <- self$getDataFromLabel("number")
-    futile.logger::flog.debug(paste("Scraping polyhedron", number, name))
+    file.id <- self$getDataFromLabel("number")
+
+    futile.logger::flog.debug(paste("Scraping polyhedron",
+                                    file.id, name))
+
     symbol <- self$getDataFromLabel("symbol")
+    if (is.null(symbol)){
+      symbol <- ""
+    }
     dual <- self$getDataFromLabel("dual")
     sfaces <- self$getDataFromLabel("sfaces")
     svertices <- self$getDataFromLabel("svertices")
@@ -205,12 +279,21 @@ initialize = function(number, netlib.p3.lines) {
     #TODO
     dih <- NULL
     vertices <- self$scrapeVertices(vertices.txt)
-    ret <- PolyhedronStateDefined.class$new(source = self$source, number = number, name = name, symbol = symbol,
-    dual = dual, sfaces = sfaces,
-    svertices = svertices, net = net, solid = solid, hinges = hinges, dih = dih, vertices =vertices)
+
+
+    ret <- PolyhedronStateDefined.class$new(source = self$source,
+                  file.id = file.id, name = name,
+                  symbol = symbol,
+                  dual = dual, sfaces = sfaces, svertices = svertices,
+                  vertices = vertices, net = net, solid = solid,
+                  hinges = hinges, dih = dih)
     ret
-}, buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
-    stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
+},
+applyTransformationMatrix = function(transformation.matrix){
+  stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
+},
+buildRGL = function(transformation.matrix) {
+  stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
 },
 exportToXML = function(){
     stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
@@ -224,18 +307,24 @@ exportToXML = function(){
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(number, netlib.p3.lines)}}{Initializes the object, taking the number and PDH file as parameters}
+#'   \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes
+#'   the object, taking the file.id and PDH file as parameters}
 #'   \item{\code{scrape()}}{Scrapes data from dmccooey file format}
+#'   \item{\code{getName()}}{returns polyhedron name}
 #'   \item{\code{scrapeValues(values.lines)}}{Scrapes values}
 #'   \item{\code{scrapeVertices(vertices.lines)}}{Scrapes vertices}
 #'   \item{\code{scrapeFaces(face.lines)}}{Scrapes faces}
-#'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{Builds the \code{RGL} implementation}
+#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
+#'   transformation matrix to polyhedron}
+#'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
 #' }
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import stringr futile.logger
+#' @importFrom  futile.logger flog.info
 #' @importFrom R6 R6Class
-PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScraper",
+#' @noRd
+PolyhedronStateDmccoeyScraper.class <- R6::R6Class(
+  "PolyhedronStateDmccoeyScraper",
   inherit = PolyhedronState.class,
   public = list(
     polyhedra.dmccoey.lines = NA,
@@ -251,27 +340,35 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
     regexp.values       = NA,
     regexp.vertex       = NA,
     regexp.faces        = NA,
-  initialize = function(number, polyhedra.dmccoey.lines){
-    super$initialize(source = "dmccooney", number)
+  initialize = function(file.id, polyhedra.dmccoey.lines){
+    super$initialize(source = "dmccooney", file.id)
     self$polyhedra.dmccoey.lines <- polyhedra.dmccoey.lines
     self$labels.map <- list()
     #init regexp
 
     self$regexp.values.names <- "C[0-9]+"
     self$regexp.rn  <- "[0-9]+\\.[0-9]+"
-    self$regexp.values <- paste("(",self$regexp.values.names,")\\=(",self$regexp.rn,
-    ")(\\=([[:graph:]]+))?",sep="")
-    #V1=(C0,0.0,-1.0)
-    self$regexp.vertex <- paste("(V[0-9]+)","\\=\\((,?-?(",
-    self$regexp.values.names,"|",self$regexp.rn,")){3}\\)",sep="")
+    self$regexp.values <- paste("(", self$regexp.values.names,
+                                ")\\=(",
+                                self$regexp.rn,
+                                ")(\\=([[:graph:]]+))?",
+                                sep = "")
+                                #V1=(C0,0.0,-1.0)
+    self$regexp.vertex <- paste("(V[0-9]+)",
+                                "\\=\\((,?-?(",
+                                self$regexp.values.names,
+                                "|",
+                                self$regexp.rn,
+                                ")){3}\\)",
+                                sep = "")
     self$regexp.faces  <- paste("\\{(,?[0-9]+)+}")
     self
   },
   scrapeValues = function(values.lines){
       self$values <- list()
       for (value in values.lines){
-          value.name <- sub(self$regexp.values,"\\1",value)
-          value.number <- sub(self$regexp.values,"\\2",value)
+          value.name <- sub(self$regexp.values, "\\1", value)
+          value.number <- sub(self$regexp.values, "\\2", value)
           self$values[[value.name]] <- value.number
       }
       self
@@ -280,29 +377,33 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
       #TODO fancy regexp
       regexp.vertex.def <- "\\(([[:alpha:][0-9],.-]+)\\)"
       regexp.code.sign  <- "^\\-"
-      self$vertices <- data.frame(Pos3D_1=character(), Pos3D_2=character(), Pos3D_3=character(),stringsAsFactors = FALSE)
-      self$vertices.replaced <- data.frame(Pos3D_1=numeric(), Pos3D_2=numeric(), Pos3D_3=numeric(),stringsAsFactors = FALSE)
+      self$vertices <- data.frame(Pos3D_1 = character(), Pos3D_2 = character(),
+                    Pos3D_3 = character(), stringsAsFactors = FALSE)
+      self$vertices.replaced <- data.frame(Pos3D_1 = numeric(),
+                                           Pos3D_2 = numeric(),
+                                           Pos3D_3 = numeric(),
+                                           stringsAsFactors = FALSE)
 
       for (vertex.line in vertices.lines){
-          vertex.name <- sub(self$regexp.vertex,"\\1",vertex.line)
-          vertex.row <- as.numeric(sub("^V","",vertex.name))+1
-          vertex.def <- str_extract(vertex.line,regexp.vertex.def)
-          vertex.coords <- strsplit(vertex.def,split=",")[[1]]
-          vertex.coords <- gsub("\\(|\\)","",vertex.coords)
-          self$vertices[vertex.row,] <- vertex.coords
+          vertex.name <- sub(self$regexp.vertex, "\\1", vertex.line)
+          vertex.row <- as.numeric(sub("^V", "", vertex.name)) + 1
+          vertex.def <- str_extract(vertex.line, regexp.vertex.def)
+          vertex.coords <- strsplit(vertex.def, split = ",")[[1]]
+          vertex.coords <- gsub("\\(|\\)", "", vertex.coords)
+          self$vertices[vertex.row, ] <- vertex.coords
           vertex.coords.replaced <- NULL
-          for (d in 1:length(vertex.coords)){
+          for (d in seq_len(length(vertex.coords))) {
               value.code <- vertex.coords[d]
-              if (length(grep(regexp.code.sign,value.code))>0){
+              if (length(grep(regexp.code.sign, value.code)) > 0){
                   parity <- -1
-                  value.code <- sub(regexp.code.sign,"",value.code)
+                  value.code <- sub(regexp.code.sign, "", value.code)
               }
               else{
                   parity <- 1
               }
 
               is.value.numeric <- TRUE
-              if (length(grep(self$regexp.values.names,value.code))>0){
+              if (length(grep(self$regexp.values.names, value.code)) > 0){
                   is.value.numeric <- FALSE
               }
               if (!is.value.numeric){
@@ -310,8 +411,9 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
                       value <- self$values[[value.code]]
                   }
                   else{
-                      stop(paste("code",value.code,"not found in value definitions. Available values:",
-                      paste(names(self$values),collapse=",")))
+                      stop(paste("code", value.code, paste("not found in value",
+                                "definitions... Available values:",
+                                paste(names(self$values), collapse = ","))))
                   }
               }
               else{
@@ -319,9 +421,9 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
               }
 
 
-              vertex.coords.replaced[d] <- parity*as.numeric(value)
+              vertex.coords.replaced[d] <- parity * as.numeric(value)
           }
-          self$vertices.replaced[vertex.row,] <- vertex.coords.replaced
+          self$vertices.replaced[vertex.row, ] <- vertex.coords.replaced
       }
       self
   },
@@ -329,45 +431,63 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
       face.cont <- 1
       self$faces <- list()
       for (face.line in face.lines){
-          face.def  <- gsub("\\{|\\}","",face.line)
-          face.vertices <- strsplit(face.def,split=",")[[1]]
-          self$faces[[as.character(face.cont)]] <- as.numeric(face.vertices)+1
-          face.cont <- face.cont+1
+          face.def  <- gsub("\\{|\\}", "", face.line)
+          face.vertices <- strsplit(face.def, split = ",")[[1]]
+          self$faces[[as.character(face.cont)]] <- as.numeric(face.vertices) + 1
+          face.cont <- face.cont + 1
       }
   },
   scrape = function() {
       #preprocess
       lines.num <- length(self$polyhedra.dmccoey.lines)
-      self$polyhedra.dmccoey.lines[2:lines.num] <- gsub("[[:space:]]","",self$polyhedra.dmccoey.lines[2:lines.num])
+      self$polyhedra.dmccoey.lines[2:lines.num] <- gsub("[[:space:]]",
+                      "",
+                      self$polyhedra.dmccoey.lines[2:lines.num])
 
       name <- self$polyhedra.dmccoey.lines[1]
-      futile.logger::flog.debug(paste("Scraping dmccoey polyhedron", self$number,name))
+      futile.logger::flog.debug(paste("Scraping dmccoey polyhedron",
+                                      self$file.id,
+                                      name))
 
       #values
 
-      self$labels.map[["values"]] <- grep(self$regexp.values,self$polyhedra.dmccoey.lines)
+      self$labels.map[["values"]] <- grep(self$regexp.values,
+                                          self$polyhedra.dmccoey.lines)
       values.lines <- self$polyhedra.dmccoey.lines[self$labels.map[["values"]]]
       self$scrapeValues(values.lines)
 
       #vertex
-      self$labels.map[["vertices"]]<-grep(self$regexp.vertex,self$polyhedra.dmccoey.lines)
+      self$labels.map[["vertices"]] <- grep(self$regexp.vertex,
+                                            self$polyhedra.dmccoey.lines)
 
-      self$scrapeVertices(vertices.lines = self$polyhedra.dmccoey.lines[self$labels.map[["vertices"]]])
+      self$scrapeVertices(vertices.lines = self$polyhedra.dmccoey.lines[
+          self$labels.map[["vertices"]]])
 
       #faces
-      grep(self$regexp.faces,self$polyhedra.dmccoey.lines)
-      self$labels.map[["faces"]]<-grep(self$regexp.faces,self$polyhedra.dmccoey.lines)
-      self$scrapeFaces(face.lines = self$polyhedra.dmccoey.lines[self$labels.map[["faces"]]])
+      grep(self$regexp.faces, self$polyhedra.dmccoey.lines)
+      self$labels.map[["faces"]] <- grep(self$regexp.faces,
+                                       self$polyhedra.dmccoey.lines)
+      self$scrapeFaces(face.lines = self$polyhedra.dmccoey.lines[
+        self$labels.map[["faces"]]])
 
 
 
-      ret <- PolyhedronStateDefined.class$new(source = self$source, number   = self$number,
-      name = name,
-      vertices = self$vertices.replaced,
-      solid    = self$faces)
+      ret <- PolyhedronStateDefined.class$new(
+                    source = self$source,
+                    file.id = self$file.id,
+                    name = name,
+                    vertices = self$vertices.replaced,
+                    solid    = self$faces)
       ret
-  }, buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
-      stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
+  },
+  getName = function() {
+    self$polyhedra.dmccoey.lines[1]
+  },
+  applyTransformationMatrix = function(transformation.matrix){
+    stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
+  },
+  buildRGL = function(transformation.matrix) {
+    stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
   },
   exportToXML = function(){
       stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
@@ -375,11 +495,15 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class("PolyhedronStateDmccoeyScrape
 )
 
 
-#' norm calculates norm of a vector
+#' norm
+#'
+#' Calculates the norm of a vector
+#'
 #' @param vector numeric vector
+#' @noRd
 #'
 norm <- function(vector){
-    sqrt(sum(vector*vector))
+    sqrt(sum(vector * vector))
 }
 
 #' Polyhedron State Defined
@@ -389,57 +513,113 @@ norm <- function(vector){
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(source, number,name, symbol, dual,
-#'               sfaces, svertices, net, solid, hinges, dih, vertices)}}{Initializes the object, taking defaults.}
+#'   \item{\code{initialize(source, file.id, name, symbol, dual,
+#'               sfaces, svertices, net, solid, hinges, dih, vertices)}}{
+#'               Initializes the object, taking defaults.}
 #'   \item{\code{scrape()}}{Do nothing as the object is defined}
+#'   \item{\code{getName()}}{returns polyhedron name}
 #'   \item{\code{getNet()}}{Gets the 2d net model}
 #'   \item{\code{getSolid()}}{Gets the solid representation}
-#'   \item{\code{triangulate(force = FALSE)}}{Generates the triangular faces model for generating tmesh }
-#'   \item{\code{getBoundingBox(vertices.3d)}}{Gets the bounding box of the object}
-#'   \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates the object's Mass Center for parameter
+#'   \item{\code{triangulate(force = FALSE, vertices)}}{Generates
+#'    the triangular faces model for generating tmesh }
+#'   \item{\code{getBoundingBox(vertices.3d)}}{Gets the bounding box of
+#'   the object}
+#'   \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates
+#'   the object's Mass Center for parameter
 #'         vertices}
-#'   \item{\code{getNormalizedSize()}}{Normalizes the volume of the object to a tetrahedron bounding box}#'
-#'   \item{\code{getPositionedVertices(size,origin)}}{Returns the vertices adjusted to size and origin parameters}#'
-#'   \item{\code{buildRGL(size = 1, origin = c(0, 0, 0), normalize.size = TRUE)}}{
-#'   Builds the RGL model, taking the object's size, the origin}
-#'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
+#'   \item{\code{getNormalizedSize(size, vertices.id.3d =
+#'   private$vertices.id.3d)}}{Normalizes the volume of the object to a
+#'   tetrahedron bounding box}
+#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
+#'   transformation matrix to polyhedron}
+#'   \item{\code{getTransformedVertices(vertices,
+#'   transformation.matrix)}}{Returns the vertices
+#'   adjusted with transformation matrix}
+#'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
+#'   \item{\code{exportToXML()}}{Gets an XML representation out of
+#'   the polyhedron object}
+#'   \item{\code{serialize()}}{Gets a list representation out
+#'   of the polyhedron object}
+#'   \item{\code{expect_equal()}}{Function which test equal values
+#'   for all fields using serialize function}
+#'
 #' }
 #' @field source polyhedron definition source
-#' @field number polyhedron arbitrary numeration (netlib|dmccooey)
-#' @field name polyhedron name       (netlib|dmccooey)
-#' @field symbol the eqn(1) input for two symbols separated by a tab; the Johnson symbol, and the Schlafli symbol (netlib)
-#' @field dual  the name of the dual polyhedron optionally followed by a horizontal tab and the number of the dual (netlib)
+#' @field file.id polyhedron filename in original
+#' source (netlib|dmccooey)
+#' @field name polyhedron name (netlib|dmccooey)
+#' @field symbol the eqn(1) input for two symbols separated by a tab;
+#' the Johnson symbol, and the Schlafli symbol (netlib)
+#' @field dual  the name of the dual polyhedron optionally followed
+#' by a horizontal tab and the number of the dual (netlib)
 #' @field sfaces polyhedron solid face list (netlib)
 #' @field svertices polyhedron solid vertice list (netlib)
-#' @field net polyhedron 2D net model with vertices defined for a planar representation (netlib)
+#' @field net polyhedron 2D net model with vertices defined for
+#'  a planar representation (netlib)
 #' @field hinges Polyhedron hinge list (netlib)
-#' @field solid polyhedron list of edges which generate a solid (netlib|dmccooey)
+#' @field solid polyhedron list of edges which generate a
+#' solid (netlib|dmccooey)
 #' @field dih Dih attribute (netlib)
 #' @field vertices Polyhedron vertices list (netlib|dmccooey)
-#' @field vertices.rgl Polyhedron triangulated vertices list for RGL
-#' @field solid.triangulated Polyhedron solid (triangulated) for RGL visualization
+#' @field transformation.matrix transformation matrix for
+#'  calculations and visualizing polyhedron
+#' Private
 #' @field mass.center polyhedron mass center
+#' @field edges.cont  Edges count
+#' @field edges.check Edges check degree property
+#' @field vertices.id.3d vertices definition for solid 3d object
+#' @field vertices.centered centered vertices for applying
+#' transformation matrices
+#' @field vertices.rgl Polyhedron triangulated vertices list for RGL
+#' @field solid.triangulated Polyhedron solid (triangulated)
+#' for RGL visualization
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import rgl testthat XML
+#' @importFrom futile.logger flog.debug
+#' @importFrom rgl identityMatrix
+#' @importFrom rgl transform3d
+#' @importFrom rgl asHomogeneous
 #' @importFrom R6 R6Class
-PolyhedronStateDefined.class <- R6::R6Class("PolyhedronStateDefined", inherit = PolyhedronState.class,
+#' @noRd
+PolyhedronStateDefined.class <- R6::R6Class(
+  "PolyhedronStateDefined",
+  inherit = PolyhedronState.class,
 private = list(mass.center = NA,
 #infered state
 edges.cont = 0,
 edges.check = NULL,
+vertices.id.3d = NULL,
 #rgl aux members
 vertices.rgl = NULL,
 solid.triangulated = NULL
 ),
-public = list(number = NA, source = NA, name = NA, symbol = NA, dual = NA, sfaces = NA, svertices = NA,
-net = NA, hinges = NA, solid = NA, dih = NA, vertices = NA, edges = NULL,
-initialize = function(source, number,
-name, vertices, solid, symbol=NULL, dual=NULL, sfaces=NULL, svertices = NULL, net = NULL,  hinges = NULL, dih = NULL) {
-    super$initialize(source = source,number = number)
+public = list(file.id = NA,
+              source = NA,
+              name = NA,
+              symbol = NA,
+              dual = NA,
+              sfaces = NA,
+              svertices = NA,
+              vertices = NA,
+              vertices.centered = NULL,
+              net = NA,
+              solid = NA,
+              hinges = NA,
+              dih = NA,
+              edges = NULL,
+              transformation.matrix = NA,
+  initialize = function(source, file.id, name,
+                        vertices, solid, net = NULL,
+                        symbol="", dual=NULL, sfaces=NULL,
+                        svertices = NULL, hinges = NULL, dih = NULL,
+                        normalize.size = TRUE) {
+    super$initialize(source = source, file.id = file.id)
     self$name <- name
     self$vertices <- vertices
     self$solid <- solid
+    if (is.null(symbol)){
+      symbol <- ""
+    }
     self$symbol <- symbol
     self$dual <- dual
     self$sfaces <- sfaces
@@ -447,40 +627,79 @@ name, vertices, solid, symbol=NULL, dual=NULL, sfaces=NULL, svertices = NULL, ne
     self$net <- net
     self$hinges <- hinges
     self$dih <- dih
+    if (is.null(self$solid)){
+      self$addError(paste("Solid definition not found"))
+    }
+    self$transformation.matrix <- identityMatrix()
+    if (nchar(self$errors) == 0){
+      self$adjustVertices(normalize.size = normalize.size)
+    }
     self
-}, scrape = function() {
+},
+scrape = function() {
     self
-}, getSymbol = function() {
+},
+getName = function() {
+  self$name
+},
+getSymbol = function() {
     self$symbol
-}, getVertices = function(solid = FALSE) {
-    ret<- self$vertices
+},
+adjustVertices = function(normalize.size = TRUE){
+  private$vertices.id.3d <- sort(unique(unlist(self$solid)))
+  self$vertices.centered <- self$vertices
+  mass.center <- self$calculateMassCenter(
+                  vertices.id.3d = private$vertices.id.3d,
+                  applyTransformation = FALSE)
+  vapply(private$vertices.id.3d, FUN = function(x){
+          self$vertices.centered[x, 1:3] <-
+            self$vertices.centered[x, 1:3] - mass.center
+          TRUE
+          },
+         FUN.VALUE = logical(1))
+  private$mass.center <- self$calculateMassCenter(
+    vertices.id.3d = private$vertices.id.3d,
+    applyTransformation = FALSE)
+  #normalize size
+  if (normalize.size){
+    normalized.size <- self$getNormalizedSize(1)
+    self$vertices.centered <- self$vertices.centered[, 1:3] * normalized.size
+  }
+  self
+},
+getVertices = function(solid = FALSE) {
+    ret <- self$vertices
     if (solid){
       vertices.in.faces <- NULL
       for (f in self$solid){
         for (v in f){
-          vertices.in.faces <- union(vertices.in.faces,v)
+          vertices.in.faces <- union(vertices.in.faces, v)
         }
       }
-      ret <- self$vertices[vertices.in.faces,]
+      ret <- self$vertices[vertices.in.faces, ]
     }
     ret
-}, getNet = function() {
+},
+getNet = function() {
     self$net
-}, getSolid = function() {
+},
+getSolid = function() {
     self$solid
 },
 inferEdges = function(force.recalculation = FALSE){
-    if (is.null(private$edges.check) | force.recalculation){
-        private$edges.check <- data.frame(origin=numeric(),dest=numeric(),count=numeric())
+    if (is.null(private$edges.check) | force.recalculation) {
+        private$edges.check <- data.frame(origin = numeric(),
+                                          dest = numeric(),
+                                          count = numeric())
         self$edges <- list()
         private$edges.cont <- 0
-        for (f.number in 1:length(self$solid)){
+        for (f.number in seq_len(length(self$solid))){
             f <- self$solid[[f.number]]
             degree.f <- length(f)
             v.ant <- f[degree.f]
-            for (it.v in c(1:length(f))){
+            for (it.v in seq_len(length(f))){
                 v <- f[it.v]
-                if (v>v.ant){
+                if (v > v.ant){
                     v1 <- v.ant
                     v2 <- v
                 }
@@ -488,198 +707,355 @@ inferEdges = function(force.recalculation = FALSE){
                     v1 <- v
                     v2 <- v.ant
                 }
-                row.edge <- which(private$edges.check$origin==v1&
-                private$edges.check$dest==v2)
-                if (length(row.edge)==0){
-                    row.edge <- nrow(private$edges.check)+1
+                row.edge <- which(private$edges.check$origin == v1 &
+                private$edges.check$dest == v2)
+                if (length(row.edge) == 0){
+                    row.edge <- nrow(private$edges.check) + 1
                     count    <- 1
-                    private$edges.cont <- private$edges.cont +1
-                    self$edges[[as.character(private$edges.cont)]]<-c(v1,v2)
+                    private$edges.cont <- private$edges.cont + 1
+                    self$edges[[as.character(private$edges.cont)]] <- c(v1, v2)
                 }
                 else{
-                    count <- private$edges.check[row.edge,"count"]+1
+                    count <- private$edges.check[row.edge, "count"] + 1
                 }
-                private$edges.check[row.edge,]<- c(v1,v2,count)
+                private$edges.check[row.edge, ] <- c(v1, v2, count)
                 v.ant <- v
             }
         }
     }
     self
 },
-checkEdgesConsistency=function(){
+checkEdgesConsistency = function(){
     ret <- NULL
     if (!is.null(self$solid)){
         self$inferEdges()
-        rows.error <- which(private$edges.check$count!=2)
-        if (length(rows.error)>0){
-            error.edges <- paste(apply(private$edges.check[rows.error,],MARGIN=1,
-            FUN=function(x)paste(names(x),x,sep="=>",collapse=",")),collapse="|")
-            self$addError(paste("For", self$source, self$name,"faces definition is wrong as there are edges with count diff to 2:",error.edges))
+        rows.error <- which(private$edges.check$count != 2)
+        if (length(rows.error) > 0){
+            error.edges <- paste(apply(private$edges.check[rows.error, ],
+                    MARGIN = 1,
+                    FUN = function(x)
+                      paste(names(x), x, sep = "=>", collapse = ",")),
+                    collapse = "|")
+            self$addError(current.error = paste("For",
+                            self$source,
+                            self$name,
+                            paste("faces definition is wrong as there",
+                                  "are edges with count diff to 2:"),
+                            error.edges))
         }
-        ret <- private$edges.check[rows.error,]
+        ret <- private$edges.check[rows.error, ]
     }
     ret
 },
 triangulate = function(force = FALSE) {
+    if (is.null(self$vertices.centered)){
+      stop(paste("vertices.centered must be called before triangulate"))
+    }
     if (is.null(private$solid.triangulated) | force) {
         net <- self$solid
-        private$vertices.rgl <- self$vertices[, 1:3]
+        private$vertices.rgl <- self$vertices.centered[, 1:3]
         private$vertices.rgl$desc <- "solid"
         faces.size <- unlist(lapply(net, FUN = length))
         max.faces <- max(faces.size)
-        # if (max.faces > 3) stop(paste('Not yet implemented for faces with', max.faces))
+        # if (max.faces > 3) stop(paste('Not yet
+        #implemented for faces with', max.faces))
         f <- 1
         ret <- list()
         for (face in net) {
             current.vertex <- nrow(private$vertices.rgl)
             # the description considers vector referencing starting in 0.
             if (length(face) < 3) {
-                stop(paste("Problem with definition. Face defined with", length(face),
-                "vertex"))
+              stop(paste(gettext("rpoly.polyhedron_invalid_face",
+                                 domain = "R-Rpolyhedra"),
+                         length(face)))
             }
             if (length(face) == 3) {
                 tmesh <- face
             } else {
                 if (length(face) == 4) {
-                    tmesh <- c(face[1], face[2], face[3], face[3], face[4], face[1])
+                    tmesh <- c(face[1], face[2], face[3],
+                               face[3], face[4], face[1])
                 }
                 if (length(face) >= 5) {
-                    extra.mid.vertex <- apply(self$vertices[face, 1:3], MARGIN = 2,
-                    FUN = mean)
-                    extra.vertex.id <- current.vertex + 1
-                    private$vertices.rgl[extra.vertex.id, 1:3] <- extra.mid.vertex
-                    private$vertices.rgl[extra.vertex.id, 4] <- paste("extra-f", f,
-                    sep = "")
-                    last.v <- length(face)
-                    tmesh <- NULL
-                    for (v in 1:length(face)) {
-                        tmesh <- c(tmesh, face[last.v], face[v], extra.vertex.id)
-                        last.v <- v
-                    }
-                }
+              extra.mid.vertex <- apply(self$vertices.centered[
+                face, 1:3],
+                MARGIN = 2,
+              FUN = mean)
+              extra.vertex.id <- current.vertex + 1
+              private$vertices.rgl[extra.vertex.id, 1:3] <- extra.mid.vertex
+              private$vertices.rgl[extra.vertex.id, 4] <- paste("extra-f", f,
+              sep = "")
+              last.v <- length(face)
+              tmesh <- NULL
+              for (v in seq_len(length(face))) {
+                  tmesh <- c(tmesh, face[last.v], face[v], extra.vertex.id)
+                  last.v <- v
+              }
             }
+          }
             ret[[f]] <- tmesh
-            futile.logger::flog.debug(paste("triangulated f", f, length(face),
-            "original", paste(face, collapse = ","), "triangulated", paste(tmesh,
-            collapse = ",")))
+            futile.logger::flog.debug(paste("triangulated f",
+                                            f,
+                                            length(face),
+                                            "original",
+                                            paste(face, collapse = ","),
+                                            "triangulated", paste(tmesh,
+                                            collapse = ",")))
             f <- f + 1
         }
         private$solid.triangulated <- ret
     }
     private$solid.triangulated
-}, getBoundingBox = function(vertices.def) {
-    vertices.def.min <- apply(vertices.def, MARGIN = 2, FUN = min)
-    vertices.def.max <- apply(vertices.def, MARGIN = 2, FUN = max)
-    rbind(vertices.def.min, vertices.def.max)
 },
-checkInsideBoundingBox = function(vertices.df,v, bounding.box){
-    inside <-rep(NA,3)
-    pos3d <- vertices.df[v,]
+getBoundingBox = function(
+        transformation.matrix =self$transformation.matrix,
+        vertices.id.3d = private$vertices.id.3d) {
+  vertices.def <- self$getTransformedVertices(self$vertices.centered,
+        transformation.matrix = transformation.matrix)
+
+  vertices.def <- vertices.def[private$vertices.id.3d, ]
+
+  vertices.def.min <- apply(vertices.def, MARGIN = 2, FUN = min)
+  vertices.def.max <- apply(vertices.def, MARGIN = 2, FUN = max)
+  rbind(vertices.def.min, vertices.def.max)
+},
+checkInsideBoundingBox = function(vertices.df, v, bounding.box){
+    inside <- rep(NA, 3)
+    pos3d <- vertices.df[v, ]
     for (d in 1:3){
-        inside[d] <- pos3d[d]>=bounding.box[1,d]&
-        pos3d[d]<=bounding.box[2,d]
+        inside[d] <- pos3d[d] >= bounding.box[1, d] &
+        pos3d[d] <= bounding.box[2, d]
     }
-    ret <- min(inside)==1
+    ret <- min(inside) == 1
     if (ret){
-        private$vertices.built <- union(private$vertices.built,v)
+        private$vertices.built <- union(private$vertices.built, v)
     }
     ret
 },
-calculateMassCenter = function(size = 1, vertices.3d) {
-    resized.vertex <- private$vertices.rgl[vertices.3d, c(1:3)] * size
-    # delaunayn(resized.vertex)
-    private$mass.center <- apply(resized.vertex, MARGIN = 2, FUN = mean)
-    private$mass.center
+calculateMassCenter = function(vertices.id.3d = private$vertices.id.3d,
+                               applyTransformation=TRUE) {
+  transformed.vertex <- self$vertices[vertices.id.3d, c(1:3)]
+  if (applyTransformation){
+    vertices.centered <- asHomogeneous(as.matrix(
+                            self$vertices[vertices.id.3d, c(1:3)]))
+    transformed.vertex <- transform3d(vertices.centered,
+                                      self$transformation.matrix)
+  }
+
+  transformed.vertex <- transformed.vertex[, 1:3]
+  apply(transformed.vertex, MARGIN = 2, FUN = mean)
 },
-getNormalizedSize=function(size){
-    vertices.def <- private$vertices.rgl[sort(unique(unlist(private$solid.triangulated))), c(1:3)]
-    bounding.box <- self$getBoundingBox(vertices.def = vertices.def)
-    volume <- prod(apply(bounding.box, MARGIN = 2,
-    FUN = function(x) {x[2] - x[1]}))
-    # 0.7501087 is tetrahedron bounding box
-    size <- size * (0.7501087 / volume) ^ (1 / 3)
-    size
+getNormalizedSize = function(size){
+  bounding.box <- self$getBoundingBox()
+  volume <- prod(apply(bounding.box, MARGIN = 2,
+                       FUN = function(x) {
+                         x[2] - x[1]
+                         }
+                       ))
+  # 0.7501087 is tetrahedron bounding box
+  size <- size * (0.7501087 / volume) ^ (1 / 3)
+  size
 },
-getPositionedVertices = function(size = 1,origin = c(0,0,0)){
-    positioned.vertices <- private$vertices.rgl[, c(1:3)] * size
-    for (d in 1:3) {
-        positioned.vertices[, d] <- positioned.vertices[, d] + origin[d] -
-        private$mass.center[d]
+getTransformedVertices = function(
+        vertices = self$vertices.centered,
+        transformation.matrix = self$transformation.matrix) {
+  transformed.vertices <-  transform3d(asHomogeneous(
+            as.matrix(vertices[, c(1:3)])),
+            matrix = transformation.matrix)
+  transformed.vertices <- transformed.vertices[, 1:3]
+  transformed.vertices
+},
+applyTransformationMatrix = function(transformation.matrix){
+  self$transformation.matrix <- transformation.matrix %*%
+              self$transformation.matrix
+  self$transformation.matrix
+},
+buildRGL = function(transformation.matrix = NULL) {
+    if (is.null(transformation.matrix)){
+      transformation.matrix <- self$transformation.matrix
     }
-    positioned.vertices
-},
-buildRGL = function(size = 1, origin = c(0, 0, 0), normalize.size = TRUE) {
     ret <- NULL
     self$inferEdges()
     if (length(self$solid) > 1) {
         triangulated.solid <- self$triangulate()
-        if (normalize.size) {
-            size <- self$getNormalizedSize(size)
-        }
-        self$calculateMassCenter(size, vertices.3d = sort(unique(unlist(triangulated.solid))))
-        positioned.vertices     <- self$getPositionedVertices(size,origin)
-        positioned.vertices <- checkVertices(vertices = self$getVertices()[,1:3],
-                                             positioned.vertices = positioned.vertices,
-                                             triangulated.solid)
-        vertices <- as.matrix(cbind(positioned.vertices, 1))
+        transformed.vertices <- self$getTransformedVertices(
+                  vertices = private$vertices.rgl,
+                  transformation.matrix = transformation.matrix)
+        transformed.vertices <- checkVertices(
+                  vertices = self$getVertices()[, 1:3],
+                  transformed.vertices = transformed.vertices,
+                  triangulated.solid)
+        vertices <- as.matrix(cbind(transformed.vertices, 1))
         ret <- rgl::tmesh3d(c(t(vertices)), unlist(triangulated.solid))
     } else {
-        futile.logger::flog.info(paste("For", self$name, " solid definition not found"))
+        futile.logger::flog.info(paste("For", self$name,
+                                       " solid definition not found"))
         self$addError("solid definition not found")
     }
     ret
   },
-  exportToXML = function()
-  {
+  exportToXML = function() {
       polyhedronToXML(self)
+  },
+  expect_equal = function(polyhedron){
+
+    compatible <- !is.null(polyhedron$state$serialize)
+    if (compatible){
+      self.serialized <- self$serialize()
+      polyhedron.serialized <- polyhedron$getState()$serialize()
+      #check all same fields
+      expect_equal(names(polyhedron.serialized), names(self.serialized))
+      #check values for all fields
+      for (name in names(self.serialized)){
+        expect_equal(self.serialized[[name]], polyhedron.serialized[[name]])
+      }
+    }
+    else{
+      stop(paste("Not compatible polyhedron", polyhedron$getName()))
+    }
+  },
+  serialize = function(){
+    ret <- list()
+    ret[["source"]]    <- self$source
+    ret[["name"]]      <- self$name
+    ret[["net"]]       <- self$net
+    ret[["file.id"]]   <- self$file.id
+    ret[["sfaces"]]    <- self$sfaces
+    ret[["vertices"]]  <- self$vertices
+    ret[["solid"]]     <- self$solid
+    ret[["svertices"]] <- self$svertices
+    ret[["symbol"]]    <- self$symbol
+    ret[["dual"]]      <- self$dual
+    #Private:
+    #edges.check: data.frame
+    #edges.cont: 6
+    #mass.center: -0.77777777691603 -0.833950387905475 -0.839177040579277
+    #solid.triangulated: list
+    #vertices.rgl: data.frame
+    ret
   }
 ))
 
-#' Polyhedron
+
+#' Polyhedron State Deserializer
 #'
-#' Polyhedron container class, which is accesible by the final users upon call to \code{getPolyhedron()}
+#' Polyhedron state for deserialize from database
+#'
+#'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(number, state = NULL)}}{Initializes the object}
-#'   \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from the definition}}
+#'   \item{\code{initialize(serialized.polyhedron)}}{Initializes the object.}
+#'   \item{\code{scrape()}}{Returns a State Defined}
+#'
+#' }
+#' @field serialized.polyhedron polyhedron definition serialized
+#' @format \code{\link{R6Class}} object.
+#' @docType class
+#' @importFrom R6 R6Class
+#' @noRd
+PolyhedronStateDeserializer.class <- R6::R6Class(
+  "PolyhedronStateDeserializer",
+  inherit = PolyhedronState.class,
+  public = list(serialized.polyhedron = NA,
+  initialize = function(serialized.polyhedron){
+    self$serialized.polyhedron <- serialized.polyhedron
+    self
+  },
+  scrape = function(){
+    sp <- self$serialized.polyhedron
+    source    <- sp$source
+    file.id   <- sp$file.id
+    name      <- sp$name
+    symbol    <- sp$symbol
+    dual      <- sp$dual
+    sfaces    <- sp$sfaces
+    svertices <- sp$svertices
+    net       <- sp$net
+    solid     <- sp$solid
+    hinges    <- sp$hindges
+    dih       <- sp$dih
+    vertices  <- sp$vertices
+
+    ret <- PolyhedronStateDefined.class$new(source = source,
+                    file.id = file.id,
+                    name = name,
+                    symbol = symbol,
+                    dual = dual,
+                    sfaces = sfaces,
+                    svertices = svertices,
+                    vertices = vertices,
+                    net = net,
+                    solid = solid,
+                    hinges = hinges,
+                    dih = dih)
+    ret
+  }))
+#' Polyhedron
+#'
+#' Polyhedron container class, which is accesible by the final users upon call
+#' to \code{getPolyhedron()}
+#' @section Methods:
+#' \describe{
+#'   \item{\code{initialize(file.id, state = NULL)}}{Initializes the object}
+#'   \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from
+#'   the netlib definition}}
+#'   \item{\code{scrapeDmccoey(polyhedra.dmccoey.lines)}}{{Scrapes polyhedra
+#'    from the dmccoey definition}}
+#'   \item{\code{deserialize(polyhedron.serialized)}}{{Deserialize polyhedron
+#'    from definition}}
 #'   \item{\code{getName()}}{Gets the name from polyhedron definition}
 #'   \item{\code{getState()}}{Gets the state from polyhedron definition}
-#'   \item{\code{getSolid()}}{Gets the solid definition of polyhedron definition}
+#'   \item{\code{getSolid()}}{Gets the solid definition of polyhedron
+#'   definition}
 #'   \item{\code{isChecked()}}{Returns TRUE is polyhedron is checked}
 #'   \item{\code{getErrors()}}{Returns errors collected in checking process}
-#'   \item{\code{getRGLModel(size = 1, origin = c(0, 0, 0)}}{Builds the RGL model}
-#'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
-#'   \item{\code{checkProperties(expected.vertices, expected.faces)}}{check polyhedron basic properties}
+#'   \item{\code{getRGLModel(transformation.matrix)}}{Builds the RGL model}
+#'   \item{\code{exportToXML()}}{Gets an XML representation out of the
+#'   polyhedron object}
+#'   \item{\code{checkProperties(expected.vertices,
+#'   expected.faces)}}{check polyhedron basic properties}
 #'
 
 #' }
-#' @field number Polyhedron number
+#' @field file.id Polyhedron file.id
 #' @field state Polyhedron state
 #' @format \code{\link{R6Class}} object.
 #' @docType class
-#' @import rgl futile.logger testthat
 #' @importFrom R6 R6Class
-Polyhedron.class <- R6::R6Class("Polyhedron", public = list(number = NA, state = NA,
-initialize = function(number, state = NULL) {
-    self$number <- number
+#' @noRd
+Polyhedron.class <- R6::R6Class("Polyhedron",
+  public = list(file.id = NA, state = NA,
+initialize = function(file.id, state = NULL) {
+    self$file.id <- file.id
     if (!is.null(state)) {
         self$state <- state
     }
     self
 },
 scrapeNetlib = function(netlib.p3.lines) {
-    self$state <- PolyhedronStateNetlibScraper.class$new(self$number, netlib.p3.lines)
+    self$state <- PolyhedronStateNetlibScraper.class$new(
+      self$file.id, netlib.p3.lines)
     self$state <- self$state$scrape()
     self
 },
 scrapeDmccoey = function(polyhedra.dmccoey.lines) {
-    self$state <- PolyhedronStateDmccoeyScraper.class$new(self$number, polyhedra.dmccoey.lines)
+    self$state <- PolyhedronStateDmccoeyScraper.class$new(
+      self$file.id, polyhedra.dmccoey.lines)
     self$state <- self$state$scrape()
     #Postprocess in defined state
     self
 },
+deserialize = function(serialized.polyhedron){
+
+  self$state   <- PolyhedronStateDeserializer.class$new(
+    serialized.polyhedron)
+  self$state   <- self$state$scrape()
+  self$file.id <- serialized.polyhedron$file.id
+  #Postprocess in defined state
+  self
+},
 getName = function() {
-    self$state$name
+    self$state$getName()
 },
 getState = function() {
     self$state
@@ -691,14 +1067,15 @@ isChecked = function(){
     inconsistent.edges <- self$state$checkEdgesConsistency()
     ret <- FALSE
     if (!is.null(inconsistent.edges)){
-        ret <- nrow(inconsistent.edges)==0
+        ret <- nrow(inconsistent.edges) == 0
     }
     ret
 },
-getRGLModel = function(size = 1, origin = c(0, 0, 0)) {
-    futile.logger::flog.debug(paste("drawing", self$getName()),"model")
-    self$state$buildRGL(size = size, origin = origin)
+getRGLModel = function(transformation.matrix = NULL) {
+  futile.logger::flog.debug(paste("drawing", self$getName()), "model")
+  self$state$buildRGL(transformation.matrix = transformation.matrix)
 },
+
 exportToXML = function(){
     self$state$exportToXML()
 },
@@ -707,10 +1084,9 @@ getErrors = function(){
 },
 checkProperties = function(expected.vertices, expected.faces){
     faces <- self$getSolid()
-    expect_equal(length(faces),expected.faces)
+    expect_equal(length(faces), expected.faces)
     vertices.solid <- which(row.names(self$state$vertices) %in% unlist(faces))
-    expect_equal(length(vertices.solid),expected.vertices)
-
+    expect_equal(length(vertices.solid), expected.vertices)
     #check Edges consistency
     self$state$checkEdgesConsistency()
     self
@@ -721,21 +1097,20 @@ checkProperties = function(expected.vertices, expected.faces){
 #' Check rendering vertices properties
 #'
 #' @param vertices vertices dataframe for checking
-#' @param positioned.vertices positioned vertices dataframe for checking
+#' @param transformed.vertices positioned vertices dataframe for checking
 #' @param triangulated.solid triangulated.solid for checking
 #' @return checked positioned vertices
 #' @importFrom stats runif
-
-
-checkVertices <- function(vertices, positioned.vertices, triangulated.solid){
+#' @noRd
+checkVertices <- function(vertices, transformed.vertices, triangulated.solid){
   triangulated.solid <- sort(unique(unlist(triangulated.solid)))
-  set.seed(sum(vertices[,1:3]))
-  positioned.vertices.rows <- intersect(triangulated.solid,1:nrow(positioned.vertices))
-  row <- positioned.vertices.rows[trunc(runif(1,1,length(positioned.vertices.rows)+1-0.1^9))]
-  col <- trunc(runif(1,1,4-0.1^9))
-  positioned.vertices[row,col] <-positioned.vertices[row,col]+0.1^6
-  positioned.vertices
+  set.seed(sum(vertices[, 1:3]))
+  transformed.vertices.rows <- intersect(triangulated.solid,
+                                         seq_len(nrow(transformed.vertices)))
+  row <- transformed.vertices.rows[trunc(runif(1, 1,
+                                               length(transformed.vertices.rows)
+                                               + 1 - 0.1 ^ 9))]
+  col <- trunc(runif(1, 1, 4 - 0.1 ^ 9))
+  transformed.vertices[row, col] <- transformed.vertices[row, col] + 0.1 ^ 6
+  transformed.vertices
 }
-
-
-
