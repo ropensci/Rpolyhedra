@@ -205,5 +205,5 @@ switchToFullDatabase <- function(env = NA){
   if (retVal == "NOT_AVAILABLE") {
     futile.logger::flog.error("Full Database not available yet.")
   }
-  env
+  retVal
 }
