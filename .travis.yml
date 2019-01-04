@@ -14,5 +14,4 @@ after_success:
   - R CMD INSTALL $PKG_TARBALL
   - Rscript -e 'library(covr); codecov()'
   - Rscript -e 'lintr::lint_package()'
-  - bash < (curl -s https://codecov.io/bash)
 
