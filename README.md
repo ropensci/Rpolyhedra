@@ -80,7 +80,7 @@ for (i in seq_len(n)) {
  
 PDH files can be found in `extdata/www.netlib.org/polyhedra/index.html`
 
-### Dmccooey
+### dmccooey
 Includes 767 polyhedra definitions.
 The [polyhedra database](http://dmccooey.com/polyhedra/) built by David Mccooey has an open format which has been scraped to feed RPolyhedra database
 
