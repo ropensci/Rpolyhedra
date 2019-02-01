@@ -24,12 +24,10 @@ install.packages("Rpolyhedra")
 Install the R package using the following commands on the R console:
 
 ```R
-install.packages(c("futile.logger", "rgl", "stringr", "R6", "testthat", "devtools"))
-devtools::install_github("qbotics/Rpolyhedra")
+devtools::install_github("qbotics/Rpolyhedra", build_opts = NULL)
 library(Rpolyhedra)
 # if want to switch to fullDB in user filespace, it will download the full database
 switchToFullDatabase()
-
 ```
 
 # A simple example of 5 regular polyhedra
