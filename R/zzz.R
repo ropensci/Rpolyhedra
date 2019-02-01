@@ -1,24 +1,8 @@
-#' Rpolyhedra
-#'
-#' polyhedra database
-#'
-#' A polyhedra database scraped from:
-#' * http://paulbourke.net/dataformats/phd/: PHD files as R6 objects and 'rgl'
-#'          visualizing capabilities. The PHD format was created to describe the geometric
-#'          polyhedra definitions derived mathematically <http://www.netlib.org/polyhedra/>
-#'          by Andrew Hume and by the Kaleido program of Zvi Har'El.
-#' * http://dmccooey.com/Polyhedra: Polyhedra text datafiles.
-#'
-#' @docType package
-#' @name Rpolyhedra
-#' @importFrom R6 R6Class
-#' @importFrom futile.logger flog.info
-#' @author Alejandro Baranek <abaranek@dc.uba.ar>, Leonardo Javier Belen <leobelen@gmail.com>
-
 #' Executes code while loading the package.
 #'
 #' @param libname The library name
 #' @param pkgname The package name
+#' @noRd
 .onLoad <- function(libname, pkgname) {
 
   setPackageEnvir(variable.name = "RpolyhedraEnv", new.env())
