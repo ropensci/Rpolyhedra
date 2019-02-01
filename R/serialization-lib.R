@@ -34,7 +34,6 @@ convertDFToXML <- function(df, name, node) {
 #' @return an XML document, ready to be converted to String with XML::saveXML()
 #' @examples
 #' #get the representation of a cube (netlib library)
-#' library(Rpolyhedra)
 #' XML::saveXML(polyhedronToXML(getPolyhedron("netlib", "cube")$state))
 #'
 #' @importFrom XML newXMLDoc
