@@ -1,8 +1,15 @@
  # Rpolyhedra
 
- Polyhedra database scraped from public available sources using R6 objects and 'rgl' visualizing capabilities. 
- 
   | Release | Usage | Development |
+ <!-- Polyhedra database scraped from publically available sources using R6 objects and 'rgl' visualizing capabilities. -->
+
+ This package is a curation made based on the poly package found on http://www.netlib.org/polyhedra/ ([Original Help message](poly_original_help_message.html)), and the polyhedra database found on http://dmccooey.com/polyhedra, both of which provide polyhedra databases on its own format. As such, Rpolyhedra provides with the following:
+
+ 1. A module to scrape the polyhedra for the different sources found with features for incremental correction of issues found and to be found in scraping process.
+ 1. A database of the scraped polyhedra.
+ 1. An R6 polyhedron representation with 'rgl' package visualizing capabilites.
+
+
 |:--------|:------|:------------|
  [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) | [![Travis](https://travis-ci.org/qbotics/Rpolyhedra.svg?branch=master)](https://travis-ci.org/qbotics/Rpolyhedra) |
 | [![CRAN](http://www.r-pkg.org/badges/version/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra) | | [![codecov](https://codecov.io/gh/qbotics/Rpolyhedra/branch/master/graph/badge.svg)](https://codecov.io/gh/qbotics/Rpolyhedra) |
