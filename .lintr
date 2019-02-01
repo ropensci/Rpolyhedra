@@ -1,5 +1,7 @@
 linters: with_defaults(
-    multiple_dots_linter = NULL,
-    camel_case_linter = NULL,
+    snake_case_linter, # do not allow snake case
+    camel_case_linter = NULL, # allow camel case
+    multiple_dots_linter, # do not allow dot sep
+    commented_code_linter = NULL, # comment code is ok
     NULL
   )
