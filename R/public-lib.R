@@ -106,6 +106,7 @@ scrapePolyhedraSources <- function(sources.config =
 #'#search within the polyhedron names from all sources
 #'cubes <- getAvailablePolyhedra(sources=available.sources,
 #'         search.string="cube")
+#'cubes
 getAvailableSources <- function(){
   getPolyhedraObject()$getAvailableSources()
 }
@@ -134,7 +135,7 @@ getAvailableSources <- function(){
 #'#search within the polyhedron names
 #'
 #'cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
-
+#'cube
 getAvailablePolyhedra <- function(sources =
                       names(getPackageEnvir(".available.sources")),
                       search.string = NULL){

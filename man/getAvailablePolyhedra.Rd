@@ -29,6 +29,7 @@ available.netlib.polyhedra <- getAvailablePolyhedra(sources="netlib")
 #search within the polyhedron names
 
 cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
+cube
 }
 \seealso{
 getAvailableSources
