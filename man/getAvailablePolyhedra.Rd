@@ -2,7 +2,7 @@
 % Please edit documentation in R/public-lib.R
 \name{getAvailablePolyhedra}
 \alias{getAvailablePolyhedra}
-\title{getAvailablePolyhedra()}
+\title{Get available polyhedra}
 \usage{
 getAvailablePolyhedra(sources, search.string)
 }
@@ -29,6 +29,7 @@ available.netlib.polyhedra <- getAvailablePolyhedra(sources="netlib")
 #search within the polyhedron names
 
 cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
+cube
 }
 \seealso{
 getAvailableSources

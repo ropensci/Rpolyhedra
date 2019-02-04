@@ -1,16 +1,16 @@
-#' getPreloadedDataFilename
+#' Get preloaded data filename
 #'
 #' Gets the path of Polyhedra preloaded data CSV file
 #'
-#' @param polyhedra_preloaded_data filename of polyhedra preloaded data csv
+#' @param polyhedra.preloaded.data filename of polyhedra preloaded data csv
 #' @return the path to the Polyhedra database file
 #' @noRd
-getPreloadedDataFilename <- function(polyhedra_preloaded_data =
+getPreloadedDataFilename <- function(polyhedra.preloaded.data =
                                        "polyhedra.preloaded.data.csv"){
-  file.path(getDataDir(), polyhedra_preloaded_data)
+  file.path(getDataDir(), polyhedra.preloaded.data)
 }
 
-#' updatePolyhedraDatabase
+#' Update polyhedra database
 #'
 #' Function for initializing database
 #'
@@ -46,7 +46,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
                   sources.config = .available.sources)
 }
 
-#' downloadRPolyhedraSupportingFiles
+#' Download RPolyhedra supporting files
 #'
 #' Downloads the files from the remote location
 #'
@@ -93,7 +93,7 @@ downloadRPolyhedraSupportingFiles <- function(){
   retVal
 }
 
-#' copyFilesToExtData
+#' Copy files to external data
 #'
 #' Copies files from/to the home directory to the package one to build a preconfigured package.
 #'
@@ -164,7 +164,7 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env =  "HOME"),
 }
 
 
-#' PolyhedronScraperConfiguration
+#' Polyhedron scraper configuration class
 #'
 #' Abstract class for configuring specific scrapers for Diferent sources
 #'
@@ -196,7 +196,7 @@ PolyhedronScraperConfiguration.class <- R6::R6Class(
     }))
 
 
-#' PolyhedronScraperConfigurationNetlib
+#' Polyhedron scraper configuration class (Netlib)
 #'
 #' Scraper configuration for Netlib source
 #'
@@ -241,7 +241,7 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
     }
   ))
 
-#' PolyhedronScraperConfigurationDmccoey
+#' Polyhedron scraper configuration class (Dmccoey)
 #'
 #' Scraper configuration for Dmccoey source
 #'
@@ -289,7 +289,7 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
     }
   ))
 
-#' checkDatabaseVersion
+#' Check database version
 #'
 #' Determines if there is a need for a database update by checking the
 #' version file of both the package and the database installation.
@@ -314,7 +314,7 @@ checkDatabaseVersion <- function(){
   status
 }
 
-#' isCompatiblePolyhedraRDS()
+#' Is compatible Polyhedra RDS file
 #'
 #' Tests if the polyhedra RDS is compatible with the current format
 #'
@@ -371,7 +371,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
 
 
 
-#' getPackageVersion
+#' Get package version
 #'
 #' Obtains code version from the Description
 #' @importFrom utils packageVersion
@@ -393,7 +393,7 @@ getPackageDB <- function(){
   ret
 }
 
-#' getDatabaseVersion
+#' Get database version
 #'
 #' Obtains the generation code version from the database version file
 #' @noRd

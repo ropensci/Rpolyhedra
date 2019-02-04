@@ -7,7 +7,7 @@ Authors@R: c(
     person("Leonardo","Belen",,"leobelen@gmail.com", c("aut","com","cph"))
     )
 Maintainer: Alejandro Baranek <abaranek@dc.uba.ar>
-Description: A polyhedra database scraped from various sources as R6 objects and 'rgl' visualizing capabilities. 
+Description: A polyhedra database scraped from various sources as R6 objects and 'rgl' visualizing capabilities.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -20,11 +20,12 @@ Imports: futile.logger,
          rgl,
          stringr,
          R6,
-         testthat, 
+         testthat,
          XML,
          digest,
          git2r
 Collate:
+  'Rpolyhedra-package.R'
   'polyhedra-lib.R'
   'ledger-lib.R'
   'db-lib.R'

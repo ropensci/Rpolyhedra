@@ -2,7 +2,7 @@
 % Please edit documentation in R/public-lib.R
 \name{scrapePolyhedraSources}
 \alias{scrapePolyhedraSources}
-\title{scrapePolyhedraSources()}
+\title{Scrape polyhedra sources}
 \usage{
 scrapePolyhedraSources(sources.config =
          getPackageEnvir(".available.sources"),

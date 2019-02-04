@@ -2,7 +2,7 @@
 % Please edit documentation in R/serialization-lib.R
 \name{polyhedronToXML}
 \alias{polyhedronToXML}
-\title{polyhedronToXML()}
+\title{Polyhedron to XML}
 \usage{
 polyhedronToXML(polyhedron.state.defined, is.transformed.vertices = TRUE)
 }
@@ -19,7 +19,6 @@ Gets an XML representation out of the polyhedron object
 }
 \examples{
 #get the representation of a cube (netlib library)
-library(Rpolyhedra)
 XML::saveXML(polyhedronToXML(getPolyhedron("netlib", "cube")$state))
 
 }

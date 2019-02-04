@@ -2,7 +2,7 @@
 % Please edit documentation in R/public-lib.R
 \name{switchToFullDatabase}
 \alias{switchToFullDatabase}
-\title{switchToFullDatabase()}
+\title{Switch to full database}
 \usage{
 switchToFullDatabase(env=NA)
 }

@@ -1,4 +1,4 @@
-#' getPolyhedraObject
+#' Get a polyhedra object
 #'
 #' Return the polyhedra database handler.
 #' @seealso PolyhedraDatabase.class
@@ -9,7 +9,7 @@ getPolyhedraObject <- function() {
   getUserEnvir(".polyhedra")
 }
 
-#' scrapePolyhedra()
+#' Scrape polyedra objects
 #'
 #' Gets polyhedra objects from text files of
 #' different sources, scheduling and scraping using
@@ -32,7 +32,7 @@ scrapePolyhedra <- function(scrape.config,
 
 }
 
-#' scrapePolyhedraSources()
+#' Scrape polyhedra sources
 #'
 #' Scrapes polyhedra objects from text files of
 #' different sources, in order to make them available to the
@@ -87,7 +87,7 @@ scrapePolyhedraSources <- function(sources.config =
 }
 
 
-#' getAvailableSources()
+#' Get available sources
 #'
 #' Gets the list of names of available sources in database to be used later as
 #' references to the package.
@@ -106,11 +106,12 @@ scrapePolyhedraSources <- function(sources.config =
 #'#search within the polyhedron names from all sources
 #'cubes <- getAvailablePolyhedra(sources=available.sources,
 #'         search.string="cube")
+#'cubes
 getAvailableSources <- function(){
   getPolyhedraObject()$getAvailableSources()
 }
 
-#' getAvailablePolyhedra()
+#' Get available polyhedra
 #'
 #' Gets the list of names of available polyhedra and its status in
 #' the polyhedra database, which can be later called with getPolyhedron
@@ -134,7 +135,7 @@ getAvailableSources <- function(){
 #'#search within the polyhedron names
 #'
 #'cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
-
+#'cube
 getAvailablePolyhedra <- function(sources =
                       names(getPackageEnvir(".available.sources")),
                       search.string = NULL){
@@ -142,7 +143,7 @@ getAvailablePolyhedra <- function(sources =
                       search.string = search.string)
 }
 
-#' getPolyhedron()
+#' Get polyhedron
 #'
 #' Gets a polyhedron from the database. It returns an R6 Class
 #' with all its characteristics and functions.
@@ -188,7 +189,7 @@ getPolyhedron <- function(source = "netlib", polyhedron.name) {
   ret
 }
 
-#' switchToFullDatabase()
+#' Switch to full database
 #'
 #' Prompts user for changing database to fulldb in
 #' user filespace. Also, allows the user to switch back to

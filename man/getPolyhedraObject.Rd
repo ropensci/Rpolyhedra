@@ -2,7 +2,7 @@
 % Please edit documentation in R/public-lib.R
 \name{getPolyhedraObject}
 \alias{getPolyhedraObject}
-\title{getPolyhedraObject}
+\title{Get a polyhedra object}
 \usage{
 getPolyhedraObject()
 }

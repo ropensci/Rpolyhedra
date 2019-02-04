@@ -3,7 +3,7 @@
 \docType{class}
 \name{PolyhedraDatabase.class}
 \alias{PolyhedraDatabase.class}
-\title{PolyhedraDatabase}
+\title{Polyhedra database}
 \format{\code{\link{R6Class}} object.}
 \usage{
 PolyhedraDatabase.class
