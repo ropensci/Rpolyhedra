@@ -2,7 +2,7 @@
 % Please edit documentation in R/public-lib.R
 \name{getAvailableSources}
 \alias{getAvailableSources}
-\title{getAvailableSources()}
+\title{Get available sources}
 \usage{
 getAvailableSources()
 }

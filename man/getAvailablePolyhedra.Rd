@@ -2,7 +2,7 @@
 % Please edit documentation in R/public-lib.R
 \name{getAvailablePolyhedra}
 \alias{getAvailablePolyhedra}
-\title{getAvailablePolyhedra()}
+\title{Get available polyhedra}
 \usage{
 getAvailablePolyhedra(sources, search.string)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/public-lib.R
 \name{getPolyhedron}
 \alias{getPolyhedron}
-\title{getPolyhedron()}
+\title{Get polyhedron}
 \usage{
 getPolyhedron(source = "netlib", polyhedron.name)
 }

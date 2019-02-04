@@ -2,7 +2,7 @@
 % Please edit documentation in R/serialization-lib.R
 \name{polyhedronToXML}
 \alias{polyhedronToXML}
-\title{polyhedronToXML()}
+\title{Polyhedron to XML}
 \usage{
 polyhedronToXML(polyhedron.state.defined, is.transformed.vertices = TRUE)
 }

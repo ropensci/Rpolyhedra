@@ -1,4 +1,4 @@
-#' maxWithoutNA
+#' Max without NA
 #'
 #' Function that returns NA if all elements are NA, and the max value not NA, if not.
 #'
@@ -7,7 +7,7 @@
 maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm = TRUE), NA)
 
 
-#' ScraperLedger
+#' Scraper ledger
 #'
 #' Ledger of scraping status of each objects. Allows different type of states:
 #' queued, scraping, scraped, failed, exception, skipped

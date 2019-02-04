@@ -1,5 +1,5 @@
 
-#' convertDFToXML()
+#' Convert dataframe to XML
 #'
 #' Allows to the creation of xml excerpts out of a data.frame.
 #'
@@ -25,7 +25,7 @@ convertDFToXML <- function(df, name, node) {
   node
 }
 
-#' polyhedronToXML()
+#' Polyhedron to XML
 #'
 #' Gets an XML representation out of the polyhedron object
 #'

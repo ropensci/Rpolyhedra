@@ -1,4 +1,4 @@
-#' getPackageEnvir
+#' Get variable from package environment
 #'
 #' Obtains a variable from package environment
 #' @param variable.name  name of variable to be retrieved
@@ -7,7 +7,7 @@ getPackageEnvir <- function(variable.name){
   get(variable.name, envir = asNamespace("Rpolyhedra"))
 }
 
-#' setPackageEnvir
+#' Set package environment variable
 #'
 #' Set a variable from package environment
 #'
@@ -19,7 +19,7 @@ setPackageEnvir <- function(variable.name, value){
 }
 
 
-#' getUserEnvir
+#' Get an user environment variable
 #'
 #' Gets a writable environment for the package
 #'
@@ -29,7 +29,7 @@ getUserEnvir <- function(variable.name) {
   get(x = variable.name, envir = getPackageEnvir("RpolyhedraEnv"))
 }
 
-#' setUserEnvir
+#' Set an user environment variable
 #'
 #' Sets variable in the writable environment for the package
 #'
@@ -42,7 +42,7 @@ setUserEnvir <- function(variable.name, value) {
 }
 
 
-#' getDataEnv
+#' Get data environment
 #'
 #' Gets the current .data.env value
 #'
@@ -53,7 +53,7 @@ getDataEnv <- function() {
 }
 
 
-#' getUserSpace
+#' Get user space
 #'
 #' This function is used internally for accesing the local database path
 #' @return path of user space
@@ -62,7 +62,7 @@ getUserSpace <- function(){
   file.path(path.expand("~"), ".R", "Rpolyhedra")
 }
 
-#' initDataDirEnvironment
+#' Initialize data directory environment
 #'
 #' initialize data enviornment
 #'
@@ -80,7 +80,7 @@ initDataDirEnvironment <- function() {
   .data.env
 }
 
-#' getDataDir
+#' Get data directory
 #'
 #' Gets the path of Rpolyhedra data dir.
 #'
@@ -99,7 +99,7 @@ getDataDir <- function(data.env = getDataEnv()) {
   data.dir
 }
 
-#' getEnvironmentFilepath
+#' Get environment file path
 #'
 #' Gets the filename where package data environment is persisted
 #' @return The environment filepath
@@ -108,7 +108,7 @@ getEnvironmentFilepath <- function(){
   file.path(getDataDir("HOME"), "Rpolyhedra.env")
 }
 
-#' setDataDirEnvironment
+#' Set data directory environment
 #'
 #' Sets the path of Rpolyhedra data dir.
 #'
@@ -132,7 +132,7 @@ setDataDirEnvironment <- function(env = "PACKAGE") {
   .data.env
 }
 
-#' getPackageDir
+#' Get package directory
 #'
 #' Gets the path of package data.
 #' @noRd
@@ -144,7 +144,7 @@ getPackageDir <- function(){
   file.path(home.dir, data.subdir)
 }
 
-#' getPolyhedraRDSPath
+#' Get polyhedra RDS file path
 #'
 #' Gets the path of Polyhedra RDS database file
 #'
@@ -155,7 +155,7 @@ getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
   file.path(getDataDir(), polyhedra_rds_filename)
 }
 
-#' selectDataEnv
+#' Select data environment
 #'
 #' Asks the user where to set the system variable .data.env
 #'
@@ -223,7 +223,8 @@ selectDataEnv <- function(env=NA, downloadDatabase = TRUE,
   getDataEnv()
 }
 
-#' getGitCommit
+#' Get git commit
+#'
 #' get the last git commit sha
 #' @param long.version determines if the complete version of the sha will
 #'         be returned.
@@ -245,7 +246,7 @@ getGitCommit <- function(long.version = FALSE){
   git.sha
 }
 
-#' getPolyhedraObject
+#' Get polyhedra object
 #'
 #' Gets the polyhedra object
 #'

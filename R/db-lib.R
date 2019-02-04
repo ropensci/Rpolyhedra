@@ -1,4 +1,4 @@
-#' PolyhedraDatabase
+#' Polyhedra database
 #'
 #' Scrapes all polyhedra in data folder to save a representation which
 #' is accesible by the final users upon call to \code{getPolyhedron()}.
