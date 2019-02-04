@@ -61,7 +61,7 @@ exportToXML = function(){
 #' @section Methods:
 #' \describe{
 #'   \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes the object, taking the file.id and PDH file as parameters}
-#'   \item{\code{extract_rows_from_label(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
+#'   \item{\code{extractRowsFromLabel(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
 #'   expected label as parameters}
 #'   \item{\code{getLabels()}}{Gets the label from the polyhedron}
 #'   \item{\code{scrapeNet(net.txt, offset = 0) }}{Scrape the net model}
@@ -96,7 +96,7 @@ initialize = function(file.id, netlib.p3.lines) {
     self$labels.map <- list()
     self
 },
-extract_rows_from_label = function(label.number, expected.label) {
+extractRowsFromLabel = function(label.number, expected.label) {
     observer.label <- self$netlib.p3.lines[self$labels.rows[label.number]]
     observer.label <- sub("\\:", "", observer.label)
     if (observer.label != expected.label) {
@@ -235,7 +235,7 @@ getDataFromLabel = function(label) {
     r <- self$labels.map[[label]]
     ret <- NULL
     if (!is.null(r)) ret <- self$netlib.p3.lines[
-              self$extract_rows_from_label(r, label)]
+              self$extractRowsFromLabel(r, label)]
     ret
 },
 getName = function() {
@@ -387,7 +387,7 @@ PolyhedronStateDmccoeyScraper.class <- R6::R6Class(
       for (vertex.line in vertices.lines){
           vertex.name <- sub(self$regexp.vertex, "\\1", vertex.line)
           vertex.row <- as.numeric(sub("^V", "", vertex.name)) + 1
-          vertex.def <- str_extract(vertex.line, regexp.vertex.def)
+          vertex.def <- stringr::str_extract(vertex.line, regexp.vertex.def)
           vertex.coords <- strsplit(vertex.def, split = ",")[[1]]
           vertex.coords <- gsub("\\(|\\)", "", vertex.coords)
           self$vertices[vertex.row, ] <- vertex.coords

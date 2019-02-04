@@ -2,12 +2,12 @@
 #'
 #' Gets the path of Polyhedra preloaded data CSV file
 #'
-#' @param polyhedra_preloaded_data filename of polyhedra preloaded data csv
+#' @param polyhedra.preloaded.data filename of polyhedra preloaded data csv
 #' @return the path to the Polyhedra database file
 #' @noRd
-getPreloadedDataFilename <- function(polyhedra_preloaded_data =
+getPreloadedDataFilename <- function(polyhedra.preloaded.data =
                                        "polyhedra.preloaded.data.csv"){
-  file.path(getDataDir(), polyhedra_preloaded_data)
+  file.path(getDataDir(), polyhedra.preloaded.data)
 }
 
 #' Update polyhedra database

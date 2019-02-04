@@ -148,11 +148,11 @@ getPackageDir <- function(){
 #'
 #' Gets the path of Polyhedra RDS database file
 #'
-#' @param polyhedra_rds_filename filename of polyhedra database
+#' @param polyhedra.rds.filename filename of polyhedra database
 #' @return the path to the Polyhedra database file
 #' @noRd
-getPolyhedraRDSPath <- function(polyhedra_rds_filename = "polyhedra.RDS") {
-  file.path(getDataDir(), polyhedra_rds_filename)
+getPolyhedraRDSPath <- function(polyhedra.rds.filename = "polyhedra.RDS") {
+  file.path(getDataDir(), polyhedra.rds.filename)
 }
 
 #' Select data environment
