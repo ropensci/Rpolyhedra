@@ -1,6 +1,6 @@
 
 context("db-lib")
-test_that("create minimal db", {
+testthat::test_that("create minimal db", {
   initDataDirEnvironment()
   testthat::expect_equal(selectDataEnv("PACKAGE"), "PACKAGE")
   source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()

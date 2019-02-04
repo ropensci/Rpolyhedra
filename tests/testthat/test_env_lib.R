@@ -1,5 +1,5 @@
 context("env-lib")
-test_that("test on env lib functions", {
+testthat::test_that("test on env lib functions", {
 
   setUserEnvir("testUser", "testUser")
   testthat::expect_equal(getUserEnvir(variable.name = "testUser"), "testUser")

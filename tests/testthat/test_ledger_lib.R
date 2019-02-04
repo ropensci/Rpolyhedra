@@ -1,5 +1,5 @@
 context("ledger-lib")
-test_that("create minimal ledger", {
+testthat::test_that("create minimal ledger", {
   ledger <- ScraperLedger.class$new()
   #initialize variables
   source.config.netlib <- getPackageEnvir(".available.sources")[["netlib"]]
