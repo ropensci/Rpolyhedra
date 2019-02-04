@@ -85,7 +85,8 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
         self$polyhedra.db$getPolyhedron(source = source,
                                         polyhedron.name = scraped.name)
 
-      expected.polyhedron$getState()$expect_equal(scraped.polyhedron)
+      expected.polyhedron.state <- expected.polyhedron$getState()
+      expected.polyhedron.state$expectEqual(scraped.polyhedron)
     }))
 
 #' Polyhedron test task edges consistency
@@ -112,7 +113,7 @@ PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class(
         self$polyhedra.db$getPolyhedron(source = source,
                                         polyhedron.name = self$polyhedron.name)
       edges.inconsistent <- current.polyhedron$state$checkEdgesConsistency()
-      expect_equal(nrow(edges.inconsistent), 0)
+      testthat::expect_equal(nrow(edges.inconsistent), 0)
     }))
 
 

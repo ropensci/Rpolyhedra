@@ -3,10 +3,10 @@
 context("polyhedra- Check package db")
 test_that("Check pkg-minimal size and objects", {
   available.polyhedra <- getAvailablePolyhedra()
-  test_that::expect_equal(
+  testthat::expect_equal(
     nrow(available.polyhedra[available.polyhedra$source == "netlib", ]),
     119)
-  test_that::expect_equal(
+  testthat::expect_equal(
     nrow(available.polyhedra[available.polyhedra$source == "dmccooey", ]),
     9)
   .polyhedra <- getPolyhedraObject()
@@ -14,13 +14,13 @@ test_that("Check pkg-minimal size and objects", {
   polyhedra.rds.netlib <- dir(sources.netlib.dir)
   polyhedra.rds.netlib <- polyhedra.rds.netlib[
               grep("\\.RDS\\.zip", polyhedra.rds.netlib)]
-  test_that::expect_equal(length(polyhedra.rds.netlib), 119)
+  testthat::expect_equal(length(polyhedra.rds.netlib), 119)
 
   sources.dmccooey.dir <- .polyhedra$getPolyhedraSourceDir(source = "dmccooey")
   polyhedra.rds.dmccooey <- dir(sources.dmccooey.dir)
   polyhedra.rds.dmccooey <- polyhedra.rds.dmccooey[
                 grep("\\.RDS\\.zip", polyhedra.rds.dmccooey)]
-  test_that::expect_equal(length(polyhedra.rds.dmccooey), 9)
+  testthat::expect_equal(length(polyhedra.rds.dmccooey), 9)
 })
 
 
@@ -92,5 +92,5 @@ context("polyhedra- RGL")
 test_that("Build RGL model for polyhedra", {
     hexagonal.prism <- getPolyhedron("netlib", "hexagonal prism")
     rgl <- hexagonal.prism$getState()$buildRGL()
-    test_that::expect_equal(dim(rgl$vb), c(4, 36))
+    testthat::expect_equal(dim(rgl$vb), c(4, 36))
   })
