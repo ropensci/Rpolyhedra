@@ -233,7 +233,7 @@ selectDataEnv <- function(env=NA, downloadDatabase = TRUE,
 #' @noRd
 getGitCommit <- function(long.version = FALSE){
   #TODO: replace with git2r when issue #2 is resolved.
-  #git2r::commits()[[1]]@sha
+  #rgit2r::commits()[[1]]@sha
   if (file.exists(".git")){
     git.sha <- system("git log --pretty=format:'%h' -n 1", intern = TRUE)[1]
   }

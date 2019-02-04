@@ -418,12 +418,12 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                  obs = obs)
         if (status == "testing"){
           tryCatch({
-            res <- expect_true(self$existsPolyhedron(source = source,
+            res <- test_that::expect_true(self$existsPolyhedron(source = source,
                       polyhedron.name = polyhedron.name))
             db.polyhedron <- self$getPolyhedron(source = source,
                       polyhedron.name = polyhedron.name)
             scraped.polyhedron$state$inferEdges()
-            expect_equal(scraped.polyhedron, db.polyhedron)
+            test_that::expect_equal(scraped.polyhedron, db.polyhedron)
             status <- "tested"
           },
           error = function(e){

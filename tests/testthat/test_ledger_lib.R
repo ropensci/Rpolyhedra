@@ -32,13 +32,15 @@ test_that("create minimal ledger", {
   # Execute functions
   ledger.crc   <-  ledger$getCRCPolyhedronName(source = "netlib",
                                                polyhedron.name = "tetrahedron")
-  expect_equal(ledger$getAvailableSources(), "netlib")
-  expect_equal(ledger$getAvailablePolyhedra()$scraped.name,
+  test_that::expect_equal(ledger$getAvailableSources(), "netlib")
+  test_that::expect_equal(ledger$getAvailablePolyhedra()$scraped.name,
                                         c("tetrahedron", "octahedron", "cube"))
-  expect_equal(unique(ledger$getFilenamesStatus(status = "scraped")$status),
-                                        "scraped")
-  expect_equal(unique(ledger$getFilenamesStatusMode(mode = "test")$status),
-                                        "scraped")
+  test_that::expect_equal(
+            unique(ledger$getFilenamesStatus(status = "scraped")$status),
+            "scraped")
+  test_that::expect_equal(
+            unique(ledger$getFilenamesStatusMode(mode = "test")$status),
+            "scraped")
 
   ledger$countStatusUse(status.field = "status", status = "scraped")
 
