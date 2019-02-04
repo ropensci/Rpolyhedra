@@ -12,4 +12,4 @@ futile.logger::flog.threshold(futile.logger::ERROR)
 
 
 
-test_check("Rpolyhedra")
+testthat::test_check("Rpolyhedra")

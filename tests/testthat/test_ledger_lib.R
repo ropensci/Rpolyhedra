@@ -1,5 +1,5 @@
 context("ledger-lib")
-test_that("create minimal ledger", {
+testthat::test_that("create minimal ledger", {
   ledger <- ScraperLedger.class$new()
   #initialize variables
   source.config.netlib <- getPackageEnvir(".available.sources")[["netlib"]]
@@ -32,13 +32,15 @@ test_that("create minimal ledger", {
   # Execute functions
   ledger.crc   <-  ledger$getCRCPolyhedronName(source = "netlib",
                                                polyhedron.name = "tetrahedron")
-  expect_equal(ledger$getAvailableSources(), "netlib")
-  expect_equal(ledger$getAvailablePolyhedra()$scraped.name,
+  testthat::expect_equal(ledger$getAvailableSources(), "netlib")
+  testthat::expect_equal(ledger$getAvailablePolyhedra()$scraped.name,
                                         c("tetrahedron", "octahedron", "cube"))
-  expect_equal(unique(ledger$getFilenamesStatus(status = "scraped")$status),
-                                        "scraped")
-  expect_equal(unique(ledger$getFilenamesStatusMode(mode = "test")$status),
-                                        "scraped")
+  testthat::expect_equal(
+            unique(ledger$getFilenamesStatus(status = "scraped")$status),
+            "scraped")
+  testthat::expect_equal(
+            unique(ledger$getFilenamesStatusMode(mode = "test")$status),
+            "scraped")
 
   ledger$countStatusUse(status.field = "status", status = "scraped")
 

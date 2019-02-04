@@ -1,7 +1,7 @@
 context("serialization-lib XML export")
-test_that("test xml can be exported", {
+testthat::test_that("test xml can be exported", {
   xml.polyhedron <- polyhedronToXML(
           getPolyhedron("netlib", "tetrahedron")$getState())
-  expect_equal(
+  testthat::expect_equal(
     as.numeric(nchar(XML::getChildrenStrings(xml.polyhedron))), 406)
 })
