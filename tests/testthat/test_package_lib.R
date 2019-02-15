@@ -5,7 +5,7 @@ setup(assign(".tmp.package.dir",
           file.path(getDataDir(data.env = "PACKAGE"), ".tmp"),
           env = parent.frame()))
 setup(assign(".tmp.home.dir",
-             file.path(getUserSpace(), ".tmp"),
+             file.path(tempdir(), ".tmp"),
              env = parent.frame()))
 setup(dir.create(.tmp.package.dir, recursive = TRUE, showWarnings = FALSE))
 setup(dir.create(.tmp.home.dir, recursive = TRUE, showWarnings = FALSE))
