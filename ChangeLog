@@ -1,13 +1,147 @@
-2344280 (HEAD -> dev-leobelen) Merge remote-tracking branch 'origin/master' into dev-leobelen
+d52e1ad (HEAD -> dev-v0.4.2, origin/dev-v0.4.1, dev-0.4.1) Version 0.4.1 in DESCRIPTION
+78aa43b Regenerated db for v0.4.1
+2e7b728 [BUGFIX] violation of CRAN policy while writing to personal folder on test
+99bb614 Merge branch 'master' into dev-0.4.1
+a1b6996 (origin/master, origin/dev-ropensci, origin/HEAD, master, dev-ropensci) lintrbot false snake_case correction
+c912ebd with_mock false snake case correction
+81e7481 lintrbot false snake_case corrections
+0de9f89 fixed testthat reference
+2d31a02 fixed testthat reference
+a1a4180 Corrected lintr bot (Not present in local lintr)
+4a9c7d0 (origin/dev-0.4.1) Merge branch 'master' into dev-0.4.1
+f0fd35e lintr corrections
+8b38ab8 Merge remote-tracking branch 'origin/dev-leobelen'
+9030c1c lintr config according to extended google style code
+ff228d9 (origin/dev-leobelen) updates to the code of conduct and contribution files
+61167a0 update objects titles in documentation
+2d1840b Merge remote-tracking branch 'origin/master' into dev-leobelen
+f453a11 Merge pull request #28 from schloerke/review_changes
+ff957d1 added code of conduct
+aaab643 do not library your library
+5cf70ea do not install.packages in readme.  add `build_opts = NULL`
+5f3aa11 add .lintr file
+c1b75ff display the final output in the example
+d22c93a add itemize to package doc file. Separate `.onLoad` from `-package`
+1253c37 fix table alignment with non perfect markdown preview
+15c6008 copy in vignette intro
+dde9778 Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.4.1
+6290598 Merge branch 'master' into dev-0.4.1
+bd65a4e Merge remote-tracking branch 'origin/master' into dev-leobelen
+3ef0f3b Small change in README
+89dab88 removed unneeded code for codecov.io
+c8a06d6 codecov.io integration
+666affb gitignore for dev
+4b7ab78 (origin/fulldb, origin/dev-0.4.0, fulldb, dev-0.4.0) lintr
+1b1245e pkg-minimal
+dda26e5 Changes in selectDataEnv return value (Now returns getDataEnv())
+07dba6b Merge remote-tracking branch 'origin/dev-0.4.0' into dev-0.4.0
+8a930c4 Improvement to publishing process. New parameter in selectDataEnv for not downloading HOME database
+72f60b9 removed windows/linux/macos targets to travis, for now it only checks on the default os (linux)
+640e398 added windows/linux/macos targets to travis
+7bbd097 [bugfix] getBaseDir setup in package-lib
+624ee98 Merge remote-tracking branch 'origin/dev-0.4.0' into fulldb
+404ed19 Merged from v0.4.0
+19687fe [bugfix] in copyFilesToExtData
+c4a9ca1 test_db fixed in windows
+62f309d (tag: v0.4.0) pkg-minimal for v0.4.0
+06f6a1e (dev-0.3.1) pkg-minimal database for V0.4.0
+ec1b7fa improved the documentation as indicated in #157
+b0d2f80 comment changes as suggested by Noam Ross
+162eb60 After lintr
+cdd2c61 exported polyhedronToXML
+55f9da8 Added testcase for checking db size and existing files
+93c4a1f Changes in public functions
+94f0389 [bugfix] Wasn't saving polyhedra crc files
+370e7cd [bugfix] Wasnt saving polyhedra
+252541d Changes in getPolyhedron doc
+efcbc56 [bugfix] teardown environment
+79c6601 [bugfix] rds was not saving. More coverage and check, goodpractices, lintr, etc.
+9315add setup and teardown in test_package_lib
+9a04f08 lintr and improved package coverage
+d3588e6 lintrd some code
+460878e lintr code
+df96018 Trying to extend coverage on db-lib
+0c9f515 A little more test coverage
+eefcd58 mockup fixed for test_package_lib.R
+d2ccef6 More coverage on db-lib
+ce9b9e9 Commented mocks in test package
+b2eaf1d Beter coverage in public-lib. Pushed funcionality to db
+f564ebf Working on package_lib tests
+6974ede Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.3.1
+4d76b2b One testthat by lib file
+1cda363 linted R/ files
+b741b4d Code reorganization
+cbb5a1e download files now has better failover messages
+99a649e Merge remote-tracking branch 'origin/dev-0.3.1' into dev-leobelen
+2e01170 expect_equal in rgl context
+d0ed938 [bugfix] with null symbols when no symbol label in netlib. More coverage on testcases
+6c11d82 Merge remote-tracking branch 'origin/dev-0.3.1' into dev-leobelen
+8dfecf2 [bugfix] When running testcase for db, works in pretend mode
+830986c Merge remote-tracking branch 'origin/dev-0.3.1' into dev-leobelen
+0dd2778 ledger testcase
+873dc8e Added better examples and XML export features.
+9d90681 Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.3.1
+9d52cd8 Merge remote-tracking branch 'origin/master' into dev-0.3.1
+31a0d92 Merge pull request #25 from noamross/patch-1
+f1c8f29 better test coverage
+87c6be1 first draft of xml support added #15
+dec11d1 Add code coverage badge to README
+b91892e version 0.3.1 in DESCRIPTION
+d0f0275 Added getName to state objects
+0fe1066 Added getName to state objects
+44cc372 Merge remote-tracking branch 'origin' into dev-0.3.1
+4d9e423 (origin/dev-0.3.0, dev-0.3.0) Corrections in README.md
+f29735c Merge branch 'dev-0.3.0' into dev-0.3.1
+b8b39cd (tag: v0.3.0) [bugfix] documentation missing in scrapePolyhedraSources
+6075a9b .gitignore in development mode
+c5daa2e regenerated db for v0.3.0
+fe15d3f pkg-minimal db for v0.3.0
+ea3f5e8 After lintr
+ccb8284 Updating ledger info=>debug
+7130be3 [bugfix] Check when no solid definition
+4ca56d8 [bugfix] When no solid definition or other errors in polyhedron does not continue scraping process
+6ef2a7b [bugfix] when no preloaded name. Included parameter for running specific source.filename scraper
+c085a0e Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.3.0
+1f9e1fc added .lintr to buildignore to comply with cran rules
+2ca27b0 seq_len replaced 1:nrow
+fdc55fc lintr version merged to dev-0.3.0
+c3f3d71 (origin/lintr) changes to conform with ropensci
+a2de0d0 Examples using transformationMatrix
+675ec7d changed sapply to vapply
+18ef58d replaced second vapply
+eb16005 seq_len instead of 1:nrow working
+1bdb8bd [bugfixed] Was processing faces descriptor as a face
+c952f02 [bugfix] seq_len instead of seq_along. Debugging problem when scraping faces
+69cfa7e Replaced 1:nrow...  for seq_along(nrow...
+1ce2ff1 changed 1:nrow by seq_len in db-lib.R to conform to ROpenSci rules
+2fb5359 added lintr to travis
+0e8d21b linted all files
+92a8c78 Merge remote-tracking branch 'origin/dev-0.3.0' into lintr
+1cbe4ef changes to documentation
+341d336 [bugfix] accessing to db.version. Always using getPackageDB
+6991b7b [bugfix] accessing to db.version. Always using getPackageDB
+5ad7863 reopen #2 still an issue using gitr, using command line instead
+acbd0b7 version 0.3.0 new RoxygenNote
+16bbb61 closes #2
+a0e4c99 Example corrected for using transformation matrix
+ee5eec5 Merge remote-tracking branch 'origin/lintr' into dev-0.3.0
+a0e00f3 Example corrected for using transformation matrix
+f6ceb23 Implemented transformation matrix for polyhedron state
+abcd4e2 changed all imports with importFrom to narrow down the namespace, except polyhedra-lib.R
+8d127cd corrections on linted files
+bdc138f linted R files except polyhedra-lib.R
+f84cae1 (origin/git2r-integration) added git2r integration according with #2
+5b3c107 (tag: v0.2.8) [bugfix] more structure compatibilities for CRAN submission
+2344280 Merge remote-tracking branch 'origin/master' into dev-leobelen
 ec6df0c [bugfix] changed changelog file name to respond to CRAN standards
-05b749c (tag: v0.2.8, origin/master, origin/dev-0.3.0, origin/HEAD) Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.3.0
-7fb219f (origin/dev-leobelen) move genchangelog.sh to utils for better hqndling
+05b749c Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.3.0
+7fb219f move genchangelog.sh to utils for better hqndling
 0474dd4 Merge remote-tracking branch 'origin/dev-leobelen' into dev-0.3.0
 723d156 added a changelog generator
 1f1172e v0.2.8 now polyhedra names are case insensitive
 beec66c Merge remote-tracking branch 'origin/master'
 2a6a198 expect equal in documentation
-bb302c6 (master) changed R badge to 3.4.0 in Readme.md)
+bb302c6 changed R badge to 3.4.0 in Readme.md)
 d513dd5 (tag: v0.2.7) Release version 0.2.7
 6b40908 [bugfix] XML and db version to 0.2.7
 998c091 removed debugging infrastructure
@@ -24,20 +158,26 @@ c7c6727 (origin/dev-package-env) rpoly.polyhedron_invalid_face
 f1536cf rpoly.polyhedron_invalid_face
 27ea70a minor changes
 5fde000 solved a problem with switchToFullDB in which forcing an environment did not change it
+27585a9 generating fulldb
+72d1021 merged v0.2.6 in fulldb branch
 19a80f9 (tag: v0.2.6) regenerated db for v0.2.6
 73915c1 [bugfix] package documentation
 bbe0336 encapsulated environment functions
 c0c4465 Merge remote-tracking branch 'origin/dev-leobelen' into dev-package-env
 a890dfd removed methods from Imports in the DESCRIPTION file to comply with CRAN rules
 f35a879 added documentation changes to comply with cran
+e4f9b3a Merge branch 'dev-package-env' into fulldb
 d2c7c36 Update polyhedra database after switch
+9c2e4fb Merge branch 'dev-package-env' into fulldb
 43e12b1 v0.2.6 with db v0.2.5
 afd547d Merge remote-tracking branch 'origin/dev-package-env' into dev-package-env
+70ccd87 fulldb for v0.2.6. But will be overrided with final v0.2.6
 cfe8b67 pkg-minimal config for v0.2.6
 ddac524 [bugfix] data.dir for downloading
 482ca41 environment.txt to Rpolyhedra.env
 3142707 pkg-minimal for v0.2.6
 1df85c6 [bugfix] does not create home directory until user confirmation
+8a552d8 fulldb for v0.2.6
 0e6cc46 db generated v.0.2.6
 f96fbc6 Generating db v0.2.6
 7daefb1 [bugfix] reading .data.env from userspace when it is available
@@ -52,6 +192,7 @@ fe1f936 workaround for #17 until next release
 15534a7 [bugfix] can change .data.env but have to access without exporting selectDataEnv
 1f11691 (tag: v0.2.5) solved a problem with downloadRPolyhedraSupportingFiles not being called when selecting fullDB
 c7b7a1c environment changes to allow the modification of package wide variables
+ed3b3bb fulldb for v0.2.5
 17fbc64 [bugfix] in filenames for polyhedra.RDS
 17ff330 moved on to file.path on db-lib.R
 f737781 minor changes removing debug info
