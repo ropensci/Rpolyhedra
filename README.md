@@ -35,6 +35,10 @@ switchToFullDatabase()
 To get started execute the following commands:
 
 ```R
+# 0.  Load libraries
+library(rgl)
+library(dplyr)
+library(Rpolyhedra)
 # 1.  Obtain 5 regular solids
 polyhedra.2.draw <- getAvailablePolyhedra(source = "netlib")
 polyhedra.2.draw <- polyhedra.2.draw %>%

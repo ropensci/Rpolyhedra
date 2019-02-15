@@ -1,4 +1,3 @@
-library(testthat)
 library(Rpolyhedra)
 library(stringr)
 library(futile.logger)
