@@ -540,7 +540,7 @@ norm <- function(vector){
 #'   the polyhedron object}
 #'   \item{\code{serialize()}}{Gets a list representation out
 #'   of the polyhedron object}
-#'   \item{\code{expect_equal()}}{Function which test equal values
+#'   \item{\code{expectEqual()}}{Function which test equal values
 #'   for all fields using serialize function}
 #'
 #' }
@@ -897,17 +897,18 @@ buildRGL = function(transformation.matrix = NULL) {
   exportToXML = function() {
       polyhedronToXML(self)
   },
-  expect_equal = function(polyhedron){
-
+  expectEqual = function(polyhedron){
     compatible <- !is.null(polyhedron$state$serialize)
     if (compatible){
       self.serialized <- self$serialize()
       polyhedron.serialized <- polyhedron$getState()$serialize()
       #check all same fields
-      expect_equal(names(polyhedron.serialized), names(self.serialized))
+      testthat::expect_equal(names(polyhedron.serialized),
+                              names(self.serialized))
       #check values for all fields
       for (name in names(self.serialized)){
-        expect_equal(self.serialized[[name]], polyhedron.serialized[[name]])
+        testthat::expect_equal(self.serialized[[name]],
+                                polyhedron.serialized[[name]])
       }
     }
     else{
@@ -1084,9 +1085,9 @@ getErrors = function(){
 },
 checkProperties = function(expected.vertices, expected.faces){
     faces <- self$getSolid()
-    expect_equal(length(faces), expected.faces)
+    testthat::expect_equal(length(faces), expected.faces)
     vertices.solid <- which(row.names(self$state$vertices) %in% unlist(faces))
-    expect_equal(length(vertices.solid), expected.vertices)
+    testthat::expect_equal(length(vertices.solid), expected.vertices)
     #check Edges consistency
     self$state$checkEdgesConsistency()
     self
