@@ -1,8 +1,7 @@
 ^CODE_OF_CONDUCT\.md$
 ^CONTRIBUTING\.md$
 ^Meta$
-^Meta$
-^doc$
+^docs$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^.travis.yml$
