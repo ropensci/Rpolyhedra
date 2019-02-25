@@ -11,8 +11,8 @@
 
 | Release | Usage | Development |
 |:--------|:------|:------------|
-| [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) | [![Travis](https://travis-ci.org/qbotics/Rpolyhedra.svg?branch=master)](https://travis-ci.org/qbotics/Rpolyhedra) |
-| [![CRAN](http://www.r-pkg.org/badges/version/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra) | | [![codecov](https://codecov.io/gh/qbotics/Rpolyhedra/branch/master/graph/badge.svg)](https://codecov.io/gh/qbotics/Rpolyhedra) |
+| [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) | [![Travis](https://travis-ci.org/ropensci/Rpolyhedra.svg?branch=master)](https://travis-ci.org/ropensci/Rpolyhedra) |
+| [![CRAN](http://www.r-pkg.org/badges/version/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra) | | [![codecov](https://codecov.io/gh/ropensci/Rpolyhedra/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/Rpolyhedra) |
 
 # How to get started
 ```R
@@ -24,7 +24,7 @@ install.packages("Rpolyhedra")
 Install the R package using the following commands on the R console:
 
 ```R
-devtools::install_github("qbotics/Rpolyhedra", build_opts = NULL)
+devtools::install_github("ropensci/Rpolyhedra", build_opts = NULL)
 library(Rpolyhedra)
 # if want to switch to fullDB in user filespace, it will download the full database
 switchToFullDatabase()
@@ -127,3 +127,6 @@ sudo apt-get install r-cran-rgl
 ```
 
 Please note that the 'Rpolyhedra' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+
+
+![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
