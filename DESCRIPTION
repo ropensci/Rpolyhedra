@@ -18,13 +18,14 @@ Suggests: knitr, rmarkdown,
     covr
 VignetteBuilder: knitr
 Depends: R (>= 3.4)
-Imports: futile.logger,
+Imports: R6,
          rgl,
          stringr,
-         R6,
-         testthat,
+         dplyr,
          XML,
          digest,
+         testthat,
+         futile.logger,
          git2r
 Collate:
   'Rpolyhedra-package.R'

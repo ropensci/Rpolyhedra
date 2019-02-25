@@ -121,15 +121,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "futile.logger",
-      "name": "futile.logger",
+      "identifier": "R6",
+      "name": "R6",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=futile.logger"
+      "sameAs": "https://CRAN.R-project.org/package=R6"
     },
     {
       "@type": "SoftwareApplication",
@@ -157,27 +157,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "R6",
-      "name": "R6",
+      "identifier": "dplyr",
+      "name": "dplyr",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=R6"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "testthat",
-      "name": "testthat",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
     {
       "@type": "SoftwareApplication",
@@ -205,6 +193,30 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "futile.logger",
+      "name": "futile.logger",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=futile.logger"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "git2r",
       "name": "git2r",
       "provider": {
@@ -216,8 +228,8 @@
       "sameAs": "https://CRAN.R-project.org/package=git2r"
     }
   ],
-  "readme": "https://github.com/qbotics/RpolyhedraLegacy/blob/master/README.md",
-  "fileSize": "857.433KB",
+  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
+  "fileSize": "862.8KB",
   "contIntegration": [
     "https://travis-ci.org/ropensci/Rpolyhedra",
     "https://codecov.io/gh/ropensci/Rpolyhedra"

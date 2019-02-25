@@ -22,8 +22,8 @@ A polyhedra database scraped from:
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/qbotics/Rpolyhedra}
-  \item Report bugs at \url{https://github.com/qbotics/Rpolyhedra/issues}
+  \item \url{https://github.com/ropensci/Rpolyhedra}
+  \item Report bugs at \url{https://github.com/ropensci/Rpolyhedra/issues}
 }
 
 }
