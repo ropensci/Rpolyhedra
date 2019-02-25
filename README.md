@@ -1,4 +1,4 @@
- # Rpolyhedra
+# Rpolyhedra
 
  <!-- Polyhedra database scraped from publically available sources using R6 objects and 'rgl' visualizing capabilities. -->
 
