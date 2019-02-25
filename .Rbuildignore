@@ -1,9 +1,9 @@
+^codemeta\.json$
 ^CODE_OF_CONDUCT\.md$
 ^CONTRIBUTING\.md$
 ^Meta$
-^docs$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^.travis.yml$
 ^.lintr$
-
+^docs

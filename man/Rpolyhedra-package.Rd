@@ -22,8 +22,8 @@ A polyhedra database scraped from:
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/qbotics/Rpolyhedra}
-  \item Report bugs at \url{https://github.com/qbotics/Rpolyhedra/issues}
+  \item \url{https://github.com/ropensci/Rpolyhedra}
+  \item Report bugs at \url{https://github.com/ropensci/Rpolyhedra/issues}
 }
 
 }
@@ -33,6 +33,12 @@ Useful links:
 Authors:
 \itemize{
   \item Leonardo Belen \email{leobelen@gmail.com} [compiler, copyright holder]
+}
+
+Other contributors:
+\itemize{
+  \item Barret Schloerke \email{schloerke@gmail.com} [reviewer]
+  \item Lijia Yu \email{yu@lijiayu.net} [reviewer]
 }
 
 }
