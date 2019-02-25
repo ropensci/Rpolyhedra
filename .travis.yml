@@ -14,4 +14,6 @@ after_success:
   - R CMD INSTALL $PKG_TARBALL
   - Rscript -e 'library(covr); codecov()'
   - Rscript -e 'lintr::lint_package()'
-
+after_success:
+  - R CMD INSTALL .
+  - Rscript -e 'pkgdown::build_site()'
