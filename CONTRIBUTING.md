@@ -11,7 +11,7 @@ In vignettes there is documentation and examples for public functions. However t
 
 All code is documented within R files. Several functions and classes (for developers) are not included in vignettes to avoid final user confusion, but it should be possible for a developer to get insights of the code following test cases, and extend funcionality or make contributions to the project.
 
-#Reproducibility
+# Reproducibility
 
 The project was built from the ground up with reproducibility in mind. To accommodate for that, each run of the scraping functionality stores information about the run in a Ledger that can be later queried for analytical purposes. 
 
