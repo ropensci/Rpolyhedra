@@ -1,11 +1,10 @@
 Package: Rpolyhedra
 Type: Package
 Title: Polyhedra Database
-Version: 0.4.1
+Version: 0.4.2
 Authors@R: c(
     person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
     person("Leonardo","Belen",,"leobelen@gmail.com", c("aut","com","cph")),
-    person("Noam","Ross",,"noam.ross@gmail.com", c("rev")),
     person("Barret","Schloerke",,"schloerke@gmail.com", c("rev")),
     person("Lijia","Yu",,"yu@lijiayu.net", c("rev"))
     )
@@ -38,5 +37,5 @@ Collate:
   'public-lib.R'
   'test-lib.R'
   'zzz.R'
-BugReports: https://github.com/qbotics/Rpolyhedra/issues
-URL: https://github.com/qbotics/Rpolyhedra
+BugReports: https://github.com/ropensci/Rpolyhedra/issues
+URL: https://github.com/ropensci/Rpolyhedra

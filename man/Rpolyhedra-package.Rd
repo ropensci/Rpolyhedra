@@ -35,4 +35,10 @@ Authors:
   \item Leonardo Belen \email{leobelen@gmail.com} [compiler, copyright holder]
 }
 
+Other contributors:
+\itemize{
+  \item Barret Schloerke \email{schloerke@gmail.com} [reviewer]
+  \item Lijia Yu \email{yu@lijiayu.net} [reviewer]
+}
+
 }
