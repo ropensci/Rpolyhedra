@@ -1,3 +1,4 @@
+^doc$
 ^codemeta\.json$
 ^CODE_OF_CONDUCT\.md$
 ^CONTRIBUTING\.md$
@@ -7,3 +8,4 @@
 ^.travis.yml$
 ^.lintr$
 ^docs
+^doc
