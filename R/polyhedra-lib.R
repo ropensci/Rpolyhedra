@@ -580,6 +580,7 @@ norm <- function(vector){
 #' @importFrom rgl transform3d
 #' @importFrom rgl asHomogeneous
 #' @importFrom R6 R6Class
+#' @importFrom geometry convhulln
 #' @noRd
 PolyhedronStateDefined.class <- R6::R6Class(
   "PolyhedronStateDefined",
