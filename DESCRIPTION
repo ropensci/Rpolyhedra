@@ -19,6 +19,7 @@ Suggests: knitr, rmarkdown,
 VignetteBuilder: knitr
 Depends: R (>= 3.4)
 Imports: R6,
+         geometry,
          rgl,
          stringr,
          dplyr,
@@ -26,7 +27,7 @@ Imports: R6,
          digest,
          testthat,
          futile.logger,
-         git2r
+         git2r,
 Collate:
   'Rpolyhedra-package.R'
   'polyhedra-lib.R'

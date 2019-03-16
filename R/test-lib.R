@@ -51,6 +51,8 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
     polyhedra.dir = NA,
     polyhedron.file.id = NA,
     source.filename = NA,
+    #state
+    scraped.polyhedron = NA,
     initialize = function(polyhedra.db, source.config, polyhedron.name,
                           polyhedra.dir, polyhedron.file.id,
                           source.filename) {
@@ -66,10 +68,10 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       source <- self$source.config$getName()
       tryCatch({
         obs    <- ""
-        scraped.polyhedron <- self$source.config$scrape(polyhedron.file.id =
-                        self$polyhedron.file.id,
+        self$scraped.polyhedron <- self$source.config$scrape(
+                        polyhedron.file.id = self$polyhedron.file.id,
                         file.path(self$polyhedra.dir, self$source.filename))
-        scraped.name <- scraped.polyhedron$getName()
+        scraped.name <- self$scraped.polyhedron$getName()
         status <- "testing"
       },
       error = function(e){
@@ -77,7 +79,7 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
         futile.logger::flog.error(paste("catched error", error))
         assign("error", error, envir = parent.env(environment()))
         status <- "exception"
-        if (exists("scraped.polyhedron")){
+        if (!is.na(self$scraped.polyhedron)){
           obs    <- scraped.polyhedron$getErrors()
         }
       })
@@ -86,7 +88,7 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
                                         polyhedron.name = scraped.name)
 
       expected.polyhedron.state <- expected.polyhedron$getState()
-      expected.polyhedron.state$expectEqual(scraped.polyhedron)
+      expected.polyhedron.state$expectEqual(self$scraped.polyhedron)
     }))
 
 #' Polyhedron test task edges consistency

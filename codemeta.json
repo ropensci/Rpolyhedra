@@ -133,6 +133,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "geometry",
+      "name": "geometry",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=geometry"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "rgl",
       "name": "rgl",
       "provider": {
@@ -229,7 +241,6 @@
     }
   ],
   "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
-  "fileSize": "862.8KB",
   "contIntegration": [
     "https://travis-ci.org/ropensci/Rpolyhedra",
     "https://codecov.io/gh/ropensci/Rpolyhedra"
@@ -239,5 +250,12 @@
     "geometry",
     "rgl"
   ],
-  "relatedLink": "https://CRAN.R-project.org/package=Rpolyhedra"
+  "relatedLink": "https://CRAN.R-project.org/package=Rpolyhedra",
+  "funder": {},
+  "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/onboarding/issues/157",
+    "provider": "http://ropensci.org"
+  }
 }

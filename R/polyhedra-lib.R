@@ -522,14 +522,14 @@ norm <- function(vector){
 #'   \item{\code{getSolid()}}{Gets the solid representation}
 #'   \item{\code{triangulate(force = FALSE, vertices)}}{Generates
 #'    the triangular faces model for generating tmesh }
-#'   \item{\code{getBoundingBox(vertices.3d)}}{Gets the bounding box of
-#'   the object}
+#'   \item{\code{getConvHull(self$transformation.matrix, vertices.id.3d)}}{Gets the Convex Hull of
+#'   the object vertices}
 #'   \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates
 #'   the object's Mass Center for parameter
 #'         vertices}
 #'   \item{\code{getNormalizedSize(size, vertices.id.3d =
-#'   private$vertices.id.3d)}}{Normalizes the volume of the object to a
-#'   tetrahedron bounding box}
+#'   private$vertices.id.3d)}}{Normalizes the convex hull volume of the object to a
+#'   tetrahedron Convex Hull volume}
 #'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
 #'   transformation matrix to polyhedron}
 #'   \item{\code{getTransformedVertices(vertices,
@@ -807,30 +807,14 @@ triangulate = function(force = FALSE) {
     }
     private$solid.triangulated
 },
-getBoundingBox = function(
+getConvHull = function(
         transformation.matrix =self$transformation.matrix,
         vertices.id.3d = private$vertices.id.3d) {
   vertices.def <- self$getTransformedVertices(self$vertices.centered,
         transformation.matrix = transformation.matrix)
-
   vertices.def <- vertices.def[private$vertices.id.3d, ]
-
-  vertices.def.min <- apply(vertices.def, MARGIN = 2, FUN = min)
-  vertices.def.max <- apply(vertices.def, MARGIN = 2, FUN = max)
-  rbind(vertices.def.min, vertices.def.max)
-},
-checkInsideBoundingBox = function(vertices.df, v, bounding.box){
-    inside <- rep(NA, 3)
-    pos3d <- vertices.df[v, ]
-    for (d in 1:3){
-        inside[d] <- pos3d[d] >= bounding.box[1, d] &
-        pos3d[d] <= bounding.box[2, d]
-    }
-    ret <- min(inside) == 1
-    if (ret){
-        private$vertices.built <- union(private$vertices.built, v)
-    }
-    ret
+  convhulln <- convhulln(vertices.def, options = c("FA", "n"))
+  convhulln
 },
 calculateMassCenter = function(vertices.id.3d = private$vertices.id.3d,
                                applyTransformation=TRUE) {
@@ -846,14 +830,10 @@ calculateMassCenter = function(vertices.id.3d = private$vertices.id.3d,
   apply(transformed.vertex, MARGIN = 2, FUN = mean)
 },
 getNormalizedSize = function(size){
-  bounding.box <- self$getBoundingBox()
-  volume <- prod(apply(bounding.box, MARGIN = 2,
-                       FUN = function(x) {
-                         x[2] - x[1]
-                         }
-                       ))
-  # 0.7501087 is tetrahedron bounding box
-  size <- size * (0.7501087 / volume) ^ (1 / 3)
+  convex.hull <- self$getConvHull()
+  volume <- convex.hull$vol
+  # 0.1178511 is tetrahedron convex hull volume
+  size <- size * (0.1178511 / volume) ^ (1 / 3)
   size
 },
 getTransformedVertices = function(
