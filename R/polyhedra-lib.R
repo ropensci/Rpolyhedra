@@ -531,7 +531,8 @@ norm <- function(vector){
 #'   private$vertices.id.3d)}}{Normalizes the convex hull volume of the object to a
 #'   tetrahedron Convex Hull volume}
 #'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
-#'   transformation matrix to polyhedron}
+#'   transformation matrix to internal transformation matrix}
+#'   \item{\code{resetTransformationMatrix()}}{Reset internal transformation matrix}
 #'   \item{\code{getTransformedVertices(vertices,
 #'   transformation.matrix)}}{Returns the vertices
 #'   adjusted with transformation matrix}
@@ -846,6 +847,10 @@ getTransformedVertices = function(
   transformed.vertices <- transformed.vertices[, 1:3]
   transformed.vertices
 },
+resetTransformationMatrix = function(){
+  self$transformation.matrix <- identityMatrix()
+  self$transformation.matrix
+},
 applyTransformationMatrix = function(transformation.matrix){
   self$transformation.matrix <- transformation.matrix %*%
               self$transformation.matrix
@@ -854,6 +859,9 @@ applyTransformationMatrix = function(transformation.matrix){
 buildRGL = function(transformation.matrix = NULL) {
     if (is.null(transformation.matrix)){
       transformation.matrix <- self$transformation.matrix
+    }
+    else{
+      transformation.matrix <- transformation.matrix %*% self$transformation.matrix
     }
     ret <- NULL
     self$inferEdges()
