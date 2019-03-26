@@ -1,17 +1,25 @@
 Rpolyhedra 0.4.2
 ============
 
+First version published using devtools::release() on [rOpenSci.org](http://www.rOpenSci.org). 
+
+### MINOR IMPROVEMENTS
+
+* Calculates and normalizes polyhedra size using geometry::convhulln instead of bounding box
+
 ### BUG FIXES
+
+* A polyhedron now applies internal transformation matrix
 
 
 Rpolyhedra 0.4.1
 ============
 
-First version on [rOpenSci.org](http://www.rOpenSci.org). 
+First version published on [rOpenSci.org](http://www.rOpenSci.org). 
 
 ### MINOR IMPROVEMENTS
 
-* Complies with all the prerequisites of rOpenSci and applies the suggestions made by rOpenSci reviewers. 
+* Complies with all the prerequisites of rOpenSci and applies the suggestions made by rOpenSci reviwers. 
 * Fixes a test that writes on user space.
 * Integrates with codecov.io, which allows for better test coverage. 
 * Updated examples.
