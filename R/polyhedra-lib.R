@@ -861,7 +861,8 @@ buildRGL = function(transformation.matrix = NULL) {
       transformation.matrix <- self$transformation.matrix
     }
     else{
-      transformation.matrix <- transformation.matrix %*% self$transformation.matrix
+      transformation.matrix <- transformation.matrix %*%
+                                  self$transformation.matrix
     }
     ret <- NULL
     self$inferEdges()
