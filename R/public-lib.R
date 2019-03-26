@@ -9,7 +9,7 @@ getPolyhedraObject <- function() {
   getUserEnvir(".polyhedra")
 }
 
-#' Scrape polyedra objects
+#' Scrape polyhedra objects
 #'
 #' Gets polyhedra objects from text files of
 #' different sources, scheduling and scraping using

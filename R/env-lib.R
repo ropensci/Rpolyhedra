@@ -245,13 +245,3 @@ getGitCommit <- function(long.version = FALSE){
   }
   git.sha
 }
-
-#' Get polyhedra object
-#'
-#' Gets the polyhedra object
-#'
-#' @return .polyhedra
-#' @noRd
-getPolyhedraObject <- function() {
-  getUserEnvir(".polyhedra")
-}

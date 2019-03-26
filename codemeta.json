@@ -257,5 +257,6 @@
     "@type": "Review",
     "url": "https://github.com/ropensci/onboarding/issues/157",
     "provider": "http://ropensci.org"
-  }
+  },
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

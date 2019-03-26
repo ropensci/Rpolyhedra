@@ -10,7 +10,7 @@ PolyhedraDatabase.class
 }
 \description{
 Scrapes all polyhedra in data folder to save a representation which
-is accesible by the final users upon call to \code{getPolyhedron()}.
+is accessible by the final users upon call to \code{getPolyhedron()}.
 }
 \section{Fields}{
 
@@ -39,7 +39,7 @@ is accesible by the final users upon call to \code{getPolyhedron()}.
   \item{\code{getPolyhedron(source, polyhedron.name, strict)}}{Retrieves
   a polyhedron by source and name}
   \item{\code{addPolyhedron(source, polyhedron, overwrite, save.on.change = FALSE)}}{Adds a polyhedron
-  by source and name, if orverwrite is TRUE, it will update any existing one
+  by source and name, if overwrite is TRUE, it will update any existing one
   by that source and name}
   \item{\code{configPolyhedraSource(source.config, source.filenames, max.quant)}}{Scrapes all
   polyhedra in the given directory for adding to db or testing}

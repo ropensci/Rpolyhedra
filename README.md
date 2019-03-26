@@ -6,7 +6,7 @@
 
  1. A module to scrape the polyhedra for the different sources found with features for incremental correction of issues found and to be found in scraping process.
  1. A database of the scraped polyhedra.
- 1. An R6 polyhedron representation with 'rgl' package visualizing capabilites.
+ 1. An R6 polyhedron representation with 'rgl' package visualizing capabilities.
 
 
 | Release | Usage | Development |
@@ -86,15 +86,15 @@ for (i in seq_len(n)) {
  Includes 142 polyhedra definitions.
  The PHD format was created to describe the geometric polyhedron definitions derived mathematically by Andrew Hume and by the Kaleido program of Zvi Har'El.
 
- PHD files were generated using [poly2](http://www.netlib.org/poly2/readme) library (no longer mantained). Althought the code is available, specific programming skills are required to run it.
+ PHD files were generated using [poly2](http://www.netlib.org/poly2/readme) library (no longer maintained). Although the code is available, specific programming skills are required to run it.
 
-PDH files can be found in `extdata/www.netlib.org/polyhedra/index.html`
+PHD files can be found in `extdata/www.netlib.org/polyhedra/index.html`
 
 ### dmccooey
 Includes 767 polyhedra definitions.
 The [polyhedra database](http://dmccooey.com/polyhedra/) built by David Mccooey has an open format which has been scraped to feed RPolyhedra database
 
-dmccooney files can be found in `extdata/dmccooey.com/polyhedra/`
+dmccooey files can be found in `extdata/dmccooey.com/polyhedra/`
 
 # Troubleshooting
 
@@ -109,7 +109,7 @@ Windows
 
 run end user CRAN version
 
-OSX brew
+macOS brew
 
 ```bash
 brew install openssl
