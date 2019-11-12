@@ -5,25 +5,10 @@
 \alias{PolyhedraDatabase.class}
 \title{Polyhedra database}
 \format{\code{\link{R6Class}} object.}
-\usage{
-PolyhedraDatabase.class
-}
 \description{
 Scrapes all polyhedra in data folder to save a representation which
 is accessible by the final users upon call to \code{getPolyhedron()}.
 }
-\section{Fields}{
-
-\describe{
-\item{\code{polyhedra.rds.file}}{path of rds database file}
-
-\item{\code{sources.config}}{Sources configuration for scraping different sources}
-
-\item{\code{ledger}}{rr ledger of scraping process}
-
-\item{\code{data}}{Polyhedra data from different sources}
-}}
-
 \section{Methods}{
 
 \describe{
@@ -57,4 +42,269 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 }
 }
 
-\keyword{datasets}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{polyhedra.rds.file}}{path of rds database file}
+
+\item{\code{sources.config}}{Sources configuration for scraping different sources}
+
+\item{\code{ledger}}{rr ledger of scraping process}
+
+\item{\code{data}}{Polyhedra data from different sources}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{data}}{Polyhedra data from different sources}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{PolyhedraDatabase.class$new()}}
+\item \href{#method-getVersion}{\code{PolyhedraDatabase.class$getVersion()}}
+\item \href{#method-configPolyhedraRDSPath}{\code{PolyhedraDatabase.class$configPolyhedraRDSPath()}}
+\item \href{#method-existsSource}{\code{PolyhedraDatabase.class$existsSource()}}
+\item \href{#method-addSourceConfig}{\code{PolyhedraDatabase.class$addSourceConfig()}}
+\item \href{#method-existsPolyhedron}{\code{PolyhedraDatabase.class$existsPolyhedron()}}
+\item \href{#method-getPolyhedraSourceDir}{\code{PolyhedraDatabase.class$getPolyhedraSourceDir()}}
+\item \href{#method-getPolyhedronFilename}{\code{PolyhedraDatabase.class$getPolyhedronFilename()}}
+\item \href{#method-getPolyhedron}{\code{PolyhedraDatabase.class$getPolyhedron()}}
+\item \href{#method-addPolyhedron}{\code{PolyhedraDatabase.class$addPolyhedron()}}
+\item \href{#method-configPolyhedraSource}{\code{PolyhedraDatabase.class$configPolyhedraSource()}}
+\item \href{#method-saveRDS}{\code{PolyhedraDatabase.class$saveRDS()}}
+\item \href{#method-cover}{\code{PolyhedraDatabase.class$cover()}}
+\item \href{#method-scrape}{\code{PolyhedraDatabase.class$scrape()}}
+\item \href{#method-testRR}{\code{PolyhedraDatabase.class$testRR()}}
+\item \href{#method-generateTestTasks}{\code{PolyhedraDatabase.class$generateTestTasks()}}
+\item \href{#method-schedulePolyhedraSources}{\code{PolyhedraDatabase.class$schedulePolyhedraSources()}}
+\item \href{#method-getAvailableSources}{\code{PolyhedraDatabase.class$getAvailableSources()}}
+\item \href{#method-getAvailablePolyhedra}{\code{PolyhedraDatabase.class$getAvailablePolyhedra()}}
+\item \href{#method-clone}{\code{PolyhedraDatabase.class$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getVersion"></a>}}
+\subsection{Method \code{getVersion()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getVersion()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-configPolyhedraRDSPath"></a>}}
+\subsection{Method \code{configPolyhedraRDSPath()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$configPolyhedraRDSPath()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-existsSource"></a>}}
+\subsection{Method \code{existsSource()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$existsSource(source)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addSourceConfig"></a>}}
+\subsection{Method \code{addSourceConfig()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$addSourceConfig(source.config)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-existsPolyhedron"></a>}}
+\subsection{Method \code{existsPolyhedron()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$existsPolyhedron(source = "netlib", polyhedron.name)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getPolyhedraSourceDir"></a>}}
+\subsection{Method \code{getPolyhedraSourceDir()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedraSourceDir(source, create.dir = TRUE)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getPolyhedronFilename"></a>}}
+\subsection{Method \code{getPolyhedronFilename()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedronFilename(
+  source,
+  polyhedron.name,
+  extension
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getPolyhedron"></a>}}
+\subsection{Method \code{getPolyhedron()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedron(
+  source = "netlib",
+  polyhedron.name,
+  strict = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addPolyhedron"></a>}}
+\subsection{Method \code{addPolyhedron()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$addPolyhedron(
+  source = "netlib",
+  source.filename,
+  polyhedron,
+  overwrite = FALSE,
+  save.on.change = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-configPolyhedraSource"></a>}}
+\subsection{Method \code{configPolyhedraSource()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$configPolyhedraSource(
+  source.config,
+  source.filenames = NULL,
+  max.quant = 0,
+  save.on.change = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-saveRDS"></a>}}
+\subsection{Method \code{saveRDS()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$saveRDS(save.on.change = TRUE)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cover"></a>}}
+\subsection{Method \code{cover()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$cover(
+  mode,
+  sources = names(self$sources.config),
+  covering.code,
+  polyhedra.names = NULL,
+  max.quant = 0,
+  save.on.change = FALSE,
+  seed = NULL
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-scrape"></a>}}
+\subsection{Method \code{scrape()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$scrape(
+  mode = "scrape.queued",
+  sources = names(self$sources.config),
+  max.quant = 0,
+  time2scrape.source = 30,
+  save.on.change = FALSE,
+  skip.still.queued = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-testRR"></a>}}
+\subsection{Method \code{testRR()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$testRR(
+  sources = names(self$sources.config),
+  max.quant = 0
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-generateTestTasks"></a>}}
+\subsection{Method \code{generateTestTasks()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$generateTestTasks(
+  sources = names(self$sources.config),
+  polyhedra.names = NULL,
+  TestTaskClass,
+  max.quant = 0
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-schedulePolyhedraSources"></a>}}
+\subsection{Method \code{schedulePolyhedraSources()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$schedulePolyhedraSources(
+  sources.config = getPackageEnvir(".available.sources"),
+  source.filenames = NULL,
+  max.quant = 0,
+  test = FALSE,
+  save.on.change = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getAvailableSources"></a>}}
+\subsection{Method \code{getAvailableSources()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getAvailableSources()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getAvailablePolyhedra"></a>}}
+\subsection{Method \code{getAvailablePolyhedra()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getAvailablePolyhedra(
+  sources = self$getAvailableSources(),
+  search.string = NULL,
+  ignore.case = TRUE
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

@@ -1,7 +1,7 @@
 Package: Rpolyhedra
 Type: Package
 Title: Polyhedra Database
-Version: 0.4.2
+Version: 0.4.3
 Language: en-US
 Authors@R: c(
     person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
@@ -14,7 +14,7 @@ Description: A polyhedra database scraped from various sources as R6 objects and
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
 Suggests: knitr, rmarkdown,
     covr
 VignetteBuilder: knitr

@@ -4,8 +4,11 @@
 \alias{scrapePolyhedra}
 \title{Scrape polyhedra objects}
 \usage{
-scrapePolyhedra(scrape.config, source.filenames = NULL,
-  sources.config = getPackageEnvir(".available.sources"))
+scrapePolyhedra(
+  scrape.config,
+  source.filenames = NULL,
+  sources.config = getPackageEnvir(".available.sources")
+)
 }
 \arguments{
 \item{scrape.config}{predefined configuration for scraping}
