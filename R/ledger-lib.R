@@ -9,6 +9,7 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm = TRUE), NA)
 
 #' Scraper ledger
 #'
+#' @description
 #' Ledger of scraping status of each objects. Allows different type of states:
 #' queued, scraping, scraped, failed, exception, skipped
 #'
@@ -16,9 +17,6 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm = TRUE), NA)
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize()}}{initializes the object}
-#'   \item{\code{addFilename(source, source.filename)}}{add filename to the ledger}
-#'   \item{\code{getIdFilename(source, source.filename)}}{Returns id/row of source and filenames parameters in the ledger}
 #'   \item{\code{getCRCPolyhedronName(source, polyheron.name)}}{Returns CRC of the polyhedron.name for storing in db folder}
 #'   \item{\code{updateStatus(source, source.filename, status, status.field = 'status', scraped.polyhedron = NA, obs ='')}}{Updates status of source and filenames parameters in Ledger }
 #'   \item{\code{savePreloadedData()}}{Internal method which saves a file with an estimation of time required time to scrape each filename}
@@ -31,7 +29,6 @@ maxWithoutNA <- function(x) ifelse( !all(is.na(x)), max(x, na.rm = TRUE), NA)
 #' }
 #'
 #' @format \code{\link{R6Class}} object.
-#' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom utils read.csv
 #' @importFrom digest digest
@@ -44,6 +41,8 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
    dirty = FALSE,
    preloaded.data.filename = NA,
    preloaded.data = NA,
+   #' @description
+   #' initializes the object
    initialize = function() {
      self$df <- data.frame(id           = character(),
                            source       = character(),
@@ -70,9 +69,15 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      self$loadPreloadedData()
      self
    },
+   #' @description
+   #' Gets the available sources
    getAvailableSources = function(){
     sort(unique(self$df$source))
    },
+   #' @description
+   #' Adds filename to the ledger
+   #' @param source the source to add the filename to
+   #' @param source.filename the filename to add to the source
    addFilename = function(source, source.filename){
      r <- NULL
      default.status <- "queued"
@@ -114,6 +119,11 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      }
      r
    },
+   #' @description
+   #' Returns id/row of source and filenames parameters in the ledger
+   #'  @param source the source
+   #' @param source.filename the filename
+   #' @returns the filename id
    getIdFilename = function(source, source.filename){
      r <- which(self$df$source == source &
                   self$df$source.filename == source.filename)
@@ -125,6 +135,10 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      }
      r
    },
+   #' @description
+   #' Returns CRC of the polyhedron.name for storing in db folder
+   #' @param source the source to add the filename to
+   #' @param source.filename the filename to add to the source
    getCRCPolyhedronName = function(source, polyhedron.name){
      r <- which(self$df$source == source & tolower(self$df$scraped.name)
                 == tolower(polyhedron.name))
