@@ -45,20 +45,13 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{version}}{version of database file}
+
 \item{\code{polyhedra.rds.file}}{path of rds database file}
 
 \item{\code{sources.config}}{Sources configuration for scraping different sources}
 
 \item{\code{ledger}}{rr ledger of scraping process}
-
-\item{\code{data}}{Polyhedra data from different sources}
-}
-\if{html}{\out{</div>}}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{data}}{Polyhedra data from different sources}
 }
 \if{html}{\out{</div>}}
 }
