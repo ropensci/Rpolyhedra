@@ -1,17 +1,15 @@
 #' Polyhedra database
 #'
+#' @description
 #' Scrapes all polyhedra in data folder to save a representation which
 #' is accessible by the final users upon call to \code{getPolyhedron()}.
 #'
+#' @details
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize()}}{Initializes the object}
-#'   \item{\code{existsSource(source)}}{Determines if the source exists on
-#'   the database}
 #'   \item{\code{getPolyhedraSourceDir(source)}}{Retrieves polyhedra dir
 #'   of a source}
-#'   \item{\code{addSource(source)}}{Adds a new source to the database}
 #'   \item{\code{configPolyhedraRDSPath()}}{config path for rds database file}
 #'   \item{\code{existsPolyhedron(source,polyhedron.name)}}{Determines if
 #'   the polyhedron exists on the database}
@@ -35,10 +33,6 @@
 #'   all polyhedron within the source those names match with search.string}
 #' }
 #'
-#' @field version version of database file
-#' @field polyhedra.rds.file path of rds database file
-#' @field sources.config Sources configuration for scraping different sources
-#' @field ledger rr ledger of scraping process
 #'
 #' @format \code{\link{R6Class}} object.
 #' @docType class
@@ -47,26 +41,48 @@
 #' @importFrom R6 R6Class
 PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
   public = list(
+    #' @field version version of database file
     version = NA,
+    #' @field polyhedra.rds.file path of rds database file
     polyhedra.rds.file = NA,
+    #' @field sources.config Sources configuration for scraping different sources
     sources.config = NA,
+    #' @field ledger rr ledger of scraping process
     ledger         = NA,
+    #' @description
+    #' Create a new PolyhedraDatabase object.
+    #' @return A new `PolyhedraDatabase` object.
     initialize = function() {
       self$version        <- getDatabaseVersion()
       self$ledger         <- ScraperLedger.class$new()
       self$sources.config <- list()
       self
     },
+    #' @description
+    #' get the version of the current object.
+    #' @return Database version
     getVersion = function(){
       self$version
     },
+    #' @description
+    #' sets the path of the RDS object
+    #' @return Database version
     configPolyhedraRDSPath = function(){
       self$polyhedra.rds.file <- getPolyhedraRDSPath()
       self$polyhedra.rds.file
     },
+    #' @description
+    #' Determines if the source exists on
+    #'   the database
+    #' @param source source description
+    #' @return boolean value
     existsSource = function(source){
       source %in% self$getAvailableSources()
     },
+    #' @description
+    #' add  source.config to the database
+    #' @param source.config SourceConfig object able to scrape source polyhedra definitions
+    #' @return PolyhedraDatabase.class object
     addSourceConfig = function(source.config) {
       source <- source.config$getName()
       if (!self$existsSource(source)){
@@ -75,6 +91,12 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       self
     },
+    #' @description
+    #' Determines if the database includes a polyhedron which name
+    #' matches the parameter value
+    #' @param source source description
+    #' @param polyhedron.name polyhedron description
+    #' @return boolean value
     existsPolyhedron = function(source = "netlib", polyhedron.name) {
       ret <- FALSE
       file.path <- self$getPolyhedronFilename(source = source,
@@ -86,6 +108,11 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       ret
     },
+    #' @description
+    #' gets polyhedra sources folder
+    #' @param source source description
+    #' @param create.dir if dir does not exists, create it
+    #' @return string with polyhedra sources path
     getPolyhedraSourceDir = function(source, create.dir = TRUE){
       ret <- file.path(getDataDir(), "polyhedra", source, "/")
       if (create.dir){
@@ -93,12 +120,25 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       ret
     },
+    #' @description
+    #' gets the filename of the polyhedron matching parameter.
+    #' @param source source description
+    #' @param polyhedron.name polyhedron description
+    #' @param extention Extention of the polyhedron filenam
+    #' @return string with polyhedron filename
     getPolyhedronFilename = function(source, polyhedron.name, extension){
       paste(self$getPolyhedraSourceDir(source),
             self$ledger$getCRCPolyhedronName(source = source,
                 polyhedron.name = polyhedron.name),
             extension, sep = "")
     },
+    #' @description
+    #' gets polyhedron object which name
+    #' matches the parameter value
+    #' @param source source description
+    #' @param polyhedron.name polyhedron description
+    #' @param strict halts execution if polyhedron not found
+    #' @return Polyhedron.class object
     getPolyhedron = function(source = "netlib", polyhedron.name,
                              strict = FALSE) {
       data.dir <- self$getPolyhedraSourceDir(source = source)
@@ -131,6 +171,14 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       ret
     },
+    #' @description
+    #' add polyhedron object to the database
+    #' @param source source description
+    #' @param source.filename filename of the polyhedron source definition
+    #' @param polyhedron polyhedron object
+    #' @param overwrite overwrite exiting definition
+    #' @param save.on.change saves Database state after operation
+    #' @return Polyhedron.class object
     addPolyhedron = function(source="netlib", source.filename,
                              polyhedron, overwrite = FALSE,
                              save.on.change = FALSE) {

@@ -9,15 +9,14 @@
 Scrapes all polyhedra in data folder to save a representation which
 is accessible by the final users upon call to \code{getPolyhedron()}.
 }
+\details{
+
+}
 \section{Methods}{
 
 \describe{
-  \item{\code{initialize()}}{Initializes the object}
-  \item{\code{existsSource(source)}}{Determines if the source exists on
-  the database}
   \item{\code{getPolyhedraSourceDir(source)}}{Retrieves polyhedra dir
   of a source}
-  \item{\code{addSource(source)}}{Adds a new source to the database}
   \item{\code{configPolyhedraRDSPath()}}{config path for rds database file}
   \item{\code{existsPolyhedron(source,polyhedron.name)}}{Determines if
   the polyhedron exists on the database}
@@ -83,62 +82,125 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
 \subsection{Method \code{new()}}{
+Create a new PolyhedraDatabase object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$new()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+A new `PolyhedraDatabase` object.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getVersion"></a>}}
 \subsection{Method \code{getVersion()}}{
+get the version of the current object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getVersion()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+Database version
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-configPolyhedraRDSPath"></a>}}
 \subsection{Method \code{configPolyhedraRDSPath()}}{
+sets the path of the RDS object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$configPolyhedraRDSPath()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+Database version
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-existsSource"></a>}}
 \subsection{Method \code{existsSource()}}{
+Determines if the source exists on
+  the database
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$existsSource(source)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{source}}{source description}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+boolean value
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addSourceConfig"></a>}}
 \subsection{Method \code{addSourceConfig()}}{
+add  source.config to the database
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$addSourceConfig(source.config)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{source.config}}{SourceConfig object able to scrape source polyhedra definitions}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+PolyhedraDatabase.class object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-existsPolyhedron"></a>}}
 \subsection{Method \code{existsPolyhedron()}}{
+Determines if the database includes a polyhedron which name
+matches the parameter value
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$existsPolyhedron(source = "netlib", polyhedron.name)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{source}}{source description}
+
+\item{\code{polyhedron.name}}{polyhedron description}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+boolean value
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getPolyhedraSourceDir"></a>}}
 \subsection{Method \code{getPolyhedraSourceDir()}}{
+gets polyhedra sources folder
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedraSourceDir(source, create.dir = TRUE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{source}}{source description}
+
+\item{\code{create.dir}}{if dir does not exists, create it}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+string with polyhedra sources path
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getPolyhedronFilename"></a>}}
 \subsection{Method \code{getPolyhedronFilename()}}{
+gets the filename of the polyhedron matching parameter.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedronFilename(
   source,
@@ -147,10 +209,26 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{source}}{source description}
+
+\item{\code{polyhedron.name}}{polyhedron description}
+
+\item{\code{extention}}{Extention of the polyhedron filenam}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+string with polyhedron filename
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getPolyhedron"></a>}}
 \subsection{Method \code{getPolyhedron()}}{
+gets polyhedron object which name
+matches the parameter value
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedron(
   source = "netlib",
@@ -159,10 +237,25 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{source}}{source description}
+
+\item{\code{polyhedron.name}}{polyhedron description}
+
+\item{\code{strict}}{halts execution if polyhedron not found}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Polyhedron.class object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addPolyhedron"></a>}}
 \subsection{Method \code{addPolyhedron()}}{
+add polyhedron object to the database
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$addPolyhedron(
   source = "netlib",
@@ -173,6 +266,24 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{source}}{source description}
+
+\item{\code{source.filename}}{filename of the polyhedron source definition}
+
+\item{\code{polyhedron}}{polyhedron object}
+
+\item{\code{overwrite}}{overwrite exiting definition}
+
+\item{\code{save.on.change}}{saves Database state after operation}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Polyhedron.class object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-configPolyhedraSource"></a>}}
