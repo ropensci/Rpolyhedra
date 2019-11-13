@@ -2,53 +2,65 @@
 #'
 #' This abstract class provide the basis from which polyhedron state class derivate.
 #'
-#' @section Methods:
-#' \describe{
-#'   \item{\code{addError(current.error)}}{Adds an error to the error string and log it as info}
-#'   \item{\code{scrape()}}{Scrapes the polyhedra folder files}
-#'   \item{\code{getName()}}{returns polyhedron name}
-#'   \item{\code{getSolid()}}{returns the object corresponding to the solid}
-#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
-#'   \item{\code{buildRGL(transformation.matrix)}}{creates a RGL representation of the object}
-#'   \item{\code{exportToXML()}}{Gets an XML representation out of the polyhedron object}
-#' }
-#' @field errors Errors string
-#' @field source polyhedron definition source
-#' @field file.id polyhedron file id
-#' @format \code{\link{R6Class}} object.
-#' @docType class
 #' @importFrom R6 R6Class
-#' @noRd
 PolyhedronState.class <- R6::R6Class("PolyhedronState", public = list(
-source = NA, file.id = NA, errors = "",
+  #' @field source polyhedron definition source
+  source = NA,
+  #' @field file.id polyhedron file id
+    file.id = NA,
+  #' @field errors Errors string
+  errors = "",
+  #'@description
+  #' Adds an error to the error string and log it as info
+  #' @param source the source file
+  #' @param file.id the file id
 initialize = function(source, file.id) {
     self$source <- source
     self$file.id <- file.id
     self
 },
+#'@description
+#' Adds an error to the error string and log it as info
+#' @param current.error the error to add
 addError = function(current.error) {
     self$errors <- paste(self$errors, current.error)
     futile.logger::flog.error(current.error)
     self$errors
 },
+#'@description
+#'Scrapes the polyhedra folder files
 scrape = function() {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
+#'@description
+#'Returns polyhedron name
 getName = function() {
   stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
+#'@description
+#'Returns the object corresponding to the solid
 getSolid = function() {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
+#'@description
+#'Checks edge consistency
 checkEdgesConsistency = function(){
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
+#'@description
+#'Apply transformation matrix to polyhedron
+#'@param transformation.matrix the transformation matrix to apply to the polyhedron
 applyTransformationMatrix = function(transformation.matrix){
   stop("Abstract class")
 },
+#'@description
+#'Creates a RGL representation of the object
+#'@param transformation.matrix the transformation matrix to apply to the polyhedron
 buildRGL = function(transformation.matrix) {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 },
+#'@description
+#'Gets an XML representation out of the polyhedron object
 exportToXML = function(){
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
 }
@@ -60,7 +72,6 @@ exportToXML = function(){
 #'
 #' @section Methods:
 #' \describe{
-#'   \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes the object, taking the file.id and PDH file as parameters}
 #'   \item{\code{extractRowsFromLabel(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
 #'   expected label as parameters}
 #'   \item{\code{getLabels()}}{Gets the label from the polyhedron}
@@ -74,28 +85,37 @@ exportToXML = function(){
 #'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
 #'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
 #' }
-#' @field netlib.p3.lines The path to the PHD files
-#' @field labels.rows Labels - row of appearance
-#' @field labels.map Labels - Map of content
-#' @format \code{\link{R6Class}} object.
-#' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom stringr str_extract
 #' @importFrom R6 R6Class
-#' @noRd
 PolyhedronStateNetlibScraper.class <- R6::R6Class(
   "PolyhedronStateNetlibScraper",
 inherit = PolyhedronState.class,
-public = list(netlib.p3.lines = NA,
-              labels.rows = NA,
-              labels.map = NA,
-              errors = "",
+public = list(
+  #' @field netlib.p3.lines The path to the PHD files
+  netlib.p3.lines = NA,
+  #' @field labels.rows Labels - row of appearance
+  labels.rows = NA,
+  #' @field labels.map Labels - Map of content
+  labels.map = NA,
+  #'@field errors the errors found
+  errors = "",
+
+  #'@description
+  #'Initializes the object, taking the file.id and PDH file as parameters
+  #'@param file.id the file id
+  #'@param netlib.p3.lines the lines to add
 initialize = function(file.id, netlib.p3.lines) {
     super$initialize(source = "netlib", file.id = file.id)
     self$netlib.p3.lines <- netlib.p3.lines
     self$labels.map <- list()
     self
 },
+#'@description
+#'Extracts data from the label, taking the label number and the
+#'   expected label as parameters
+#'@param label.number the label number
+#'@param expected.label the expected label
 extractRowsFromLabel = function(label.number, expected.label) {
     observer.label <- self$netlib.p3.lines[self$labels.rows[label.number]]
     observer.label <- sub("\\:", "", observer.label)
