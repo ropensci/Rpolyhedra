@@ -35,10 +35,10 @@
 #'   all polyhedron within the source those names match with search.string}
 #' }
 #'
+#' @field version version of database file
 #' @field polyhedra.rds.file path of rds database file
 #' @field sources.config Sources configuration for scraping different sources
 #' @field ledger rr ledger of scraping process
-#' @field data Polyhedra data from different sources
 #'
 #' @format \code{\link{R6Class}} object.
 #' @docType class
