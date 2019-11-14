@@ -66,9 +66,7 @@ Adds an error to the error string and log it as info
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{source}}{the source file}
-
-\item{\code{file.id}}{the file id}
+\item{\code{current.error}}{the error to add}
 }
 \if{html}{\out{</div>}}
 }
@@ -133,6 +131,13 @@ Creates a RGL representation of the object
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$buildRGL(transformation.matrix)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-exportToXML"></a>}}
