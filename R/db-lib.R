@@ -61,13 +61,13 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @description
     #' get the version of the current object.
     #' @return Database version
-    getVersion = function(){
+    getVersion = function() {
       self$version
     },
     #' @description
     #' sets the path of the RDS object
     #' @return Database version
-    configPolyhedraRDSPath = function(){
+    configPolyhedraRDSPath = function() {
       self$polyhedra.rds.file <- getPolyhedraRDSPath()
       self$polyhedra.rds.file
     },
@@ -76,7 +76,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #'   the database
     #' @param source source description
     #' @return boolean value
-    existsSource = function(source){
+    existsSource = function(source) {
       source %in% self$getAvailableSources()
     },
     #' @description
@@ -85,7 +85,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @return PolyhedraDatabase.class object
     addSourceConfig = function(source.config) {
       source <- source.config$getName()
-      if (!self$existsSource(source)){
+      if (!self$existsSource(source)) {
         self$sources.config[[source]] <- source.config
         self$getPolyhedraSourceDir(source)
       }
@@ -113,7 +113,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @param source source description
     #' @param create.dir if dir does not exists, create it
     #' @return string with polyhedra sources path
-    getPolyhedraSourceDir = function(source, create.dir = TRUE){
+    getPolyhedraSourceDir = function(source, create.dir = TRUE) {
       ret <- file.path(getDataDir(), "polyhedra", source, "/")
       if (create.dir){
         dir.create(ret, showWarnings = FALSE, recursive = TRUE)
@@ -126,7 +126,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @param polyhedron.name polyhedron description
     #' @param extention Extention of the polyhedron filenam
     #' @return string with polyhedron filename
-    getPolyhedronFilename = function(source, polyhedron.name, extension){
+    getPolyhedronFilename = function(source, polyhedron.name, extension) {
       paste(self$getPolyhedraSourceDir(source),
             self$ledger$getCRCPolyhedronName(source = source,
                 polyhedron.name = polyhedron.name),
@@ -284,7 +284,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                      polyhedra.names = NULL,
                      max.quant=0,
                      save.on.change = FALSE,
-                     seed = NULL){
+                     seed = NULL) {
       self$configPolyhedraRDSPath()
       if (!is.null(seed)){
         set.seed(seed)
