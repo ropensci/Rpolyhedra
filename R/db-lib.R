@@ -537,7 +537,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                         seed            = seed)
       ret
     },
-    schedulePolyhedraSources = function (sources.config =
+    schedulePolyhedraSources = function(sources.config =
                                          getPackageEnvir(".available.sources"),
                                          source.filenames= NULL,
                                          max.quant = 0,

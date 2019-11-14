@@ -1,7 +1,10 @@
 linters: with_defaults(
-    snake_case_linter, # do not allow snake case
-    camel_case_linter = NULL, # allow camel case
-    multiple_dots_linter = NULL, # allow dot sep
-    commented_code_linter, # comment code not allowed. 
-    NULL
+    object_name_linter = NULL, # 448
+    paren_brace_linter = NULL, # 198
+    line_length_linter = NULL, # 44
+    object_length_linter = NULL, # 8
+    spaces_inside_linter = NULL, # 6
+    cyclocomp_linter = NULL, # 4
+    commented_code_linter = NULL, # 1
+    function_left_parentheses = NULL # 1
   )
