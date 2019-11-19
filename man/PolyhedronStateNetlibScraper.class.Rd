@@ -11,24 +11,6 @@ Polyhedron State Netlib Scraper
 \details{
 Scrapes polyhedra from a PHD file format.
 }
-\section{Methods}{
-
-\describe{
-  \item{\code{extractRowsFromLabel(label.number, expected.label)}}{Extracts data from the label, taking the label number and the
-  expected label as parameters}
-  \item{\code{getLabels()}}{Gets the label from the polyhedron}
-  \item{\code{scrapeNet(net.txt, offset = 0) }}{Scrape the net model}
-  \item{\code{extractCFOutBrackets()}}{Gets the CF Out Brackets}
-  \item{\code{scrapeVertices(vertices.txt)}}{Scrapes the vertices}
-  \item{\code{setupLabelsOrder()}}{Sets up the order of labels included in PHD file}
-  \item{\code{getDataFromLabel(label)}}{Gets data from the Label}
-  \item{\code{scrape()}}{Scrapes the data from the PHD file}
-  \item{\code{getName()}}{returns polyhedron name}
-  \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply transformation matrix to polyhedron}
-  \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
-}
-}
-
 \section{Super class}{
 \code{\link[Rpolyhedra:PolyhedronState]{Rpolyhedra::PolyhedronState}} -> \code{PolyhedronStateNetlibScraper}
 }
@@ -116,88 +98,174 @@ Extracts data from the label, taking the label number and the
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getLabels"></a>}}
 \subsection{Method \code{getLabels()}}{
+get Labels from current netlib file description
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$getLabels()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+a list containing labels from netlib file description
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeNet"></a>}}
 \subsection{Method \code{scrapeNet()}}{
+scrape Net Model from netlib format
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$scrapeNet(net.txt, offset = 0)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{net.txt}}{a vector containing net model in netlib format}
+
+\item{\code{offset}}{in numbering vertices}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a list containing a net model
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-extractCFOutBrackets"></a>}}
 \subsection{Method \code{extractCFOutBrackets()}}{
+Remove brackets for current field content
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$extractCFOutBrackets(x)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{a string containing brackets}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+value
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeVertices"></a>}}
 \subsection{Method \code{scrapeVertices()}}{
+scrape vertices described in netlib format
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$scrapeVertices(vertices.txt)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{vertices.txt}}{vector containing netlib format vertices}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+data.frame containing netlib vertices
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setupLabelsOrder"></a>}}
 \subsection{Method \code{setupLabelsOrder()}}{
+setupLabelsOrder
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$setupLabelsOrder()}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{vertices.txt}}{vector containing netlib format vertices}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+data.frame containing netlib vertices
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getDataFromLabel"></a>}}
 \subsection{Method \code{getDataFromLabel()}}{
+Get data from label specified as parameter
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$getDataFromLabel(label)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{label}}{the label to get data from}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+value
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getName"></a>}}
 \subsection{Method \code{getName()}}{
+get Polyhedron name
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$getName()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+string with polyhedron name
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
 \subsection{Method \code{scrape()}}{
+scrape polyhedron
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$scrape()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+A new `PolyhedronStateDefined` object.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
 \subsection{Method \code{applyTransformationMatrix()}}{
+Apply transformation matrix to polyhedron
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$applyTransformationMatrix(
   transformation.matrix
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-buildRGL"></a>}}
 \subsection{Method \code{buildRGL()}}{
+Creates a RGL representation of the object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$buildRGL(transformation.matrix)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-exportToXML"></a>}}
 \subsection{Method \code{exportToXML()}}{
+serializes object in XML
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$exportToXML()}\if{html}{\out{</div>}}
 }
