@@ -40,7 +40,7 @@ This abstract class provide the basis from which polyhedron state class derivate
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
 \subsection{Method \code{new()}}{
-Adds an error to the error string and log it as info
+Create a polyhedronState object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$new(source, file.id)}\if{html}{\out{</div>}}
 }
@@ -53,6 +53,9 @@ Adds an error to the error string and log it as info
 \item{\code{file.id}}{the file id}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A new  `PolyhedronState` object.
 }
 }
 \if{html}{\out{<hr>}}
@@ -75,6 +78,8 @@ Adds an error to the error string and log it as info
 \if{html}{\out{<a id="method-scrape"></a>}}
 \subsection{Method \code{scrape()}}{
 Scrapes the polyhedra folder files
+#'@description
+get Polyhedron name
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$scrape()}\if{html}{\out{</div>}}
 }
@@ -83,11 +88,13 @@ Scrapes the polyhedra folder files
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getName"></a>}}
 \subsection{Method \code{getName()}}{
-Returns polyhedron name
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$getName()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+string with polyhedron name
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getSolid"></a>}}

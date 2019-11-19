@@ -72,6 +72,9 @@ Initializes the object, taking the file.id and PDH file as parameters
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+A new  `PolyhedronStateNetlibScraper` object.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-extractRowsFromLabel"></a>}}

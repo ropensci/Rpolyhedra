@@ -12,10 +12,11 @@ PolyhedronState.class <- R6::R6Class("PolyhedronState",
     #' @field errors Errors string
     errors = "",
     #' @description
-    #' Adds an error to the error string and log it as info
+    #' Create a polyhedronState object
     #' @param source the source file
     #' @param file.id the file id
-  initialize = function(source, file.id) {
+    #' @return A new  `PolyhedronState` object.
+    initialize = function(source, file.id) {
       self$source <- source
       self$file.id <- file.id
       self
@@ -33,8 +34,9 @@ PolyhedronState.class <- R6::R6Class("PolyhedronState",
   scrape = function() {
       stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
   },
-  #'@description
-  #'Returns polyhedron name
+  #'#'@description
+  #' get Polyhedron name
+  #' @return string with polyhedron name
   getName = function() {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
   },
@@ -88,8 +90,9 @@ PolyhedronStateNetlibScraper.class <- R6::R6Class(
     errors = "",
     #'@description
     #'Initializes the object, taking the file.id and PDH file as parameters
-    #'@param file.id the file id
-    #'@param netlib.p3.lines the lines to add
+    #' @param file.id the file id
+    #' @param netlib.p3.lines the lines to add
+    #' @return A new  `PolyhedronStateNetlibScraper` object.
   initialize = function(file.id, netlib.p3.lines) {
       super$initialize(source = "netlib", file.id = file.id)
       self$netlib.p3.lines <- netlib.p3.lines
@@ -491,8 +494,6 @@ PolyhedronStateDmccooeyScraper.class <- R6::R6Class(
               else{
                   value <- value.code
               }
-
-
               vertex.coords.replaced[d] <- parity * as.numeric(value)
           }
           self$vertices.replaced[vertex.row, ] <- vertex.coords.replaced
@@ -703,6 +704,8 @@ PolyhedronStateDefined.class <- R6::R6Class(
     #' @field transformation.matrix transformation matrix for
     #'  calculations and visualizing polyhedron
     transformation.matrix = NA,
+    #' @param file.id identifier of the definition file.
+    #' @return A new  `PolyhedronStateDefined` object.
   initialize = function(source, file.id, name,
                         vertices, solid, net = NULL,
                         symbol="", dual=NULL, sfaces=NULL,
@@ -744,9 +747,15 @@ PolyhedronStateDefined.class <- R6::R6Class(
   getName = function() {
     self$name
   },
+  #'@description
+  #' get Polyhedron symbol
+  #' @return string with polyhedron symbol
   getSymbol = function() {
       self$symbol
   },
+  #'@description
+  #' adjust polyhedron Vertices
+  #' @return modified  `PolyhedronStateDefined` object.
   adjustVertices = function(normalize.size = TRUE){
     private$vertices.id.3d <- sort(unique(unlist(self$solid)))
     self$vertices.centered <- self$vertices
@@ -1034,24 +1043,23 @@ PolyhedronStateDefined.class <- R6::R6Class(
 
 #' Polyhedron State Deserializer
 #'
+#' @description
 #' Polyhedron state for deserialize from database
 #'
 #'
-#' @section Methods:
-#' \describe{
-#'   \item{\code{initialize(serialized.polyhedron)}}{Initializes the object.}
-#'   \item{\code{scrape()}}{Returns a State Defined}
-#'
-#' }
-#' @field serialized.polyhedron polyhedron definition serialized
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom R6 R6Class
-#' @noRd
 PolyhedronStateDeserializer.class <- R6::R6Class(
   "PolyhedronStateDeserializer",
   inherit = PolyhedronState.class,
-  public = list(serialized.polyhedron = NA,
+  public = list(
+    #' @field serialized.polyhedron polyhedron definition serialized
+    serialized.polyhedron = NA,
+    #' @description
+    #' Initialize PolyhedronStateDeserializer object
+    #' @param serialized.polyhedron a serialized polyhedron
+    #' @return A new  `PolyhedronStateDeserializer` object.
   initialize = function(serialized.polyhedron){
     self$serialized.polyhedron <- serialized.polyhedron
     self
@@ -1085,6 +1093,8 @@ PolyhedronStateDeserializer.class <- R6::R6Class(
                     dih = dih)
     ret
   }))
+
+
 #' Polyhedron
 #'
 #' Polyhedron container class, which is accesible by the final users upon call
@@ -1112,16 +1122,20 @@ PolyhedronStateDeserializer.class <- R6::R6Class(
 #'
 
 #' }
-#' @field file.id Polyhedron file.id
-#' @field state Polyhedron state
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom R6 R6Class
-#' @noRd
 Polyhedron.class <- R6::R6Class("Polyhedron",
   public = list(
+    #' @field file.id Polyhedron file.id
     file.id = NA,
+    #' @field state Polyhedron state
     state = NA,
+    #' @description
+    #' Create a polyhedronState object
+    #' @param state polyhedron state object
+    #' @param file.id the file id
+    #' @return A new  `Polyhedron` object.
   initialize = function(file.id, state = NULL) {
       self$file.id <- file.id
       if (!is.null(state)) {
@@ -1129,12 +1143,20 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
       }
       self
   },
+  #' @description
+  #' scrape Netlib polyhedron definition
+  #' @param netlib.p3.lines vector with netlib definition lines
+  #' @return A new  `PolyhedronStateDefined` object.
   scrapeNetlib = function(netlib.p3.lines) {
       self$state <- PolyhedronStateNetlibScraper.class$new(
         self$file.id, netlib.p3.lines)
       self$state <- self$state$scrape()
       self
   },
+  #' @description
+  #' scrape Dmccooey polyhedron definition
+  #' @param polyhedra.dmccooey.lines vector with Dmccooey definition lines
+  #' @return A new  `PolyhedronStateDefined` object.
   scrapeDmccooey = function(polyhedra.dmccooey.lines) {
       self$state <- PolyhedronStateDmccooeyScraper.class$new(
         self$file.id, polyhedra.dmccooey.lines)
@@ -1142,8 +1164,11 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
       #Postprocess in defined state
       self
   },
+  #' @description
+  #' deserialize a polyhedron state definition
+  #' @param serialized.polyhedron a seralized version of a polyhedron state
+  #' @return A new  `PolyhedronStateDefined` object.
   deserialize = function(serialized.polyhedron){
-
     self$state   <- PolyhedronStateDeserializer.class$new(
       serialized.polyhedron)
     self$state   <- self$state$scrape()
