@@ -6,32 +6,6 @@
 #'
 #' @details
 #'
-#' @section Methods:
-#' \describe{
-#'   \item{\code{getPolyhedraSourceDir(source)}}{Retrieves polyhedra dir
-#'   of a source}
-#'   \item{\code{configPolyhedraRDSPath()}}{config path for rds database file}
-#'   \item{\code{existsPolyhedron(source,polyhedron.name)}}{Determines if
-#'   the polyhedron exists on the database}
-#'   \item{\code{getPolyhedron(source, polyhedron.name, strict)}}{Retrieves
-#'   a polyhedron by source and name}
-#'   \item{\code{addPolyhedron(source, polyhedron, overwrite, save.on.change = FALSE)}}{Adds a polyhedron
-#'   by source and name, if overwrite is TRUE, it will update any existing one
-#'   by that source and name}
-#'   \item{\code{configPolyhedraSource(source.config, source.filenames, max.quant)}}{Scrapes all
-#'   polyhedra in the given directory for adding to db or testing}
-#'   \item{\code{schedulePolyhedraSources(sources.config, source.filenames, max.quant,
-#'   test)}}{Scrapes files applying parameter sources.config}
-#'   \item{\code{cover(sources, covering.code, polyhedra.names = NULL,
-#'                     max.quant = 0, save.on.change = FALSE, seed = NULL)}}{Cover all polyhedron with specified code}
-#'   \item{\code{scrape(mode = "scrape.queued",
-#'                      sources = names(self$sources.config),
-#'                      max.quant = 0, time2scrape.source = 30,
-#'                      save.on.change = FALSE, skip.still.queued = FALSE)}}{Scrape file with specified parameters}
-#'   \item{\code{saveRDS = function(save.on.change = TRUE)}}{Save state in file when specified}
-#'   \item{\code{getAvailablePolyhedra(sources,search.string)}}{Retrieves
-#'   all polyhedron within the source those names match with search.string}
-#' }
 #'
 #'
 #' @format \code{\link{R6Class}} object.
@@ -96,6 +70,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' matches the parameter value
     #' @param source source description
     #' @param polyhedron.name polyhedron description
+    #'
     #' @return boolean value
     existsPolyhedron = function(source = "netlib", polyhedron.name) {
       ret <- FALSE
@@ -124,7 +99,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' gets the filename of the polyhedron matching parameter.
     #' @param source source description
     #' @param polyhedron.name polyhedron description
-    #' @param extention Extention of the polyhedron filenam
+    #' @param extension extension of the polyhedron filename
     #' @return string with polyhedron filename
     getPolyhedronFilename = function(source, polyhedron.name, extension) {
       paste(self$getPolyhedraSourceDir(source),
@@ -179,7 +154,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @param overwrite overwrite exiting definition
     #' @param save.on.change saves Database state after operation
     #' @return Polyhedron.class object
-    addPolyhedron = function(source="netlib", source.filename,
+    addPolyhedron = function(source = "netlib", source.filename,
                              polyhedron, overwrite = FALSE,
                              save.on.change = FALSE) {
       polyhedron.name <- polyhedron$getName()
@@ -228,7 +203,14 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                scraped.polyhedron = polyhedron)
       polyhedron
     },
-    configPolyhedraSource = function(source.config, source.filenames= NULL,
+    #' @description
+    #' Process parameter filenames using source.config parameter
+    #' @param source.config source configuration for scraping files
+    #' @param source.filenames filenames of the polyhedron source definition
+    #' @param max.quant maximum filenames to process
+    #' @param save.on.change saves Database state after operation
+    #' @return Modified `PolyhedraDatabase` object.
+    configPolyhedraSource = function(source.config, source.filenames = NULL,
                                      max.quant = 0,
                                      save.on.change = FALSE) {
       source <- source.config$getName()
@@ -268,6 +250,10 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       self$saveRDS(save.on.change = save.on.change)
       self
     },
+    #' @description
+    #' saveRDS
+    #' @param save.on.change saves Database state after operation
+    #' @return saveRDS return status
     saveRDS = function(save.on.change = TRUE){
       ret <- NULL
       if (self$ledger$dirty & save.on.change){
@@ -278,11 +264,21 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       ret
     },
+    #' @description
+    #' Cover objects and applies covering.code parameter
+    #' @param mode covering mode. Available values are "scrape.queued", "scrape.retry","skipped",  "test"
+    #' @param sources sources names
+    #' @param covering.code code for applying in covering
+    #' @param polyhedra.names polyhedra names to cover (optional)
+    #' @param max.quant maximum numbers of polyhedra to cover
+    #' @param save.on.change saves Database state after operation
+    #' @param seed seed for determinstic random generator
+    #' @return A list with resulting objects covered
     cover = function(mode,
                      sources = names(self$sources.config),
                      covering.code,
                      polyhedra.names = NULL,
-                     max.quant=0,
+                     max.quant = 0,
                      save.on.change = FALSE,
                      seed = NULL) {
       self$configPolyhedraRDSPath()
@@ -308,7 +304,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         if (!is.null(seed)){
           n <- nrow(filenames2scrape)
           if (max.quant < n){
-            sample.2.cover <- sort(sample(1:n, size = max.quant))
+            sample.2.cover <- sort(sample( 1:n, size = max.quant))
           }
           else{
             sample.2.cover <- 1:n
@@ -333,6 +329,17 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       ret
     },
+    #' @description
+    #' Scrape polyhedra queued sources
+    #' @param mode covering mode. Available values are "scrape.queued", "scrape.retry","skipped",  "test"
+    #' @param sources sources names
+    #' @param covering.code code for applying in covering
+    #' @param polyhedra.names polyhedra names to cover (optional)
+    #' @param max.quant maximum numbers of polyhedra to cover
+    #' @param time2scrape.source maximum time to spend scraping each source
+    #' @param save.on.change saves Database state after operation
+    #' @param skip.still.queued Flag unscraped files with status `skipped``
+    #' @return A list with resulting objects covered
     scrape = function(mode = "scrape.queued",
                       sources = names(self$sources.config),
                       max.quant = 0,
@@ -390,7 +397,6 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         max.quant.scrape <- max(max.quant,
                                 max.quant.time)
       }
-
       futile.logger::flog.debug(paste("Scraping sources",
                                       paste(sources, collapse = ","),
                                         "max.quant =", max.quant,
@@ -424,6 +430,11 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       ret
     },
+    #' @description
+    #' testRR
+    #' @param sources sources names
+    #' @param max.quant maximum numbers of polyhedra to cover
+    #' @return A list with resulting objects tested
     testRR = function(sources = names(self$sources.config),
                     max.quant = 0){
       self$configPolyhedraRDSPath()
@@ -494,6 +505,13 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                         max.quant     = max.quant)
       ret
     },
+    #' @description
+    #' generate Test tasks for selected polyhedra
+    #' @param sources sources names
+    #' @param polyhedra.names polyhedra names to cover (optional)
+    #' @param TestTaskClass an R6 TestTaskClass class
+    #' @param max.quant maximum numbers of polyhedra to cover
+    #' @return A list with resulting TestTasks generated
     generateTestTasks = function(sources = names(self$sources.config),
                                  polyhedra.names = NULL,
                                  TestTaskClass,
@@ -537,11 +555,17 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                         seed            = seed)
       ret
     },
+    #' @description
+    #' Schedules polyhedra sources for scraping
+    #' @param sources.config sources configurations for scraping files
+    #' @param source.filenames filenames of the polyhedron source definition
+    #' @param max.quant maximum filenames to process
+    #' @param save.on.change saves Database state after operation
+    #' @return Modified `PolyhedraDatabase` object.
     schedulePolyhedraSources = function(sources.config =
                                          getPackageEnvir(".available.sources"),
                                          source.filenames= NULL,
                                          max.quant = 0,
-                                         test = FALSE,
                                          save.on.change = FALSE){
       for (source  in names(sources.config)){
         self$configPolyhedraSource(source.config    = sources.config[[source]],
@@ -551,10 +575,19 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
       }
       self
     },
+    #' @description
+    #' Returns available sources in current database
+    #' @return A vector with names of available sources
     getAvailableSources = function() {
       #TODO in ledger
       self$ledger$getAvailableSources()
     },
+    #' @description
+    #' Retrieves all polyhedron within the source those names match with search.string
+    #' @param sources sources names
+    #' @param search.string string for matching polyhedron names
+    #' @param ignore.case ignore case in search string
+    #' @return A list with resulting objects covered
     getAvailablePolyhedra = function(sources = self$getAvailableSources(),
                                      search.string = NULL, ignore.case = TRUE) {
       self$ledger$getAvailablePolyhedra(sources = sources,
