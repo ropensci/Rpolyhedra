@@ -138,9 +138,9 @@ setDataDirEnvironment <- function(env = "PACKAGE") {
 #' @noRd
 getPackageDir <- function(){
   home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
-  data.subdir <- file.path("inst", "extdata/")
+  data.subdir <- file.path("inst", "extdata")
   if (!dir.exists(file.path(home.dir, data.subdir)))
-    data.subdir <- "extdata/"
+    data.subdir <- "extdata"
   file.path(home.dir, data.subdir)
 }
 

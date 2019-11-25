@@ -647,7 +647,6 @@ norm <- function(vector){
 #' @importFrom rgl asHomogeneous
 #' @importFrom R6 R6Class
 #' @importFrom geometry convhulln
-#' @noRd
 PolyhedronStateDefined.class <- R6::R6Class(
   "PolyhedronStateDefined",
   inherit = PolyhedronState.class,
@@ -1064,6 +1063,9 @@ PolyhedronStateDeserializer.class <- R6::R6Class(
     self$serialized.polyhedron <- serialized.polyhedron
     self
   },
+  #' @description
+  #' Generates a PolyhedronStateDefined from a serialized polyhedron
+  #' @return A new  `PolyhedronStateDefined` object.
   scrape = function(){
     sp <- self$serialized.polyhedron
     source    <- sp$source
@@ -1182,12 +1184,21 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
   getName = function() {
       self$state$getName()
   },
+  #' @description
+  #' Gets polyhedron state
+  #' @return A new  `PolyhedronState` object.
   getState = function() {
       self$state
   },
+  #' @description
+  #' Gets a solid definition
+  #' @return A list of vertex vectors composing polyhedron faces.
   getSolid = function() {
       self$state$getSolid()
   },
+  #' @description
+  #' checks Edges consistency
+  #' @return A boolean value
   isChecked = function(){
       inconsistent.edges <- self$state$checkEdgesConsistency()
       ret <- FALSE
@@ -1196,17 +1207,31 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
       }
       ret
   },
+  #' @description
+  #' Return an RGL model with an optional transformation described by transformation.matrix parameter
+  #' @param transformation.matrix transformation matrix parameter
+  #' @return An tmesh3d object
   getRGLModel = function(transformation.matrix = NULL) {
     futile.logger::flog.debug(paste("drawing", self$getName()), "model")
     self$state$buildRGL(transformation.matrix = transformation.matrix)
   },
-
+  #' @description
+  #' exports an XML definition of current polyhedron
+  #' @return A character object with the XML definitiont
   exportToXML = function(){
       self$state$exportToXML()
   },
+  #' @description
+  #' returns the errors found when processing current polyhedron
+  #' @return a data.frame with polyhedron errors
   getErrors = function(){
       self$state$errors
   },
+  #' @description
+  #' check properties of current polyhedron
+  #' @param expected.vertices expected vertices number
+  #' @param expected.faces expected faces number
+  #' @return Unmodified polyhedron object
   checkProperties = function(expected.vertices, expected.faces){
       faces <- self$getSolid()
       testthat::expect_equal(length(faces), expected.faces)

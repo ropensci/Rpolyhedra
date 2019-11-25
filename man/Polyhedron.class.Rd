@@ -159,58 +159,102 @@ string with polyhedron name
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getState"></a>}}
 \subsection{Method \code{getState()}}{
+Gets polyhedron state
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getState()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+A new  `PolyhedronState` object.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getSolid"></a>}}
 \subsection{Method \code{getSolid()}}{
+Gets a solid definition
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getSolid()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+A list of vertex vectors composing polyhedron faces.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-isChecked"></a>}}
 \subsection{Method \code{isChecked()}}{
+checks Edges consistency
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$isChecked()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+A boolean value
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getRGLModel"></a>}}
 \subsection{Method \code{getRGLModel()}}{
+Return an RGL model with an optional transformation described by transformation.matrix parameter
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getRGLModel(transformation.matrix = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{transformation.matrix}}{transformation matrix parameter}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+An tmesh3d object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-exportToXML"></a>}}
 \subsection{Method \code{exportToXML()}}{
+exports an XML definition of current polyhedron
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$exportToXML()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+A character object with the XML definitiont
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getErrors"></a>}}
 \subsection{Method \code{getErrors()}}{
+returns the errors found when processing current polyhedron
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getErrors()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+a data.frame with polyhedron errors
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-checkProperties"></a>}}
 \subsection{Method \code{checkProperties()}}{
+check properties of current polyhedron
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$checkProperties(expected.vertices, expected.faces)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{expected.vertices}}{expected vertices number}
+
+\item{\code{expected.faces}}{expected faces number}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Unmodified polyhedron object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

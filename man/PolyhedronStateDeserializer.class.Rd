@@ -61,10 +61,14 @@ A new  `PolyhedronStateDeserializer` object.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
 \subsection{Method \code{scrape()}}{
+Generates a PolyhedronStateDefined from a serialized polyhedron
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDeserializer.class$scrape()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+A new  `PolyhedronStateDefined` object.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
