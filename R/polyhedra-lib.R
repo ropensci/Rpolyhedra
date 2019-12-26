@@ -21,7 +21,7 @@ PolyhedronState.class <- R6::R6Class("PolyhedronState",
       self$file.id <- file.id
       self
   },
-  #'@description
+  #' '@description
   #' Adds an error to the error string and log it as info
   #' @param current.error the error to add
   addError = function(current.error) {
@@ -29,13 +29,13 @@ PolyhedronState.class <- R6::R6Class("PolyhedronState",
       futile.logger::flog.error(current.error)
       self$errors
   },
-  #'@description
-  #'Scrapes the polyhedra folder files
+  #' @description
+  #' Scrapes the polyhedra folder files
   scrape = function() {
       stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
   },
-  #'#'@description
-  #' get Polyhedron name
+  #'@description
+  #' Get Polyhedron name
   #' @return string with polyhedron name
   getName = function() {
     stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
@@ -352,20 +352,6 @@ PolyhedronStateNetlibScraper.class <- R6::R6Class(
 #'
 #' Scrapes polyhedra from a dmccooey file format
 #'
-#' @section Methods:
-#' \describe{
-#'   \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes
-#'   the object, taking the file.id and PDH file as parameters}
-#'   \item{\code{scrape()}}{Scrapes data from dmccooey file format}
-#'   \item{\code{getName()}}{returns polyhedron name}
-#'   \item{\code{scrapeValues(values.lines)}}{Scrapes values}
-#'   \item{\code{scrapeVertices(vertices.lines)}}{Scrapes vertices}
-#'   \item{\code{scrapeFaces(faces.lines)}}{Scrapes faces}
-#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
-#'   transformation matrix to polyhedron}
-#'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
-#' }
-#' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom  futile.logger flog.info
 #' @importFrom R6 R6Class
@@ -603,43 +589,6 @@ norm <- function(vector){
 #'
 #' Polyhedron state inside database.
 #'
-#'
-#' @section Methods:
-#' \describe{
-#'   \item{\code{initialize(source, file.id, name, symbol, dual,
-#'               sfaces, svertices, net, solid, hinges, dih, vertices)}}{
-#'               Initializes the object, taking defaults.}
-#'   \item{\code{scrape()}}{Do nothing as the object is defined}
-#'   \item{\code{getName()}}{returns polyhedron name}
-#'   \item{\code{getNet()}}{Gets the 2d net model}
-#'   \item{\code{getSolid()}}{Gets the solid representation}
-#'   \item{\code{triangulate(force = FALSE, vertices)}}{Generates
-#'    the triangular faces model for generating tmesh }
-#'   \item{\code{getConvHull(self$transformation.matrix, vertices.id.3d)}}{Gets the Convex Hull of
-#'   the object vertices}
-#'   \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates
-#'   the object's Mass Center for parameter
-#'         vertices}
-#'   \item{\code{getNormalizedSize(size, vertices.id.3d =
-#'   private$vertices.id.3d)}}{Normalizes the convex hull volume of the object to a
-#'   tetrahedron Convex Hull volume}
-#'   \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
-#'   transformation matrix to internal transformation matrix}
-#'   \item{\code{resetTransformationMatrix()}}{Reset internal transformation matrix}
-#'   \item{\code{getTransformedVertices(vertices,
-#'   transformation.matrix)}}{Returns the vertices
-#'   adjusted with transformation matrix}
-#'   \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
-#'   \item{\code{exportToXML()}}{Gets an XML representation out of
-#'   the polyhedron object}
-#'   \item{\code{serialize()}}{Gets a list representation out
-#'   of the polyhedron object}
-#'   \item{\code{expectEqual()}}{Function which test equal values
-#'   for all fields using serialize function}
-#'
-#' }
-#' for RGL visualization
-#' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom futile.logger flog.debug
 #' @importFrom rgl identityMatrix
@@ -651,19 +600,17 @@ PolyhedronStateDefined.class <- R6::R6Class(
   "PolyhedronStateDefined",
   inherit = PolyhedronState.class,
   private = list(
-    #' @field mass.center polyhedron mass center
+    # polyhedron mass center
     mass.center = NA,
-    #infered state
-    #' @field edges.cont  Edges count
+    # Edges count
     edges.cont = 0,
-    #' @field edges.check Edges check degree property
+    # Edges check degree property
     edges.check = NULL,
-    #' @field vertices.id.3d vertices definition for solid 3d object
+    # vertices definition for solid 3d object
     vertices.id.3d = NULL,
-    #rgl aux members
-    #' @field vertices.rgl Polyhedron triangulated vertices list for RGL
+    # Polyhedron triangulated vertices list for RGL
     vertices.rgl = NULL,
-    #' @field solid.triangulated Polyhedron solid (triangulated)
+    #  Polyhedron solid (triangulated)
     solid.triangulated = NULL
   ),
   public = list(
@@ -698,12 +645,27 @@ PolyhedronStateDefined.class <- R6::R6Class(
     hinges = NA,
     #' @field dih Dih attribute (netlib)
     dih = NA,
-    #' @field polyhedron edges (netlib|dmccooey)
+    #' @field edges polyhedron edges (netlib|dmccooey)
     edges = NULL,
     #' @field transformation.matrix transformation matrix for
     #'  calculations and visualizing polyhedron
     transformation.matrix = NA,
+    #' @description
+    #' object initialization routine
+    #'
+    #' @param source the library to use
     #' @param file.id identifier of the definition file.
+    #' @param name the polyhedron name
+    #' @param vertices the vertices
+    #' @param solid the solid object
+    #' @param net the net
+    #' @param symbol the symbold
+    #' @param dual whether it is dual or not
+    #' @param sfaces the solid faces
+    #' @param svertices the solid vertices
+    #' @param hinges the hinges
+    #' @param dih the dih
+    #' @param normalize.size whether it has to normalize the size or not
     #' @return A new  `PolyhedronStateDefined` object.
   initialize = function(source, file.id, name,
                         vertices, solid, net = NULL,
@@ -754,6 +716,8 @@ PolyhedronStateDefined.class <- R6::R6Class(
   },
   #'@description
   #' adjust polyhedron Vertices
+  #'
+  #' @param normalize.size whether it has to normalize the size or not
   #' @return modified  `PolyhedronStateDefined` object.
   adjustVertices = function(normalize.size = TRUE){
     private$vertices.id.3d <- sort(unique(unlist(self$solid)))
@@ -777,6 +741,9 @@ PolyhedronStateDefined.class <- R6::R6Class(
     }
     self
   },
+  #' @description
+  #' Get the polyhedron state
+  #' @param solid toggles the production of solid vertices.
   getVertices = function(solid = FALSE) {
       ret <- self$vertices
       if (solid){
@@ -790,12 +757,19 @@ PolyhedronStateDefined.class <- R6::R6Class(
       }
       ret
   },
+  #' @description
+  #' Gets the net property
   getNet = function() {
       self$net
   },
+  #' @description
+  #' Gets the solid property
   getSolid = function() {
       self$solid
   },
+  #' @description
+  #' Infer edges
+  #' @param force.recalculation forces the recalculation of the edges
   inferEdges = function(force.recalculation = FALSE){
       if (is.null(private$edges.check) | force.recalculation) {
           private$edges.check <- data.frame(origin = numeric(),
@@ -835,6 +809,8 @@ PolyhedronStateDefined.class <- R6::R6Class(
       }
       self
   },
+  #' @description
+  #' Checks edges consistency
   checkEdgesConsistency = function(){
       ret <- NULL
       if (!is.null(self$solid)){
@@ -857,6 +833,9 @@ PolyhedronStateDefined.class <- R6::R6Class(
       }
       ret
   },
+  #' @description
+  #' Triangulates the polyhedron
+  #' @param force forces the triangulation.
   triangulate = function(force = FALSE) {
       if (is.null(self$vertices.centered)){
         stop(paste("vertices.centered must be called before triangulate"))
@@ -917,6 +896,12 @@ PolyhedronStateDefined.class <- R6::R6Class(
       }
       private$solid.triangulated
   },
+  #' @description
+  #' Gets the convex hull
+  #'
+  #' @param transformation.matrix the transformation matrix
+  #' @param vertices.id.3d  the vertices ids
+  #' @return the convex hull
   getConvHull = function(
           transformation.matrix =self$transformation.matrix,
           vertices.id.3d = private$vertices.id.3d) {
@@ -926,6 +911,10 @@ PolyhedronStateDefined.class <- R6::R6Class(
     convhulln <- convhulln(vertices.def, options = c("FA", "n"))
     convhulln
   },
+  #' @description
+  #' Calculates the center of mass.
+  #' @param vertices.id.3d  the vertices ids
+  #' @param applyTransformation does it need to apply transformations?
   calculateMassCenter = function(vertices.id.3d = private$vertices.id.3d,
                                  applyTransformation=TRUE) {
     transformed.vertex <- self$vertices[vertices.id.3d, c(1:3)]
@@ -939,6 +928,9 @@ PolyhedronStateDefined.class <- R6::R6Class(
     transformed.vertex <- transformed.vertex[, 1:3]
     apply(transformed.vertex, MARGIN = 2, FUN = mean)
   },
+  #' @description
+  #' Gets the normalized size
+  #' @param size the object's size
   getNormalizedSize = function(size){
     convex.hull <- self$getConvHull()
     volume <- convex.hull$vol
@@ -946,6 +938,10 @@ PolyhedronStateDefined.class <- R6::R6Class(
     size <- size * (0.1178511 / volume) ^ (1 / 3)
     size
   },
+  #' @description
+  #' Gets the transformed vertices
+  #' @param vertices input vertices
+  #' @param transformation.matrix the transformation matrix
   getTransformedVertices = function(
           vertices = self$vertices.centered,
           transformation.matrix = self$transformation.matrix) {
@@ -955,6 +951,8 @@ PolyhedronStateDefined.class <- R6::R6Class(
     transformed.vertices <- transformed.vertices[, 1:3]
     transformed.vertices
   },
+  #' @description
+  #' Resets the transformation matrix
   resetTransformationMatrix = function(){
     self$transformation.matrix <- identityMatrix()
     self$transformation.matrix
@@ -968,6 +966,9 @@ PolyhedronStateDefined.class <- R6::R6Class(
                 self$transformation.matrix
     self$transformation.matrix
   },
+  #' @description
+  #' Build RGL
+  #' @param transformation.matrix the transformation matrix
   buildRGL = function(transformation.matrix = NULL) {
     if (is.null(transformation.matrix)){
       transformation.matrix <- self$transformation.matrix
@@ -996,9 +997,14 @@ PolyhedronStateDefined.class <- R6::R6Class(
     }
     ret
   },
+  #' @description
+  #' Exports the object to XML format
   exportToXML = function() {
       polyhedronToXML(self)
   },
+  #' @description
+  #' Determines if a polyhedron is equal to this one.
+  #' @param polyhedron the polyhedron to compare to.
   expectEqual = function(polyhedron){
     compatible <- !is.null(polyhedron$state$serialize)
     if (compatible){
@@ -1017,6 +1023,8 @@ PolyhedronStateDefined.class <- R6::R6Class(
       stop(paste("Not compatible polyhedron", polyhedron$getName()))
     }
   },
+  #' @description
+  #' Serialize the object.
   serialize = function(){
     ret <- list()
     ret[["source"]]    <- self$source

@@ -4,7 +4,6 @@
 \name{PolyhedronStateDefined.class}
 \alias{PolyhedronStateDefined.class}
 \title{Polyhedron State Defined}
-\format{\code{\link{R6Class}} object.}
 \description{
 Polyhedron State Defined
 
@@ -13,62 +12,12 @@ Polyhedron State Defined
 \details{
 Polyhedron state inside database.
 }
-\section{Methods}{
-
-\describe{
-  \item{\code{initialize(source, file.id, name, symbol, dual,
-              sfaces, svertices, net, solid, hinges, dih, vertices)}}{
-              Initializes the object, taking defaults.}
-  \item{\code{scrape()}}{Do nothing as the object is defined}
-  \item{\code{getName()}}{returns polyhedron name}
-  \item{\code{getNet()}}{Gets the 2d net model}
-  \item{\code{getSolid()}}{Gets the solid representation}
-  \item{\code{triangulate(force = FALSE, vertices)}}{Generates
-   the triangular faces model for generating tmesh }
-  \item{\code{getConvHull(self$transformation.matrix, vertices.id.3d)}}{Gets the Convex Hull of
-  the object vertices}
-  \item{\code{calculateMassCenter(size = 1, vertices.3d)}}{Calculates
-  the object's Mass Center for parameter
-        vertices}
-  \item{\code{getNormalizedSize(size, vertices.id.3d =
-  private$vertices.id.3d)}}{Normalizes the convex hull volume of the object to a
-  tetrahedron Convex Hull volume}
-  \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
-  transformation matrix to internal transformation matrix}
-  \item{\code{resetTransformationMatrix()}}{Reset internal transformation matrix}
-  \item{\code{getTransformedVertices(vertices,
-  transformation.matrix)}}{Returns the vertices
-  adjusted with transformation matrix}
-  \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
-  \item{\code{exportToXML()}}{Gets an XML representation out of
-  the polyhedron object}
-  \item{\code{serialize()}}{Gets a list representation out
-  of the polyhedron object}
-  \item{\code{expectEqual()}}{Function which test equal values
-  for all fields using serialize function}
-
-}
-for RGL visualization
-}
-
 \section{Super class}{
 \code{\link[Rpolyhedra:PolyhedronState]{Rpolyhedra::PolyhedronState}} -> \code{PolyhedronStateDefined}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{mass.center}}{polyhedron mass center}
-
-\item{\code{edges.cont}}{Edges count}
-
-\item{\code{edges.check}}{Edges check degree property}
-
-\item{\code{vertices.id.3d}}{vertices definition for solid 3d object}
-
-\item{\code{vertices.rgl}}{Polyhedron triangulated vertices list for RGL}
-
-\item{\code{solid.triangulated}}{Polyhedron solid (triangulated)}
-
 \item{\code{file.id}}{polyhedron filename in original}
 
 \item{\code{source}}{polyhedron definition source (netlib|dmccooey)}
@@ -100,29 +49,10 @@ solid (netlib|dmccooey)}
 
 \item{\code{dih}}{Dih attribute (netlib)}
 
-\item{\code{polyhedron}}{edges (netlib|dmccooey)}
+\item{\code{edges}}{polyhedron edges (netlib|dmccooey)}
 
 \item{\code{transformation.matrix}}{transformation matrix for
 calculations and visualizing polyhedron}
-}
-\if{html}{\out{</div>}}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{mass.center}}{polyhedron mass center}
-
-\item{\code{edges.cont}}{Edges count}
-
-\item{\code{edges.check}}{Edges check degree property}
-
-\item{\code{vertices.id.3d}}{vertices definition for solid 3d object}
-
-\item{\code{vertices.rgl}}{Polyhedron triangulated vertices list for RGL}
-
-\item{\code{solid.triangulated}}{Polyhedron solid (triangulated)}
-
-\item{\code{polyhedron}}{edges (netlib|dmccooey)}
 }
 \if{html}{\out{</div>}}
 }
@@ -163,6 +93,7 @@ calculations and visualizing polyhedron}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
 \subsection{Method \code{new()}}{
+object initialization routine
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$new(
   source,
@@ -184,7 +115,31 @@ calculations and visualizing polyhedron}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{source}}{the library to use}
+
 \item{\code{file.id}}{identifier of the definition file.}
+
+\item{\code{name}}{the polyhedron name}
+
+\item{\code{vertices}}{the vertices}
+
+\item{\code{solid}}{the solid object}
+
+\item{\code{net}}{the net}
+
+\item{\code{symbol}}{the symbold}
+
+\item{\code{dual}}{whether it is dual or not}
+
+\item{\code{sfaces}}{the solid faces}
+
+\item{\code{svertices}}{the solid vertices}
+
+\item{\code{hinges}}{the hinges}
+
+\item{\code{dih}}{the dih}
+
+\item{\code{normalize.size}}{whether it has to normalize the size or not}
 }
 \if{html}{\out{</div>}}
 }
@@ -237,6 +192,13 @@ adjust polyhedron Vertices
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$adjustVertices(normalize.size = TRUE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{normalize.size}}{whether it has to normalize the size or not}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 modified  `PolyhedronStateDefined` object.
 }
@@ -244,14 +206,23 @@ modified  `PolyhedronStateDefined` object.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getVertices"></a>}}
 \subsection{Method \code{getVertices()}}{
+Get the polyhedron state
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$getVertices(solid = FALSE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{solid}}{toggles the production of solid vertices.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getNet"></a>}}
 \subsection{Method \code{getNet()}}{
+Gets the net property
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$getNet()}\if{html}{\out{</div>}}
 }
@@ -260,6 +231,7 @@ modified  `PolyhedronStateDefined` object.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getSolid"></a>}}
 \subsection{Method \code{getSolid()}}{
+Gets the solid property
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$getSolid()}\if{html}{\out{</div>}}
 }
@@ -268,14 +240,23 @@ modified  `PolyhedronStateDefined` object.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-inferEdges"></a>}}
 \subsection{Method \code{inferEdges()}}{
+Infer edges
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$inferEdges(force.recalculation = FALSE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{force.recalculation}}{forces the recalculation of the edges}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-checkEdgesConsistency"></a>}}
 \subsection{Method \code{checkEdgesConsistency()}}{
+Checks edges consistency
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$checkEdgesConsistency()}\if{html}{\out{</div>}}
 }
@@ -284,14 +265,23 @@ modified  `PolyhedronStateDefined` object.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-triangulate"></a>}}
 \subsection{Method \code{triangulate()}}{
+Triangulates the polyhedron
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$triangulate(force = FALSE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{force}}{forces the triangulation.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getConvHull"></a>}}
 \subsection{Method \code{getConvHull()}}{
+Gets the convex hull
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$getConvHull(
   transformation.matrix = self$transformation.matrix,
@@ -299,10 +289,23 @@ modified  `PolyhedronStateDefined` object.
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{transformation.matrix}}{the transformation matrix}
+
+\item{\code{vertices.id.3d}}{the vertices ids}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the convex hull
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-calculateMassCenter"></a>}}
 \subsection{Method \code{calculateMassCenter()}}{
+Calculates the center of mass.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$calculateMassCenter(
   vertices.id.3d = private$vertices.id.3d,
@@ -310,18 +313,36 @@ modified  `PolyhedronStateDefined` object.
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{vertices.id.3d}}{the vertices ids}
+
+\item{\code{applyTransformation}}{does it need to apply transformations?}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getNormalizedSize"></a>}}
 \subsection{Method \code{getNormalizedSize()}}{
+Gets the normalized size
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$getNormalizedSize(size)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{size}}{the object's size}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getTransformedVertices"></a>}}
 \subsection{Method \code{getTransformedVertices()}}{
+Gets the transformed vertices
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$getTransformedVertices(
   vertices = self$vertices.centered,
@@ -329,10 +350,20 @@ modified  `PolyhedronStateDefined` object.
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{vertices}}{input vertices}
+
+\item{\code{transformation.matrix}}{the transformation matrix}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-resetTransformationMatrix"></a>}}
 \subsection{Method \code{resetTransformationMatrix()}}{
+Resets the transformation matrix
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$resetTransformationMatrix()}\if{html}{\out{</div>}}
 }
@@ -360,14 +391,23 @@ an applied transformation.matrix
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-buildRGL"></a>}}
 \subsection{Method \code{buildRGL()}}{
+Build RGL
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$buildRGL(transformation.matrix = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{transformation.matrix}}{the transformation matrix}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-exportToXML"></a>}}
 \subsection{Method \code{exportToXML()}}{
+Exports the object to XML format
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$exportToXML()}\if{html}{\out{</div>}}
 }
@@ -376,14 +416,23 @@ an applied transformation.matrix
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-expectEqual"></a>}}
 \subsection{Method \code{expectEqual()}}{
+Determines if a polyhedron is equal to this one.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$expectEqual(polyhedron)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{polyhedron}}{the polyhedron to compare to.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-serialize"></a>}}
 \subsection{Method \code{serialize()}}{
+Serialize the object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$serialize()}\if{html}{\out{</div>}}
 }

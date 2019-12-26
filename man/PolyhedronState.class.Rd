@@ -56,12 +56,13 @@ Create a polyhedronState object
 }
 \subsection{Returns}{
 A new  `PolyhedronState` object.
+'@description
+Adds an error to the error string and log it as info
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addError"></a>}}
 \subsection{Method \code{addError()}}{
-Adds an error to the error string and log it as info
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$addError(current.error)}\if{html}{\out{</div>}}
 }
@@ -78,8 +79,6 @@ Adds an error to the error string and log it as info
 \if{html}{\out{<a id="method-scrape"></a>}}
 \subsection{Method \code{scrape()}}{
 Scrapes the polyhedra folder files
-#'@description
-get Polyhedron name
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$scrape()}\if{html}{\out{</div>}}
 }
@@ -88,6 +87,7 @@ get Polyhedron name
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getName"></a>}}
 \subsection{Method \code{getName()}}{
+Get Polyhedron name
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$getName()}\if{html}{\out{</div>}}
 }

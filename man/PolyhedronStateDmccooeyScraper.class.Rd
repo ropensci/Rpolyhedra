@@ -4,7 +4,6 @@
 \name{PolyhedronStateDmccooeyScraper.class}
 \alias{PolyhedronStateDmccooeyScraper.class}
 \title{Polyhedron State Dmccooey Scraper}
-\format{\code{\link{R6Class}} object.}
 \description{
 Polyhedron State Dmccooey Scraper
 
@@ -13,22 +12,6 @@ Polyhedron State Dmccooey Scraper
 \details{
 Scrapes polyhedra from a dmccooey file format
 }
-\section{Methods}{
-
-\describe{
-  \item{\code{initialize(file.id, netlib.p3.lines)}}{Initializes
-  the object, taking the file.id and PDH file as parameters}
-  \item{\code{scrape()}}{Scrapes data from dmccooey file format}
-  \item{\code{getName()}}{returns polyhedron name}
-  \item{\code{scrapeValues(values.lines)}}{Scrapes values}
-  \item{\code{scrapeVertices(vertices.lines)}}{Scrapes vertices}
-  \item{\code{scrapeFaces(faces.lines)}}{Scrapes faces}
-  \item{\code{applyTransformationMatrix(transformation.matrix)}}{Apply
-  transformation matrix to polyhedron}
-  \item{\code{buildRGL(transformation.matrix)}}{Builds the \code{RGL} model}
-}
-}
-
 \section{Super class}{
 \code{\link[Rpolyhedra:PolyhedronState]{Rpolyhedra::PolyhedronState}} -> \code{PolyhedronStateDmccooeyScraper}
 }
