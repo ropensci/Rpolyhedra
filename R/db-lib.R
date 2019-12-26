@@ -313,16 +313,19 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         }
         for (r in seq_len(nrow(filenames2scrape))){
           current.filename.data <- filenames2scrape[r, ]
+          #debug
+          current.filename.data <<- current.filename.data
+
           source <- current.filename.data$source
           source.config <- self$sources.config[[source]]
           polyhedra.dir <- source.config$getBaseDir(home.dir.data)
           polyhedron.file.id <- current.filename.data$file.id
           source.filename <- current.filename.data$source.filename
           ret[[paste(source, source.filename, sep = "|")]] <-
-                  covering.code(polyhedra.dir = polyhedra.dir,
-                                source.config = source.config,
-                                polyhedron.file.id = polyhedron.file.id,
-                                source.filename = source.filename)
+                              covering.code(polyhedra.dir = polyhedra.dir,
+                                            source.config = source.config,
+                                            polyhedron.file.id = polyhedron.file.id,
+                                            source.filename = source.filename)
         }
         #after covering, save RDS
         self$saveRDS(save.on.change = save.on.change)

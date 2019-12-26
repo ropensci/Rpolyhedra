@@ -681,7 +681,7 @@ PolyhedronStateDefined.class <- R6::R6Class(
     dual = NA,
     #' @field sfaces polyhedron solid face list (netlib)
     sfaces = NA,
-    #' @field svertices polyhedron solid vertice list (netlib)
+    #' @field svertices polyhedron solid vertices list (netlib)
     svertices = NA,
     #' @field vertices Polyhedron vertices list (netlib|dmccooey)
     vertices = NA,

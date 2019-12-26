@@ -10,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/Rpolyhedra",
   "issueTracker": "https://github.com/ropensci/Rpolyhedra/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.1",
+    "version": "3.6.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
+  "runtimePlatform": "R version 3.6.2 (2019-12-12)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",

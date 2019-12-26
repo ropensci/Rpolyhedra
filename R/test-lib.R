@@ -65,12 +65,14 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
       self
     },
     run = function(){
+      error <- ""
+      scraped.name <- NA
       source <- self$source.config$getName()
       tryCatch({
         obs    <- ""
         self$scraped.polyhedron <- self$source.config$scrape(
                         polyhedron.file.id = self$polyhedron.file.id,
-                        file.path(self$polyhedra.dir, self$source.filename))
+                        source.filename = file.path(self$polyhedra.dir, self$source.filename))
         scraped.name <- self$scraped.polyhedron$getName()
         status <- "testing"
       },
@@ -83,6 +85,12 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
           obs    <- scraped.polyhedron$getErrors()
         }
       })
+      #debug
+      status.debug <<- status
+      error <<- error
+      scraped.name <<- scraped.name
+      self.debug <<- self
+
       expected.polyhedron <-
         self$polyhedra.db$getPolyhedron(source = source,
                                         polyhedron.name = scraped.name)

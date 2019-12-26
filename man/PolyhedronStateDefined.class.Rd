@@ -83,7 +83,7 @@ by a horizontal tab and the number of the dual (netlib)}
 
 \item{\code{sfaces}}{polyhedron solid face list (netlib)}
 
-\item{\code{svertices}}{polyhedron solid vertice list (netlib)}
+\item{\code{svertices}}{polyhedron solid vertices list (netlib)}
 
 \item{\code{vertices}}{Polyhedron vertices list (netlib|dmccooey)}
 
