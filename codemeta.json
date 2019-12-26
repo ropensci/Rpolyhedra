@@ -240,7 +240,6 @@
       "sameAs": "https://CRAN.R-project.org/package=git2r"
     }
   ],
-  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
   "contIntegration": [
     "https://travis-ci.org/ropensci/Rpolyhedra",
     "https://codecov.io/gh/ropensci/Rpolyhedra"
@@ -252,7 +251,7 @@
   ],
   "relatedLink": "https://CRAN.R-project.org/package=Rpolyhedra",
   "funder": {},
-  "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/qbotics/RpolyhedraLegacy/blob/master/NEWS.md",
   "review": {
     "@type": "Review",
     "url": "https://github.com/ropensci/onboarding/issues/157",
