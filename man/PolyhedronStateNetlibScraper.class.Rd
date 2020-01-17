@@ -222,7 +222,7 @@ string with polyhedron name
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
 \subsection{Method \code{scrape()}}{
-scrape polyhedron
+scrape Netlib polyhedron definition
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$scrape()}\if{html}{\out{</div>}}
 }

@@ -4,7 +4,7 @@ testthat::test_that("create minimal db", {
   initDataDirEnvironment()
   testthat::expect_equal(selectDataEnv("PACKAGE"), "PACKAGE")
   source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()
-  source.config.dmccooey <- PolyhedronScraperConfigurationDmccoey.class$new()
+  source.config.dmccooey <- PolyhedronScraperConfigurationDmccooey.class$new()
   testthat::expect_equal(source.config.netlib$getBaseDir("destdir"),
                file.path("destdir", "sources", "www.netlib.org", "polyhedra"))
   testthat::expect_equal(source.config.dmccooey$getBaseDir("destdir"),

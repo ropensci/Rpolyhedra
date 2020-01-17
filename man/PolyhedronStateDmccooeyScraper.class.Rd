@@ -160,7 +160,7 @@ This `PolyhedronStateDmccooeyScraper` object with faces defined.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
 \subsection{Method \code{scrape()}}{
-scrape polyhedron
+scrape Dmccooey polyhedron definition
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$scrape()}\if{html}{\out{</div>}}
 }

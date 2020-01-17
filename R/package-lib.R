@@ -38,10 +38,11 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
   .available.sources <- getPackageEnvir(".available.sources")
   .available.scrapping.conf <- getPackageEnvir(".available.scrapping.conf")
 
-
   #"dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
-  #Change when release version
-  scrapePolyhedra(scrape.config = .available.scrapping.conf[["dev-minimal"]],
+  setPackageEnvir(".scrape.config", "dev-minimal")
+  #When release version, change parameter to "pkg-minimal"
+  .scrape.config <- getPackageEnvir(".scrape.config")
+  scrapePolyhedra(scrape.config = .available.scrapping.conf[[.scrape.config]],
                   source.filenames = source.filenames,
                   sources.config = .available.sources)
 }
@@ -228,9 +229,9 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
       polyhedra.files <- polyhedra.files[order(as.numeric(polyhedra.files))]
       polyhedra.files
     },
-    scrape = function(polyhedron.file.id, source.filename){
-      polyhedra.netlib.lines <- readLines(source.filename)
-      polyhedron.file.id <- source.filename
+    scrape = function(polyhedron.file.id, source.filename.path){
+      polyhedra.netlib.lines <- readLines(source.filename.path)
+      polyhedron.file.id <- source.filename.path
       polyhedron.file.id <- strsplit(polyhedron.file.id, split = "/")[[1]]
       polyhedron.file.id <- polyhedron.file.id[length(polyhedron.file.id)]
       current.polyhedron <- Polyhedron.class$new(file.id = polyhedron.file.id)
@@ -241,9 +242,9 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
     }
   ))
 
-#' Polyhedron scraper configuration class (Dmccoey)
+#' Polyhedron scraper configuration class (Dmccooey)
 #'
-#' Scraper configuration for Dmccoey source
+#' Scraper configuration for Dmccooey source
 #'
 #' @section Methods:
 #' \describe{
@@ -257,8 +258,8 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 #' @noRd
-PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
-  "PolyhedronScraperConfigurationDmccoey",
+PolyhedronScraperConfigurationDmccooey.class <- R6::R6Class(
+  "PolyhedronScraperConfigurationDmccooey",
   inherit = PolyhedronScraperConfiguration.class,
   public = list(
     initialize = function(name) {
@@ -278,12 +279,17 @@ PolyhedronScraperConfigurationDmccoey.class <- R6::R6Class(
       polyhedra.files <- polyhedra.files[grep("\\.txt", polyhedra.files)]
       polyhedra.files
     },
-    scrape = function(polyhedron.file.id, source.filename){
-      polyhedra.dmccoey.lines <- readLines(source.filename)
+    scrape = function(polyhedron.file.id, source.filename.path){
+      polyhedra.dmccooey.lines <- readLines(source.filename.path)
       current.polyhedron <- Polyhedron.class$new(file.id = polyhedron.file.id)
-      current.polyhedron$scrapeDmccoey(polyhedra.dmccoey.lines =
-                                         polyhedra.dmccoey.lines)
-      futile.logger::flog.debug(paste("parsed", source.filename, "with name",
+
+      #debug
+      current.polyhedron <<- current.polyhedron
+
+
+      current.polyhedron$scrapeDmccooey(polyhedra.dmccooey.lines =
+                                         polyhedra.dmccooey.lines)
+      futile.logger::flog.debug(paste("parsed", source.filename.path, "with name",
                                       current.polyhedron$state$name))
       current.polyhedron
     }

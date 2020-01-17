@@ -109,12 +109,15 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
          preloaded.time2scrape <- NA
        }
        self$df[r, c("id",
+                    "file.id",
                    "source",
                    "source.filename",
                    "status")] <- c(r,
+                                  file.id,
                                   source,
                                   source.filename,
                                   default.status)
+
        self$dirty <- TRUE
      }
      r

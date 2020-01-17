@@ -20,7 +20,7 @@
   .available.sources[["netlib"]] <-
     PolyhedronScraperConfigurationNetlib.class$new()
   .available.sources[["dmccooey"]] <-
-    PolyhedronScraperConfigurationDmccoey.class$new()
+    PolyhedronScraperConfigurationDmccooey.class$new()
 
   setPackageEnvir(variable.name = ".available.sources", .available.sources)
 

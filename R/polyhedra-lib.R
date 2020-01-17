@@ -278,7 +278,7 @@ PolyhedronStateNetlibScraper.class <- R6::R6Class(
     self$getDataFromLabel("name")
   },
   #' @description
-  #' scrape polyhedron
+  #' scrape Netlib polyhedron definition
   #' @return A new `PolyhedronStateDefined` object.
   scrape = function() {
       # first check labels
@@ -502,9 +502,11 @@ PolyhedronStateDmccooeyScraper.class <- R6::R6Class(
       self
   },
   #' @description
-  #' scrape polyhedron
+  #' scrape Dmccooey polyhedron definition
   #' @return A new `PolyhedronStateDefined` object.
   scrape = function() {
+      stopifnot(!is.na(self$regexp.values))
+
       #preprocess
       lines.num <- length(self$polyhedra.dmccooey.lines)
       self$polyhedra.dmccooey.lines[2:lines.num] <- gsub("[[:space:]]",
@@ -523,6 +525,7 @@ PolyhedronStateDmccooeyScraper.class <- R6::R6Class(
       values.lines <- self$polyhedra.dmccooey.lines[self$labels.map[["values"]]]
       self$scrapeValues(values.lines)
 
+
       #vertex
       self$labels.map[["vertices"]] <- grep(self$regexp.vertex,
                                             self$polyhedra.dmccooey.lines)
@@ -537,7 +540,8 @@ PolyhedronStateDmccooeyScraper.class <- R6::R6Class(
       self$scrapeFaces(faces.lines = self$polyhedra.dmccooey.lines[
         self$labels.map[["faces"]]])
 
-
+      #debug
+      self.debug <<- self
 
       ret <- PolyhedronStateDefined.class$new(
                     source = self$source,
@@ -1169,7 +1173,12 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
   #' @return A new  `PolyhedronStateDefined` object.
   scrapeDmccooey = function(polyhedra.dmccooey.lines) {
       self$state <- PolyhedronStateDmccooeyScraper.class$new(
-        self$file.id, polyhedra.dmccooey.lines)
+        file.id = self$file.id, polyhedra.dmccooey.lines = polyhedra.dmccooey.lines)
+      self$state$setupRegexp()
+      #debug
+      polyhedra.dmccooey.lines <<- polyhedra.dmccooey.lines
+      self.debug <<- self
+
       self$state <- self$state$scrape()
       #Postprocess in defined state
       self
