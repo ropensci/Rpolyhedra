@@ -39,7 +39,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
   .available.scrapping.conf <- getPackageEnvir(".available.scrapping.conf")
 
   #"dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
-  setPackageEnvir(".scrape.config", "dev-minimal")
+  setPackageEnvir(".scrape.config", "pkg-minimal")
   #When release version, change parameter to "pkg-minimal"
   .scrape.config <- getPackageEnvir(".scrape.config")
   scrapePolyhedra(scrape.config = .available.scrapping.conf[[.scrape.config]],
@@ -282,9 +282,6 @@ PolyhedronScraperConfigurationDmccooey.class <- R6::R6Class(
     scrape = function(polyhedron.file.id, source.filename.path){
       polyhedra.dmccooey.lines <- readLines(source.filename.path)
       current.polyhedron <- Polyhedron.class$new(file.id = polyhedron.file.id)
-
-      #debug
-      current.polyhedron <<- current.polyhedron
 
 
       current.polyhedron$scrapeDmccooey(polyhedra.dmccooey.lines =

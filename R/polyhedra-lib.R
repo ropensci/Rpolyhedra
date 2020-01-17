@@ -540,8 +540,6 @@ PolyhedronStateDmccooeyScraper.class <- R6::R6Class(
       self$scrapeFaces(faces.lines = self$polyhedra.dmccooey.lines[
         self$labels.map[["faces"]]])
 
-      #debug
-      self.debug <<- self
 
       ret <- PolyhedronStateDefined.class$new(
                     source = self$source,
@@ -1175,9 +1173,6 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
       self$state <- PolyhedronStateDmccooeyScraper.class$new(
         file.id = self$file.id, polyhedra.dmccooey.lines = polyhedra.dmccooey.lines)
       self$state$setupRegexp()
-      #debug
-      polyhedra.dmccooey.lines <<- polyhedra.dmccooey.lines
-      self.debug <<- self
 
       self$state <- self$state$scrape()
       #Postprocess in defined state

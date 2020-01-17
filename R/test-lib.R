@@ -85,11 +85,6 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
           obs    <- scraped.polyhedron$getErrors()
         }
       })
-      #debug
-      status.debug <<- status
-      error <<- error
-      scraped.name <<- scraped.name
-      self.debug <<- self
 
       expected.polyhedron <-
         self$polyhedra.db$getPolyhedron(source = source,

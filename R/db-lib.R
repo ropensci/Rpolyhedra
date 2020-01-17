@@ -313,8 +313,6 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         }
         for (r in seq_len(nrow(filenames2scrape))){
           current.filename.data <- filenames2scrape[r, ]
-          #debug
-          current.filename.data <<- current.filename.data
 
           source <- current.filename.data$source
           source.config <- self$sources.config[[source]]
@@ -357,20 +355,13 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                   polyhedron.file.id, source.filename){
         source <- source.config$getName()
         current.polyhedron <- NULL
-        #tryCatch({
+        tryCatch({
           self$ledger$updateStatus(source = source,
                                    source.filename = source.filename,
                                    status = "scraping")
 
           source.filename.path <- file.path(polyhedra.dir,
                                             source.filename)
-          #debug
-          source.config <<- source.config
-          #self.debug <<- self
-          polyhedron.file.id <<- polyhedron.file.id
-          polyhedra.dir <<- polyhedra.dir
-          source.filename <<- source.filename
-          source.filename.path <<- source.filename.path
 
           current.polyhedron <- source.config$scrape(
             polyhedron.file.id = polyhedron.file.id,
@@ -387,16 +378,16 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
                                      source.filename = source.filename,
                                      status = "failed", obs = errors)
           }
-        # },
-        # error = function(e){
-        #   error <- paste(e$message, collapse = ",")
-        #   futile.logger::flog.error(paste("catched error", error))
-        #   assign("error", error, envir = parent.env(environment()))
-        #   self$ledger$updateStatus(source = source,
-        #                            source.filename,
-        #                            status = "exception",
-        #                            obs = error)
-        # })
+        },
+        error = function(e){
+          error <- paste(e$message, collapse = ",")
+          futile.logger::flog.error(paste("catched error", error))
+          assign("error", error, envir = parent.env(environment()))
+          self$ledger$updateStatus(source = source,
+                                   source.filename,
+                                   status = "exception",
+                                   obs = error)
+        })
         current.polyhedron
       }
       if (time2scrape.source > 0){
