@@ -127,7 +127,7 @@ object initialization routine
 
 \item{\code{net}}{the net}
 
-\item{\code{symbol}}{the symbold}
+\item{\code{symbol}}{the symbol}
 
 \item{\code{dual}}{whether it is dual or not}
 
@@ -391,7 +391,7 @@ an applied transformation.matrix
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-buildRGL"></a>}}
 \subsection{Method \code{buildRGL()}}{
-Build RGL
+Build 'rgl'
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined.class$buildRGL(transformation.matrix = NULL)}\if{html}{\out{</div>}}
 }

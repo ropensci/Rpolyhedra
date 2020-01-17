@@ -133,7 +133,7 @@ Apply transformation matrix to polyhedron
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-buildRGL"></a>}}
 \subsection{Method \code{buildRGL()}}{
-Creates a RGL representation of the object
+Creates a 'rgl' representation of the object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$buildRGL(transformation.matrix)}\if{html}{\out{</div>}}
 }

@@ -19,7 +19,7 @@ First version published on [rOpenSci.org](http://www.rOpenSci.org).
 
 ### MINOR IMPROVEMENTS
 
-* Complies with all the prerequisites of rOpenSci and applies the suggestions made by rOpenSci reviwers. 
+* Complies with all the prerequisites of rOpenSci and applies the suggestions made by rOpenSci reviewers. 
 * Fixes a test that writes on user space.
 * Integrates with codecov.io, which allows for better test coverage. 
 * Updated examples.

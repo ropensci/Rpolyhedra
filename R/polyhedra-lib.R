@@ -57,7 +57,7 @@ PolyhedronState.class <- R6::R6Class("PolyhedronState",
     stop("Abstract class")
   },
   #'@description
-  #'Creates a RGL representation of the object
+  #'Creates a 'rgl' representation of the object
   #'@param transformation.matrix the transformation matrix to apply to the polyhedron
   buildRGL = function(transformation.matrix) {
       stop(gettext("rpoly.abstract_class", domain = "R-Rpolyhedra"))
@@ -335,7 +335,7 @@ PolyhedronStateNetlibScraper.class <- R6::R6Class(
     stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
   },
   #'@description
-  #'Creates a RGL representation of the object
+  #'Creates a 'rgl' representation of the object
   #'@param transformation.matrix the transformation matrix to apply to the polyhedron
   buildRGL = function(transformation.matrix) {
     stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
@@ -562,7 +562,7 @@ PolyhedronStateDmccooeyScraper.class <- R6::R6Class(
     stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
   },
   #'@description
-  #'Creates a RGL representation of the object
+  #'Creates a 'rgl' representation of the object
   #'@param transformation.matrix the transformation matrix to apply to the polyhedron
   buildRGL = function(transformation.matrix) {
     stop(gettext("rpoly.not_implemented", domain = "R-Rpolyhedra"))
@@ -610,7 +610,7 @@ PolyhedronStateDefined.class <- R6::R6Class(
     edges.check = NULL,
     # vertices definition for solid 3d object
     vertices.id.3d = NULL,
-    # Polyhedron triangulated vertices list for RGL
+    # Polyhedron triangulated vertices list for 'rgl'
     vertices.rgl = NULL,
     #  Polyhedron solid (triangulated)
     solid.triangulated = NULL
@@ -661,7 +661,7 @@ PolyhedronStateDefined.class <- R6::R6Class(
     #' @param vertices the vertices
     #' @param solid the solid object
     #' @param net the net
-    #' @param symbol the symbold
+    #' @param symbol the symbol
     #' @param dual whether it is dual or not
     #' @param sfaces the solid faces
     #' @param svertices the solid vertices
@@ -969,7 +969,7 @@ PolyhedronStateDefined.class <- R6::R6Class(
     self$transformation.matrix
   },
   #' @description
-  #' Build RGL
+  #' Build 'rgl'
   #' @param transformation.matrix the transformation matrix
   buildRGL = function(transformation.matrix = NULL) {
     if (is.null(transformation.matrix)){
@@ -1109,31 +1109,9 @@ PolyhedronStateDeserializer.class <- R6::R6Class(
 
 #' Polyhedron
 #'
+#' @description
 #' Polyhedron container class, which is accesible by the final users upon call
-#' to \code{getPolyhedron()}
-#' @section Methods:
-#' \describe{
-#'   \item{\code{initialize(file.id, state = NULL)}}{Initializes the object}
-#'   \item{\code{scrapeNetlib(polyhedron.lines)}}{{Scrapes polyhedra from
-#'   the netlib definition}}
-#'   \item{\code{scrapeDmccooey(polyhedra.dmccooey.lines)}}{{Scrapes polyhedra
-#'    from the dmccooey definition}}
-#'   \item{\code{deserialize(polyhedron.serialized)}}{{Deserialize polyhedron
-#'    from definition}}
-#'   \item{\code{getName()}}{Gets the name from polyhedron definition}
-#'   \item{\code{getState()}}{Gets the state from polyhedron definition}
-#'   \item{\code{getSolid()}}{Gets the solid definition of polyhedron
-#'   definition}
-#'   \item{\code{isChecked()}}{Returns TRUE is polyhedron is checked}
-#'   \item{\code{getErrors()}}{Returns errors collected in checking process}
-#'   \item{\code{getRGLModel(transformation.matrix)}}{Builds the RGL model}
-#'   \item{\code{exportToXML()}}{Gets an XML representation out of the
-#'   polyhedron object}
-#'   \item{\code{checkProperties(expected.vertices,
-#'   expected.faces)}}{check polyhedron basic properties}
 #'
-
-#' }
 #' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom R6 R6Class
@@ -1180,7 +1158,7 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
   },
   #' @description
   #' deserialize a polyhedron state definition
-  #' @param serialized.polyhedron a seralized version of a polyhedron state
+  #' @param serialized.polyhedron a serialized version of a polyhedron state
   #' @return A new  `PolyhedronStateDefined` object.
   deserialize = function(serialized.polyhedron){
     self$state   <- PolyhedronStateDeserializer.class$new(
@@ -1220,7 +1198,7 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
       ret
   },
   #' @description
-  #' Return an RGL model with an optional transformation described by transformation.matrix parameter
+  #' Return an 'rgl' model with an optional transformation described by transformation.matrix parameter
   #' @param transformation.matrix transformation matrix parameter
   #' @return An tmesh3d object
   getRGLModel = function(transformation.matrix = NULL) {
