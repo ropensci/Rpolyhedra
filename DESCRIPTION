@@ -6,6 +6,7 @@ Language: en-US
 Authors@R: c(
     person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
     person("Leonardo","Belen",,"leobelen@gmail.com", c("aut","com","cph")),
+    person(,"qbotics",,"qbotics6@gmail.com", c("cph")),
     person("Barret","Schloerke",,"schloerke@gmail.com", c("rev")),
     person("Lijia","Yu",,"yu@lijiayu.net", c("rev"))
     )
