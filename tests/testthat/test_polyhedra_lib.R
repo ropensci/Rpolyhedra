@@ -3,8 +3,8 @@
 context("polyhedra- Check package db")
 testthat::test_that("Check pkg-minimal size and objects", {
   available.polyhedra <- getAvailablePolyhedra()
-  .scrape.config <- getPackageEnvir(".scrape.config")
-  if (.scrape.config == "dev-minimal"){
+  .scrape.config <- getUserEnvir(".scrape.config")
+  if (.scrape.config == "dev-minimal" || .scrape.config == "pkg-minimal"){
     expected.netlib.size <- 10
     expected.dmccooey.size <- 0
   }

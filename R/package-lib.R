@@ -35,13 +35,13 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
 
   setUserEnvir(".polyhedra", value = .polyhedra)
 
-  .available.sources <- getPackageEnvir(".available.sources")
-  .available.scrapping.conf <- getPackageEnvir(".available.scrapping.conf")
+  .available.sources <- getUserEnvir(".available.sources")
+  .available.scrapping.conf <- getUserEnvir(".available.scrapping.conf")
 
   #"dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
-  setPackageEnvir(".scrape.config", "pkg-minimal")
+  setUserEnvir(".scrape.config", "pkg-minimal")
   #When release version, change parameter to "pkg-minimal"
-  .scrape.config <- getPackageEnvir(".scrape.config")
+  .scrape.config <- getUserEnvir(".scrape.config")
   scrapePolyhedra(scrape.config = .available.scrapping.conf[[.scrape.config]],
                   source.filenames = source.filenames,
                   sources.config = .available.sources)
@@ -115,7 +115,7 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env =  "HOME"),
   dir.create(dest.folder, showWarnings = FALSE, recursive = TRUE)
   #check existing sources
   existing <- FALSE
-  .available.sources <- getPackageEnvir(".available.sources")
+  .available.sources <- getUserEnvir(".available.sources")
   for (source in names(.available.sources)){
     source.config <- .available.sources[[source]]
     dest.folder.source <- source.config$getBaseDir(dest.folder)
@@ -208,7 +208,6 @@ PolyhedronScraperConfiguration.class <- R6::R6Class(
 #'   \item{\code{scrape(polyhedron.file.id, source.filename)}}{scrapes the object}
 #' }
 #'
-#' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
@@ -253,7 +252,6 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
 #'   \item{\code{scrape(polyhedron.file.id, source.filename)}}{scrapes the object}
 #' }
 #'
-#' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
@@ -388,7 +386,7 @@ getPackageVersion <- function(){
 #' Obtains the database version from environment
 #' @noRd
 getPackageDB <- function(){
-  .package.db <- getPackageEnvir(".package.db")
+  .package.db <- getUserEnvir(".package.db")
   ret <- .package.db[[getPackageVersion()]]
   if (is.null(ret)){
     ret <- getPackageVersion()

@@ -2,7 +2,7 @@ context("ledger-lib")
 testthat::test_that("create minimal ledger", {
   ledger <- ScraperLedger.class$new()
   #initialize variables
-  source.config.netlib <- getPackageEnvir(".available.sources")[["netlib"]]
+  source.config.netlib <- getUserEnvir(".available.sources")[["netlib"]]
 
   scrapeInLedger <- function(ledger, source.config, filename){
     #Simulates scrape desired behavior

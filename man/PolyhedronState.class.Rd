@@ -39,6 +39,7 @@ This abstract class provide the basis from which polyhedron state class derivate
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create a polyhedronState object
 \subsection{Usage}{
@@ -55,13 +56,14 @@ Create a polyhedronState object
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new  `PolyhedronState` object.
+A new  PolyhedronState object.
 '@description
 Adds an error to the error string and log it as info
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addError"></a>}}
+\if{latex}{\out{\hypertarget{method-addError}{}}}
 \subsection{Method \code{addError()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$addError(current.error)}\if{html}{\out{</div>}}
@@ -77,6 +79,7 @@ Adds an error to the error string and log it as info
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 Scrapes the polyhedra folder files
 \subsection{Usage}{
@@ -86,6 +89,7 @@ Scrapes the polyhedra folder files
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getName"></a>}}
+\if{latex}{\out{\hypertarget{method-getName}{}}}
 \subsection{Method \code{getName()}}{
 Get Polyhedron name
 \subsection{Usage}{
@@ -98,6 +102,7 @@ string with polyhedron name
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getSolid"></a>}}
+\if{latex}{\out{\hypertarget{method-getSolid}{}}}
 \subsection{Method \code{getSolid()}}{
 Returns the object corresponding to the solid
 \subsection{Usage}{
@@ -107,6 +112,7 @@ Returns the object corresponding to the solid
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-checkEdgesConsistency"></a>}}
+\if{latex}{\out{\hypertarget{method-checkEdgesConsistency}{}}}
 \subsection{Method \code{checkEdgesConsistency()}}{
 Checks edge consistency
 \subsection{Usage}{
@@ -116,6 +122,7 @@ Checks edge consistency
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
+\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
 \subsection{Method \code{applyTransformationMatrix()}}{
 Apply transformation matrix to polyhedron
 \subsection{Usage}{
@@ -132,6 +139,7 @@ Apply transformation matrix to polyhedron
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-buildRGL"></a>}}
+\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
 \subsection{Method \code{buildRGL()}}{
 Creates a 'rgl' representation of the object
 \subsection{Usage}{
@@ -148,6 +156,7 @@ Creates a 'rgl' representation of the object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-exportToXML"></a>}}
+\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
 \subsection{Method \code{exportToXML()}}{
 Gets an XML representation out of the polyhedron object
 \subsection{Usage}{
@@ -157,6 +166,7 @@ Gets an XML representation out of the polyhedron object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

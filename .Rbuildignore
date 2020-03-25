@@ -11,3 +11,4 @@
 ^docs
 ^doc
 ^cran-comments\.md$
+^inst\extdata\.tmp$

@@ -21,7 +21,7 @@ getPolyhedraObject <- function() {
 #' @return polyhedra db object
 scrapePolyhedra <- function(scrape.config,
                 source.filenames = NULL,
-                sources.config = getPackageEnvir(".available.sources")) {
+                sources.config = getUserEnvir(".available.sources")) {
   scrapePolyhedraSources(max.quant.config.schedule =
                scrape.config[["max.quant.config.schedule"]],
              max.quant.scrape = scrape.config[["max.quant.scrape"]],
@@ -47,12 +47,12 @@ scrapePolyhedra <- function(scrape.config,
 #' @return polyhedra db object
 #' @usage
 #'     scrapePolyhedraSources(sources.config =
-#'          getPackageEnvir(".available.sources"),
+#'          getUserEnvir(".available.sources"),
 #'     max.quant.config.schedule = 0,
 #'     max.quant.scrape = 0, time2scrape.source = 30,
 #'     source.filenames = NULL, retry.scrape = FALSE)
 scrapePolyhedraSources <- function(sources.config =
-                                     getPackageEnvir(".available.sources"),
+                                     getUserEnvir(".available.sources"),
                                    max.quant.config.schedule = 0,
                                    max.quant.scrape = 0,
                                    time2scrape.source = 30,
@@ -137,7 +137,7 @@ getAvailableSources <- function(){
 #'cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
 #'cube
 getAvailablePolyhedra <- function(sources =
-                      names(getPackageEnvir(".available.sources")),
+                      names(getUserEnvir(".available.sources")),
                       search.string = NULL){
   getPolyhedraObject()$getAvailablePolyhedra(sources = sources,
                       search.string = search.string)
@@ -182,7 +182,7 @@ getAvailablePolyhedra <- function(sources =
 
 getPolyhedron <- function(source = "netlib", polyhedron.name) {
   ret <- NULL
-  if (exists(".polyhedra", envir = getPackageEnvir("RpolyhedraEnv"))) {
+  if (exists(".polyhedra", envir = getUserEnvir("RpolyhedraEnv"))) {
     ret <- getPolyhedraObject()$getPolyhedron(source = source,
                                               polyhedron.name = polyhedron.name)
   }

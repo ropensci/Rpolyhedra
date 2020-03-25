@@ -4,7 +4,6 @@
 \name{PolyhedronStateDeserializer.class}
 \alias{PolyhedronStateDeserializer.class}
 \title{Polyhedron State Deserializer}
-\format{\code{\link{R6Class}} object.}
 \description{
 Polyhedron state for deserialize from database
 }
@@ -41,6 +40,7 @@ Polyhedron state for deserialize from database
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize PolyhedronStateDeserializer object
 \subsection{Usage}{
@@ -55,11 +55,12 @@ Initialize PolyhedronStateDeserializer object
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new  `PolyhedronStateDeserializer` object.
+A new  PolyhedronStateDeserializer object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 Generates a PolyhedronStateDefined from a serialized polyhedron
 \subsection{Usage}{
@@ -67,11 +68,12 @@ Generates a PolyhedronStateDefined from a serialized polyhedron
 }
 
 \subsection{Returns}{
-A new  `PolyhedronStateDefined` object.
+A new  PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

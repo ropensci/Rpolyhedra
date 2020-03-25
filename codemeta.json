@@ -14,10 +14,10 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.2",
+    "version": "3.6.3",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.2 (2019-12-12)",
+  "runtimePlatform": "R version 3.6.3 (2020-02-29)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -256,12 +256,11 @@
   ],
   "relatedLink": "https://CRAN.R-project.org/package=Rpolyhedra",
   "funder": {},
-  "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/qbotics/RpolyhedraLegacy/blob/master/NEWS.md",
   "review": {
     "@type": "Review",
     "url": "https://github.com/ropensci/onboarding/issues/157",
     "provider": "http://ropensci.org"
   },
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md"
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

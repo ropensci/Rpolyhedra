@@ -27,7 +27,7 @@ testthat::test_that("create minimal db", {
   db$addSourceConfig(source.config = source.config.dmccooey)
 
   db$schedulePolyhedraSources(sources.config =
-                                getPackageEnvir(".available.sources"),
+                                getUserEnvir(".available.sources"),
                               source.filenames = NULL)
   db$scrape(mode = "scrape.queued", sources = "netlib", max.quant = 3,
             skip.still.queued = FALSE, save.on.change = FALSE)

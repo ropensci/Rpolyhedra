@@ -5,7 +5,7 @@
 #' @noRd
 .onLoad <- function(libname, pkgname) {
 
-  setPackageEnvir(variable.name = "RpolyhedraEnv", new.env())
+  setPackageEnvir(variable.name = "RpolyhedraEnv", new.env(parent=asNamespace("Rpolyhedra")))
 
   #package version db
   .package.db <- list()

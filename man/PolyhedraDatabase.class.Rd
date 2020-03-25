@@ -4,13 +4,9 @@
 \name{PolyhedraDatabase.class}
 \alias{PolyhedraDatabase.class}
 \title{Polyhedra database}
-\format{\code{\link{R6Class}} object.}
 \description{
 Scrapes all polyhedra in data folder to save a representation which
 is accessible by the final users upon call to \code{getPolyhedron()}.
-}
-\details{
-
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -52,6 +48,7 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new PolyhedraDatabase object.
 \subsection{Usage}{
@@ -64,6 +61,7 @@ A new `PolyhedraDatabase` object.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getVersion"></a>}}
+\if{latex}{\out{\hypertarget{method-getVersion}{}}}
 \subsection{Method \code{getVersion()}}{
 get the version of the current object.
 \subsection{Usage}{
@@ -76,6 +74,7 @@ Database version
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-configPolyhedraRDSPath"></a>}}
+\if{latex}{\out{\hypertarget{method-configPolyhedraRDSPath}{}}}
 \subsection{Method \code{configPolyhedraRDSPath()}}{
 sets the path of the RDS object
 \subsection{Usage}{
@@ -88,6 +87,7 @@ Database version
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-existsSource"></a>}}
+\if{latex}{\out{\hypertarget{method-existsSource}{}}}
 \subsection{Method \code{existsSource()}}{
 Determines if the source exists on
   the database
@@ -108,6 +108,7 @@ boolean value
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addSourceConfig"></a>}}
+\if{latex}{\out{\hypertarget{method-addSourceConfig}{}}}
 \subsection{Method \code{addSourceConfig()}}{
 add  source.config to the database
 \subsection{Usage}{
@@ -127,6 +128,7 @@ PolyhedraDatabase.class object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-existsPolyhedron"></a>}}
+\if{latex}{\out{\hypertarget{method-existsPolyhedron}{}}}
 \subsection{Method \code{existsPolyhedron()}}{
 Determines if the database includes a polyhedron which name
 matches the parameter value
@@ -149,6 +151,7 @@ boolean value
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getPolyhedraSourceDir"></a>}}
+\if{latex}{\out{\hypertarget{method-getPolyhedraSourceDir}{}}}
 \subsection{Method \code{getPolyhedraSourceDir()}}{
 gets polyhedra sources folder
 \subsection{Usage}{
@@ -170,6 +173,7 @@ string with polyhedra sources path
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getPolyhedronFilename"></a>}}
+\if{latex}{\out{\hypertarget{method-getPolyhedronFilename}{}}}
 \subsection{Method \code{getPolyhedronFilename()}}{
 gets the filename of the polyhedron matching parameter.
 \subsection{Usage}{
@@ -197,6 +201,7 @@ string with polyhedron filename
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getPolyhedron"></a>}}
+\if{latex}{\out{\hypertarget{method-getPolyhedron}{}}}
 \subsection{Method \code{getPolyhedron()}}{
 gets polyhedron object which name
 matches the parameter value
@@ -225,6 +230,7 @@ Polyhedron.class object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addPolyhedron"></a>}}
+\if{latex}{\out{\hypertarget{method-addPolyhedron}{}}}
 \subsection{Method \code{addPolyhedron()}}{
 add polyhedron object to the database
 \subsection{Usage}{
@@ -258,6 +264,7 @@ Polyhedron.class object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-configPolyhedraSource"></a>}}
+\if{latex}{\out{\hypertarget{method-configPolyhedraSource}{}}}
 \subsection{Method \code{configPolyhedraSource()}}{
 Process parameter filenames using source.config parameter
 \subsection{Usage}{
@@ -288,6 +295,7 @@ Modified `PolyhedraDatabase` object.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-saveRDS"></a>}}
+\if{latex}{\out{\hypertarget{method-saveRDS}{}}}
 \subsection{Method \code{saveRDS()}}{
 saveRDS
 \subsection{Usage}{
@@ -307,6 +315,7 @@ saveRDS return status
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-cover"></a>}}
+\if{latex}{\out{\hypertarget{method-cover}{}}}
 \subsection{Method \code{cover()}}{
 Cover objects and applies covering.code parameter
 \subsection{Usage}{
@@ -346,6 +355,7 @@ A list with resulting objects covered
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 Scrape polyhedra queued sources
 \subsection{Usage}{
@@ -386,6 +396,7 @@ A list with resulting objects covered
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-testRR"></a>}}
+\if{latex}{\out{\hypertarget{method-testRR}{}}}
 \subsection{Method \code{testRR()}}{
 testRR
 \subsection{Usage}{
@@ -410,6 +421,7 @@ A list with resulting objects tested
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-generateTestTasks"></a>}}
+\if{latex}{\out{\hypertarget{method-generateTestTasks}{}}}
 \subsection{Method \code{generateTestTasks()}}{
 generate Test tasks for selected polyhedra
 \subsection{Usage}{
@@ -440,6 +452,7 @@ A list with resulting TestTasks generated
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-schedulePolyhedraSources"></a>}}
+\if{latex}{\out{\hypertarget{method-schedulePolyhedraSources}{}}}
 \subsection{Method \code{schedulePolyhedraSources()}}{
 Schedules polyhedra sources for scraping
 \subsection{Usage}{
@@ -470,6 +483,7 @@ Modified `PolyhedraDatabase` object.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getAvailableSources"></a>}}
+\if{latex}{\out{\hypertarget{method-getAvailableSources}{}}}
 \subsection{Method \code{getAvailableSources()}}{
 Returns available sources in current database
 \subsection{Usage}{
@@ -482,6 +496,7 @@ A vector with names of available sources
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getAvailablePolyhedra"></a>}}
+\if{latex}{\out{\hypertarget{method-getAvailablePolyhedra}{}}}
 \subsection{Method \code{getAvailablePolyhedra()}}{
 Retrieves all polyhedron within the source those names match with search.string
 \subsection{Usage}{
@@ -509,6 +524,7 @@ A list with resulting objects covered
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

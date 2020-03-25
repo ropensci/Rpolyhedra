@@ -299,7 +299,7 @@ ScraperLedger.class <- R6::R6Class("ScraperLedger",
      }
    },
    getAvailablePolyhedra = function(sources = names(
-           getPackageEnvir(".available.sources")),
+           getUserEnvir(".available.sources")),
            search.string = "",
            ret.fields = c("source", "scraped.name", "symbol", "vertices",
                           "faces", "status"),

@@ -7,7 +7,7 @@
 scrapePolyhedra(
   scrape.config,
   source.filenames = NULL,
-  sources.config = getPackageEnvir(".available.sources")
+  sources.config = getUserEnvir(".available.sources")
 )
 }
 \arguments{

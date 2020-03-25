@@ -9,7 +9,6 @@
 #'   \item{\code{run()}}{Run the test task}
 #' }
 #'
-#' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom R6 R6Class
 #' @noRd
@@ -40,7 +39,6 @@ public = list(
 #'   \item{\code{run()}}{Run the test task}
 #' }
 #'
-#' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
@@ -98,7 +96,6 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
 #'
 #' A Test task for running edges consistency test for current polyhedron
 #'
-#' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @noRd
 PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class(

@@ -4,7 +4,6 @@
 \name{Polyhedron.class}
 \alias{Polyhedron.class}
 \title{Polyhedron}
-\format{\code{\link{R6Class}} object.}
 \description{
 Polyhedron container class, which is accesible by the final users upon call
 }
@@ -37,6 +36,7 @@ Polyhedron container class, which is accesible by the final users upon call
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create a polyhedronState object
 \subsection{Usage}{
@@ -53,11 +53,12 @@ Create a polyhedronState object
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new  `Polyhedron` object.
+A new  Polyhedron object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeNetlib"></a>}}
+\if{latex}{\out{\hypertarget{method-scrapeNetlib}{}}}
 \subsection{Method \code{scrapeNetlib()}}{
 scrape Netlib polyhedron definition
 \subsection{Usage}{
@@ -72,11 +73,12 @@ scrape Netlib polyhedron definition
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new  `PolyhedronStateDefined` object.
+A new  PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeDmccooey"></a>}}
+\if{latex}{\out{\hypertarget{method-scrapeDmccooey}{}}}
 \subsection{Method \code{scrapeDmccooey()}}{
 scrape Dmccooey polyhedron definition
 \subsection{Usage}{
@@ -91,11 +93,12 @@ scrape Dmccooey polyhedron definition
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new  `PolyhedronStateDefined` object.
+A new  PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-deserialize"></a>}}
+\if{latex}{\out{\hypertarget{method-deserialize}{}}}
 \subsection{Method \code{deserialize()}}{
 deserialize a polyhedron state definition
 \subsection{Usage}{
@@ -110,11 +113,12 @@ deserialize a polyhedron state definition
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new  `PolyhedronStateDefined` object.
+A new  PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getName"></a>}}
+\if{latex}{\out{\hypertarget{method-getName}{}}}
 \subsection{Method \code{getName()}}{
 get Polyhedron name
 \subsection{Usage}{
@@ -127,6 +131,7 @@ string with polyhedron name
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getState"></a>}}
+\if{latex}{\out{\hypertarget{method-getState}{}}}
 \subsection{Method \code{getState()}}{
 Gets polyhedron state
 \subsection{Usage}{
@@ -134,11 +139,12 @@ Gets polyhedron state
 }
 
 \subsection{Returns}{
-A new  `PolyhedronState` object.
+A new  PolyhedronState object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getSolid"></a>}}
+\if{latex}{\out{\hypertarget{method-getSolid}{}}}
 \subsection{Method \code{getSolid()}}{
 Gets a solid definition
 \subsection{Usage}{
@@ -151,6 +157,7 @@ A list of vertex vectors composing polyhedron faces.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-isChecked"></a>}}
+\if{latex}{\out{\hypertarget{method-isChecked}{}}}
 \subsection{Method \code{isChecked()}}{
 checks Edges consistency
 \subsection{Usage}{
@@ -163,6 +170,7 @@ A boolean value
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getRGLModel"></a>}}
+\if{latex}{\out{\hypertarget{method-getRGLModel}{}}}
 \subsection{Method \code{getRGLModel()}}{
 Return an 'rgl' model with an optional transformation described by transformation.matrix parameter
 \subsection{Usage}{
@@ -182,6 +190,7 @@ An tmesh3d object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-exportToXML"></a>}}
+\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
 \subsection{Method \code{exportToXML()}}{
 exports an XML definition of current polyhedron
 \subsection{Usage}{
@@ -194,6 +203,7 @@ A character object with the XML definitiont
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getErrors"></a>}}
+\if{latex}{\out{\hypertarget{method-getErrors}{}}}
 \subsection{Method \code{getErrors()}}{
 returns the errors found when processing current polyhedron
 \subsection{Usage}{
@@ -206,6 +216,7 @@ a data.frame with polyhedron errors
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-checkProperties"></a>}}
+\if{latex}{\out{\hypertarget{method-checkProperties}{}}}
 \subsection{Method \code{checkProperties()}}{
 check properties of current polyhedron
 \subsection{Usage}{
@@ -227,6 +238,7 @@ Unmodified polyhedron object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

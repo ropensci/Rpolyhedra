@@ -57,6 +57,7 @@ Scrapes polyhedra from a PHD file format.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Initializes the object, taking the file.id and PDH file as parameters
 \subsection{Usage}{
@@ -73,11 +74,12 @@ Initializes the object, taking the file.id and PDH file as parameters
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new  `PolyhedronStateNetlibScraper` object.
+A new  PolyhedronStateNetlibScraper object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-extractRowsFromLabel"></a>}}
+\if{latex}{\out{\hypertarget{method-extractRowsFromLabel}{}}}
 \subsection{Method \code{extractRowsFromLabel()}}{
 Extracts data from the label, taking the label number and the
   expected label as parameters
@@ -100,6 +102,7 @@ Extracts data from the label, taking the label number and the
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getLabels"></a>}}
+\if{latex}{\out{\hypertarget{method-getLabels}{}}}
 \subsection{Method \code{getLabels()}}{
 get Labels from current netlib file description
 \subsection{Usage}{
@@ -112,6 +115,7 @@ a list containing labels from netlib file description
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeNet"></a>}}
+\if{latex}{\out{\hypertarget{method-scrapeNet}{}}}
 \subsection{Method \code{scrapeNet()}}{
 scrape Net Model from netlib format
 \subsection{Usage}{
@@ -133,6 +137,7 @@ a list containing a net model
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-extractCFOutBrackets"></a>}}
+\if{latex}{\out{\hypertarget{method-extractCFOutBrackets}{}}}
 \subsection{Method \code{extractCFOutBrackets()}}{
 Remove brackets for current field content
 \subsection{Usage}{
@@ -152,6 +157,7 @@ value
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-scrapeVertices}{}}}
 \subsection{Method \code{scrapeVertices()}}{
 scrape vertices described in netlib format
 \subsection{Usage}{
@@ -171,6 +177,7 @@ data.frame containing netlib vertices
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setupLabelsOrder"></a>}}
+\if{latex}{\out{\hypertarget{method-setupLabelsOrder}{}}}
 \subsection{Method \code{setupLabelsOrder()}}{
 setupLabelsOrder
 \subsection{Usage}{
@@ -190,6 +197,7 @@ data.frame containing netlib vertices
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getDataFromLabel"></a>}}
+\if{latex}{\out{\hypertarget{method-getDataFromLabel}{}}}
 \subsection{Method \code{getDataFromLabel()}}{
 Get data from label specified as parameter
 \subsection{Usage}{
@@ -209,6 +217,7 @@ value
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getName"></a>}}
+\if{latex}{\out{\hypertarget{method-getName}{}}}
 \subsection{Method \code{getName()}}{
 get Polyhedron name
 \subsection{Usage}{
@@ -221,6 +230,7 @@ string with polyhedron name
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 scrape Netlib polyhedron definition
 \subsection{Usage}{
@@ -228,11 +238,12 @@ scrape Netlib polyhedron definition
 }
 
 \subsection{Returns}{
-A new `PolyhedronStateDefined` object.
+A new PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
+\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
 \subsection{Method \code{applyTransformationMatrix()}}{
 Apply transformation matrix to polyhedron
 \subsection{Usage}{
@@ -251,6 +262,7 @@ Apply transformation matrix to polyhedron
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-buildRGL"></a>}}
+\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
 \subsection{Method \code{buildRGL()}}{
 Creates a 'rgl' representation of the object
 \subsection{Usage}{
@@ -267,6 +279,7 @@ Creates a 'rgl' representation of the object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-exportToXML"></a>}}
+\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
 \subsection{Method \code{exportToXML()}}{
 serializes object in XML
 \subsection{Usage}{
@@ -276,6 +289,7 @@ serializes object in XML
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

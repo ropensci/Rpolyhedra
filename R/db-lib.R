@@ -4,11 +4,6 @@
 #' Scrapes all polyhedra in data folder to save a representation which
 #' is accessible by the final users upon call to \code{getPolyhedron()}.
 #'
-#' @details
-#'
-#'
-#'
-#' @format \code{\link{R6Class}} object.
 #' @docType class
 #' @importFrom futile.logger flog.info
 #' @importFrom utils zip

@@ -69,6 +69,7 @@ Scrapes polyhedra from a dmccooey file format
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize Dmccooey scraper
 \subsection{Usage}{
@@ -85,11 +86,12 @@ Initialize Dmccooey scraper
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new  `PolyhedronStateDmccooeyScraper` object.
+A new  PolyhedronStateDmccooeyScraper object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setupRegexp"></a>}}
+\if{latex}{\out{\hypertarget{method-setupRegexp}{}}}
 \subsection{Method \code{setupRegexp()}}{
 setupRegexp for Dmccooey definition
 \subsection{Usage}{
@@ -97,11 +99,12 @@ setupRegexp for Dmccooey definition
 }
 
 \subsection{Returns}{
-This `PolyhedronStateDmccooeyScraper` object with regexp defined.
+This PolyhedronStateDmccooeyScraper object with regexp defined.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeValues"></a>}}
+\if{latex}{\out{\hypertarget{method-scrapeValues}{}}}
 \subsection{Method \code{scrapeValues()}}{
 scrape values from Dmccooey definition
 \subsection{Usage}{
@@ -116,11 +119,12 @@ scrape values from Dmccooey definition
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-This `PolyhedronStateDmccooeyScraper` object with values defined.
+This PolyhedronStateDmccooeyScraper object with values defined.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-scrapeVertices}{}}}
 \subsection{Method \code{scrapeVertices()}}{
 scrape polyhedron vertices from definition
 \subsection{Usage}{
@@ -135,11 +139,12 @@ scrape polyhedron vertices from definition
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-This `PolyhedronStateDmccooeyScraper` object with faces defined.
+This PolyhedronStateDmccooeyScraper object with faces defined.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrapeFaces"></a>}}
+\if{latex}{\out{\hypertarget{method-scrapeFaces}{}}}
 \subsection{Method \code{scrapeFaces()}}{
 scrape polyhedron faces from definition
 \subsection{Usage}{
@@ -154,11 +159,12 @@ scrape polyhedron faces from definition
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-This `PolyhedronStateDmccooeyScraper` object with faces defined.
+This PolyhedronStateDmccooeyScraper object with faces defined.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 scrape Dmccooey polyhedron definition
 \subsection{Usage}{
@@ -166,11 +172,12 @@ scrape Dmccooey polyhedron definition
 }
 
 \subsection{Returns}{
-A new `PolyhedronStateDefined` object.
+A new PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getName"></a>}}
+\if{latex}{\out{\hypertarget{method-getName}{}}}
 \subsection{Method \code{getName()}}{
 get Polyhedron name
 \subsection{Usage}{
@@ -183,6 +190,7 @@ string with polyhedron name
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
+\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
 \subsection{Method \code{applyTransformationMatrix()}}{
 Apply transformation matrix to polyhedron
 \subsection{Usage}{
@@ -201,6 +209,7 @@ Apply transformation matrix to polyhedron
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-buildRGL"></a>}}
+\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
 \subsection{Method \code{buildRGL()}}{
 Creates a 'rgl' representation of the object
 \subsection{Usage}{
@@ -217,6 +226,7 @@ Creates a 'rgl' representation of the object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-exportToXML"></a>}}
+\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
 \subsection{Method \code{exportToXML()}}{
 serializes object in XML
 \subsection{Usage}{
@@ -226,6 +236,7 @@ serializes object in XML
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

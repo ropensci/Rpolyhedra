@@ -37,6 +37,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item  qbotics \email{qbotics6@gmail.com} [copyright holder]
   \item Barret Schloerke \email{schloerke@gmail.com} [reviewer]
   \item Lijia Yu \email{yu@lijiayu.net} [reviewer]
 }
