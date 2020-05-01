@@ -4,6 +4,8 @@ doc
 .Rhistory
 .RData*
 
+# dev
+R/dev
 #log
 *.log
 

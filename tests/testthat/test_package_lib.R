@@ -34,13 +34,12 @@ testthat::test_that("test on package lib functions", {
                   c("SUCCESS", "NOT_AVAILABLE")
      )), failure_message = "downloadRPolyhedraSupportingFiles error"))
 
-  #if(length(dir(all.files=TRUE, path = .tmp.package.dir)) ==0) {
-  #  testthat::expect_equal(copyFilesToExtData(force = FALSE,
-  #                                            source.folder =
-  #                                              getDataDir(data.env =  "PACKAGE"),
-  #                                            dest.folder = .tmp.package.dir),
-  #                         TRUE)
-  #}
+
+  testthat::expect_equal(copyFilesToExtData(force = FALSE,
+                                            source.folder =
+                                              getDataDir(data.env =  "PACKAGE"),
+                                            dest.folder = .tmp.package.dir),
+                                                   TRUE)
 
   testthat::expect(!is.null(getPackageVersion()))
   testthat::expect(!is.null(getPackageDB()))
