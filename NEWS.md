@@ -1,3 +1,10 @@
+Rpolyhedra 0.4.4
+============
+
+### MINOR IMPROVEMENTS
+* Roxygen changed the way R6 classes are documented
+* Problems in testhat with some tests
+
 Rpolyhedra 0.4.2
 ============
 
