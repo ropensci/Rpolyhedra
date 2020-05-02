@@ -9,7 +9,7 @@ Polyhedron State
 Polyhedron State
 }
 \details{
-This abstract class provide the basis from which polyhedron state class derivate.
+This abstract class provide the basis from which every polyhedron state class derivate.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}

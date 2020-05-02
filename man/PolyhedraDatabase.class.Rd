@@ -345,7 +345,7 @@ Cover objects and applies covering.code parameter
 
 \item{\code{save.on.change}}{saves Database state after operation}
 
-\item{\code{seed}}{seed for determinstic random generator}
+\item{\code{seed}}{seed for deterministic random generator}
 }
 \if{html}{\out{</div>}}
 }

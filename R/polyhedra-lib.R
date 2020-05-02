@@ -1,6 +1,6 @@
 #' Polyhedron State
 #'
-#' This abstract class provide the basis from which polyhedron state class derivate.
+#' This abstract class provide the basis from which every polyhedron state class derivate.
 #'
 #' @importFrom R6 R6Class
 PolyhedronState.class <- R6::R6Class("PolyhedronState",
@@ -1108,7 +1108,7 @@ PolyhedronStateDeserializer.class <- R6::R6Class(
 #' Polyhedron
 #'
 #' @description
-#' Polyhedron container class, which is accesible by the final users upon call
+#' Polyhedron container class, which is accessible by the final users upon call
 #'
 #' @docType class
 #' @importFrom R6 R6Class
@@ -1204,7 +1204,7 @@ Polyhedron.class <- R6::R6Class("Polyhedron",
   },
   #' @description
   #' exports an XML definition of current polyhedron
-  #' @return A character object with the XML definitiont
+  #' @return A character object with the XML definition
   exportToXML = function(){
       self$state$exportToXML()
   },
