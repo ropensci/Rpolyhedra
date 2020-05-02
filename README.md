@@ -15,6 +15,11 @@
 | [![CRAN](http://www.r-pkg.org/badges/version/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra) | | [![codecov](https://codecov.io/gh/ropensci/Rpolyhedra/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/Rpolyhedra) |
 |||[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)|
 
+# Preview
+Through [Rpolyhedraexplorer](https://qbotics.shinyapps.io/rpolyhedra-explorer/) you can navigate the polyhedra database without actually installing R environment.
+
+
+
 # How to get started
 ```R
 install.packages("Rpolyhedra")

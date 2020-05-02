@@ -267,7 +267,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @param polyhedra.names polyhedra names to cover (optional)
     #' @param max.quant maximum numbers of polyhedra to cover
     #' @param save.on.change saves Database state after operation
-    #' @param seed seed for determinstic random generator
+    #' @param seed seed for deterministic random generator
     #' @return A list with resulting objects covered
     cover = function(mode,
                      sources = names(self$sources.config),

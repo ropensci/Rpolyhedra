@@ -5,7 +5,7 @@
 \alias{Polyhedron.class}
 \title{Polyhedron}
 \description{
-Polyhedron container class, which is accesible by the final users upon call
+Polyhedron container class, which is accessible by the final users upon call
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -198,7 +198,7 @@ exports an XML definition of current polyhedron
 }
 
 \subsection{Returns}{
-A character object with the XML definitiont
+A character object with the XML definition
 }
 }
 \if{html}{\out{<hr>}}
