@@ -27,6 +27,7 @@ Imports: R6,
   digest,
   testthat,
   futile.logger,
+  stringi,
   git2r
 Collate:
   'Rpolyhedra-package.R'
