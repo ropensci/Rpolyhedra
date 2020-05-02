@@ -11,7 +11,6 @@ testthat::test_that("Check pkg-minimal size and objects", {
   else{
     expected.netlib.size <- 119
     expected.dmccooey.size <- 9
-
   }
 
 
