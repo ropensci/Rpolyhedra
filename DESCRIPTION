@@ -17,7 +17,8 @@ LazyData: true
 RoxygenNote: 7.1.0
 Suggests: knitr, rmarkdown, covr, codemetar
 VignetteBuilder: knitr
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.5.0), 
+  stringi
 Imports: R6,
   geometry,
   rgl,
@@ -27,7 +28,6 @@ Imports: R6,
   digest,
   testthat,
   futile.logger,
-  stringi,
   git2r
 Collate:
   'Rpolyhedra-package.R'

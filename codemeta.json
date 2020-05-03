@@ -138,6 +138,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "stringi",
+      "name": "stringi",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stringi"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "R6",
       "name": "R6",
       "provider": {
@@ -243,18 +255,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=futile.logger"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "stringi",
-      "name": "stringi",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
     {
       "@type": "SoftwareApplication",
