@@ -138,18 +138,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "stringi",
-      "name": "stringi",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=stringi"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "R6",
       "name": "R6",
       "provider": {
@@ -195,6 +183,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=stringr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "stringi",
+      "name": "stringi",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
     {
       "@type": "SoftwareApplication",
@@ -283,11 +283,12 @@
     "https://docs.ropensci.org/Rpolyhedra"
   ],
   "funder": {},
-  "releaseNotes": "https://github.com/qbotics/RpolyhedraLegacy/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
   "review": {
     "@type": "Review",
     "url": "https://github.com/ropensci/onboarding/issues/157",
     "provider": "http://ropensci.org"
   },
-  "developmentStatus": "https://www.repostatus.org/#active"
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md"
 }

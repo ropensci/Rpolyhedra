@@ -17,12 +17,12 @@ LazyData: true
 RoxygenNote: 7.1.0
 Suggests: knitr, rmarkdown, covr, codemetar
 VignetteBuilder: knitr
-Depends: R (>= 3.5.0), 
-  stringi
+Depends: R (>= 3.5.0)
 Imports: R6,
   geometry,
   rgl,
   stringr,
+  stringi,
   dplyr,
   XML,
   digest,
