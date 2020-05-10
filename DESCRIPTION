@@ -21,6 +21,7 @@ Depends: R (>= 3.5.0)
 Imports: R6,
   geometry,
   rgl,
+  knitr,
   stringr,
   stringi,
   dplyr,
