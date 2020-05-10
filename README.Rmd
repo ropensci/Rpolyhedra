@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   dpi=200,
   comment = "#>",
-  fig.path = "man/figures/README-africa-",
+  fig.path = "man/figures/README-",
   out.width = "100%"
 )
 ```
@@ -91,13 +91,14 @@ polyhedron.colors <- rainbow(n)
 polyhedron.scale <- 5
 ```
 
-```{r, render, webgl=TRUE}
+```{r, render}
+# For interactive RGL window
+#```{r, render, webgl=TRUE}
 # 3. open and setup RGL window
 open3d()
 par3d(FOV = 1)
 rgl.bg( sphere =FALSE, fogtype = "none", color=c("black"))
 rgl.viewpoint(theta = 0, phi=0, zoom=0.8, fov=1)
-
 # 4. for each polyhedron, setup rotation, position and render
 for (i in seq_len(n)) {
   # Obtain polyhedron
@@ -120,7 +121,12 @@ for (i in seq_len(n)) {
   shade3d(shape.rgl, color = polyhedron.colors[i])
 }
 
+#rgl::rglwidget()
+#rgl::rgl.snapshot("man/figures/README-5-polyhedra.png")
 ```
+
+![5-polyhedra](man/figures/README-5-polyhedra.png)
+
 ## sources
 ### netlib
  Includes 142 polyhedra definitions.
@@ -139,17 +145,18 @@ dmccooey files can be found in `extdata/dmccooey.com/polyhedra/`
 # Troubleshooting
 
 ## devtools
-Ubuntu
+
+### Ubuntu
 
 ```bash
 apt-get install libcurl4-openssl-dev
 ```
 
-Windows
+### Windows
 
 run end user CRAN version
 
-macOS brew
+### macOS brew
 
 ```bash
 brew install openssl
@@ -160,12 +167,13 @@ After, in R:
 install.packages("devtools")
 ```
 
-# rgl
+## rgl
 
-Ubuntu
+### Ubuntu
 ```bash
 sudo apt-get install r-cran-rgl
 ```
+
 
 Please note that the 'Rpolyhedra' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
 
