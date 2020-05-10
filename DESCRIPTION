@@ -28,6 +28,8 @@ Imports: R6,
   XML,
   digest,
   testthat,
+  covr,
+  pkgdown,
   futile.logger,
   git2r
 Collate:
