@@ -1,0 +1,13 @@
+url: https://ropensci.github.io/Rpolyhedra/
+
+template:
+  params:
+    bootswatch: cosmo
+
+authors:
+  Alejandro Baranek:
+    href: https://twitter.com/ken4rab
+  Leonardo Belen:
+
+development:
+  mode: release
