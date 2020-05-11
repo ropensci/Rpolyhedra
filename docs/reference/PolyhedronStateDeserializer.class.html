@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scrape polyhedra sources — scrapePolyhedraSources • Rpolyhedra</title>
+<title>Polyhedron State Deserializer — PolyhedronStateDeserializer.class • Rpolyhedra</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Scrape polyhedra sources — scrapePolyhedraSources" />
-<meta property="og:description" content="Scrapes polyhedra objects from text files of
-different sources, in order to make them available to the
-package." />
+<meta property="og:title" content="Polyhedron State Deserializer — PolyhedronStateDeserializer.class" />
+<meta property="og:description" content="Polyhedron state for deserialize from database" />
 
 
 
@@ -116,55 +114,79 @@ package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Scrape polyhedra sources</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropensci/Rpolyhedra/blob/master/R/public-lib.R'><code>R/public-lib.R</code></a></small>
-    <div class="hidden name"><code>scrapePolyhedraSources.Rd</code></div>
+    <h1>Polyhedron State Deserializer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/Rpolyhedra/blob/master/R/polyhedra-lib.R'><code>R/polyhedra-lib.R</code></a></small>
+    <div class="hidden name"><code>PolyhedronStateDeserializer.class.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Scrapes polyhedra objects from text files of
-different sources, in order to make them available to the
-package.</p>
+    <p>Polyhedron state for deserialize from database</p>
     </div>
 
-    <pre class="usage"><span class='fu'>scrapePolyhedraSources</span>(<span class='kw'>sources.config</span> <span class='kw'>=</span>
-         <span class='fu'>getUserEnvir</span>(<span class='st'>".available.sources"</span>),
-    <span class='kw'>max.quant.config.schedule</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-    <span class='kw'>max.quant.scrape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>time2scrape.source</span> <span class='kw'>=</span> <span class='fl'>30</span>,
-    <span class='kw'>source.filenames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>retry.scrape</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>sources.config</th>
-      <td><p>the sources that will be used by the function</p></td>
-    </tr>
-    <tr>
-      <th>max.quant.config.schedule</th>
-      <td><p>number of files to schedule</p></td>
-    </tr>
-    <tr>
-      <th>max.quant.scrape</th>
-      <td><p>number of files scrape</p></td>
-    </tr>
-    <tr>
-      <th>time2scrape.source</th>
-      <td><p>time applied to scrape source</p></td>
-    </tr>
-    <tr>
-      <th>source.filenames</th>
-      <td><p>if not null specify which source filenames to scrape</p></td>
-    </tr>
-    <tr>
-      <th>retry.scrape</th>
-      <td><p>should it retry scrape?</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
-    <p>polyhedra db object</p>
+    <p><code>Rpolyhedra::PolyhedronState</code> -&gt; <code>PolyhedronStateDeserializer</code></p>
+    <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
+
+    <p><div class="r6-fields"></p><dl'>
+<dt><code>serialized.polyhedron</code></dt><dd><p>polyhedron definition serialized</p></dd>
+
+</dl><p></div></p>
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+<h3>Public methods</h3>
+
+<ul>
+<li><p><a href='#method-new'><code>PolyhedronStateDeserializer.class$new()</code></a></p></li>
+<li><p><a href='#method-scrape'><code>PolyhedronStateDeserializer.class$scrape()</code></a></p></li>
+<li><p><a href='#method-clone'><code>PolyhedronStateDeserializer.class$clone()</code></a></p></li>
+</ul>
+<p><details ><summary>Inherited methods</summary>
+<ul>
+<li><p><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="applyTransformationMatrix"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-applyTransformationMatrix'><code>Rpolyhedra::PolyhedronState$applyTransformationMatrix()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="buildRGL"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-buildRGL'><code>Rpolyhedra::PolyhedronState$buildRGL()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-checkEdgesConsistency'><code>Rpolyhedra::PolyhedronState$checkEdgesConsistency()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="exportToXML"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-exportToXML'><code>Rpolyhedra::PolyhedronState$exportToXML()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getName"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-getName'><code>Rpolyhedra::PolyhedronState$getName()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-getSolid'><code>Rpolyhedra::PolyhedronState$getSolid()</code></a></span></p></li>
+</ul>
+</details>
+
+<hr>
+<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
+<p>Initialize PolyhedronStateDeserializer object</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>PolyhedronStateDeserializer.class</span>$<span class='fu'>new</span>(<span class='no'>serialized.polyhedron</span>)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl'>
+<dt><code>serialized.polyhedron</code></dt><dd><p>a serialized polyhedron</p></dd>
+
+</dl><p></div></p>
+<h3>Returns</h3>
+<p>A new  PolyhedronStateDeserializer object.</p>
+<p><hr>
+<a id="method-scrape"></a></p><h3>Method <code>scrape()</code></h3>
+<p>Generates a PolyhedronStateDefined from a serialized polyhedron</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>PolyhedronStateDeserializer.class</span>$<span class='fu'>scrape</span>()</pre><p></div></p>
+
+<h3>Returns</h3>
+<p>A new  PolyhedronStateDefined object.</p>
+<p><hr>
+<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>PolyhedronStateDeserializer.class</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl'>
+<dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+
+</dl><p></div></p>
+
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

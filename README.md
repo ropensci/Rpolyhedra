@@ -34,7 +34,9 @@ environment.
 
 # How to get started
 
-`R{r, init} install.packages("Rpolyhedra")`
+``` r
+install.packages("Rpolyhedra")
+```
 
 # How to get started (Development version)
 
@@ -74,7 +76,6 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
-library(Rpolyhedra)
 ```
 
 ``` r

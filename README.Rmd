@@ -39,7 +39,7 @@ Through [Rpolyhedraexplorer](https://qbotics.shinyapps.io/rpolyhedra-explorer/) 
 
 
 # How to get started
-```R{r, init}
+```R
 install.packages("Rpolyhedra")
 ```
 
@@ -72,7 +72,6 @@ library(rgl)
 # For forarding webgl output to knitr
 knit_hooks$set(webgl = hook_webgl)
 library(dplyr)
-library(Rpolyhedra)
 ```
 
 ```{r, 1-retrieve}
