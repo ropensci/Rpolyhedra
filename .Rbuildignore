@@ -1,6 +1,7 @@
 ^CRAN-RELEASE$
 ^doc$
 ^codemeta\.json$
+^README.Rmd$
 ^CONTRIBUTING\.md$
 ^CODE_OF_CONDUCT.md$
 ^Meta$
