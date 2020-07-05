@@ -159,7 +159,7 @@ PHD files can be found in `extdata/www.netlib.org/polyhedra/index.html`
 
 Includes 767 polyhedra definitions. The [polyhedra
 database](http://dmccooey.com/polyhedra/) built by David Mccooey has an
-open format which has been scraped to feed RPolyhedra database
+open format which has been scraped to feed Rpolyhedra database
 
 dmccooey files can be found in `extdata/dmccooey.com/polyhedra/`
 

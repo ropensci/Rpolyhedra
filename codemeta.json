@@ -14,10 +14,9 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "4.0.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.0 (2020-04-24)",
+  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -131,14 +130,7 @@
     {
       "@type": "SoftwareApplication",
       "identifier": "codemetar",
-      "name": "codemetar",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=codemetar"
+      "name": "codemetar"
     }
   ],
   "softwareRequirements": [
@@ -281,10 +273,7 @@
       "sameAs": "https://CRAN.R-project.org/package=git2r"
     }
   ],
-  "contIntegration": [
-    "https://travis-ci.org/ropensci/Rpolyhedra",
-    "https://codecov.io/gh/ropensci/Rpolyhedra"
-  ],
+  "contIntegration": ["https://travis-ci.org/ropensci/Rpolyhedra", "https://codecov.io/gh/ropensci/Rpolyhedra"],
   "keywords": [
     "polyhedra-database",
     "geometry",
@@ -298,9 +287,10 @@
   "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
   "review": {
     "@type": "Review",
-    "url": "https://github.com/ropensci/onboarding/issues/157",
-    "provider": "http://ropensci.org"
+    "url": "https://github.com/ropensci/software-review/issues/157",
+    "provider": "https://ropensci.org"
   },
   "developmentStatus": "https://www.repostatus.org/#active",
-  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md"
+  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
+  "fileSize": "2866.417KB"
 }
