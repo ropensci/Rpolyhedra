@@ -587,9 +587,8 @@ norm <- function(vector){
     sqrt(sum(vector * vector))
 }
 
-#' Polyhedron State Defined
+#' Polyhedron State scraped and defined
 #'
-#' Polyhedron state inside database.
 #'
 #' @importFrom futile.logger flog.debug
 #' @importFrom rgl identityMatrix

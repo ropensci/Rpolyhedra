@@ -9,6 +9,7 @@
 ^\.Rproj\.user$
 ^.travis.yml$
 ^.lintr$
+^_pkgdown.yml$
 ^docs
 ^doc
 ^cran-comments\.md$

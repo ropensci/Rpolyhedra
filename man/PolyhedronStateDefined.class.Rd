@@ -2,14 +2,11 @@
 % Please edit documentation in R/polyhedra-lib.R
 \name{PolyhedronStateDefined.class}
 \alias{PolyhedronStateDefined.class}
-\title{Polyhedron State Defined}
+\title{Polyhedron State scraped and defined}
 \description{
-Polyhedron State Defined
+Polyhedron State scraped and defined
 
-Polyhedron State Defined
-}
-\details{
-Polyhedron state inside database.
+Polyhedron State scraped and defined
 }
 \section{Super class}{
 \code{\link[Rpolyhedra:PolyhedronState]{Rpolyhedra::PolyhedronState}} -> \code{PolyhedronStateDefined}
