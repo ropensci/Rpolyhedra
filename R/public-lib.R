@@ -58,9 +58,10 @@ scrapePolyhedraSources <- function(sources.config =
                                    time2scrape.source = 30,
                                    source.filenames = NULL,
                                    retry.scrape = FALSE){
-  futile.logger::flog.debug(paste("Scheduling",
-                                  max.quant.config.schedule,
-                                  "polyhedra for scraping"))
+  futile.logger::flog.debug(paste("scrapePolyhedraSources",
+                                  "max.quant.config.schedule =",max.quant.config.schedule,
+                                  "max.quant.scrape =", max.quant.scrape,
+                                  "time2scrape.source =", time2scrape.source))
   getPolyhedraObject()$schedulePolyhedraSources(sources.config =
                           sources.config,
                         source.filenames =
