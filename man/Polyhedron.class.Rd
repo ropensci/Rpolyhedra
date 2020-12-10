@@ -4,253 +4,80 @@
 \name{Polyhedron.class}
 \alias{Polyhedron.class}
 \title{Polyhedron}
+\arguments{
+\item{state}{polyhedron state object}
+
+\item{file.id}{the file id}
+
+\item{netlib.p3.lines}{vector with netlib definition lines}
+
+\item{polyhedra.dmccooey.lines}{vector with Dmccooey definition lines}
+
+\item{serialized.polyhedron}{a serialized version of a polyhedron state}
+
+\item{transformation.matrix}{transformation matrix parameter}
+
+\item{expected.vertices}{expected vertices number}
+
+\item{expected.faces}{expected faces number}
+}
+\value{
+A new  Polyhedron object.
+
+A new  PolyhedronStateDefined object.
+
+A new  PolyhedronStateDefined object.
+
+A new  PolyhedronStateDefined object.
+
+string with polyhedron name
+
+A new  PolyhedronState object.
+
+A list of vertex vectors composing polyhedron faces.
+
+A boolean value
+
+An tmesh3d object
+
+A character object with the XML definition
+
+a data.frame with polyhedron errors
+
+Unmodified polyhedron object
+}
 \description{
 Polyhedron container class, which is accessible by the final users upon call
+
+Create a polyhedronState object
+
+scrape Netlib polyhedron definition
+
+scrape Dmccooey polyhedron definition
+
+deserialize a polyhedron state definition
+
+get Polyhedron name
+
+Gets polyhedron state
+
+Gets a solid definition
+
+checks Edges consistency
+
+Return an 'rgl' model with an optional transformation described by transformation.matrix parameter
+
+exports an XML definition of current polyhedron
+
+returns the errors found when processing current polyhedron
+
+check properties of current polyhedron
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Fields}{
+
 \describe{
 \item{\code{file.id}}{Polyhedron file.id}
 
 \item{\code{state}}{Polyhedron state}
-}
-\if{html}{\out{</div>}}
-}
-\section{Methods}{
-\subsection{Public methods}{
-\itemize{
-\item \href{#method-new}{\code{Polyhedron.class$new()}}
-\item \href{#method-scrapeNetlib}{\code{Polyhedron.class$scrapeNetlib()}}
-\item \href{#method-scrapeDmccooey}{\code{Polyhedron.class$scrapeDmccooey()}}
-\item \href{#method-deserialize}{\code{Polyhedron.class$deserialize()}}
-\item \href{#method-getName}{\code{Polyhedron.class$getName()}}
-\item \href{#method-getState}{\code{Polyhedron.class$getState()}}
-\item \href{#method-getSolid}{\code{Polyhedron.class$getSolid()}}
-\item \href{#method-isChecked}{\code{Polyhedron.class$isChecked()}}
-\item \href{#method-getRGLModel}{\code{Polyhedron.class$getRGLModel()}}
-\item \href{#method-exportToXML}{\code{Polyhedron.class$exportToXML()}}
-\item \href{#method-getErrors}{\code{Polyhedron.class$getErrors()}}
-\item \href{#method-checkProperties}{\code{Polyhedron.class$checkProperties()}}
-\item \href{#method-clone}{\code{Polyhedron.class$clone()}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Create a polyhedronState object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$new(file.id, state = NULL)}\if{html}{\out{</div>}}
-}
+}}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file.id}}{the file id}
-
-\item{\code{state}}{polyhedron state object}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new  Polyhedron object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeNetlib"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeNetlib}{}}}
-\subsection{Method \code{scrapeNetlib()}}{
-scrape Netlib polyhedron definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$scrapeNetlib(netlib.p3.lines)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{netlib.p3.lines}}{vector with netlib definition lines}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new  PolyhedronStateDefined object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeDmccooey"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeDmccooey}{}}}
-\subsection{Method \code{scrapeDmccooey()}}{
-scrape Dmccooey polyhedron definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$scrapeDmccooey(polyhedra.dmccooey.lines)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{polyhedra.dmccooey.lines}}{vector with Dmccooey definition lines}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new  PolyhedronStateDefined object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-deserialize"></a>}}
-\if{latex}{\out{\hypertarget{method-deserialize}{}}}
-\subsection{Method \code{deserialize()}}{
-deserialize a polyhedron state definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$deserialize(serialized.polyhedron)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{serialized.polyhedron}}{a serialized version of a polyhedron state}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new  PolyhedronStateDefined object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getName"></a>}}
-\if{latex}{\out{\hypertarget{method-getName}{}}}
-\subsection{Method \code{getName()}}{
-get Polyhedron name
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getName()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-string with polyhedron name
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getState"></a>}}
-\if{latex}{\out{\hypertarget{method-getState}{}}}
-\subsection{Method \code{getState()}}{
-Gets polyhedron state
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getState()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-A new  PolyhedronState object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getSolid"></a>}}
-\if{latex}{\out{\hypertarget{method-getSolid}{}}}
-\subsection{Method \code{getSolid()}}{
-Gets a solid definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getSolid()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-A list of vertex vectors composing polyhedron faces.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-isChecked"></a>}}
-\if{latex}{\out{\hypertarget{method-isChecked}{}}}
-\subsection{Method \code{isChecked()}}{
-checks Edges consistency
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$isChecked()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-A boolean value
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRGLModel"></a>}}
-\if{latex}{\out{\hypertarget{method-getRGLModel}{}}}
-\subsection{Method \code{getRGLModel()}}{
-Return an 'rgl' model with an optional transformation described by transformation.matrix parameter
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getRGLModel(transformation.matrix = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{transformation.matrix}}{transformation matrix parameter}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-An tmesh3d object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportToXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
-\subsection{Method \code{exportToXML()}}{
-exports an XML definition of current polyhedron
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$exportToXML()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-A character object with the XML definition
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getErrors"></a>}}
-\if{latex}{\out{\hypertarget{method-getErrors}{}}}
-\subsection{Method \code{getErrors()}}{
-returns the errors found when processing current polyhedron
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$getErrors()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-a data.frame with polyhedron errors
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-checkProperties"></a>}}
-\if{latex}{\out{\hypertarget{method-checkProperties}{}}}
-\subsection{Method \code{checkProperties()}}{
-check properties of current polyhedron
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$checkProperties(expected.vertices, expected.faces)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{expected.vertices}}{expected vertices number}
-
-\item{\code{expected.faces}}{expected faces number}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Unmodified polyhedron object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Polyhedron.class$clone(deep = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
-}

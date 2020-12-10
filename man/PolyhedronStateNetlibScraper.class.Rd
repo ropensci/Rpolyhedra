@@ -3,19 +3,79 @@
 \name{PolyhedronStateNetlibScraper.class}
 \alias{PolyhedronStateNetlibScraper.class}
 \title{Polyhedron State Netlib Scraper}
-\description{
-Polyhedron State Netlib Scraper
+\arguments{
+\item{file.id}{the file id}
 
-Polyhedron State Netlib Scraper
+\item{netlib.p3.lines}{the lines to add}
+
+\item{label.number}{the label number}
+
+\item{expected.label}{the expected label}
+
+\item{net.txt}{a vector containing net model in netlib format}
+
+\item{offset}{in numbering vertices}
+
+\item{x}{a string containing brackets}
+
+\item{vertices.txt}{vector containing netlib format vertices}
+
+\item{label}{the label to get data from}
+
+\item{transformation.matrix}{the transformation matrix to apply to the polyhedron}
+}
+\value{
+A new  PolyhedronStateNetlibScraper object.
+
+a list containing labels from netlib file description
+
+a list containing a net model
+
+value
+
+data.frame containing netlib vertices
+
+data.frame containing netlib vertices
+
+value
+
+string with polyhedron name
+
+A new PolyhedronStateDefined object.
+}
+\description{
+Initializes the object, taking the file.id and PDH file as parameters
+
+Extracts data from the label, taking the label number and the
+  expected label as parameters
+
+get Labels from current netlib file description
+
+scrape Net Model from netlib format
+
+Remove brackets for current field content
+
+scrape vertices described in netlib format
+
+setupLabelsOrder
+
+Get data from label specified as parameter
+
+get Polyhedron name
+
+scrape Netlib polyhedron definition
+
+Apply transformation matrix to polyhedron
+
+Creates a 'rgl' representation of the object
+
+serializes object in XML
 }
 \details{
 Scrapes polyhedra from a PHD file format.
 }
-\section{Super class}{
-\code{\link[Rpolyhedra:PolyhedronState]{Rpolyhedra::PolyhedronState}} -> \code{PolyhedronStateNetlibScraper}
-}
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Fields}{
+
 \describe{
 \item{\code{netlib.p3.lines}}{The path to the PHD files}
 
@@ -24,284 +84,5 @@ Scrapes polyhedra from a PHD file format.
 \item{\code{labels.map}}{Labels - Map of content}
 
 \item{\code{errors}}{the errors found}
-}
-\if{html}{\out{</div>}}
-}
-\section{Methods}{
-\subsection{Public methods}{
-\itemize{
-\item \href{#method-new}{\code{PolyhedronStateNetlibScraper.class$new()}}
-\item \href{#method-extractRowsFromLabel}{\code{PolyhedronStateNetlibScraper.class$extractRowsFromLabel()}}
-\item \href{#method-getLabels}{\code{PolyhedronStateNetlibScraper.class$getLabels()}}
-\item \href{#method-scrapeNet}{\code{PolyhedronStateNetlibScraper.class$scrapeNet()}}
-\item \href{#method-extractCFOutBrackets}{\code{PolyhedronStateNetlibScraper.class$extractCFOutBrackets()}}
-\item \href{#method-scrapeVertices}{\code{PolyhedronStateNetlibScraper.class$scrapeVertices()}}
-\item \href{#method-setupLabelsOrder}{\code{PolyhedronStateNetlibScraper.class$setupLabelsOrder()}}
-\item \href{#method-getDataFromLabel}{\code{PolyhedronStateNetlibScraper.class$getDataFromLabel()}}
-\item \href{#method-getName}{\code{PolyhedronStateNetlibScraper.class$getName()}}
-\item \href{#method-scrape}{\code{PolyhedronStateNetlibScraper.class$scrape()}}
-\item \href{#method-applyTransformationMatrix}{\code{PolyhedronStateNetlibScraper.class$applyTransformationMatrix()}}
-\item \href{#method-buildRGL}{\code{PolyhedronStateNetlibScraper.class$buildRGL()}}
-\item \href{#method-exportToXML}{\code{PolyhedronStateNetlibScraper.class$exportToXML()}}
-\item \href{#method-clone}{\code{PolyhedronStateNetlibScraper.class$clone()}}
-}
-}
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-addError}{\code{Rpolyhedra::PolyhedronState$addError()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-checkEdgesConsistency}{\code{Rpolyhedra::PolyhedronState$checkEdgesConsistency()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-getSolid}{\code{Rpolyhedra::PolyhedronState$getSolid()}}\out{</span>}
-}
-\out{</details>}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the object, taking the file.id and PDH file as parameters
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$new(file.id, netlib.p3.lines)}\if{html}{\out{</div>}}
-}
+}}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file.id}}{the file id}
-
-\item{\code{netlib.p3.lines}}{the lines to add}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new  PolyhedronStateNetlibScraper object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-extractRowsFromLabel"></a>}}
-\if{latex}{\out{\hypertarget{method-extractRowsFromLabel}{}}}
-\subsection{Method \code{extractRowsFromLabel()}}{
-Extracts data from the label, taking the label number and the
-  expected label as parameters
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$extractRowsFromLabel(
-  label.number,
-  expected.label
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{label.number}}{the label number}
-
-\item{\code{expected.label}}{the expected label}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getLabels"></a>}}
-\if{latex}{\out{\hypertarget{method-getLabels}{}}}
-\subsection{Method \code{getLabels()}}{
-get Labels from current netlib file description
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$getLabels()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-a list containing labels from netlib file description
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeNet"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeNet}{}}}
-\subsection{Method \code{scrapeNet()}}{
-scrape Net Model from netlib format
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$scrapeNet(net.txt, offset = 0)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{net.txt}}{a vector containing net model in netlib format}
-
-\item{\code{offset}}{in numbering vertices}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-a list containing a net model
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-extractCFOutBrackets"></a>}}
-\if{latex}{\out{\hypertarget{method-extractCFOutBrackets}{}}}
-\subsection{Method \code{extractCFOutBrackets()}}{
-Remove brackets for current field content
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$extractCFOutBrackets(x)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{x}}{a string containing brackets}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-value
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeVertices"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeVertices}{}}}
-\subsection{Method \code{scrapeVertices()}}{
-scrape vertices described in netlib format
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$scrapeVertices(vertices.txt)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{vertices.txt}}{vector containing netlib format vertices}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-data.frame containing netlib vertices
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setupLabelsOrder"></a>}}
-\if{latex}{\out{\hypertarget{method-setupLabelsOrder}{}}}
-\subsection{Method \code{setupLabelsOrder()}}{
-setupLabelsOrder
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$setupLabelsOrder()}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{vertices.txt}}{vector containing netlib format vertices}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-data.frame containing netlib vertices
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getDataFromLabel"></a>}}
-\if{latex}{\out{\hypertarget{method-getDataFromLabel}{}}}
-\subsection{Method \code{getDataFromLabel()}}{
-Get data from label specified as parameter
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$getDataFromLabel(label)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{label}}{the label to get data from}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-value
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getName"></a>}}
-\if{latex}{\out{\hypertarget{method-getName}{}}}
-\subsection{Method \code{getName()}}{
-get Polyhedron name
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$getName()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-string with polyhedron name
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
-\subsection{Method \code{scrape()}}{
-scrape Netlib polyhedron definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$scrape()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-A new PolyhedronStateDefined object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
-\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
-\subsection{Method \code{applyTransformationMatrix()}}{
-Apply transformation matrix to polyhedron
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$applyTransformationMatrix(
-  transformation.matrix
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-buildRGL"></a>}}
-\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
-\subsection{Method \code{buildRGL()}}{
-Creates a 'rgl' representation of the object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$buildRGL(transformation.matrix)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportToXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
-\subsection{Method \code{exportToXML()}}{
-serializes object in XML
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$exportToXML()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateNetlibScraper.class$clone(deep = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
-}

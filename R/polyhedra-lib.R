@@ -2,6 +2,7 @@
 #'
 #' This abstract class provide the basis from which every polyhedron state class derivate.
 #'
+#' @export
 #' @importFrom R6 R6Class
 PolyhedronState.class <- R6::R6Class("PolyhedronState",
   public = list(

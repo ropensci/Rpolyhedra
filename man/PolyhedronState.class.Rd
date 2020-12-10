@@ -3,182 +3,49 @@
 \name{PolyhedronState.class}
 \alias{PolyhedronState.class}
 \title{Polyhedron State}
-\description{
-Polyhedron State
+\arguments{
+\item{source}{the source file}
 
-Polyhedron State
+\item{file.id}{the file id}
+
+\item{current.error}{the error to add}
+
+\item{transformation.matrix}{the transformation matrix to apply to the polyhedron}
+}
+\value{
+A new  PolyhedronState object.
+'@description
+Adds an error to the error string and log it as info
+
+string with polyhedron name
+}
+\description{
+Create a polyhedronState object
+
+Scrapes the polyhedra folder files
+
+Get Polyhedron name
+
+Returns the object corresponding to the solid
+
+Checks edge consistency
+
+Apply transformation matrix to polyhedron
+
+Creates a 'rgl' representation of the object
+
+Gets an XML representation out of the polyhedron object
 }
 \details{
 This abstract class provide the basis from which every polyhedron state class derivate.
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Fields}{
+
 \describe{
 \item{\code{source}}{polyhedron definition source}
 
 \item{\code{file.id}}{polyhedron file id}
 
 \item{\code{errors}}{Errors string}
-}
-\if{html}{\out{</div>}}
-}
-\section{Methods}{
-\subsection{Public methods}{
-\itemize{
-\item \href{#method-new}{\code{PolyhedronState.class$new()}}
-\item \href{#method-addError}{\code{PolyhedronState.class$addError()}}
-\item \href{#method-scrape}{\code{PolyhedronState.class$scrape()}}
-\item \href{#method-getName}{\code{PolyhedronState.class$getName()}}
-\item \href{#method-getSolid}{\code{PolyhedronState.class$getSolid()}}
-\item \href{#method-checkEdgesConsistency}{\code{PolyhedronState.class$checkEdgesConsistency()}}
-\item \href{#method-applyTransformationMatrix}{\code{PolyhedronState.class$applyTransformationMatrix()}}
-\item \href{#method-buildRGL}{\code{PolyhedronState.class$buildRGL()}}
-\item \href{#method-exportToXML}{\code{PolyhedronState.class$exportToXML()}}
-\item \href{#method-clone}{\code{PolyhedronState.class$clone()}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Create a polyhedronState object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$new(source, file.id)}\if{html}{\out{</div>}}
-}
+}}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source}}{the source file}
-
-\item{\code{file.id}}{the file id}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new  PolyhedronState object.
-'@description
-Adds an error to the error string and log it as info
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addError"></a>}}
-\if{latex}{\out{\hypertarget{method-addError}{}}}
-\subsection{Method \code{addError()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$addError(current.error)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{current.error}}{the error to add}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
-\subsection{Method \code{scrape()}}{
-Scrapes the polyhedra folder files
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$scrape()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getName"></a>}}
-\if{latex}{\out{\hypertarget{method-getName}{}}}
-\subsection{Method \code{getName()}}{
-Get Polyhedron name
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$getName()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-string with polyhedron name
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getSolid"></a>}}
-\if{latex}{\out{\hypertarget{method-getSolid}{}}}
-\subsection{Method \code{getSolid()}}{
-Returns the object corresponding to the solid
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$getSolid()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-checkEdgesConsistency"></a>}}
-\if{latex}{\out{\hypertarget{method-checkEdgesConsistency}{}}}
-\subsection{Method \code{checkEdgesConsistency()}}{
-Checks edge consistency
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$checkEdgesConsistency()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
-\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
-\subsection{Method \code{applyTransformationMatrix()}}{
-Apply transformation matrix to polyhedron
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$applyTransformationMatrix(transformation.matrix)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-buildRGL"></a>}}
-\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
-\subsection{Method \code{buildRGL()}}{
-Creates a 'rgl' representation of the object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$buildRGL(transformation.matrix)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportToXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
-\subsection{Method \code{exportToXML()}}{
-Gets an XML representation out of the polyhedron object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$exportToXML()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronState.class$clone(deep = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
-}

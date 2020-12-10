@@ -4,12 +4,139 @@
 \name{PolyhedraDatabase.class}
 \alias{PolyhedraDatabase.class}
 \title{Polyhedra database}
+\arguments{
+\item{create.dir}{if dir does not exists, create it}
+
+\item{extension}{extension of the polyhedron filename}
+
+\item{polyhedron.name}{polyhedron description}
+
+\item{strict}{halts execution if polyhedron not found}
+
+\item{source}{source description}
+
+\item{source.filename}{filename of the polyhedron source definition}
+
+\item{polyhedron}{polyhedron object}
+
+\item{overwrite}{overwrite exiting definition}
+
+\item{source.config}{source configuration for scraping files}
+
+\item{seed}{seed for deterministic random generator}
+
+\item{mode}{covering mode. Available values are "scrape.queued", "scrape.retry","skipped",  "test"}
+
+\item{covering.code}{code for applying in covering}
+
+\item{time2scrape.source}{maximum time to spend scraping each source}
+
+\item{skip.still.queued}{Flag unscraped files with status `skipped``}
+
+\item{polyhedra.names}{polyhedra names to cover (optional)}
+
+\item{TestTaskClass}{an R6 TestTaskClass class}
+
+\item{sources.config}{sources configurations for scraping files}
+
+\item{source.filenames}{filenames of the polyhedron source definition}
+
+\item{max.quant}{maximum filenames to process}
+
+\item{save.on.change}{saves Database state after operation}
+
+\item{sources}{sources names}
+
+\item{search.string}{string for matching polyhedron names}
+
+\item{ignore.case}{ignore case in search string}
+}
+\value{
+A new `PolyhedraDatabase` object.
+
+Database version
+
+Database version
+
+boolean value
+
+PolyhedraDatabase.class object
+
+boolean value
+
+string with polyhedra sources path
+
+string with polyhedron filename
+
+Polyhedron.class object
+
+Polyhedron.class object
+
+Modified `PolyhedraDatabase` object.
+
+saveRDS return status
+
+A list with resulting objects covered
+
+A list with resulting objects covered
+
+A list with resulting objects tested
+
+A list with resulting TestTasks generated
+
+Modified `PolyhedraDatabase` object.
+
+A vector with names of available sources
+
+A list with resulting objects covered
+}
 \description{
 Scrapes all polyhedra in data folder to save a representation which
 is accessible by the final users upon call to \code{getPolyhedron()}.
+
+Create a new PolyhedraDatabase object.
+
+get the version of the current object.
+
+sets the path of the RDS object
+
+Determines if the source exists on
+  the database
+
+add  source.config to the database
+
+Determines if the database includes a polyhedron which name
+matches the parameter value
+
+gets polyhedra sources folder
+
+gets the filename of the polyhedron matching parameter.
+
+gets polyhedron object which name
+matches the parameter value
+
+add polyhedron object to the database
+
+Process parameter filenames using source.config parameter
+
+saveRDS
+
+Cover objects and applies covering.code parameter
+
+Scrape polyhedra queued sources
+
+testRR
+
+generate Test tasks for selected polyhedra
+
+Schedules polyhedra sources for scraping
+
+Returns available sources in current database
+
+Retrieves all polyhedron within the source those names match with search.string
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Fields}{
+
 \describe{
 \item{\code{version}}{version of database file}
 
@@ -18,525 +145,5 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 \item{\code{sources.config}}{Sources configuration for scraping different sources}
 
 \item{\code{ledger}}{rr ledger of scraping process}
-}
-\if{html}{\out{</div>}}
-}
-\section{Methods}{
-\subsection{Public methods}{
-\itemize{
-\item \href{#method-new}{\code{PolyhedraDatabase.class$new()}}
-\item \href{#method-getVersion}{\code{PolyhedraDatabase.class$getVersion()}}
-\item \href{#method-configPolyhedraRDSPath}{\code{PolyhedraDatabase.class$configPolyhedraRDSPath()}}
-\item \href{#method-existsSource}{\code{PolyhedraDatabase.class$existsSource()}}
-\item \href{#method-addSourceConfig}{\code{PolyhedraDatabase.class$addSourceConfig()}}
-\item \href{#method-existsPolyhedron}{\code{PolyhedraDatabase.class$existsPolyhedron()}}
-\item \href{#method-getPolyhedraSourceDir}{\code{PolyhedraDatabase.class$getPolyhedraSourceDir()}}
-\item \href{#method-getPolyhedronFilename}{\code{PolyhedraDatabase.class$getPolyhedronFilename()}}
-\item \href{#method-getPolyhedron}{\code{PolyhedraDatabase.class$getPolyhedron()}}
-\item \href{#method-addPolyhedron}{\code{PolyhedraDatabase.class$addPolyhedron()}}
-\item \href{#method-configPolyhedraSource}{\code{PolyhedraDatabase.class$configPolyhedraSource()}}
-\item \href{#method-saveRDS}{\code{PolyhedraDatabase.class$saveRDS()}}
-\item \href{#method-cover}{\code{PolyhedraDatabase.class$cover()}}
-\item \href{#method-scrape}{\code{PolyhedraDatabase.class$scrape()}}
-\item \href{#method-testRR}{\code{PolyhedraDatabase.class$testRR()}}
-\item \href{#method-generateTestTasks}{\code{PolyhedraDatabase.class$generateTestTasks()}}
-\item \href{#method-schedulePolyhedraSources}{\code{PolyhedraDatabase.class$schedulePolyhedraSources()}}
-\item \href{#method-getAvailableSources}{\code{PolyhedraDatabase.class$getAvailableSources()}}
-\item \href{#method-getAvailablePolyhedra}{\code{PolyhedraDatabase.class$getAvailablePolyhedra()}}
-\item \href{#method-clone}{\code{PolyhedraDatabase.class$clone()}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Create a new PolyhedraDatabase object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$new()}\if{html}{\out{</div>}}
-}
+}}
 
-\subsection{Returns}{
-A new `PolyhedraDatabase` object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getVersion"></a>}}
-\if{latex}{\out{\hypertarget{method-getVersion}{}}}
-\subsection{Method \code{getVersion()}}{
-get the version of the current object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getVersion()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Database version
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-configPolyhedraRDSPath"></a>}}
-\if{latex}{\out{\hypertarget{method-configPolyhedraRDSPath}{}}}
-\subsection{Method \code{configPolyhedraRDSPath()}}{
-sets the path of the RDS object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$configPolyhedraRDSPath()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Database version
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-existsSource"></a>}}
-\if{latex}{\out{\hypertarget{method-existsSource}{}}}
-\subsection{Method \code{existsSource()}}{
-Determines if the source exists on
-  the database
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$existsSource(source)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source}}{source description}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-boolean value
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addSourceConfig"></a>}}
-\if{latex}{\out{\hypertarget{method-addSourceConfig}{}}}
-\subsection{Method \code{addSourceConfig()}}{
-add  source.config to the database
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$addSourceConfig(source.config)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source.config}}{SourceConfig object able to scrape source polyhedra definitions}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-PolyhedraDatabase.class object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-existsPolyhedron"></a>}}
-\if{latex}{\out{\hypertarget{method-existsPolyhedron}{}}}
-\subsection{Method \code{existsPolyhedron()}}{
-Determines if the database includes a polyhedron which name
-matches the parameter value
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$existsPolyhedron(source = "netlib", polyhedron.name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source}}{source description}
-
-\item{\code{polyhedron.name}}{polyhedron description}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-boolean value
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getPolyhedraSourceDir"></a>}}
-\if{latex}{\out{\hypertarget{method-getPolyhedraSourceDir}{}}}
-\subsection{Method \code{getPolyhedraSourceDir()}}{
-gets polyhedra sources folder
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedraSourceDir(source, create.dir = TRUE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source}}{source description}
-
-\item{\code{create.dir}}{if dir does not exists, create it}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-string with polyhedra sources path
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getPolyhedronFilename"></a>}}
-\if{latex}{\out{\hypertarget{method-getPolyhedronFilename}{}}}
-\subsection{Method \code{getPolyhedronFilename()}}{
-gets the filename of the polyhedron matching parameter.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedronFilename(
-  source,
-  polyhedron.name,
-  extension
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source}}{source description}
-
-\item{\code{polyhedron.name}}{polyhedron description}
-
-\item{\code{extension}}{extension of the polyhedron filename}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-string with polyhedron filename
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getPolyhedron"></a>}}
-\if{latex}{\out{\hypertarget{method-getPolyhedron}{}}}
-\subsection{Method \code{getPolyhedron()}}{
-gets polyhedron object which name
-matches the parameter value
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getPolyhedron(
-  source = "netlib",
-  polyhedron.name,
-  strict = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source}}{source description}
-
-\item{\code{polyhedron.name}}{polyhedron description}
-
-\item{\code{strict}}{halts execution if polyhedron not found}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Polyhedron.class object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addPolyhedron"></a>}}
-\if{latex}{\out{\hypertarget{method-addPolyhedron}{}}}
-\subsection{Method \code{addPolyhedron()}}{
-add polyhedron object to the database
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$addPolyhedron(
-  source = "netlib",
-  source.filename,
-  polyhedron,
-  overwrite = FALSE,
-  save.on.change = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source}}{source description}
-
-\item{\code{source.filename}}{filename of the polyhedron source definition}
-
-\item{\code{polyhedron}}{polyhedron object}
-
-\item{\code{overwrite}}{overwrite exiting definition}
-
-\item{\code{save.on.change}}{saves Database state after operation}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Polyhedron.class object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-configPolyhedraSource"></a>}}
-\if{latex}{\out{\hypertarget{method-configPolyhedraSource}{}}}
-\subsection{Method \code{configPolyhedraSource()}}{
-Process parameter filenames using source.config parameter
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$configPolyhedraSource(
-  source.config,
-  source.filenames = NULL,
-  max.quant = 0,
-  save.on.change = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{source.config}}{source configuration for scraping files}
-
-\item{\code{source.filenames}}{filenames of the polyhedron source definition}
-
-\item{\code{max.quant}}{maximum filenames to process}
-
-\item{\code{save.on.change}}{saves Database state after operation}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Modified `PolyhedraDatabase` object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-saveRDS"></a>}}
-\if{latex}{\out{\hypertarget{method-saveRDS}{}}}
-\subsection{Method \code{saveRDS()}}{
-saveRDS
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$saveRDS(save.on.change = TRUE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{save.on.change}}{saves Database state after operation}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-saveRDS return status
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-cover"></a>}}
-\if{latex}{\out{\hypertarget{method-cover}{}}}
-\subsection{Method \code{cover()}}{
-Cover objects and applies covering.code parameter
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$cover(
-  mode,
-  sources = names(self$sources.config),
-  covering.code,
-  polyhedra.names = NULL,
-  max.quant = 0,
-  save.on.change = FALSE,
-  seed = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{mode}}{covering mode. Available values are "scrape.queued", "scrape.retry","skipped",  "test"}
-
-\item{\code{sources}}{sources names}
-
-\item{\code{covering.code}}{code for applying in covering}
-
-\item{\code{polyhedra.names}}{polyhedra names to cover (optional)}
-
-\item{\code{max.quant}}{maximum numbers of polyhedra to cover}
-
-\item{\code{save.on.change}}{saves Database state after operation}
-
-\item{\code{seed}}{seed for deterministic random generator}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A list with resulting objects covered
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
-\subsection{Method \code{scrape()}}{
-Scrape polyhedra queued sources
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$scrape(
-  mode = "scrape.queued",
-  sources = names(self$sources.config),
-  max.quant = 0,
-  time2scrape.source = 30,
-  save.on.change = FALSE,
-  skip.still.queued = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{mode}}{covering mode. Available values are "scrape.queued", "scrape.retry","skipped",  "test"}
-
-\item{\code{sources}}{sources names}
-
-\item{\code{max.quant}}{maximum numbers of polyhedra to cover}
-
-\item{\code{time2scrape.source}}{maximum time to spend scraping each source}
-
-\item{\code{save.on.change}}{saves Database state after operation}
-
-\item{\code{skip.still.queued}}{Flag unscraped files with status `skipped``}
-
-\item{\code{covering.code}}{code for applying in covering}
-
-\item{\code{polyhedra.names}}{polyhedra names to cover (optional)}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A list with resulting objects covered
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-testRR"></a>}}
-\if{latex}{\out{\hypertarget{method-testRR}{}}}
-\subsection{Method \code{testRR()}}{
-testRR
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$testRR(
-  sources = names(self$sources.config),
-  max.quant = 0
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{sources}}{sources names}
-
-\item{\code{max.quant}}{maximum numbers of polyhedra to cover}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A list with resulting objects tested
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-generateTestTasks"></a>}}
-\if{latex}{\out{\hypertarget{method-generateTestTasks}{}}}
-\subsection{Method \code{generateTestTasks()}}{
-generate Test tasks for selected polyhedra
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$generateTestTasks(
-  sources = names(self$sources.config),
-  polyhedra.names = NULL,
-  TestTaskClass,
-  max.quant = 0
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{sources}}{sources names}
-
-\item{\code{polyhedra.names}}{polyhedra names to cover (optional)}
-
-\item{\code{TestTaskClass}}{an R6 TestTaskClass class}
-
-\item{\code{max.quant}}{maximum numbers of polyhedra to cover}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A list with resulting TestTasks generated
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-schedulePolyhedraSources"></a>}}
-\if{latex}{\out{\hypertarget{method-schedulePolyhedraSources}{}}}
-\subsection{Method \code{schedulePolyhedraSources()}}{
-Schedules polyhedra sources for scraping
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$schedulePolyhedraSources(
-  sources.config = getPackageEnvir(".available.sources"),
-  source.filenames = NULL,
-  max.quant = 0,
-  save.on.change = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{sources.config}}{sources configurations for scraping files}
-
-\item{\code{source.filenames}}{filenames of the polyhedron source definition}
-
-\item{\code{max.quant}}{maximum filenames to process}
-
-\item{\code{save.on.change}}{saves Database state after operation}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Modified `PolyhedraDatabase` object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getAvailableSources"></a>}}
-\if{latex}{\out{\hypertarget{method-getAvailableSources}{}}}
-\subsection{Method \code{getAvailableSources()}}{
-Returns available sources in current database
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getAvailableSources()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-A vector with names of available sources
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getAvailablePolyhedra"></a>}}
-\if{latex}{\out{\hypertarget{method-getAvailablePolyhedra}{}}}
-\subsection{Method \code{getAvailablePolyhedra()}}{
-Retrieves all polyhedron within the source those names match with search.string
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$getAvailablePolyhedra(
-  sources = self$getAvailableSources(),
-  search.string = NULL,
-  ignore.case = TRUE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{sources}}{sources names}
-
-\item{\code{search.string}}{string for matching polyhedron names}
-
-\item{\code{ignore.case}}{ignore case in search string}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A list with resulting objects covered
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedraDatabase.class$clone(deep = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
-}

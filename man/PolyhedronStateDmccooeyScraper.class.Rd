@@ -4,19 +4,60 @@
 \name{PolyhedronStateDmccooeyScraper.class}
 \alias{PolyhedronStateDmccooeyScraper.class}
 \title{Polyhedron State Dmccooey Scraper}
-\description{
-Polyhedron State Dmccooey Scraper
+\arguments{
+\item{file.id}{identifier of the definition file.}
 
-Polyhedron State Dmccooey Scraper
+\item{polyhedra.dmccooey.lines}{raw Dmccooey definition file lines}
+
+\item{values.lines}{values definitions in Dmccooey source}
+
+\item{vertices.lines}{vertices definitions in Dmccooey source}
+
+\item{faces.lines}{face}
+
+\item{transformation.matrix}{the transformation matrix to apply to the polyhedron}
+}
+\value{
+A new  PolyhedronStateDmccooeyScraper object.
+
+This PolyhedronStateDmccooeyScraper object with regexp defined.
+
+This PolyhedronStateDmccooeyScraper object with values defined.
+
+This PolyhedronStateDmccooeyScraper object with faces defined.
+
+This PolyhedronStateDmccooeyScraper object with faces defined.
+
+A new PolyhedronStateDefined object.
+
+string with polyhedron name
+}
+\description{
+Initialize Dmccooey scraper
+
+setupRegexp for Dmccooey definition
+
+scrape values from Dmccooey definition
+
+scrape polyhedron vertices from definition
+
+scrape polyhedron faces from definition
+
+scrape Dmccooey polyhedron definition
+
+get Polyhedron name
+
+Apply transformation matrix to polyhedron
+
+Creates a 'rgl' representation of the object
+
+serializes object in XML
 }
 \details{
 Scrapes polyhedra from a dmccooey file format
 }
-\section{Super class}{
-\code{\link[Rpolyhedra:PolyhedronState]{Rpolyhedra::PolyhedronState}} -> \code{PolyhedronStateDmccooeyScraper}
-}
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Fields}{
+
 \describe{
 \item{\code{regexp.values.names}}{regexp for scraping values names}
 
@@ -39,216 +80,5 @@ Scrapes polyhedra from a dmccooey file format
 \item{\code{vertices.replaced}}{3D values}
 
 \item{\code{faces}}{definition}
-}
-\if{html}{\out{</div>}}
-}
-\section{Methods}{
-\subsection{Public methods}{
-\itemize{
-\item \href{#method-new}{\code{PolyhedronStateDmccooeyScraper.class$new()}}
-\item \href{#method-setupRegexp}{\code{PolyhedronStateDmccooeyScraper.class$setupRegexp()}}
-\item \href{#method-scrapeValues}{\code{PolyhedronStateDmccooeyScraper.class$scrapeValues()}}
-\item \href{#method-scrapeVertices}{\code{PolyhedronStateDmccooeyScraper.class$scrapeVertices()}}
-\item \href{#method-scrapeFaces}{\code{PolyhedronStateDmccooeyScraper.class$scrapeFaces()}}
-\item \href{#method-scrape}{\code{PolyhedronStateDmccooeyScraper.class$scrape()}}
-\item \href{#method-getName}{\code{PolyhedronStateDmccooeyScraper.class$getName()}}
-\item \href{#method-applyTransformationMatrix}{\code{PolyhedronStateDmccooeyScraper.class$applyTransformationMatrix()}}
-\item \href{#method-buildRGL}{\code{PolyhedronStateDmccooeyScraper.class$buildRGL()}}
-\item \href{#method-exportToXML}{\code{PolyhedronStateDmccooeyScraper.class$exportToXML()}}
-\item \href{#method-clone}{\code{PolyhedronStateDmccooeyScraper.class$clone()}}
-}
-}
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-addError}{\code{Rpolyhedra::PolyhedronState$addError()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-checkEdgesConsistency}{\code{Rpolyhedra::PolyhedronState$checkEdgesConsistency()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-getSolid}{\code{Rpolyhedra::PolyhedronState$getSolid()}}\out{</span>}
-}
-\out{</details>}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize Dmccooey scraper
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$new(file.id, polyhedra.dmccooey.lines)}\if{html}{\out{</div>}}
-}
+}}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file.id}}{identifier of the definition file.}
-
-\item{\code{polyhedra.dmccooey.lines}}{raw Dmccooey definition file lines}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new  PolyhedronStateDmccooeyScraper object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setupRegexp"></a>}}
-\if{latex}{\out{\hypertarget{method-setupRegexp}{}}}
-\subsection{Method \code{setupRegexp()}}{
-setupRegexp for Dmccooey definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$setupRegexp()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-This PolyhedronStateDmccooeyScraper object with regexp defined.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeValues"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeValues}{}}}
-\subsection{Method \code{scrapeValues()}}{
-scrape values from Dmccooey definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$scrapeValues(values.lines)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{values.lines}}{values definitions in Dmccooey source}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-This PolyhedronStateDmccooeyScraper object with values defined.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeVertices"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeVertices}{}}}
-\subsection{Method \code{scrapeVertices()}}{
-scrape polyhedron vertices from definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$scrapeVertices(vertices.lines)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{vertices.lines}}{vertices definitions in Dmccooey source}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-This PolyhedronStateDmccooeyScraper object with faces defined.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeFaces"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeFaces}{}}}
-\subsection{Method \code{scrapeFaces()}}{
-scrape polyhedron faces from definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$scrapeFaces(faces.lines)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{faces.lines}}{face}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-This PolyhedronStateDmccooeyScraper object with faces defined.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
-\subsection{Method \code{scrape()}}{
-scrape Dmccooey polyhedron definition
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$scrape()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-A new PolyhedronStateDefined object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getName"></a>}}
-\if{latex}{\out{\hypertarget{method-getName}{}}}
-\subsection{Method \code{getName()}}{
-get Polyhedron name
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$getName()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-string with polyhedron name
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
-\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
-\subsection{Method \code{applyTransformationMatrix()}}{
-Apply transformation matrix to polyhedron
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$applyTransformationMatrix(
-  transformation.matrix
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-buildRGL"></a>}}
-\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
-\subsection{Method \code{buildRGL()}}{
-Creates a 'rgl' representation of the object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$buildRGL(transformation.matrix)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{transformation.matrix}}{the transformation matrix to apply to the polyhedron}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportToXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
-\subsection{Method \code{exportToXML()}}{
-serializes object in XML
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$exportToXML()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDmccooeyScraper.class$clone(deep = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
-}

@@ -16,7 +16,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
+  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -130,7 +130,14 @@
     {
       "@type": "SoftwareApplication",
       "identifier": "codemetar",
-      "name": "codemetar"
+      "name": "codemetar",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=codemetar"
     }
   ],
   "softwareRequirements": [
@@ -285,12 +292,7 @@
   ],
   "funder": {},
   "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
-  "review": {
-    "@type": "Review",
-    "url": "https://github.com/ropensci/software-review/issues/157",
-    "provider": "https://ropensci.org"
-  },
   "developmentStatus": "https://www.repostatus.org/#active",
   "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
-  "fileSize": "2866.417KB"
+  "fileSize": "2943.316KB"
 }
