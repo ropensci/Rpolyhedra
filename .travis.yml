@@ -6,12 +6,16 @@ r:
 before_install:
   - tlmgr install index
   - sudo apt-get -y install  libglu1-mesa-dev
+  - sh -e /etc/init.d/xvfb start
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 r_packages:
   - covr
   - lintr
 env:
-  - ON_TRAVIS = 1
+  global:
+    - DISPLAY=:99.0
+    - ON_TRAVIS = 1
+
 after_success:
   - R CMD INSTALL $PKG_TARBALL
   - Rscript -e 'library(covr); codecov()'
@@ -21,3 +25,4 @@ deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github(ssh_id = Sys.getenv("TRAVIS_DEPLOY_KEY", ""))'
   skip_cleanup: true
+
