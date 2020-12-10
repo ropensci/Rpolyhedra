@@ -6,7 +6,6 @@ r:
 before_install:
   - tlmgr install index
   - sudo apt-get -y install  libglu1-mesa-dev
-  - sh -e /etc/init.d/xvfb start
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 r_packages:
   - covr
