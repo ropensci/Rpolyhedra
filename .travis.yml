@@ -5,7 +5,7 @@ r:
   - release
 before_install:
   - tlmgr install index
-  - sudo apt-get -y install  libglu1-mesa-dev
+  - sudo apt-get -y install  libglu1-mesa-dev libgit2-dev
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 r_packages:
   - covr
