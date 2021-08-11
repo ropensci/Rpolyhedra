@@ -18,7 +18,7 @@ RoxygenNote: 7.1.1
 Roxygen: list(r6 = FALSE)
 Suggests: knitr, pkgdown, rmarkdown, covr, codemetar
 VignetteBuilder: knitr
-Depends: R (>= 3.5.0)
+Depends: R (>= 4.0.0)
 Imports: R6,
   geometry,
   rgl,
@@ -43,4 +43,4 @@ Collate:
   'zzz.R'
 BugReports: https://github.com/ropensci/Rpolyhedra/issues
 URL: https://docs.ropensci.org/Rpolyhedra, https://github.com/ropensci/Rpolyhedra
-StagedInstall: No
+

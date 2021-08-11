@@ -41,9 +41,9 @@ testthat::test_that("test on package lib functions", {
                                             dest.folder = .tmp.package.dir),
                                                    TRUE)
 
-  testthat::expect(!is.null(getPackageVersion()))
-  testthat::expect(!is.null(getPackageDB()))
-  testthat::expect(!is.null(getDatabaseVersion()))
+  testthat::expect(!is.null(getPackageVersion()), failure_message="Package version cannot be null")
+  testthat::expect(!is.null(getPackageDB()), failure_message="Package db cannot be null")
+  testthat::expect(!is.null(getDatabaseVersion()), failure_message="Database version cannot be null")
 
   testthat::expect_equal(switchToFullDatabase(env = "PACKAGE"), "PACKAGE")
 })
