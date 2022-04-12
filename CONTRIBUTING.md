@@ -25,7 +25,7 @@ The project was built from the ground up with reproducibility in mind. To accomm
 ## Code style
 
 The code style under use is the recommended in the [google style code (GSC)](https://google.github.io/styleguide/Rguide.xml). 
-R6 classes has no code style in GSC. The code style defined for a R6 class-object named FooBar is FooBar.class .
+R6 classes has no code style in GSC. The code style defined for a R6 class-object named FooBar is FooBar .
 
 
 

@@ -30,7 +30,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL){
     }
   }
   if (is.null(.polyhedra)){
-    .polyhedra <- PolyhedraDatabase.class$new()
+    .polyhedra <- PolyhedraDatabase$new()
   }
 
   setUserEnvir(".polyhedra", value = .polyhedra)
@@ -176,7 +176,7 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env =  "HOME"),
 #' @importFrom     futile.logger flog.info
 #' @importFrom R6 R6Class
 #' @noRd
-PolyhedronScraperConfiguration.class <- R6::R6Class(
+PolyhedronScraperConfiguration <- R6::R6Class(
   "PolyhedronScraperConfiguration",
   public = list(
     name     = NA,
@@ -212,9 +212,9 @@ PolyhedronScraperConfiguration.class <- R6::R6Class(
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 #' @noRd
-PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
+PolyhedronScraperConfigurationNetlib <- R6::R6Class(
   "PolyhedronScraperConfigurationNetlib",
-  inherit = PolyhedronScraperConfiguration.class,
+  inherit = PolyhedronScraperConfiguration,
   public = list(
     initialize = function(name) {
       super$initialize(name = "netlib",
@@ -233,7 +233,7 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
       polyhedron.file.id <- source.filename.path
       polyhedron.file.id <- strsplit(polyhedron.file.id, split = "/")[[1]]
       polyhedron.file.id <- polyhedron.file.id[length(polyhedron.file.id)]
-      current.polyhedron <- Polyhedron.class$new(file.id = polyhedron.file.id)
+      current.polyhedron <- Polyhedron$new(file.id = polyhedron.file.id)
       current.polyhedron$scrapeNetlib(netlib.p3.lines = polyhedra.netlib.lines)
       futile.logger::flog.debug(paste("parsed", source.filename, "with name",
                                       current.polyhedron$state$name))
@@ -256,9 +256,9 @@ PolyhedronScraperConfigurationNetlib.class <- R6::R6Class(
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 #' @noRd
-PolyhedronScraperConfigurationDmccooey.class <- R6::R6Class(
+PolyhedronScraperConfigurationDmccooey <- R6::R6Class(
   "PolyhedronScraperConfigurationDmccooey",
-  inherit = PolyhedronScraperConfiguration.class,
+  inherit = PolyhedronScraperConfiguration,
   public = list(
     initialize = function(name) {
       super$initialize(name = "dmccooey",
@@ -279,7 +279,7 @@ PolyhedronScraperConfigurationDmccooey.class <- R6::R6Class(
     },
     scrape = function(polyhedron.file.id, source.filename.path){
       polyhedra.dmccooey.lines <- readLines(source.filename.path)
-      current.polyhedron <- Polyhedron.class$new(file.id = polyhedron.file.id)
+      current.polyhedron <- Polyhedron$new(file.id = polyhedron.file.id)
 
 
       current.polyhedron$scrapeDmccooey(polyhedra.dmccooey.lines =
@@ -327,11 +327,11 @@ checkDatabaseVersion <- function(){
 isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
                                        getPolyhedraObject(),
                                      halts = FALSE){
-  file.class <- class(.polyhedra.candidate)
+  file <- class(.polyhedra.candidate)
   compatible <- FALSE
   error <- ""
 
-  if (file.class[[1]] == "PolyhedraDatabase"){
+  if (file[[1]] == "PolyhedraDatabase"){
     db.version <- getPackageDB()
     compatible <- !is.null(db.version)
     if (compatible){
@@ -354,7 +354,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
   }
   else{
     error <- paste("Incompatible! PolyhedraDatabase class is ",
-                   file.class[[1]],
+                   file[[1]],
                    ".",
                    sep = "")
   }

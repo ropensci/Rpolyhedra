@@ -18,7 +18,7 @@ polyhedron R6 object
 \description{
 Gets a polyhedron from the database. It returns an R6 Class
 with all its characteristics and functions.
-The object returned, of type Polyhedron.class, allows to the
+The object returned, of type Polyhedron, allows to the
 user to get access to all the functionality provided.
 }
 \examples{

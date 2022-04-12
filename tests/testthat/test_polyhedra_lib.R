@@ -43,7 +43,7 @@ testthat::test_that("Scrape test rpolyhedra 5 regular solids", {
                           "cube",
                           "dodecahedron",
                           "icosahedron"),
-      TestTaskClass = PolyhedronTestTaskScrape.class,
+      TestTaskClass = PolyhedronTestTaskScrape,
                           max.quant = 5)
   for (task in tasks){
     task$run()
@@ -53,7 +53,7 @@ testthat::test_that("Scrape test rpolyhedra 5 regular solids", {
 context("polyhedra- Scrape available polyhedra")
 testthat::test_that("Scrape test rpolyhedra for 12% of available polyhedra", {
   tasks <- getPolyhedraObject()$
-    generateTestTasks(TestTaskClass = PolyhedronTestTaskScrape.class,
+    generateTestTasks(TestTaskClass = PolyhedronTestTaskScrape,
     max.quant = getPercentilPolyhedraQuant(0.12, 50))
   for (task in tasks){
     task$run()
@@ -91,7 +91,7 @@ context("polyhedra- Edges Consistency")
 testthat::test_that(paste("test check edges consistency for 12% of",
             "available polyhedra"), {
   tasks <- getPolyhedraObject()$
-    generateTestTasks(TestTaskClass = PolyhedronTestTaskEdgesConsistency.class,
+    generateTestTasks(TestTaskClass = PolyhedronTestTaskEdgesConsistency,
                     max.quant = getPercentilPolyhedraQuant(0.12, 50))
 
   for (task in tasks){

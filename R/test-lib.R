@@ -12,7 +12,7 @@
 #' @docType class
 #' @importFrom R6 R6Class
 #' @noRd
-PolyhedronTestTask.class <- R6::R6Class("PolyhedronTestTask",
+PolyhedronTestTask <- R6::R6Class("PolyhedronTestTask",
 public = list(
   polyhedra.db = NA,
   source.config = NA,
@@ -43,8 +43,8 @@ public = list(
 #' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 #' @noRd
-PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
-  inherit = PolyhedronTestTask.class,
+PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
+  inherit = PolyhedronTestTask,
   public = list(
     polyhedra.dir = NA,
     polyhedron.file.id = NA,
@@ -98,9 +98,9 @@ PolyhedronTestTaskScrape.class <- R6::R6Class("PolyhedronTestTaskScrape.class",
 #'
 #' @docType class
 #' @noRd
-PolyhedronTestTaskEdgesConsistency.class <- R6::R6Class(
+PolyhedronTestTaskEdgesConsistency <- R6::R6Class(
   "PolyhedronTestTaskEdgesConsistency",
-  inherit = PolyhedronTestTask.class,
+  inherit = PolyhedronTestTask,
   public = list(
     initialize = function(polyhedra.db, source.config, polyhedron.name,
                           polyhedra.dir, polyhedron.file.id, source.filename) {

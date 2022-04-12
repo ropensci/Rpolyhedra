@@ -18,9 +18,9 @@
   #setup Available sources
   .available.sources <- list()
   .available.sources[["netlib"]] <-
-    PolyhedronScraperConfigurationNetlib.class$new()
+    PolyhedronScraperConfigurationNetlib$new()
   .available.sources[["dmccooey"]] <-
-    PolyhedronScraperConfigurationDmccooey.class$new()
+    PolyhedronScraperConfigurationDmccooey$new()
 
   setPackageEnvir(variable.name = ".available.sources", .available.sources)
 

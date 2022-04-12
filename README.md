@@ -22,11 +22,12 @@ the following:
 3.  An R6 polyhedron representation with ‘rgl’ package visualizing
     capabilities.
 
-| Release                                                                                                  | Usage                                                                                                    | Development                                                                                                                                                                                            |
-| :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)     | [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) | [![Travis](https://travis-ci.org/ropensci/Rpolyhedra.svg?branch=master)](https://travis-ci.org/ropensci/Rpolyhedra)                                                                                    |
-| [![CRAN](http://www.r-pkg.org/badges/version/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra) |                                                                                                          | [![codecov](https://codecov.io/gh/ropensci/Rpolyhedra/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/Rpolyhedra)                                                                       |
-|                                                                                                          |                                                                                                          | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) |
+| Release                                                                                                                                  | Usage                                                                                                    | Development                                                                                                                                                                                            |
+|:-----------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)                                     | [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) |                                                                                                                                                                                                        |
+| [![R-CMD-check](https://github.com/ropensci/Rpolyhedra/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/Rpolyhedra/actions) |                                                                                                          |                                                                                                                                                                                                        |
+| [![CRAN](http://www.r-pkg.org/badges/version/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra)                                 |                                                                                                          | [![codecov](https://codecov.io/gh/ropensci/Rpolyhedra/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/Rpolyhedra)                                                                       |
+|                                                                                                                                          |                                                                                                          | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) |
 
 # Preview
 
@@ -67,6 +68,7 @@ To get started execute the following commands:
 ``` r
 # 0.  Load libraries
 library(knitr)
+#> Warning: package 'knitr' was built under R version 4.1.2
 library(rgl)
 # For forarding webgl output to knitr
 knit_hooks$set(webgl = hook_webgl)
@@ -97,7 +99,7 @@ polyhedron.colors <- rainbow(n)
 polyhedron.scale <- 5
 ```
 
-```` r
+``` r
 # For interactive RGL window
 #```{r, render, webgl=TRUE}
 # 3. open and setup RGL window
@@ -136,7 +138,7 @@ for (i in seq_len(n)) {
 
 #rgl::rglwidget()
 #rgl::rgl.snapshot("man/figures/README-5-polyhedra.png")
-````
+```
 
 ![5-polyhedra](man/figures/README-5-polyhedra.png)
 
@@ -201,4 +203,4 @@ Please note that the ‘Rpolyhedra’ project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
 this project, you agree to abide by its terms.
 
-[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

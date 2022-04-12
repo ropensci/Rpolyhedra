@@ -13,5 +13,5 @@ getPolyhedraObject()
 Return the polyhedra database handler.
 }
 \seealso{
-PolyhedraDatabase.class
+PolyhedraDatabase
 }

@@ -8,7 +8,7 @@
 #' @importFrom futile.logger flog.info
 #' @importFrom utils zip
 #' @importFrom R6 R6Class
-PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
+PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
   public = list(
     #' @field version version of database file
     version = NA,
@@ -23,7 +23,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @return A new `PolyhedraDatabase` object.
     initialize = function() {
       self$version        <- getDatabaseVersion()
-      self$ledger         <- ScraperLedger.class$new()
+      self$ledger         <- ScraperLedger$new()
       self$sources.config <- list()
       self
     },
@@ -51,7 +51,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @description
     #' add  source.config to the database
     #' @param source.config SourceConfig object able to scrape source polyhedra definitions
-    #' @return PolyhedraDatabase.class object
+    #' @return PolyhedraDatabase object
     addSourceConfig = function(source.config) {
       source <- source.config$getName()
       if (!self$existsSource(source)) {
@@ -108,7 +108,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @param source source description
     #' @param polyhedron.name polyhedron description
     #' @param strict halts execution if polyhedron not found
-    #' @return Polyhedron.class object
+    #' @return Polyhedron object
     getPolyhedron = function(source = "netlib", polyhedron.name,
                              strict = FALSE) {
       data.dir <- self$getPolyhedraSourceDir(source = source)
@@ -136,7 +136,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
         unlink(tmp.filename)
       }
       if (!is.null(serialized.polyhedron)){
-        ret <- Polyhedron.class$new(file.id = NA)
+        ret <- Polyhedron$new(file.id = NA)
         ret$deserialize(serialized.polyhedron = serialized.polyhedron)
       }
       ret
@@ -148,7 +148,7 @@ PolyhedraDatabase.class <- R6::R6Class("PolyhedraDatabase",
     #' @param polyhedron polyhedron object
     #' @param overwrite overwrite exiting definition
     #' @param save.on.change saves Database state after operation
-    #' @return Polyhedron.class object
+    #' @return Polyhedron object
     addPolyhedron = function(source = "netlib", source.filename,
                              polyhedron, overwrite = FALSE,
                              save.on.change = FALSE) {

@@ -1,7 +1,7 @@
 #' Get a polyhedra object
 #'
 #' Return the polyhedra database handler.
-#' @seealso PolyhedraDatabase.class
+#' @seealso PolyhedraDatabase
 #'
 #' @return .polyhedra
 #' @export
@@ -148,7 +148,7 @@ getAvailablePolyhedra <- function(sources =
 #'
 #' Gets a polyhedron from the database. It returns an R6 Class
 #' with all its characteristics and functions.
-#' The object returned, of type Polyhedron.class, allows to the
+#' The object returned, of type Polyhedron, allows to the
 #' user to get access to all the functionality provided.
 #'
 #' @seealso getAvailablePolyhedra, getAvailableSources

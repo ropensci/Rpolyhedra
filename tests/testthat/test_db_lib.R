@@ -3,8 +3,8 @@ context("db-lib")
 testthat::test_that("create minimal db", {
   initDataDirEnvironment()
   testthat::expect_equal(selectDataEnv("PACKAGE"), "PACKAGE")
-  source.config.netlib <- PolyhedronScraperConfigurationNetlib.class$new()
-  source.config.dmccooey <- PolyhedronScraperConfigurationDmccooey.class$new()
+  source.config.netlib <- PolyhedronScraperConfigurationNetlib$new()
+  source.config.dmccooey <- PolyhedronScraperConfigurationDmccooey$new()
   testthat::expect_equal(source.config.netlib$getBaseDir("destdir"),
                file.path("destdir", "sources", "www.netlib.org", "polyhedra"))
   testthat::expect_equal(source.config.dmccooey$getBaseDir("destdir"),
@@ -16,7 +16,7 @@ testthat::test_that("create minimal db", {
               length(source.config.dmccooey$getPolyhedraFiles(getDataDir())),
                9)
 
-  db <- PolyhedraDatabase.class$new()
+  db <- PolyhedraDatabase$new()
   #FIXME for building testcase: polyhedroncannot exist
   # if it is not in the database.
   db$existsPolyhedron(source = "netlib", polyhedron.name = "tetrahedron")
@@ -41,7 +41,7 @@ testthat::test_that("create minimal db", {
                ))
   #TODO understand why generateTestTasks doesn't get covered by covr package
   tasks <- db$
-    generateTestTasks(TestTaskClass = PolyhedronTestTaskScrape.class,
+    generateTestTasks(TestTaskClass = PolyhedronTestTaskScrape,
                       max.quant = 3)
   testthat::expect_equal(length(tasks), 3)
   #TODO
