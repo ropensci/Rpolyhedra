@@ -1,28 +1,20 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "Rpolyhedra",
   "description": "A polyhedra database scraped from various sources as R6 objects and 'rgl' visualizing capabilities.",
   "name": "Rpolyhedra: Polyhedra Database",
+  "relatedLink": "https://docs.ropensci.org/Rpolyhedra",
   "codeRepository": "https://github.com/ropensci/Rpolyhedra",
   "issueTracker": "https://github.com/ropensci/Rpolyhedra/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
-  "provider": {
-    "@id": "https://cran.r-project.org",
-    "@type": "Organization",
-    "name": "Comprehensive R Archive Network (CRAN)",
-    "url": "https://cran.r-project.org"
-  },
+  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
   "author": [
     {
       "@type": "Person",
@@ -130,17 +122,24 @@
     {
       "@type": "SoftwareApplication",
       "identifier": "codemetar",
-      "name": "codemetar"
+      "name": "codemetar",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=codemetar"
     }
   ],
-  "softwareRequirements": [
-    {
+  "softwareRequirements": {
+    "1": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 3.5.0"
     },
-    {
+    "2": {
       "@type": "SoftwareApplication",
       "identifier": "R6",
       "name": "R6",
@@ -152,7 +151,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=R6"
     },
-    {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "geometry",
       "name": "geometry",
@@ -164,7 +163,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=geometry"
     },
-    {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "rgl",
       "name": "rgl",
@@ -176,7 +175,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rgl"
     },
-    {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
@@ -188,7 +187,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringr"
     },
-    {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -200,7 +199,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
@@ -212,7 +211,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
-    {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "XML",
       "name": "XML",
@@ -224,7 +223,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=XML"
     },
-    {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "digest",
       "name": "digest",
@@ -236,7 +235,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=digest"
     },
-    {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
@@ -248,7 +247,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=testthat"
     },
-    {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "futile.logger",
       "name": "futile.logger",
@@ -260,7 +259,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=futile.logger"
     },
-    {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "git2r",
       "name": "git2r",
@@ -271,26 +270,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=git2r"
-    }
-  ],
-  "contIntegration": ["https://travis-ci.org/ropensci/Rpolyhedra", "https://codecov.io/gh/ropensci/Rpolyhedra"],
-  "keywords": [
-    "polyhedra-database",
-    "geometry",
-    "rgl"
-  ],
-  "relatedLink": [
-    "https://CRAN.R-project.org/package=Rpolyhedra",
-    "https://docs.ropensci.org/Rpolyhedra"
-  ],
-  "funder": {},
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "2155.756KB",
   "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
+  "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],
+  "developmentStatus": "https://www.repostatus.org/#active",
   "review": {
     "@type": "Review",
     "url": "https://github.com/ropensci/software-review/issues/157",
     "provider": "https://ropensci.org"
   },
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
-  "fileSize": "2866.417KB"
+  "keywords": ["polyhedra-database", "geometry", "rgl"]
 }
