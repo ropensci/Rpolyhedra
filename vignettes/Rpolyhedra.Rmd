@@ -22,6 +22,7 @@ For advanced users, the package provides a simplified set of R6 objects to scrap
 ```{r setup, include=FALSE}
 library(rgl)
 library(Rpolyhedra)
+library(dplyr)
 setupKnitr()
 ```
 
@@ -45,7 +46,6 @@ cube <- getPolyhedron(source = "netlib", polyhedron.name = "cube")
 To try package functionality, a simple demo can be executed which shows the 5 regular polyhedra.
 
 ```{r demo, webgl=TRUE}
-library(dplyr)
 # 1.  Obtain 5 regular solids
 polyhedra.2.draw <- getAvailablePolyhedra(source = "netlib")
 polyhedra.2.draw <- polyhedra.2.draw %>%
