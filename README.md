@@ -10,9 +10,9 @@
 
 This package is a polyhedra database based on the poly package found on
 <http://www.netlib.org/polyhedra/> ([Original Help
-message](poly_original_help_message.html)), and the polyhedra
-definitions found on <http://dmccooey.com/polyhedra/>. As such,
-Rpolyhedra provides with the following:
+message](https://github.com/ropensci/Rpolyhedra/tree/master/poly_original_help_message.html)),
+and the polyhedra definitions found on <http://dmccooey.com/polyhedra/>.
+As such, Rpolyhedra provides with the following:
 
 1.  A module to scrape the polyhedra for the different sources found
     with features for incremental correction of issues found and to be
@@ -69,7 +69,7 @@ To get started execute the following commands:
 library(knitr)
 #> Warning: package 'knitr' was built under R version 4.1.2
 library(rgl)
-# For forarding webgl output to knitr
+# For foarding webgl output to knitr
 knit_hooks$set(webgl = hook_webgl)
 library(dplyr)
 #> 
@@ -199,7 +199,10 @@ sudo apt-get install r-cran-rgl
 ```
 
 Please note that the ‘Rpolyhedra’ project is released with a
-[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
-this project, you agree to abide by its terms.
+[Contributor Code of
+Conduct](https://github.com/ropensci/Rpolyhedra/blob/master/CODE_OF_CONDUCT.md).
+By
+[contributing](https://github.com/ropensci/Rpolyhedra/blob/master/CONTRIBUTING.md)
+to this project, you agree to abide by its terms.
 
 [![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
