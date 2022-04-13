@@ -25,6 +25,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-pandoc@v1
+      - if: runner.os == 'macOS'
+        run: brew install --cask xquartz
       - name: Bootstrap
         run: |
           curl -OLs https://eddelbuettel.github.io/r-ci/run.sh
