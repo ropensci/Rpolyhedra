@@ -18,7 +18,7 @@ references to the package."><!-- mathjax --><script src="https://cdnjs.cloudflar
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rpolyhedra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -72,15 +72,17 @@ references to the package.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">#gets all sources in the database</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># gets all sources in the database</span></span>
 <span class="r-in"><span class="va">available.sources</span> <span class="op">&lt;-</span> <span class="fu">getAvailableSources</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co">#returns all polyhedra from all sources</span></span>
-<span class="r-in"><span class="va">available.polyhedra</span> <span class="op">&lt;-</span> <span class="fu"><a href="getAvailablePolyhedra.html">getAvailablePolyhedra</a></span><span class="op">(</span>sources<span class="op">=</span><span class="va">available.sources</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># returns all polyhedra from all sources</span></span>
+<span class="r-in"><span class="va">available.polyhedra</span> <span class="op">&lt;-</span> <span class="fu"><a href="getAvailablePolyhedra.html">getAvailablePolyhedra</a></span><span class="op">(</span>sources <span class="op">=</span> <span class="va">available.sources</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="co">#search within the polyhedron names from all sources</span></span>
-<span class="r-in"><span class="va">cubes</span> <span class="op">&lt;-</span> <span class="fu"><a href="getAvailablePolyhedra.html">getAvailablePolyhedra</a></span><span class="op">(</span>sources<span class="op">=</span><span class="va">available.sources</span>,</span>
-<span class="r-in">        search.string<span class="op">=</span><span class="st">"cube"</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># search within the polyhedron names from all sources</span></span>
+<span class="r-in"><span class="va">cubes</span> <span class="op">&lt;-</span> <span class="fu"><a href="getAvailablePolyhedra.html">getAvailablePolyhedra</a></span><span class="op">(</span></span>
+<span class="r-in">  sources <span class="op">=</span> <span class="va">available.sources</span>,</span>
+<span class="r-in">  search.string <span class="op">=</span> <span class="st">"cube"</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">cubes</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    source                     scraped.name            symbol vertices faces</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  netlib                             cube {4,3}\t@P sub 4 @        8     6</span>

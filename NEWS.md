@@ -29,7 +29,7 @@ First version published using devtools::release() on [rOpenSci.org](https://rope
 Rpolyhedra 0.4.1
 ============
 
-First version published on [rOpenSci.org](http://www.rOpenSci.org). 
+First version published on [rOpenSci.org](https://ropensci.org/). 
 
 ### MINOR IMPROVEMENTS
 

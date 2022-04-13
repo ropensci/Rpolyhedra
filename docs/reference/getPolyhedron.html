@@ -20,7 +20,7 @@ user to get access to all the functionality provided."><!-- mathjax --><script s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rpolyhedra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -84,33 +84,77 @@ the database. Current names can be found with getAvailablePolyhedra()</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tetrahedron</span> <span class="op">&lt;-</span> <span class="fu">getPolyhedron</span><span class="op">(</span>source <span class="op">=</span> <span class="st">'netlib'</span>,</span>
-<span class="r-in">       polyhedron.name <span class="op">=</span> <span class="st">'tetrahedron'</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in getPolyhedraObject()$getPolyhedron(source = source, polyhedron.name = polyhedron.name):</span> object 'Polyhedron.class' not found</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tetrahedron</span> <span class="op">&lt;-</span> <span class="fu">getPolyhedron</span><span class="op">(</span></span>
+<span class="r-in">  source <span class="op">=</span> <span class="st">"netlib"</span>,</span>
+<span class="r-in">  polyhedron.name <span class="op">=</span> <span class="st">"tetrahedron"</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># returns name of polyhedra</span></span>
 <span class="r-in"><span class="va">tetrahedron</span><span class="op">$</span><span class="fu">getName</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'tetrahedron' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tetrahedron"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># polyhedron state</span></span>
 <span class="r-in"><span class="va">tetrahedron.state</span> <span class="op">&lt;-</span> <span class="va">tetrahedron</span><span class="op">$</span><span class="fu">getState</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'tetrahedron' not found</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Johnson symbol and Schlafli symbol</span></span>
 <span class="r-in"><span class="va">tetrahedron.state</span><span class="op">$</span><span class="fu">getSymbol</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'tetrahedron.state' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "{3,3}\t@Y sub 3 @"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># vertex data.frame</span></span>
 <span class="r-in"><span class="va">tetrahedron.state</span><span class="op">$</span><span class="fu">getVertices</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'tetrahedron.state' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Pos3D_1    Pos3D_2    Pos3D_3 Pos3D_1_exp Pos3D_2_exp Pos3D_3_exp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  -1.0000000 -0.5773503  0.0000000        -1.0  -0.5773503           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  -0.5000000  0.2886751  0.0000000        -0.5   0.2886751           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   0.0000000 -0.5773503  0.0000000         0.0  -0.5773503           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   0.0000000  1.1547005  0.0000000         0.0   1.1547005           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   0.5000000  0.2886751  0.0000000         0.5   0.2886751           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   1.0000000 -0.5773503  0.0000000         1.0  -0.5773503           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  -1.3333333 -0.7698004 -1.0886621          NA          NA          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  -0.8333333 -1.0584755 -0.2721655          NA          NA          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  -0.5000000 -0.2886751 -0.8164966          NA          NA          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 -0.4444444 -1.2188506 -1.1793840          NA          NA          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Pos3D_1_exp_text Pos3D_2_exp_text Pos3D_3_exp_text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                -1   (-1/3)*sqrt(3)                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              -1/2    (1/6)*sqrt(3)                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                 0   (-1/3)*sqrt(3)                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                 0    (2/3)*sqrt(3)                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5               1/2    (1/6)*sqrt(3)                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                 1   (-1/3)*sqrt(3)                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># List of faces of solid representation (3D)</span></span>
 <span class="r-in"><span class="va">tetrahedron.state</span><span class="op">$</span><span class="fu">getSolid</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'tetrahedron.state' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 10  9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 8 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8  7 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  9 10  7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># List of faces of net representation (2D)</span></span>
 <span class="r-in"><span class="va">tetrahedron.state</span><span class="op">$</span><span class="fu">getNet</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'tetrahedron.state' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 3 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 2 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 3 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
