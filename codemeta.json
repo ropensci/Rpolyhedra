@@ -189,30 +189,6 @@
     },
     "6": {
       "@type": "SoftwareApplication",
-      "identifier": "stringi",
-      "name": "stringi",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=stringi"
-    },
-    "7": {
-      "@type": "SoftwareApplication",
-      "identifier": "dplyr",
-      "name": "dplyr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
-    },
-    "8": {
-      "@type": "SoftwareApplication",
       "identifier": "XML",
       "name": "XML",
       "provider": {
@@ -223,7 +199,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=XML"
     },
-    "9": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "digest",
       "name": "digest",
@@ -235,19 +211,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=digest"
     },
-    "10": {
-      "@type": "SoftwareApplication",
-      "identifier": "testthat",
-      "name": "testthat",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
-    },
-    "11": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "futile.logger",
       "name": "futile.logger",
@@ -259,7 +223,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=futile.logger"
     },
-    "12": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "git2r",
       "name": "git2r",
@@ -273,7 +237,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2150.68KB",
+  "fileSize": "2150.685KB",
   "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
   "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],

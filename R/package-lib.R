@@ -293,7 +293,7 @@ PolyhedronScraperConfigurationDmccooey <- R6::R6Class(
       self
     },
     getPolyhedraFiles = function(home.dir.data) {
-      # wget -r -np -k http://dmccooey.com/polyhedra
+      # wget -r -np -k http://dmccooey.com/polyhedra/
       # for filename in `find dmccooey.com/polyhedra/*.html -type f`; do
       #   echo $filename
       #    wget "www."${filename::-5}".txt" -P dmccooey.com/polyhedra/

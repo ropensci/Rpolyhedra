@@ -16,7 +16,7 @@ A polyhedra database scraped from:
          visualizing capabilities. The PHD format was created to describe the geometric
          polyhedra definitions derived mathematically <http://www.netlib.org/polyhedra/>
          by Andrew Hume and by the Kaleido program of Zvi Har'El.
-   \item http://dmccooey.com/Polyhedra: Polyhedra text datafiles.
+   \item http://dmccooey.com/Polyhedra/: Polyhedra text datafiles.
 }
 }
 \seealso{

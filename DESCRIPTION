@@ -22,13 +22,13 @@ Imports: R6,
   geometry,
   rgl,
   stringr,
-  stringi,
-  dplyr,
   XML,
   digest,
-  testthat,
   futile.logger,
   git2r
+Suggest:
+  testthat,
+  dplyr
 Collate:
   'Rpolyhedra-package.R'
   'polyhedra-lib.R'

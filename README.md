@@ -3,8 +3,8 @@
 
 # Rpolyhedra
 
-[![Downloads](http://cranlogs.r-pkg.org/badges/Rpolyhedra?color=brightgreen)](http://www.r-pkg.org:443/pkg/Rpolyhedra)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/Rpolyhedra?color=brightgreen)](http://www.r-pkg.org:443/pkg/Rpolyhedra)
+[![Downloads](http://cranlogs.r-pkg.org/badges/Rpolyhedra?color=brightgreen)](https://www.r-pkg.org:443/pkg/Rpolyhedra)
+[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/Rpolyhedra?color=brightgreen)](https://www.r-pkg.org:443/pkg/Rpolyhedra)
 
 <!-- Polyhedra database scraped from publically available sources using R6 objects and 'rgl' visualizing capabilities. -->
 

@@ -18,8 +18,8 @@ knitr::opts_chunk$set(
 
 # Rpolyhedra
 
-[![Downloads](http://cranlogs.r-pkg.org/badges/Rpolyhedra?color=brightgreen)](http://www.r-pkg.org/pkg/Rpolyhedra)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/Rpolyhedra?color=brightgreen)](http://www.r-pkg.org/pkg/Rpolyhedra)
+[![Downloads](http://cranlogs.r-pkg.org/badges/Rpolyhedra?color=brightgreen)](https://www.r-pkg.org:443/pkg/Rpolyhedra)
+[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/Rpolyhedra?color=brightgreen)](https://www.r-pkg.org:443/pkg/Rpolyhedra)
 
 
  <!-- Polyhedra database scraped from publically available sources using R6 objects and 'rgl' visualizing capabilities. -->
@@ -73,7 +73,7 @@ To get started execute the following commands:
 # 0.  Load libraries
 library(knitr)
 library(rgl)
-# For forarding webgl output to knitr
+# For fowarding webgl output to knitr
 knit_hooks$set(webgl = hook_webgl)
 library(dplyr)
 ```

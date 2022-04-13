@@ -21,7 +21,6 @@ For final users, the package provides a common interface for accessing public po
 For advanced users, the package provides a simplified set of R6 objects to scrape and compare polyhedra databases. 
 ```{r setup, include=FALSE}
 library(rgl)
-library(dplyr)
 library(Rpolyhedra)
 setupKnitr()
 ```
@@ -46,6 +45,7 @@ cube <- getPolyhedron(source = "netlib", polyhedron.name = "cube")
 To try package functionality, a simple demo can be executed which shows the 5 regular polyhedra.
 
 ```{r demo, webgl=TRUE}
+library(dplyr)
 # 1.  Obtain 5 regular solids
 polyhedra.2.draw <- getAvailablePolyhedra(source = "netlib")
 polyhedra.2.draw <- polyhedra.2.draw %>%
