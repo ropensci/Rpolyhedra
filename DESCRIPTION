@@ -15,7 +15,6 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
-Suggests: knitr, pkgdown, rmarkdown, covr, codemetar
 VignetteBuilder: knitr
 Depends: R (>= 3.5.0)
 Imports: R6,
@@ -26,9 +25,14 @@ Imports: R6,
   digest,
   futile.logger,
   git2r
-Suggest:
+Suggests: 
   testthat,
-  dplyr
+  dplyr,
+  knitr, 
+  pkgdown, 
+  rmarkdown, 
+  covr, 
+  codemetar
 Collate:
   'Rpolyhedra-package.R'
   'polyhedra-lib.R'

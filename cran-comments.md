@@ -1,13 +1,11 @@
+N  checking whether package ‘Rpolyhedra’ can be installed (11.9s)
+   Found the following notes/warnings:
+     Non-staged installation was used
+   See ‘/private/var/folders/4r/f_k7yqz92p76h7b32m953pyr0000gp/T/RtmpfV7vvq/Rpolyhedra.Rcheck/00install.out’ for details.
 ── R CMD check results ────────────────────────────────────── Rpolyhedra 0.5.0 ────
-Duration: 1m 21.5s
-
-> checking for unstated dependencies in ‘tests’ ... WARNING
-  '::' or ':::' import not declared from: ‘testthat’
+Duration: 2m 21.7s
 
 > checking whether package ‘Rpolyhedra’ can be installed ... NOTE
   See below...
 
-> checking for unstated dependencies in vignettes ... NOTE
-  'library' or 'require' call not declared from: ‘dplyr’
-
-0 errors ✓ | 1 warning x | 2 notes x
+0 errors ✓ | 0 warnings ✓ | 1 note x
