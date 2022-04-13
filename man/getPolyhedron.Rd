@@ -22,8 +22,10 @@ The object returned, of type Polyhedron, allows to the
 user to get access to all the functionality provided.
 }
 \examples{
-tetrahedron <- getPolyhedron(source = 'netlib',
-       polyhedron.name = 'tetrahedron')
+tetrahedron <- getPolyhedron(
+  source = "netlib",
+  polyhedron.name = "tetrahedron"
+)
 
 # returns name of polyhedra
 tetrahedron$getName()
@@ -42,6 +44,7 @@ tetrahedron.state$getSolid()
 
 # List of faces of net representation (2D)
 tetrahedron.state$getNet()
+
 }
 \seealso{
 getAvailablePolyhedra, getAvailableSources

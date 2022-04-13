@@ -8,12 +8,11 @@
 
 <!-- Polyhedra database scraped from publically available sources using R6 objects and 'rgl' visualizing capabilities. -->
 
-This package is a curation made based on the poly package found on
+This package is a polyhedra database based on the poly package found on
 <http://www.netlib.org/polyhedra/> ([Original Help
-message](poly_original_help_message.html)), and the polyhedra database
-found on <http://dmccooey.com/polyhedra>, both of which provide
-polyhedra databases on its own format. As such, Rpolyhedra provides with
-the following:
+message](poly_original_help_message.html)), and the polyhedra
+definitions found on <http://dmccooey.com/polyhedra/>. As such,
+Rpolyhedra provides with the following:
 
 1.  A module to scrape the polyhedra for the different sources found
     with features for incremental correction of issues found and to be
@@ -24,9 +23,9 @@ the following:
 
 | Release                                                                                                                                  | Usage                                                                                                    | Development                                                                                                                                                                                            |
 |:-----------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/onboarding/issues/157)                                     | [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) |                                                                                                                                                                                                        |
+| [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/software-review/issues/157)                                | [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) |                                                                                                                                                                                                        |
 | [![R-CMD-check](https://github.com/ropensci/Rpolyhedra/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/Rpolyhedra/actions) |                                                                                                          |                                                                                                                                                                                                        |
-| [![CRAN](http://www.r-pkg.org/badges/version/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra)                                 |                                                                                                          | [![codecov](https://codecov.io/gh/ropensci/Rpolyhedra/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/Rpolyhedra)                                                                       |
+| [![CRAN](https://www.r-pkg.org:443/pkg/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra)                                       |                                                                                                          | [![codecov](https://codecov.io/gh/ropensci/Rpolyhedra/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/Rpolyhedra)                                                                   |
 |                                                                                                                                          |                                                                                                          | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) |
 
 # Preview

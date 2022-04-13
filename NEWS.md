@@ -1,3 +1,10 @@
+Rpolyhedra 0.5
+============
+
+### MINOR IMPROVEMENTS
+* CI moved to github actions
+* Updated documentation
+
 Rpolyhedra 0.4.4
 ============
 
@@ -8,7 +15,7 @@ Rpolyhedra 0.4.4
 Rpolyhedra 0.4.2
 ============
 
-First version published using devtools::release() on [rOpenSci.org](http://www.rOpenSci.org). 
+First version published using devtools::release() on [rOpenSci.org](https://ropensci.org/). 
 
 ### MINOR IMPROVEMENTS
 

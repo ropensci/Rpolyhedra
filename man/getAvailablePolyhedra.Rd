@@ -20,15 +20,15 @@ the polyhedra database, which can be later called with getPolyhedron
 }
 \examples{
 
-#gets all polyhedra in the database
+# gets all polyhedra in the database
 available.polyhedra <- getAvailablePolyhedra()
 
-#returns all polyhedra from a given source, in this case, netlib
-available.netlib.polyhedra <- getAvailablePolyhedra(sources="netlib")
+# returns all polyhedra from a given source, in this case, netlib
+available.netlib.polyhedra <- getAvailablePolyhedra(sources = "netlib")
 
-#search within the polyhedron names
+# search within the polyhedron names
 
-cube <- getAvailablePolyhedra(sources="netlib",search.string="cube")
+cube <- getAvailablePolyhedra(sources = "netlib", search.string = "cube")
 cube
 }
 \seealso{

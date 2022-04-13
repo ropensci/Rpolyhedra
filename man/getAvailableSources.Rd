@@ -14,15 +14,17 @@ Gets the list of names of available sources in database to be used later as
 references to the package.
 }
 \examples{
-#gets all sources in the database
+# gets all sources in the database
 available.sources <- getAvailableSources()
 
-#returns all polyhedra from all sources
-available.polyhedra <- getAvailablePolyhedra(sources=available.sources)
+# returns all polyhedra from all sources
+available.polyhedra <- getAvailablePolyhedra(sources = available.sources)
 
-#search within the polyhedron names from all sources
-cubes <- getAvailablePolyhedra(sources=available.sources,
-        search.string="cube")
+# search within the polyhedron names from all sources
+cubes <- getAvailablePolyhedra(
+  sources = available.sources,
+  search.string = "cube"
+)
 cubes
 }
 \seealso{

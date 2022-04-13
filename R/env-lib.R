@@ -3,7 +3,7 @@
 #' Obtains a variable from package environment
 #' @param variable.name  name of variable to be retrieved
 #' @noRd
-getPackageEnvir <- function(variable.name){
+getPackageEnvir <- function(variable.name) {
   get(variable.name, envir = asNamespace("Rpolyhedra"))
 }
 
@@ -14,7 +14,7 @@ getPackageEnvir <- function(variable.name){
 #' @noRd
 #' @param variable.name  name of variable to be set
 #' @param value          variable value
-setPackageEnvir <- function(variable.name, value){
+setPackageEnvir <- function(variable.name, value) {
   assign(x = variable.name, value = value, envir = asNamespace("Rpolyhedra"))
 }
 
@@ -37,8 +37,10 @@ getUserEnvir <- function(variable.name) {
 #' @param value          variable value
 #' @noRd
 setUserEnvir <- function(variable.name, value) {
-  assign(x = variable.name, value = value, envir =
-           getPackageEnvir("RpolyhedraEnv"))
+  assign(
+    x = variable.name, value = value, envir =
+      getPackageEnvir("RpolyhedraEnv")
+  )
 }
 
 
@@ -58,7 +60,7 @@ getDataEnv <- function() {
 #' This function is used internally for accesing the local database path
 #' @return path of user space
 #' @noRd
-getUserSpace <- function(){
+getUserSpace <- function() {
   file.path(path.expand("~"), ".R", "Rpolyhedra")
 }
 
@@ -70,7 +72,7 @@ getUserSpace <- function(){
 #' @noRd
 initDataDirEnvironment <- function() {
   environment.filepath <- getEnvironmentFilepath()
-  if (!file.exists(environment.filepath)){
+  if (!file.exists(environment.filepath)) {
     .data.env <- "PACKAGE"
   } else {
     .data.env <- readLines(environment.filepath)[1]
@@ -104,7 +106,7 @@ getDataDir <- function(data.env = getDataEnv()) {
 #' Gets the filename where package data environment is persisted
 #' @return The environment filepath
 #' @noRd
-getEnvironmentFilepath <- function(){
+getEnvironmentFilepath <- function() {
   file.path(getDataDir("HOME"), "Rpolyhedra.env")
 }
 
@@ -120,8 +122,7 @@ getEnvironmentFilepath <- function(){
 setDataDirEnvironment <- function(env = "PACKAGE") {
   if (env %in% c("PACKAGE", "HOME")) {
     .data.env <- env
-  }
-  else {
+  } else {
     stop("Possible values are PACKAGE and HOME")
   }
   if (file.exists(getUserSpace())) {
@@ -136,11 +137,12 @@ setDataDirEnvironment <- function(env = "PACKAGE") {
 #'
 #' Gets the path of package data.
 #' @noRd
-getPackageDir <- function(){
+getPackageDir <- function() {
   home.dir <- find.package("Rpolyhedra", lib.loc = NULL, quiet = TRUE)
   data.subdir <- file.path("inst", "extdata")
-  if (!dir.exists(file.path(home.dir, data.subdir)))
+  if (!dir.exists(file.path(home.dir, data.subdir))) {
     data.subdir <- "extdata"
+  }
   file.path(home.dir, data.subdir)
 }
 
@@ -167,32 +169,36 @@ getPolyhedraRDSPath <- function(polyhedra.rds.filename = "polyhedra.RDS") {
 #' @return .data.env
 #' @importFrom futile.logger flog.info
 #' @noRd
-selectDataEnv <- function(env=NA, downloadDatabase = TRUE,
+selectDataEnv <- function(env = NA, downloadDatabase = TRUE,
                           prompt.value = NULL) {
   retVal <- "SUCCESS"
   if (is.na(env)) {
     if (!is.na(Sys.getenv(x = "ON_TRAVIS", unset = NA))) {
       return(TRUE)
     }
-    if (is.null(prompt.value)){
+    if (is.null(prompt.value)) {
       prompt.value <- readline(
-        prompt = paste("Full Database needs to download data to home folder. ",
-                       "Agree [y/n]?:"))
+        prompt = paste(
+          "Full Database needs to download data to home folder. ",
+          "Agree [y/n]?:"
+        )
+      )
     }
 
     retry <- TRUE
     while (retry) {
       answer <- tolower(prompt.value[1])
       if (answer == "n") {
-        futile.logger::flog.info(paste("Working on demo DB. You can call",
-                  "selectDataEnv to use the full database."))
+        futile.logger::flog.info(paste(
+          "Working on demo DB. You can call",
+          "selectDataEnv to use the full database."
+        ))
         setDataDirEnvironment("PACKAGE")
         retry <- FALSE
       } else if (answer == "y") {
         setDataDirEnvironment("HOME")
         retry <- FALSE
-      }
-      else {
+      } else {
         retry <- TRUE
       }
       if (retry) {
@@ -203,14 +209,14 @@ selectDataEnv <- function(env=NA, downloadDatabase = TRUE,
     setDataDirEnvironment(env)
   }
   .data.env <- getDataEnv()
-  #loads the database
-  if (.data.env == "HOME"){
-    #create dir
+  # loads the database
+  if (.data.env == "HOME") {
+    # create dir
     data.dir <- getUserSpace()
     if (!dir.exists(data.dir)) {
       dir.create(data.dir, recursive = TRUE, showWarnings = FALSE)
     }
-    if (downloadDatabase){
+    if (downloadDatabase) {
       retVal <- downloadRPolyhedraSupportingFiles()
     }
   }
@@ -231,13 +237,12 @@ selectDataEnv <- function(env=NA, downloadDatabase = TRUE,
 #' @importFrom git2r commits
 #' @return String with git commit sha
 #' @noRd
-getGitCommit <- function(long.version = FALSE){
-  #TODO: replace with git2r when issue #2 is resolved.
-  #rgit2r::commits()[[1]]@sha
-  if (file.exists(".git")){
+getGitCommit <- function(long.version = FALSE) {
+  # TODO: replace with git2r when issue #2 is resolved.
+  # rgit2r::commits()[[1]]@sha
+  if (file.exists(".git")) {
     git.sha <- system("git log --pretty=format:'%h' -n 1", intern = TRUE)[1]
-  }
-  else{
+  } else {
     git.sha <- NA
   }
   if (long.version == FALSE) {

@@ -41,5 +41,5 @@ Collate:
   'test-lib.R'
   'zzz.R'
 BugReports: https://github.com/ropensci/Rpolyhedra/issues
-URL: https://docs.ropensci.org/Rpolyhedra, https://github.com/ropensci/Rpolyhedra
+URL: https://docs.ropensci.org/Rpolyhedra/, https://github.com/ropensci/Rpolyhedra
 StagedInstall: FALSE

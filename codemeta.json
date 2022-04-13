@@ -4,7 +4,7 @@
   "identifier": "Rpolyhedra",
   "description": "A polyhedra database scraped from various sources as R6 objects and 'rgl' visualizing capabilities.",
   "name": "Rpolyhedra: Polyhedra Database",
-  "relatedLink": "https://docs.ropensci.org/Rpolyhedra",
+  "relatedLink": "https://docs.ropensci.org/Rpolyhedra/",
   "codeRepository": "https://github.com/ropensci/Rpolyhedra",
   "issueTracker": "https://github.com/ropensci/Rpolyhedra/issues",
   "license": "https://spdx.org/licenses/MIT",
@@ -273,7 +273,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2155.756KB",
+  "fileSize": "2155.784KB",
   "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
   "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],
