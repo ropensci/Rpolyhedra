@@ -16,3 +16,4 @@
 ^inst\extdata\.tmp$
 ^\.travis\.yml$
 ^\.github$
+^CRAN-SUBMISSION$
