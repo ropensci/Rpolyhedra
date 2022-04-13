@@ -10,7 +10,7 @@
 
 This package is a polyhedra database based on the poly package found on
 <http://www.netlib.org/polyhedra/> ([Original Help
-message](https://raw.githubusercontent.com/ropensci/Rpolyhedra/master/poly_original_help_message.html)),
+message](https://raw.githubusercontent.com/ropensci/Rpolyhedra/master/man/html/poly_original_help_message.html)),
 and the polyhedra definitions found on <http://dmccooey.com/polyhedra/>.
 As such, Rpolyhedra provides with the following:
 
