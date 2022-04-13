@@ -261,7 +261,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2164.97KB",
+  "fileSize": "2164.978KB",
   "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
   "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],
