@@ -1,3 +1,12 @@
-Please ignore previous upload of release 0.4.4 as it doesn't include the sample database. I'm submitting again with the database (It generates automatically but we release a sample already included in the package).
+N  checking whether package ‘Rpolyhedra’ can be installed (11s)
+   Found the following notes/warnings:
+     Non-staged installation was used
+   See ‘/private/var/folders/4r/f_k7yqz92p76h7b32m953pyr0000gp/T/RtmpfV7vvq/Rpolyhedra.Rcheck/00install.out’ for details.
+   
+── R CMD check results ────────────────────────────────────── Rpolyhedra 0.5.0 ────
+Duration: 1m 26.8s
 
-There was some problems running check_rhub() with rgl (because the lack of screen in docker severs, I think), and in some environments it required string which is not a dependence of Rpolyhedra. check_win_devel() built ok in Windows.
+> checking whether package ‘Rpolyhedra’ can be installed ... NOTE
+  See below...
+
+0 errors ✓ | 0 warnings ✓ | 1 note x
