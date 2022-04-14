@@ -77,7 +77,8 @@ downloadRPolyhedraSupportingFiles <- function() {
       # download file to tempfile
       oldw <- getOption("warn")
       options(warn = -1)
-      retVal <- tryCatch({
+      retVal <- tryCatch(
+        {
           utils::download.file(db.url, destfile = zipFile, mode = "wb")
           "SUCCESS"
         },
@@ -88,12 +89,14 @@ downloadRPolyhedraSupportingFiles <- function() {
       options(warn = oldw)
       if (retVal == "SUCCESS") {
         futile.logger::flog.info(paste(
-          "Downloaded file to", zipFile))
+          "Downloaded file to", zipFile
+        ))
         tdb <- file.path(td, "db")
         dir.create(tdb, recursive = TRUE, showWarnings = FALSE)
         utils::unzip(zipfile = zipFile, exdir = tdb)
         futile.logger::flog.info(paste(
-          "Decompressed to", tdb))
+          "Decompressed to", tdb
+        ))
         db.package.path <- dir(tdb, full.names = TRUE)
         tmp.db.path <- list.files(path = db.package.path)[1]
         files.to.copy <- list.files(db.package.path)
@@ -104,10 +107,10 @@ downloadRPolyhedraSupportingFiles <- function() {
         )
         # delete tmp path
         unlink(file.path(td, tmp.db.path), recursive = TRUE)
-      }
-      else{
+      } else {
         futile.logger::flog.warn(paste(
-          "url not found", db.url))
+          "url not found", db.url
+        ))
       }
     }
   }
