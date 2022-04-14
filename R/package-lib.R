@@ -88,13 +88,13 @@ downloadRPolyhedraSupportingFiles <- function() {
       )
       options(warn = oldw)
       if (retVal == "SUCCESS") {
-        futile.logger::flog.info(paste(
+        futile.logger::flog.debug(paste(
           "Downloaded file to", zipFile
         ))
         tdb <- file.path(td, "db")
         dir.create(tdb, recursive = TRUE, showWarnings = FALSE)
         utils::unzip(zipfile = zipFile, exdir = tdb)
-        futile.logger::flog.info(paste(
+        futile.logger::flog.debug(paste(
           "Decompressed to", tdb
         ))
         db.package.path <- dir(tdb, full.names = TRUE)
