@@ -25,6 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-pandoc@v1
+      - uses: codecov/codecov-action@v2
       - if: runner.os == 'macOS'
         run: brew install --cask xquartz
       - name: Bootstrap
