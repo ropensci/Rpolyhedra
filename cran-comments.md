@@ -1,3 +1,6 @@
+Hotfix for downloading fullDB for Release 0.5.0
+
+────────────────────────────────────────────────────────────────────────────
 N  checking whether package ‘Rpolyhedra’ can be installed (11.9s)
    Found the following notes/warnings:
      Non-staged installation was used
