@@ -64,19 +64,21 @@ downloadRPolyhedraSupportingFiles <- function() {
   if (checkDatabaseVersion() == "UPDATE") {
     if (getDataEnv() == "HOME") {
       db.version <- getPackageDB()
-      URL <- paste(
-        "https://api.github.com/repos/qbotics/RpolyhedraDB/zipball/v",
+      db.url <- paste(
+        "https://github.com/qbotics/RpolyhedraDB/archive/refs/tags/v",
         db.version,
+        ".zip",
         sep = ""
       )
-      td <- tempdir()
+      td <- file.path(tempdir(), "Rpolyhedra")
+      dir.create(td, recursive = TRUE, showWarnings = FALSE)
+      unlink(dir(td, full.names = TRUE))
       zipFile <- tempfile(tmpdir = td, fileext = ".zip")
       # download file to tempfile
       oldw <- getOption("warn")
       options(warn = -1)
-      retVal <- tryCatch(
-        {
-          utils::download.file(URL, destfile = zipFile, mode = "wb")
+      retVal <- tryCatch({
+          utils::download.file(db.url, destfile = zipFile, mode = "wb")
           "SUCCESS"
         },
         error = function(e) {
@@ -85,16 +87,27 @@ downloadRPolyhedraSupportingFiles <- function() {
       )
       options(warn = oldw)
       if (retVal == "SUCCESS") {
-        utils::unzip(zipfile = zipFile, exdir = td)
-        tmp.db.path <- list.files(path = td, pattern = "qbotics*")[1]
-        files.to.copy <- list.files(file.path(td, tmp.db.path))
+        futile.logger::flog.info(paste(
+          "Downloaded file to", zipFile))
+        tdb <- file.path(td, "db")
+        dir.create(tdb, recursive = TRUE, showWarnings = FALSE)
+        utils::unzip(zipfile = zipFile, exdir = tdb)
+        futile.logger::flog.info(paste(
+          "Decompressed to", tdb))
+        db.package.path <- dir(tdb, full.names = TRUE)
+        tmp.db.path <- list.files(path = db.package.path)[1]
+        files.to.copy <- list.files(db.package.path)
         # copy files
         file.copy(
-          from = file.path(td, tmp.db.path, files.to.copy),
+          from = file.path(db.package.path, files.to.copy),
           to = getUserSpace(), recursive = TRUE
         )
         # delete tmp path
         unlink(file.path(td, tmp.db.path), recursive = TRUE)
+      }
+      else{
+        futile.logger::flog.warn(paste(
+          "url not found", db.url))
       }
     }
   }
