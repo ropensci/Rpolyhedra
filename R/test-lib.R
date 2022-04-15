@@ -74,7 +74,8 @@ PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
       error <- ""
       scraped.name <- NA
       source <- self$source.config$getName()
-      tryCatch({
+      tryCatch(
+        {
           obs <- ""
           self$scraped.polyhedron <- self$source.config$scrape(
             polyhedron.file.id = self$polyhedron.file.id,

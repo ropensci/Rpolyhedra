@@ -231,13 +231,14 @@ PolyhedronStateNetlibScraper <- R6::R6Class(
             v = v,
             total = n.vertices,
             cf.outbrackets =
-            paste(cf.outbrackets,
-              collapse = ","
-            ),
+              paste(cf.outbrackets,
+                collapse = ","
+              ),
             cf.inbrackets =
-            paste(cf.inbrackets,
-              collapse = ","
-            ))
+              paste(cf.inbrackets,
+                collapse = ","
+              )
+          )
           vertices[cont, "Pos3D_1"] <- cf.outbrackets[1]
           vertices[cont, "Pos3D_2"] <- cf.outbrackets[2]
           vertices[cont, "Pos3D_3"] <- cf.outbrackets[3]
@@ -289,7 +290,8 @@ PolyhedronStateNetlibScraper <- R6::R6Class(
         ),
         collapse = "|",
         sep = "=>"
-      ))
+        )
+      )
       self$labels.map
     },
     #' @description
@@ -571,7 +573,8 @@ PolyhedronStateDmccooeyScraper <- R6::R6Class(
       logger$debug(
         "Scraping dmccooey polyhedron",
         file.id = self$file.id,
-        name = name)
+        name = name
+      )
       # values
 
       self$labels.map[["values"]] <- grep(
@@ -1028,7 +1031,7 @@ PolyhedronStateDefined <- R6::R6Class(
       convex.hull <- self$getConvHull()
       volume <- convex.hull$vol
       # 0.1178511 is tetrahedron convex hull volume
-      size <- size * (0.1178511 / volume) ^ (1 / 3)
+      size <- size * (0.1178511 / volume)^(1 / 3)
       size
     },
     #' @description
@@ -1311,7 +1314,8 @@ Polyhedron <- R6::R6Class("Polyhedron",
     getRGLModel = function(transformation.matrix = NULL) {
       logger <- getLogger(self)
       logger$debug("drawing",
-                   name = self$getName())
+        name = self$getName()
+      )
       self$state$buildRGL(transformation.matrix = transformation.matrix)
     },
     #' @description

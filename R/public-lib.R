@@ -83,7 +83,8 @@ scrapePolyhedraSources <- function(sources.config =
   logger$debug(
     "Scraping",
     max.quant.scrape = max.quant.scrape,
-    time2scrape.source = time2scrape.source)
+    time2scrape.source = time2scrape.source
+  )
   getPolyhedraObject()$scrape(
     mode = mode,
     max.quant = max.quant.scrape,

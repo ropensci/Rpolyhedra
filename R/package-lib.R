@@ -43,8 +43,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
   # When release version, change parameter to "pkg-minimal"
   .scrape.config <- getUserEnvir(".scrape.config")
   current.config <- .available.scrapping.conf[[.scrape.config]]
-  if (is.null(current.config))
-  {
+  if (is.null(current.config)) {
     stop(paste("Configuration", .scrape.config, " does not exists"))
   }
   scrapePolyhedra(
@@ -83,7 +82,8 @@ downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
       # download file to tempfile
       oldw <- getOption("warn")
       options(warn = -1)
-      retVal <- tryCatch({
+      retVal <- tryCatch(
+        {
           utils::download.file(db.url, destfile = zipFile, mode = "wb")
           "SUCCESS"
         },
@@ -95,13 +95,15 @@ downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
       if (retVal == "SUCCESS") {
         logger$debug(
           "Downloaded file to",
-          zipFile = zipFile)
+          zipFile = zipFile
+        )
         tdb <- file.path(td, "db")
         dir.create(tdb, recursive = TRUE, showWarnings = FALSE)
         utils::unzip(zipfile = zipFile, exdir = tdb)
         logger$debug(
           "Decompressed",
-          dest.folder = tdb)
+          dest.folder = tdb
+        )
         db.package.path <- dir(tdb, full.names = TRUE)
         tmp.db.path <- list.files(path = db.package.path)[1]
         files.to.copy <- list.files(db.package.path)
@@ -115,7 +117,8 @@ downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
       } else {
         logger$warn(
           "url not found",
-          url = db.url)
+          url = db.url
+        )
       }
     }
   }
@@ -197,7 +200,8 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env = "HOME"),
   logger$info(
     "Copied",
     cont = cont,
-    dest.folder = dest.folder)
+    dest.folder = dest.folder
+  )
   # copy RDS
   file.copy(file.path(source.folder, "polyhedra.RDS"), dest.folder)
   TRUE
@@ -219,7 +223,7 @@ PolyhedronScraperConfiguration <- R6::R6Class(
   "PolyhedronScraperConfiguration",
   public = list(
     #' @field name configuration name
-    name     = NA,
+    name = NA,
     #' @field base.dir configuration base.dir
     base.dir = NA,
     #' @field logger class logger

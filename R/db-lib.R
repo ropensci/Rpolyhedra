@@ -390,7 +390,8 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
                                   polyhedron.file.id, source.filename) {
         source <- source.config$getName()
         current.polyhedron <- NULL
-        tryCatch({
+        tryCatch(
+          {
             self$ledger$updateStatus(
               source = source,
               source.filename = source.filename,
@@ -520,7 +521,8 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
         logger <- getLogger(self)
         source <- source.config$getName()
         scraped.polyhedron <- NULL
-        tryCatch({
+        tryCatch(
+          {
             scraped.polyhedron <- source.config$scrape(
               polyhedron.file.id = polyhedron.file.id,
               source.filename = file.path(polyhedra.dir, source.filename)
@@ -545,7 +547,8 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
           obs = obs
         )
         if (status == "testing") {
-          tryCatch({
+          tryCatch(
+            {
               res <- testthat::expect_true(self$existsPolyhedron(
                 source = source,
                 polyhedron.name = polyhedron.name

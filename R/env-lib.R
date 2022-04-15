@@ -294,11 +294,11 @@ getLogger <- function(r6.object) {
 loggerSetupFile <- function(log.file) {
   lgr::basic_config()
   lgr::get_logger("root")$add_appender(AppenderFile$new(log.file,
-                                                        layout = LayoutFormat$new(
-                                                          fmt = "%L [%t] %m %j",
-                                                          timestamp_fmt = "%Y-%m-%d %H:%M:%OS3",
-                                                          colors = NULL,
-                                                          pad_levels = "right"
-                                                        )
+    layout = LayoutFormat$new(
+      fmt = "%L [%t] %m %j",
+      timestamp_fmt = "%Y-%m-%d %H:%M:%OS3",
+      colors = NULL,
+      pad_levels = "right"
+    )
   ))
 }
