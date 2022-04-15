@@ -39,9 +39,13 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
   .available.scrapping.conf <- getUserEnvir(".available.scrapping.conf")
 
   # "dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
-  setUserEnvir(".scrape.config", "pkg-minimal")
+  setUserEnvir(".scrape.config", "dev-minimal")
   # When release version, change parameter to "pkg-minimal"
   .scrape.config <- getUserEnvir(".scrape.config")
+  current.config <- .available.scrapping.conf[[.scrape.config]]
+  if(is.null(current.config)){
+    stop(paste("Configuration", .scrape.config, " does not exists"))
+  }
   scrapePolyhedra(
     scrape.config = .available.scrapping.conf[[.scrape.config]],
     source.filenames = source.filenames,
@@ -52,13 +56,14 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
 #' Download RPolyhedra supporting files
 #'
 #' Downloads the files from the remote location
-#'
+#' @param logger logger for inherating threshold from calling class/function
 #' @return TRUE if sucessfull, FALSE otherwise
 #' @importFrom utils unzip
 #' @importFrom utils download.file
 #' @importFrom utils zip
+#' @import lgr
 #' @noRd
-downloadRPolyhedraSupportingFiles <- function() {
+downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
   retVal <- "SUCCESS"
 
   if (checkDatabaseVersion() == "UPDATE") {
@@ -88,15 +93,15 @@ downloadRPolyhedraSupportingFiles <- function() {
       )
       options(warn = oldw)
       if (retVal == "SUCCESS") {
-        futile.logger::flog.debug(paste(
-          "Downloaded file to", zipFile
-        ))
+        logger$debug(
+          "Downloaded file to",
+          zipFile = zipFile)
         tdb <- file.path(td, "db")
         dir.create(tdb, recursive = TRUE, showWarnings = FALSE)
         utils::unzip(zipfile = zipFile, exdir = tdb)
-        futile.logger::flog.debug(paste(
-          "Decompressed to", tdb
-        ))
+        logger$debug(
+          "Decompressed",
+          dest.folder = tdb)
         db.package.path <- dir(tdb, full.names = TRUE)
         tmp.db.path <- list.files(path = db.package.path)[1]
         files.to.copy <- list.files(db.package.path)
@@ -108,9 +113,9 @@ downloadRPolyhedraSupportingFiles <- function() {
         # delete tmp path
         unlink(file.path(td, tmp.db.path), recursive = TRUE)
       } else {
-        futile.logger::flog.warn(paste(
-          "url not found", db.url
-        ))
+        logger$warn(
+          "url not found",
+          url = db.url)
       }
     }
   }
@@ -124,12 +129,13 @@ downloadRPolyhedraSupportingFiles <- function() {
 #' @param source.folder folder of polyhedra data sources
 #' @param dest.folder   folder of polyhedra data destination
 #' @param force indicate if existings directories must be overwritten
+#' @param logger logger for inherating threshold from calling class/function
 #' @return TRUE if sucessfull
-#' @importFrom futile.logger flog.info
+#' @import lgr
 #' @noRd
 copyFilesToExtData <- function(source.folder = getDataDir(data.env = "HOME"),
                                dest.folder = getDataDir(data.env = "PACKAGE"),
-                               force = FALSE) {
+                               force = FALSE, logger = lgr) {
   polyhedra.ledger <- getPolyhedraObject()$
     ledger$getAvailablePolyhedra(ret.fields = NULL)
   polyhedra.ledger.scraped <-
@@ -188,11 +194,10 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env = "HOME"),
       cont <- cont + 1
     }
   }
-  futile.logger::flog.info(paste(
-    "Copied", cont,
-    "polyhedra sources files to",
-    dest.folder
-  ))
+  logger$info(
+    "Copied",
+    cont = cont,
+    dest.folder = dest.folder)
   # copy RDS
   file.copy(file.path(source.folder, "polyhedra.RDS"), dest.folder)
   TRUE
@@ -207,17 +212,22 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env = "HOME"),
 #' \describe{
 #'   \item{\code{initialize()}}{Initializes the object}
 #' }
-#' @importFrom     futile.logger flog.info
+#' @import lgr
 #' @importFrom R6 R6Class
 #' @noRd
 PolyhedronScraperConfiguration <- R6::R6Class(
   "PolyhedronScraperConfiguration",
   public = list(
-    name = NA,
+    #' @field name configuration name
+    name     = NA,
+    #' @field base.dir configuration base.dir
     base.dir = NA,
+    #' @field logger class logger
+    logger = NA,
     initialize = function(name, base.dir) {
       self$name <- name
       self$base.dir <- base.dir
+      self$logger <- genLogger(self)
       self
     },
     getName = function() {
@@ -245,7 +255,6 @@ PolyhedronScraperConfiguration <- R6::R6Class(
 #' }
 #'
 #' @docType class
-#' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 #' @noRd
 PolyhedronScraperConfigurationNetlib <- R6::R6Class(
@@ -267,16 +276,18 @@ PolyhedronScraperConfigurationNetlib <- R6::R6Class(
       polyhedra.files
     },
     scrape = function(polyhedron.file.id, source.filename.path) {
+      logger <- getLogger(self)
       polyhedra.netlib.lines <- readLines(source.filename.path)
       polyhedron.file.id <- source.filename.path
       polyhedron.file.id <- strsplit(polyhedron.file.id, split = "/")[[1]]
       polyhedron.file.id <- polyhedron.file.id[length(polyhedron.file.id)]
       current.polyhedron <- Polyhedron$new(file.id = polyhedron.file.id)
       current.polyhedron$scrapeNetlib(netlib.p3.lines = polyhedra.netlib.lines)
-      futile.logger::flog.debug(paste(
-        "parsed", source.filename, "with name",
-        current.polyhedron$state$name
-      ))
+      logger$debug(
+        "Parsed",
+        source.filepath = source.filename.path,
+        name = current.polyhedron$state$name
+      )
       current.polyhedron
     }
   )
@@ -294,7 +305,6 @@ PolyhedronScraperConfigurationNetlib <- R6::R6Class(
 #' }
 #'
 #' @docType class
-#' @importFrom futile.logger flog.info
 #' @importFrom R6 R6Class
 #' @noRd
 PolyhedronScraperConfigurationDmccooey <- R6::R6Class(
@@ -321,18 +331,18 @@ PolyhedronScraperConfigurationDmccooey <- R6::R6Class(
       polyhedra.files
     },
     scrape = function(polyhedron.file.id, source.filename.path) {
+      logger <- getLogger(self)
       polyhedra.dmccooey.lines <- readLines(source.filename.path)
       current.polyhedron <- Polyhedron$new(file.id = polyhedron.file.id)
-
-
       current.polyhedron$scrapeDmccooey(
         polyhedra.dmccooey.lines =
           polyhedra.dmccooey.lines
       )
-      futile.logger::flog.debug(paste(
-        "parsed", source.filename.path, "with name",
-        current.polyhedron$state$name
-      ))
+      logger$debug(
+        "parsed",
+        source.filename.path = source.filename.path,
+        name = current.polyhedron$state$name
+      )
       current.polyhedron
     }
   )
@@ -370,11 +380,12 @@ checkDatabaseVersion <- function() {
 #' @param .polyhedra.candidate polyhedra db to test
 #' @param halts indicates whether it has to halt execution when it
 #' is not compatible
-#' @importFrom futile.logger flog.info
+#' @import lgr
 #' @noRd
 isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
                                        getPolyhedraObject(),
-                                     halts = FALSE) {
+                                     halts = FALSE,
+                                     logger = lgr) {
   file <- class(.polyhedra.candidate)
   compatible <- FALSE
   error <- ""
@@ -410,7 +421,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
     if (halts) {
       stop(paste(error, "Contact package mantainer."))
     } else {
-      futile.logger::flog.error(error)
+      logger$error(error)
     }
   }
   compatible

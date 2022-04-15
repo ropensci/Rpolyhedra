@@ -18,6 +18,8 @@ ken4rab
 \item{\code{file.id}}{polyhedron file id}
 
 \item{\code{errors}}{Errors string}
+
+\item{\code{logger}}{class logger}
 }
 \if{html}{\out{</div>}}
 }

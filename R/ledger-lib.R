@@ -29,7 +29,7 @@ maxWithoutNA <- function(x) ifelse(!all(is.na(x)), max(x, na.rm = TRUE), NA)
 #' }
 #'
 #' @format \code{\link{R6Class}} object.
-#' @importFrom futile.logger flog.info
+#' @import lgr
 #' @importFrom utils read.csv
 #' @importFrom digest digest
 #' @importFrom R6 R6Class
@@ -41,6 +41,8 @@ ScraperLedger <- R6::R6Class("ScraperLedger",
     dirty = FALSE,
     preloaded.data.filename = NA,
     preloaded.data = NA,
+    #' @field logger class logger
+    logger = NA,
     #' @description
     #' initializes the object
     initialize = function() {
@@ -69,6 +71,7 @@ ScraperLedger <- R6::R6Class("ScraperLedger",
       )
       self$resetStatesMetrics()
       self$loadPreloadedData()
+      self$logger <- genLogger(self)
       self
     },
     #' @description
@@ -81,14 +84,15 @@ ScraperLedger <- R6::R6Class("ScraperLedger",
     #' @param source the source to add the filename to
     #' @param source.filename the filename to add to the source
     addFilename = function(source, source.filename) {
+      logger <- getLogger(self)
       r <- NULL
       default.status <- "queued"
       if (is.null(self$getIdFilename(source, source.filename))) {
-        futile.logger::flog.debug(paste(
+        logger$debug(
           "Adding Filename to ledger ",
-          source,
-          source.filename
-        ))
+          source = source,
+          source.filename = source.filename
+        )
         r <- nrow(self$df) + 1
         status.field <- "status"
         self$countStatusUse(
@@ -174,6 +178,7 @@ ScraperLedger <- R6::R6Class("ScraperLedger",
                             status.field = "status",
                             scraped.polyhedron = NA,
                             obs = "") {
+      logger <- getLogger(self)
       scraped.name.lower <- ""
       if (is.null(obs)) {
         obs <- ""
@@ -291,14 +296,15 @@ ScraperLedger <- R6::R6Class("ScraperLedger",
       fields.update <- c(fields.update, status.field, "obs")
       values.update <- c(values.update, status, obs)
 
-      futile.logger::flog.debug(paste(
-        "Updating ledger for", source.filename,
-        scraped.name.lower,
-        paste(fields.update, values.update,
+      logger$debug(
+        "Updating ledger for",
+        source.filename = source.filename,
+        scraped.name.lower = scraped.name.lower,
+        polyhedron.values = paste(fields.update, values.update,
           sep = "=",
           collapse = "|"
         )
-      ))
+      )
       self$df[retrieved.id, fields.update] <- values.update
       ret <- self$df[retrieved.id, ]
       # count status uses

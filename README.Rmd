@@ -76,6 +76,7 @@ library(rgl)
 # For foarding webgl output to knitr
 knit_hooks$set(webgl = hook_webgl)
 library(dplyr)
+
 ```
 
 ```{r, 1-retrieve}

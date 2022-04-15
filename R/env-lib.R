@@ -167,10 +167,11 @@ getPolyhedraRDSPath <- function(polyhedra.rds.filename = "polyhedra.RDS") {
 #' @usage
 #'     selectDataEnv(env=NA, prompt.value = NULL)
 #' @return .data.env
-#' @importFrom futile.logger flog.info
+#' @import lgr
 #' @noRd
 selectDataEnv <- function(env = NA, downloadDatabase = TRUE,
-                          prompt.value = NULL) {
+                          prompt.value = NULL,
+                          logger = lgr) {
   retVal <- "SUCCESS"
   if (is.na(env)) {
     if (!is.na(Sys.getenv(x = "ON_TRAVIS", unset = NA))) {
@@ -189,7 +190,7 @@ selectDataEnv <- function(env = NA, downloadDatabase = TRUE,
     while (retry) {
       answer <- tolower(prompt.value[1])
       if (answer == "n") {
-        futile.logger::flog.info(paste(
+        logger$info(paste(
           "Working on demo DB. You can call",
           "selectDataEnv to use the full database."
         ))
@@ -250,3 +251,55 @@ getGitCommit <- function(long.version = FALSE) {
   }
   git.sha
 }
+
+#' genLogger
+#' @description
+#' Returns a configured logger with threshold according r6 object.
+#' This function is usually called in class constructors
+#' @param r6.object an r6.object
+#'
+#' @author ken4rab
+#' @export
+genLogger <- function(r6.object) {
+  lgr::get_logger(class(r6.object)[[1]])
+}
+
+#' getLogger
+#' @description
+#' Returns the configured lgr of an r6 object.
+#' If the object don't have a lgr or is not initialized returns an error
+#' @param r6.object an r6.object
+#'
+#' @author ken4rab
+#' @export
+getLogger <- function(r6.object) {
+  ret <- r6.object$logger
+  if (is.null(ret)) {
+    class <- class(r6.object)[[1]]
+    stop(paste("Class", class, "don't seems to have a configured logger"))
+  } else {
+    ret.class <- class(ret)[[1]]
+    if (ret.class == "logical") {
+      stop(paste("Class", ret.class, "needs to initialize logger: self$logger <- genLogger(self)"))
+    }
+  }
+  ret
+}
+
+
+#' loggerSetupFile
+#' @param log.file filepath to configure logger AppenderFile
+#' @import lgr
+#' @export
+loggerSetupFile <- function(log.file) {
+  lgr::basic_config()
+  lgr::get_logger("root")$add_appender(AppenderFile$new(log.file,
+                                                        layout = LayoutFormat$new(
+                                                          fmt = "%L [%t] %m %j",
+                                                          timestamp_fmt = "%Y-%m-%d %H:%M:%OS3",
+                                                          colors = NULL,
+                                                          pad_levels = "right"
+                                                        )
+  ))
+}
+

@@ -19,7 +19,7 @@ dmccooey.com/polyhedra/*.js
 
 
 # polyhedra database should only be included in release commits
-#polyhedra*.RDS
-#**/polyhedra/**/*.zip
+polyhedra*.RDS
+**/polyhedra/**/*.zip
 /doc/
 /Meta/

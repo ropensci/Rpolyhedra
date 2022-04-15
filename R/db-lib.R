@@ -5,7 +5,7 @@
 #' is accessible by the final users upon call to \code{getPolyhedron()}.
 #'
 #' @docType class
-#' @importFrom futile.logger flog.info
+#' @import lgr
 #' @importFrom utils zip
 #' @importFrom R6 R6Class
 PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
@@ -18,6 +18,8 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
     sources.config = NA,
     #' @field ledger rr ledger of scraping process
     ledger = NA,
+    #' @field logger class logger
+    logger = NA,
     #' @description
     #' Create a new PolyhedraDatabase object.
     #' @return A new `PolyhedraDatabase` object.
@@ -25,6 +27,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
       self$version <- getDatabaseVersion()
       self$ledger <- ScraperLedger$new()
       self$sources.config <- list()
+      self$logger <- genLogger(self)
       self
     },
     #' @description
@@ -166,6 +169,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
     addPolyhedron = function(source = "netlib", source.filename,
                              polyhedron, overwrite = FALSE,
                              save.on.change = FALSE) {
+      logger <- getLogger(self)
       polyhedron.name <- polyhedron$getName()
       data.dir <- self$getPolyhedraSourceDir(source = source)
       prev.data <- self$getPolyhedron(
@@ -173,13 +177,12 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
         polyhedron.name = polyhedron.name
       )
       if (!overwrite & !is.null(prev.data) & !save.on.change) {
-        futile.logger::flog.info(paste(
+        logger$info(
           "Polyhedron",
-          polyhedron.name,
-          "in source",
-          source,
-          "already in database"
-        ))
+          polyhedron.name = polyhedron.name,
+          source = source,
+          message = "already in database"
+        )
       } else {
         crc.name <- self$ledger$getCRCPolyhedronName(
           source = source,
@@ -204,20 +207,14 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
           )
           unlink(tmp.filename)
         }
-        futile.logger::flog.info(paste(
-          ifelse(save.on.change,
-            "[save.on.change]", ""
-          ),
+        logger$info(
           "Added polyhedron in file",
-          polyhedron.name,
-          "#|n",
-          polyhedron$file.id,
-          polyhedron.name,
-          "in source",
-          source,
-          "to database with CRC",
-          crc.name
-        ))
+          save.on.change = save.on.change,
+          polyhedron.name = polyhedron.name,
+          file.id = polyhedron$file.id,
+          source = source,
+          crc.name = crc.name
+        )
       }
       self$ledger$updateStatus(
         source = source,
@@ -237,10 +234,11 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
     configPolyhedraSource = function(source.config, source.filenames = NULL,
                                      max.quant = 0,
                                      save.on.change = FALSE) {
+      logger <- getLogger(self)
       source <- source.config$getName()
       home.dir.data <- getDataDir()
       self$configPolyhedraRDSPath()
-      futile.logger::flog.debug(paste("configuring source", source))
+      logger$debug("Configuring source", source = source)
       polyhedra.dir <- source.config$getBaseDir(home.dir.data)
       polyhedra.files <- source.config$getPolyhedraFiles(home.dir.data)
       if (!is.null(source.filenames)) {
@@ -270,13 +268,12 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
           }
         }
         if (length(scheduled) > 0) {
-          futile.logger::flog.info(paste(
+          logger$info(
             "Scheduling source ",
-            source,
-            length(scheduled),
-            "filenames:",
-            paste(scheduled, collapse = ",")
-          ))
+            source = source,
+            scheduled = length(scheduled),
+            filenames = paste(scheduled, collapse = ",")
+          )
         }
       }
       self$saveRDS(save.on.change = save.on.change)
@@ -287,13 +284,14 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
     #' @param save.on.change saves Database state after operation
     #' @return saveRDS return status
     saveRDS = function(save.on.change = TRUE) {
+      logger <- getLogger(self)
       ret <- NULL
       if (self$ledger$dirty & save.on.change) {
         self$ledger$updateCalculatedFields()
-        futile.logger::flog.info(paste(
+        logger$info(
           "Saving RDS in file",
-          self$polyhedra.rds.file
-        ))
+          rds.file = self$polyhedra.rds.file
+        )
         ret <- saveRDS(self, self$polyhedra.rds.file)
       }
       ret
@@ -387,6 +385,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
                       time2scrape.source = 30,
                       save.on.change = FALSE,
                       skip.still.queued = FALSE) {
+      logger <- getLogger(self)
       scrape.function <- function(polyhedra.dir, source.config,
                                   polyhedron.file.id, source.filename) {
         source <- source.config$getName()
@@ -425,8 +424,9 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
             }
           },
           error = function(e) {
+            logger <- getLogger(self)
             error <- paste(e$message, collapse = ",")
-            futile.logger::flog.error(paste("catched error", error))
+            logger$error("Catched error", error = error)
             assign("error", error, envir = parent.env(environment()))
             self$ledger$updateStatus(
               source = source,
@@ -455,17 +455,14 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
           max.quant.time
         )
       }
-      futile.logger::flog.debug(paste(
+      logger$debug(
         "Scraping sources",
-        paste(sources, collapse = ","),
-        "max.quant =", max.quant,
-        "time2scrape.source =",
-        time2scrape.source,
-        "max.quant.time =",
-        max.quant.time,
-        "max.quant.scrape (min) =",
-        max.quant.scrape
-      ))
+        sources = paste(sources, collapse = ","),
+        max.quant = max.quant,
+        time2scrape.source = time2scrape.source,
+        max.quant.time = max.quant.time,
+        max.quant.scrape = max.quant.scrape
+      )
       ret <- self$cover(
         mode = mode,
         sources = sources,
@@ -502,6 +499,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
     #' @return A list with resulting objects tested
     testRR = function(sources = names(self$sources.config),
                       max.quant = 0) {
+      logger <- getLogger(self)
       self$configPolyhedraRDSPath()
       if (file.exists(self$polyhedra.rds.file)) {
         polyhedra.db.saved <- readRDS(self$polyhedra.rds.file)
@@ -510,7 +508,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
         }
       } else {
         # if database doesn't exists setup test as false
-        futile.logger::ERROR(paste(
+        logger$error(paste(
           "There is no polyhedra database so ",
           "test could not be runned"
         ))
@@ -520,6 +518,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
                                 source.config,
                                 polyhedron.file.id,
                                 source.filename) {
+        logger <- getLogger(self)
         source <- source.config$getName()
         scraped.polyhedron <- NULL
         tryCatch(
@@ -534,7 +533,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
           },
           error = function(e) {
             error <- paste(e$message, collapse = ",")
-            futile.logger::flog.error(paste("catched error", error))
+            logger$error("catched error", error = error)
             assign("error", error, envir = parent.env(environment()))
             status <- "exception"
             obs <- scraped.polyhedron$getErrors()
@@ -564,7 +563,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
             },
             error = function(e) {
               error <- paste(e$message, collapse = ",")
-              futile.logger::flog.error(paste("catched error", error))
+              logger$error("catched error", error = error)
               assign("error", error, envir = parent.env(environment()))
               status <- "failed"
               obs <- scraped.polyhedron$getErrors()
@@ -598,6 +597,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
                                  polyhedra.names = NULL,
                                  TestTaskClass,
                                  max.quant = 0) {
+      logger <- getLogger(self)
       seed <- getPackageVersion()
       seed <- as.numeric(gsub("v|\\.", "", seed))
       seed <- seed * 121
@@ -609,7 +609,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
         }
       } else {
         # if database doesn't exists setup test as false
-        futile.logger::ERROR(paste(
+        logger$error(paste(
           "There is no polyhedra database so test ",
           "could not be runned"
         ))

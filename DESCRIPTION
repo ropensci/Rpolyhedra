@@ -1,7 +1,7 @@
 Package: Rpolyhedra
 Type: Package
 Title: Polyhedra Database
-Version: 0.5.1
+Version: 0.5.2
 Language: en-US
 Authors@R: c(
   person("Alejandro", "Baranek",,"abaranek@dc.uba.ar", c("aut","com","cre", "cph")),
@@ -23,7 +23,7 @@ Imports: R6,
   stringr,
   XML,
   digest,
-  futile.logger,
+  lgr,
   git2r
 Suggests: 
   testthat,

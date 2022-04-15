@@ -42,7 +42,7 @@ PolyhedronTestTask <- R6::R6Class("PolyhedronTestTask",
 #' }
 #'
 #' @docType class
-#' @importFrom futile.logger flog.info
+#' @import lgr
 #' @importFrom R6 R6Class
 #' @noRd
 PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
@@ -53,6 +53,8 @@ PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
     source.filename = NA,
     # state
     scraped.polyhedron = NA,
+    #' @field logger class logger
+    logger = NA,
     initialize = function(polyhedra.db, source.config, polyhedron.name,
                           polyhedra.dir, polyhedron.file.id,
                           source.filename) {
@@ -64,9 +66,11 @@ PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
       self$polyhedra.dir <- polyhedra.dir
       self$polyhedron.file.id <- polyhedron.file.id
       self$source.filename <- source.filename
+      self$logger <- genLogger(self)
       self
     },
     run = function() {
+      logger <- getLogger(self)
       error <- ""
       scraped.name <- NA
       source <- self$source.config$getName()
@@ -82,7 +86,7 @@ PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
         },
         error = function(e) {
           error <- paste(e$message, collapse = ",")
-          futile.logger::flog.error(paste("catched error", error))
+          logger$error(paste("catched error", error))
           assign("error", error, envir = parent.env(environment()))
           status <- "exception"
           if (!is.na(self$scraped.polyhedron)) {

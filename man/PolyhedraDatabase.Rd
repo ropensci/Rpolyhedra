@@ -18,6 +18,8 @@ is accessible by the final users upon call to \code{getPolyhedron()}.
 \item{\code{sources.config}}{Sources configuration for scraping different sources}
 
 \item{\code{ledger}}{rr ledger of scraping process}
+
+\item{\code{logger}}{class logger}
 }
 \if{html}{\out{</div>}}
 }

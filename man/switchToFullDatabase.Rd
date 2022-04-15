@@ -7,7 +7,9 @@
 switchToFullDatabase(env=NA)
 }
 \arguments{
-\item{env}{The environment to run on, can be PACKAGE,
+\item{env}{The environment to run on, can be PACKAGE,}
+
+\item{logger}{logger for inherating threshold from calling class/function
 HOME or NA. If NA, it asks the user for a an Environment.}
 }
 \value{

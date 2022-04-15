@@ -11,5 +11,5 @@
 #' @docType package
 #' @aliases Rpolyhedra
 #' @importFrom R6 R6Class
-#' @importFrom futile.logger flog.info
+#' @import lgr
 "_PACKAGE"

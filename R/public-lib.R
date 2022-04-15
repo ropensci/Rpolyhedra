@@ -45,6 +45,7 @@ scrapePolyhedra <- function(scrape.config,
 #' @param time2scrape.source time applied to scrape source
 #' @param source.filenames if not null specify which source filenames to scrape
 #' @param retry.scrape should it retry scrape?
+#' @param logger logger for inherating threshold from calling class/function
 #' @return polyhedra db object
 #' @usage
 #'     scrapePolyhedraSources(sources.config =
@@ -58,12 +59,13 @@ scrapePolyhedraSources <- function(sources.config =
                                    max.quant.scrape = 0,
                                    time2scrape.source = 30,
                                    source.filenames = NULL,
-                                   retry.scrape = FALSE) {
-  futile.logger::flog.debug(paste(
+                                   retry.scrape = FALSE,
+                                   logger = lgr) {
+  logger$debug(paste(
     "scrapePolyhedraSources",
-    "max.quant.config.schedule =", max.quant.config.schedule,
-    "max.quant.scrape =", max.quant.scrape,
-    "time2scrape.source =", time2scrape.source
+    max.quant.config.schedule = max.quant.config.schedule,
+    max.quant.scrape = max.quant.scrape,
+    time2scrape.source = time2scrape.source
   ))
   getPolyhedraObject()$schedulePolyhedraSources(
     sources.config =
@@ -78,12 +80,10 @@ scrapePolyhedraSources <- function(sources.config =
   } else {
     mode <- "scrape.queued"
   }
-  futile.logger::flog.debug(paste(
+  logger$debug(
     "Scraping",
-    max.quant.scrape,
-    "polyhedra up to",
-    time2scrape.source, "seconds"
-  ))
+    max.quant.scrape = max.quant.scrape,
+    time2scrape.source = time2scrape.source)
   getPolyhedraObject()$scrape(
     mode = mode,
     max.quant = max.quant.scrape,
@@ -127,7 +127,6 @@ getAvailableSources <- function() {
 #' the polyhedra database, which can be later called with getPolyhedron
 #'
 #' @seealso getAvailableSources
-#' @importFrom futile.logger flog.info
 #' @param sources A string vector containing the source, which can be obtained from getAvailableSources().
 #' @param search.string A search string
 #' @return polyhedra names vector
@@ -166,7 +165,6 @@ getAvailablePolyhedra <- function(sources =
 #' @param source string vector, which can be obtained from getAvailableSources()
 #' @param polyhedron.name  a valid name of a polyhedron in
 #'        the database. Current names can be found with getAvailablePolyhedra()
-#' @importFrom futile.logger flog.info
 #' @export
 #' @return polyhedron R6 object
 #' @export
@@ -212,15 +210,16 @@ getPolyhedron <- function(source = "netlib", polyhedron.name) {
 #' the package database, which is a minimal one for testing purposes.
 #'
 #' @param env The environment to run on, can be PACKAGE,
+#' @param logger logger for inherating threshold from calling class/function
 #' HOME or NA. If NA, it asks the user for a an Environment.
 #' @usage
 #'     switchToFullDatabase(env=NA)
 #' @return .data.env
 #' @export
-switchToFullDatabase <- function(env = NA) {
+switchToFullDatabase <- function(env = NA, logger = lgr) {
   retVal <- selectDataEnv(env = env)
   if (retVal == "NOT_AVAILABLE") {
-    futile.logger::flog.error("Full Database not available yet.")
+    logger$error("Full Database not available yet.")
   }
   retVal
 }

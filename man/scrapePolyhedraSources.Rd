@@ -22,6 +22,8 @@ scrapePolyhedraSources(sources.config =
 \item{source.filenames}{if not null specify which source filenames to scrape}
 
 \item{retry.scrape}{should it retry scrape?}
+
+\item{logger}{logger for inherating threshold from calling class/function}
 }
 \value{
 polyhedra db object
