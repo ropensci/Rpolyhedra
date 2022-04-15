@@ -29,8 +29,12 @@ testthat::test_that("test on env lib functions", {
   testthat::expect(!is.null(getPolyhedraObject()),
     failure_message = "getPolyhedraObject cannot be null"
   )
-  testthat::expect(!is.null(checkDatabaseVersion()))
-  testthat::expect(isCompatiblePolyhedraRDS() == TRUE)
-  testthat::expect(!is.null(scrapePolyhedraSources()))
-  testthat::expect(!is.null(getGitCommit()))
+  testthat::expect(!is.null(checkDatabaseVersion()),
+                   failure_message = "checkDatabaseVersion() is NULL")
+  testthat::expect(isCompatiblePolyhedraRDS() == TRUE,
+                   failure_message = "isCompatiblePolyhedraRDS() is FALSE")
+  testthat::expect(!is.null(scrapePolyhedraSources()),
+                   failure_message = "scrapePolyhedraSources() is NULL")
+  testthat::expect(!is.null(getGitCommit()),
+                   failure_message = "getGitCommit() is NULL")
 })
