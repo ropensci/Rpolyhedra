@@ -43,7 +43,8 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
   # When release version, change parameter to "pkg-minimal"
   .scrape.config <- getUserEnvir(".scrape.config")
   current.config <- .available.scrapping.conf[[.scrape.config]]
-  if(is.null(current.config)){
+  if (is.null(current.config))
+  {
     stop(paste("Configuration", .scrape.config, " does not exists"))
   }
   scrapePolyhedra(
@@ -82,8 +83,7 @@ downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
       # download file to tempfile
       oldw <- getOption("warn")
       options(warn = -1)
-      retVal <- tryCatch(
-        {
+      retVal <- tryCatch({
           utils::download.file(db.url, destfile = zipFile, mode = "wb")
           "SUCCESS"
         },

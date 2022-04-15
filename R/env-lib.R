@@ -302,4 +302,3 @@ loggerSetupFile <- function(log.file) {
                                                         )
   ))
 }
-

@@ -1028,7 +1028,7 @@ PolyhedronStateDefined <- R6::R6Class(
       convex.hull <- self$getConvHull()
       volume <- convex.hull$vol
       # 0.1178511 is tetrahedron convex hull volume
-      size <- size * (0.1178511 / volume)^(1 / 3)
+      size <- size * (0.1178511 / volume) ^ (1 / 3)
       size
     },
     #' @description
