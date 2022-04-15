@@ -6,7 +6,7 @@ library(geometry)
 library(testthat)
 
 # Change threshold to ERROR. Comment out/change if verbosity required for development
-lgr::basic_config(threshold = "ERROR")
+lgr::basic_config(threshold = "error")
 #' getDataDirMockedTest mocked function for a temp dest folder for testing proposes
 
 

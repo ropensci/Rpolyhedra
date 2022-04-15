@@ -7,7 +7,8 @@
 scrapePolyhedra(
   scrape.config,
   source.filenames = NULL,
-  sources.config = getUserEnvir(".available.sources")
+  sources.config = getUserEnvir(".available.sources"),
+  logger = lgr
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ scrapePolyhedra(
 \item{source.filenames}{if not null specify which source filenames to scrape}
 
 \item{sources.config}{the sources that will be used by the function}
+
+\item{logger}{logger for inherating threshold from calling class/function}
 }
 \value{
 polyhedra db object

@@ -4,7 +4,7 @@
 \alias{switchToFullDatabase}
 \title{Switch to full database}
 \usage{
-switchToFullDatabase(env=NA)
+switchToFullDatabase(env = NA, logger = lgr)
 }
 \arguments{
 \item{env}{The environment to run on, can be PACKAGE,}

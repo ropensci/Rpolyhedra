@@ -10,7 +10,7 @@ getPolyhedraObject <- function() {
 }
 
 #' Scrape polyhedra objects
-#'
+#' @description
 #' Gets polyhedra objects from text files of
 #' different sources, scheduling and scraping using
 #' predefined configurations.
@@ -18,10 +18,12 @@ getPolyhedraObject <- function() {
 #' @param scrape.config predefined configuration for scraping
 #' @param source.filenames if not null specify which source filenames to scrape
 #' @param sources.config the sources that will be used by the function
+#' @param logger logger for inherating threshold from calling class/function
 #' @return polyhedra db object
 scrapePolyhedra <- function(scrape.config,
                             source.filenames = NULL,
-                            sources.config = getUserEnvir(".available.sources")) {
+                            sources.config = getUserEnvir(".available.sources"),
+                            logger = lgr) {
   scrapePolyhedraSources(
     max.quant.config.schedule =
       scrape.config[["max.quant.config.schedule"]],
@@ -29,7 +31,8 @@ scrapePolyhedra <- function(scrape.config,
     time2scrape.source = scrape.config[["time2scrape.source"]],
     sources.config = sources.config,
     source.filenames = source.filenames,
-    retry.scrape = scrape.config[["retry.scrape"]]
+    retry.scrape = scrape.config[["retry.scrape"]],
+    logger = logger
   )
 }
 
@@ -52,7 +55,8 @@ scrapePolyhedra <- function(scrape.config,
 #'          getUserEnvir(".available.sources"),
 #'     max.quant.config.schedule = 0,
 #'     max.quant.scrape = 0, time2scrape.source = 30,
-#'     source.filenames = NULL, retry.scrape = FALSE)
+#'     source.filenames = NULL, retry.scrape = FALSE,
+#'     logger = lgr)
 scrapePolyhedraSources <- function(sources.config =
                                      getUserEnvir(".available.sources"),
                                    max.quant.config.schedule = 0,
@@ -214,7 +218,7 @@ getPolyhedron <- function(source = "netlib", polyhedron.name) {
 #' @param logger logger for inherating threshold from calling class/function
 #' HOME or NA. If NA, it asks the user for a an Environment.
 #' @usage
-#'     switchToFullDatabase(env=NA)
+#'     switchToFullDatabase(env = NA, logger = lgr)
 #' @return .data.env
 #' @export
 switchToFullDatabase <- function(env = NA, logger = lgr) {

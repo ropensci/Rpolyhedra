@@ -80,7 +80,7 @@ PolyhedronState <- R6::R6Class("PolyhedronState",
 #' @description
 #' Scrapes polyhedra from a PHD file format.
 #'
-#' @import logger
+#' @import lgr
 #' @importFrom stringr str_extract
 #' @importFrom R6 R6Class
 #' @docType class
@@ -399,7 +399,7 @@ PolyhedronStateNetlibScraper <- R6::R6Class(
 #' Scrapes polyhedra from a dmccooey file format
 #'
 #' @docType class
-#' @import logger
+#' @import lgr
 #' @importFrom R6 R6Class
 #' @docType class
 #' @author ken4rab
@@ -1228,6 +1228,8 @@ Polyhedron <- R6::R6Class("Polyhedron",
     file.id = NA,
     #' @field state Polyhedron state
     state = NA,
+    #' @field logger class logger
+    logger = NA,
     #' @description
     #' Create a polyhedronState object
     #' @param state polyhedron state object
@@ -1238,6 +1240,7 @@ Polyhedron <- R6::R6Class("Polyhedron",
       if (!is.null(state)) {
         self$state <- state
       }
+      self$logger <- genLogger(self)
       self
     },
     #' @description

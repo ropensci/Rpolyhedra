@@ -16,6 +16,8 @@ ken4rab
 \item{\code{file.id}}{Polyhedron file.id}
 
 \item{\code{state}}{Polyhedron state}
+
+\item{\code{logger}}{class logger}
 }
 \if{html}{\out{</div>}}
 }
