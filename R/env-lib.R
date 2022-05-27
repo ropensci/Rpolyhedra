@@ -290,6 +290,7 @@ getLogger <- function(r6.object) {
 #' loggerSetupFile
 #' @param log.file filepath to configure logger AppenderFile
 #' @import lgr
+#' @author ken4rab
 #' @export
 loggerSetupFile <- function(log.file) {
   lgr::basic_config()

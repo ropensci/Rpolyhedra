@@ -12,3 +12,6 @@ loggerSetupFile(log.file)
 \description{
 loggerSetupFile
 }
+\author{
+ken4rab
+}
