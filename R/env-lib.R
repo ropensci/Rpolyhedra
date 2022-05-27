@@ -288,18 +288,22 @@ getLogger <- function(r6.object) {
 
 
 #' loggerSetupFile
-#' @param log.file filepath to configure logger AppenderFile
+#' @param log.file
+#' @param default.threshold
 #' @import lgr
-#' @author ken4rab
+#' @author kenarab
 #' @export
-loggerSetupFile <- function(log.file) {
+loggerSetupFile <- function(log.file, default.threshold = "INFO") {
+  unlink(lgr$appenders$file$file)  # cleanup
   lgr::basic_config()
   lgr::get_logger("root")$add_appender(AppenderFile$new(log.file,
-    layout = LayoutFormat$new(
-      fmt = "%L [%t] %m %j",
-      timestamp_fmt = "%Y-%m-%d %H:%M:%OS3",
-      colors = NULL,
-      pad_levels = "right"
-    )
+                                                        layout = LayoutFormat$new(
+                                                          fmt = "%L [%t] %m %j",
+                                                          timestamp_fmt = "%Y-%m-%d %H:%M:%OS3",
+                                                          colors = NULL,
+                                                          pad_levels = "right"
+                                                        )
   ))
+  lgr::threshold(default.threshold, lgr::get_logger("root"))
+  lgr
 }
