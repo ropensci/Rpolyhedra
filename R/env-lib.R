@@ -293,7 +293,7 @@ getLogger <- function(r6.object) {
 #' @import lgr
 #' @author kenarab
 #' @export
-loggerSetupFile <- function(log.file, default.threshold = "INFO") {
+loggerSetupFile <- function(log.file, default.threshold = "info") {
   unlink(lgr$appenders$file$file)  # cleanup
   lgr::basic_config()
   lgr::get_logger("root")$add_appender(AppenderFile$new(log.file,

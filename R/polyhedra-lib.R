@@ -814,6 +814,18 @@ PolyhedronStateDefined <- R6::R6Class(
         normalized.size <- self$getNormalizedSize(1)
         self$vertices.centered <- self$vertices.centered[, 1:3] * normalized.size
       }
+      else{
+        # If no size normalization, vertices.centered = vertices.id.3d
+        vapply(private$vertices.id.3d,
+               FUN = function(x) {
+                 self$vertices.centered[x, 1:3] <-
+                   self$vertices.centered[x, 1:3] + mass.center
+                 TRUE
+               },
+               FUN.VALUE = logical(1)
+        )
+
+      }
       self
     },
     #' @description
