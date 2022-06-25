@@ -18,7 +18,7 @@ scrapePolyhedra(
 
 \item{sources.config}{the sources that will be used by the function}
 
-\item{logger}{logger for inherating threshold from calling class/function}
+\item{logger}{logger for inheriting threshold from calling class/function}
 }
 \value{
 polyhedra db object

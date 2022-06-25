@@ -18,7 +18,7 @@ getPolyhedraObject <- function() {
 #' @param scrape.config predefined configuration for scraping
 #' @param source.filenames if not null specify which source filenames to scrape
 #' @param sources.config the sources that will be used by the function
-#' @param logger logger for inherating threshold from calling class/function
+#' @param logger logger for inheriting threshold from calling class/function
 #' @return polyhedra db object
 scrapePolyhedra <- function(scrape.config,
                             source.filenames = NULL,
@@ -48,7 +48,7 @@ scrapePolyhedra <- function(scrape.config,
 #' @param time2scrape.source time applied to scrape source
 #' @param source.filenames if not null specify which source filenames to scrape
 #' @param retry.scrape should it retry scrape?
-#' @param logger logger for inherating threshold from calling class/function
+#' @param logger logger for inheriting threshold from calling class/function
 #' @return polyhedra db object
 #' @usage
 #'     scrapePolyhedraSources(sources.config =
@@ -215,7 +215,7 @@ getPolyhedron <- function(source = "netlib", polyhedron.name) {
 #' the package database, which is a minimal one for testing purposes.
 #'
 #' @param env The environment to run on, can be PACKAGE,
-#' @param logger logger for inherating threshold from calling class/function
+#' @param logger logger for inheriting threshold from calling class/function
 #' HOME or NA. If NA, it asks the user for a an Environment.
 #' @usage
 #'     switchToFullDatabase(env = NA, logger = lgr)
