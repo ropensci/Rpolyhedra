@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
+  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -267,15 +267,13 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2201.076KB",
+  "fileSize": "2198.175KB",
   "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
-  "readme": "https://github.com/ropensci/Rpolyhedra/blob/master/README.md",
   "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "review": {
     "@type": "Review",
     "url": "https://github.com/ropensci/software-review/issues/157",
     "provider": "https://ropensci.org"
-  },
-  "keywords": ["polyhedra-database", "geometry", "rgl"]
+  }
 }
