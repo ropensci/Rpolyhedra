@@ -288,8 +288,8 @@ getLogger <- function(r6.object) {
 
 
 #' loggerSetupFile
-#' @param log.file
-#' @param default.threshold
+#' @param log.file log path for logging file
+#' @param default.threshold threshold for setting root. Default = "info"
 #' @import lgr
 #' @author kenarab
 #' @export

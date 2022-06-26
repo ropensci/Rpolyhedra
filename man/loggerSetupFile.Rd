@@ -6,6 +6,11 @@
 \usage{
 loggerSetupFile(log.file, default.threshold = "info")
 }
+\arguments{
+\item{log.file}{log path for logging file}
+
+\item{default.threshold}{threshold for setting root. Default = "info"}
+}
 \description{
 loggerSetupFile
 }
