@@ -43,31 +43,31 @@ ken4rab
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{PolyhedronStateDmccooeyScraper$new()}}
-\item \href{#method-setupRegexp}{\code{PolyhedronStateDmccooeyScraper$setupRegexp()}}
-\item \href{#method-scrapeValues}{\code{PolyhedronStateDmccooeyScraper$scrapeValues()}}
-\item \href{#method-scrapeVertices}{\code{PolyhedronStateDmccooeyScraper$scrapeVertices()}}
-\item \href{#method-scrapeFaces}{\code{PolyhedronStateDmccooeyScraper$scrapeFaces()}}
-\item \href{#method-scrape}{\code{PolyhedronStateDmccooeyScraper$scrape()}}
-\item \href{#method-getName}{\code{PolyhedronStateDmccooeyScraper$getName()}}
-\item \href{#method-applyTransformationMatrix}{\code{PolyhedronStateDmccooeyScraper$applyTransformationMatrix()}}
-\item \href{#method-buildRGL}{\code{PolyhedronStateDmccooeyScraper$buildRGL()}}
-\item \href{#method-exportToXML}{\code{PolyhedronStateDmccooeyScraper$exportToXML()}}
-\item \href{#method-clone}{\code{PolyhedronStateDmccooeyScraper$clone()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-new}{\code{PolyhedronStateDmccooeyScraper$new()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-setupRegexp}{\code{PolyhedronStateDmccooeyScraper$setupRegexp()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-scrapeValues}{\code{PolyhedronStateDmccooeyScraper$scrapeValues()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-scrapeVertices}{\code{PolyhedronStateDmccooeyScraper$scrapeVertices()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-scrapeFaces}{\code{PolyhedronStateDmccooeyScraper$scrapeFaces()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-scrape}{\code{PolyhedronStateDmccooeyScraper$scrape()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-getName}{\code{PolyhedronStateDmccooeyScraper$getName()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-applyTransformationMatrix}{\code{PolyhedronStateDmccooeyScraper$applyTransformationMatrix()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-buildRGL}{\code{PolyhedronStateDmccooeyScraper$buildRGL()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-exportToXML}{\code{PolyhedronStateDmccooeyScraper$exportToXML()}}
+\item \href{#method-PolyhedronStateDmccooeyScraper-clone}{\code{PolyhedronStateDmccooeyScraper$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-addError}{\code{Rpolyhedra::PolyhedronState$addError()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-checkEdgesConsistency}{\code{Rpolyhedra::PolyhedronState$checkEdgesConsistency()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-getSolid}{\code{Rpolyhedra::PolyhedronState$getSolid()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-checkEdgesConsistency'><code>Rpolyhedra::PolyhedronState$checkEdgesConsistency()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getSolid'><code>Rpolyhedra::PolyhedronState$getSolid()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-new"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize Dmccooey scraper
 \subsection{Usage}{
@@ -88,8 +88,8 @@ A new  PolyhedronStateDmccooeyScraper object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setupRegexp"></a>}}
-\if{latex}{\out{\hypertarget{method-setupRegexp}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-setupRegexp"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-setupRegexp}{}}}
 \subsection{Method \code{setupRegexp()}}{
 setupRegexp for Dmccooey definition
 \subsection{Usage}{
@@ -101,8 +101,8 @@ This PolyhedronStateDmccooeyScraper object with regexp defined.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeValues"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeValues}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-scrapeValues"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-scrapeValues}{}}}
 \subsection{Method \code{scrapeValues()}}{
 scrape values from Dmccooey definition
 \subsection{Usage}{
@@ -121,8 +121,8 @@ This PolyhedronStateDmccooeyScraper object with values defined.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeVertices"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeVertices}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-scrapeVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-scrapeVertices}{}}}
 \subsection{Method \code{scrapeVertices()}}{
 scrape polyhedron vertices from definition
 \subsection{Usage}{
@@ -141,8 +141,8 @@ This PolyhedronStateDmccooeyScraper object with faces defined.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeFaces"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeFaces}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-scrapeFaces"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-scrapeFaces}{}}}
 \subsection{Method \code{scrapeFaces()}}{
 scrape polyhedron faces from definition
 \subsection{Usage}{
@@ -161,8 +161,8 @@ This PolyhedronStateDmccooeyScraper object with faces defined.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 scrape Dmccooey polyhedron definition
 \subsection{Usage}{
@@ -174,8 +174,8 @@ A new PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getName"></a>}}
-\if{latex}{\out{\hypertarget{method-getName}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-getName"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-getName}{}}}
 \subsection{Method \code{getName()}}{
 get Polyhedron name
 \subsection{Usage}{
@@ -187,8 +187,8 @@ string with polyhedron name
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
-\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-applyTransformationMatrix"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-applyTransformationMatrix}{}}}
 \subsection{Method \code{applyTransformationMatrix()}}{
 Apply transformation matrix to polyhedron
 \subsection{Usage}{
@@ -204,8 +204,8 @@ Apply transformation matrix to polyhedron
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-buildRGL"></a>}}
-\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-buildRGL"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-buildRGL}{}}}
 \subsection{Method \code{buildRGL()}}{
 Creates a 'rgl' representation of the object
 \subsection{Usage}{
@@ -221,8 +221,8 @@ Creates a 'rgl' representation of the object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportToXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-exportToXML"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-exportToXML}{}}}
 \subsection{Method \code{exportToXML()}}{
 serializes object in XML
 \subsection{Usage}{
@@ -231,8 +231,8 @@ serializes object in XML
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDmccooeyScraper-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDmccooeyScraper-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

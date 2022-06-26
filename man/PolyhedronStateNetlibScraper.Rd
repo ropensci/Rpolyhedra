@@ -29,34 +29,34 @@ ken4rab
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{PolyhedronStateNetlibScraper$new()}}
-\item \href{#method-extractRowsFromLabel}{\code{PolyhedronStateNetlibScraper$extractRowsFromLabel()}}
-\item \href{#method-getLabels}{\code{PolyhedronStateNetlibScraper$getLabels()}}
-\item \href{#method-scrapeNet}{\code{PolyhedronStateNetlibScraper$scrapeNet()}}
-\item \href{#method-extractCFOutBrackets}{\code{PolyhedronStateNetlibScraper$extractCFOutBrackets()}}
-\item \href{#method-scrapeVertices}{\code{PolyhedronStateNetlibScraper$scrapeVertices()}}
-\item \href{#method-setupLabelsOrder}{\code{PolyhedronStateNetlibScraper$setupLabelsOrder()}}
-\item \href{#method-getDataFromLabel}{\code{PolyhedronStateNetlibScraper$getDataFromLabel()}}
-\item \href{#method-getName}{\code{PolyhedronStateNetlibScraper$getName()}}
-\item \href{#method-scrape}{\code{PolyhedronStateNetlibScraper$scrape()}}
-\item \href{#method-applyTransformationMatrix}{\code{PolyhedronStateNetlibScraper$applyTransformationMatrix()}}
-\item \href{#method-buildRGL}{\code{PolyhedronStateNetlibScraper$buildRGL()}}
-\item \href{#method-exportToXML}{\code{PolyhedronStateNetlibScraper$exportToXML()}}
-\item \href{#method-clone}{\code{PolyhedronStateNetlibScraper$clone()}}
+\item \href{#method-PolyhedronStateNetlibScraper-new}{\code{PolyhedronStateNetlibScraper$new()}}
+\item \href{#method-PolyhedronStateNetlibScraper-extractRowsFromLabel}{\code{PolyhedronStateNetlibScraper$extractRowsFromLabel()}}
+\item \href{#method-PolyhedronStateNetlibScraper-getLabels}{\code{PolyhedronStateNetlibScraper$getLabels()}}
+\item \href{#method-PolyhedronStateNetlibScraper-scrapeNet}{\code{PolyhedronStateNetlibScraper$scrapeNet()}}
+\item \href{#method-PolyhedronStateNetlibScraper-extractCFOutBrackets}{\code{PolyhedronStateNetlibScraper$extractCFOutBrackets()}}
+\item \href{#method-PolyhedronStateNetlibScraper-scrapeVertices}{\code{PolyhedronStateNetlibScraper$scrapeVertices()}}
+\item \href{#method-PolyhedronStateNetlibScraper-setupLabelsOrder}{\code{PolyhedronStateNetlibScraper$setupLabelsOrder()}}
+\item \href{#method-PolyhedronStateNetlibScraper-getDataFromLabel}{\code{PolyhedronStateNetlibScraper$getDataFromLabel()}}
+\item \href{#method-PolyhedronStateNetlibScraper-getName}{\code{PolyhedronStateNetlibScraper$getName()}}
+\item \href{#method-PolyhedronStateNetlibScraper-scrape}{\code{PolyhedronStateNetlibScraper$scrape()}}
+\item \href{#method-PolyhedronStateNetlibScraper-applyTransformationMatrix}{\code{PolyhedronStateNetlibScraper$applyTransformationMatrix()}}
+\item \href{#method-PolyhedronStateNetlibScraper-buildRGL}{\code{PolyhedronStateNetlibScraper$buildRGL()}}
+\item \href{#method-PolyhedronStateNetlibScraper-exportToXML}{\code{PolyhedronStateNetlibScraper$exportToXML()}}
+\item \href{#method-PolyhedronStateNetlibScraper-clone}{\code{PolyhedronStateNetlibScraper$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-addError}{\code{Rpolyhedra::PolyhedronState$addError()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-checkEdgesConsistency}{\code{Rpolyhedra::PolyhedronState$checkEdgesConsistency()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-getSolid}{\code{Rpolyhedra::PolyhedronState$getSolid()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-checkEdgesConsistency'><code>Rpolyhedra::PolyhedronState$checkEdgesConsistency()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getSolid'><code>Rpolyhedra::PolyhedronState$getSolid()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-new"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-new}{}}}
 \subsection{Method \code{new()}}{
 Initializes the object, taking the file.id and PDH file as parameters
 \subsection{Usage}{
@@ -77,8 +77,8 @@ A new  PolyhedronStateNetlibScraper object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-extractRowsFromLabel"></a>}}
-\if{latex}{\out{\hypertarget{method-extractRowsFromLabel}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-extractRowsFromLabel"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-extractRowsFromLabel}{}}}
 \subsection{Method \code{extractRowsFromLabel()}}{
 Extracts data from the label, taking the label number and the
   expected label as parameters
@@ -97,8 +97,8 @@ Extracts data from the label, taking the label number and the
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getLabels"></a>}}
-\if{latex}{\out{\hypertarget{method-getLabels}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-getLabels"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-getLabels}{}}}
 \subsection{Method \code{getLabels()}}{
 get Labels from current netlib file description
 \subsection{Usage}{
@@ -110,8 +110,8 @@ a list containing labels from netlib file description
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeNet"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeNet}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-scrapeNet"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-scrapeNet}{}}}
 \subsection{Method \code{scrapeNet()}}{
 scrape Net Model from netlib format
 \subsection{Usage}{
@@ -132,8 +132,8 @@ a list containing a net model
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-extractCFOutBrackets"></a>}}
-\if{latex}{\out{\hypertarget{method-extractCFOutBrackets}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-extractCFOutBrackets"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-extractCFOutBrackets}{}}}
 \subsection{Method \code{extractCFOutBrackets()}}{
 Remove brackets for current field content
 \subsection{Usage}{
@@ -152,8 +152,8 @@ value
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrapeVertices"></a>}}
-\if{latex}{\out{\hypertarget{method-scrapeVertices}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-scrapeVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-scrapeVertices}{}}}
 \subsection{Method \code{scrapeVertices()}}{
 scrape vertices described in netlib format
 \subsection{Usage}{
@@ -172,8 +172,8 @@ data.frame containing netlib vertices
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setupLabelsOrder"></a>}}
-\if{latex}{\out{\hypertarget{method-setupLabelsOrder}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-setupLabelsOrder"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-setupLabelsOrder}{}}}
 \subsection{Method \code{setupLabelsOrder()}}{
 setupLabelsOrder
 \subsection{Usage}{
@@ -192,8 +192,8 @@ data.frame containing netlib vertices
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getDataFromLabel"></a>}}
-\if{latex}{\out{\hypertarget{method-getDataFromLabel}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-getDataFromLabel"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-getDataFromLabel}{}}}
 \subsection{Method \code{getDataFromLabel()}}{
 Get data from label specified as parameter
 \subsection{Usage}{
@@ -212,8 +212,8 @@ value
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getName"></a>}}
-\if{latex}{\out{\hypertarget{method-getName}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-getName"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-getName}{}}}
 \subsection{Method \code{getName()}}{
 get Polyhedron name
 \subsection{Usage}{
@@ -225,8 +225,8 @@ string with polyhedron name
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 scrape Netlib polyhedron definition
 \subsection{Usage}{
@@ -238,8 +238,8 @@ A new PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
-\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-applyTransformationMatrix"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-applyTransformationMatrix}{}}}
 \subsection{Method \code{applyTransformationMatrix()}}{
 Apply transformation matrix to polyhedron
 \subsection{Usage}{
@@ -255,8 +255,8 @@ Apply transformation matrix to polyhedron
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-buildRGL"></a>}}
-\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-buildRGL"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-buildRGL}{}}}
 \subsection{Method \code{buildRGL()}}{
 Creates a 'rgl' representation of the object
 \subsection{Usage}{
@@ -272,8 +272,8 @@ Creates a 'rgl' representation of the object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportToXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-exportToXML"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-exportToXML}{}}}
 \subsection{Method \code{exportToXML()}}{
 serializes object in XML
 \subsection{Usage}{
@@ -282,8 +282,8 @@ serializes object in XML
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateNetlibScraper-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateNetlibScraper-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

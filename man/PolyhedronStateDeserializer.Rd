@@ -23,27 +23,27 @@ ken4rab
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{PolyhedronStateDeserializer$new()}}
-\item \href{#method-scrape}{\code{PolyhedronStateDeserializer$scrape()}}
-\item \href{#method-clone}{\code{PolyhedronStateDeserializer$clone()}}
+\item \href{#method-PolyhedronStateDeserializer-new}{\code{PolyhedronStateDeserializer$new()}}
+\item \href{#method-PolyhedronStateDeserializer-scrape}{\code{PolyhedronStateDeserializer$scrape()}}
+\item \href{#method-PolyhedronStateDeserializer-clone}{\code{PolyhedronStateDeserializer$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-addError}{\code{Rpolyhedra::PolyhedronState$addError()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="applyTransformationMatrix">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-applyTransformationMatrix}{\code{Rpolyhedra::PolyhedronState$applyTransformationMatrix()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="buildRGL">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-buildRGL}{\code{Rpolyhedra::PolyhedronState$buildRGL()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-checkEdgesConsistency}{\code{Rpolyhedra::PolyhedronState$checkEdgesConsistency()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="exportToXML">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-exportToXML}{\code{Rpolyhedra::PolyhedronState$exportToXML()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getName">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-getName}{\code{Rpolyhedra::PolyhedronState$getName()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-getSolid}{\code{Rpolyhedra::PolyhedronState$getSolid()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="applyTransformationMatrix"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-applyTransformationMatrix'><code>Rpolyhedra::PolyhedronState$applyTransformationMatrix()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="buildRGL"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-buildRGL'><code>Rpolyhedra::PolyhedronState$buildRGL()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-checkEdgesConsistency'><code>Rpolyhedra::PolyhedronState$checkEdgesConsistency()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="exportToXML"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-exportToXML'><code>Rpolyhedra::PolyhedronState$exportToXML()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getName"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getName'><code>Rpolyhedra::PolyhedronState$getName()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getSolid'><code>Rpolyhedra::PolyhedronState$getSolid()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDeserializer-new"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDeserializer-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize PolyhedronStateDeserializer object
 \subsection{Usage}{
@@ -62,8 +62,8 @@ A new  PolyhedronStateDeserializer object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDeserializer-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDeserializer-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 Generates a PolyhedronStateDefined from a serialized polyhedron
 \subsection{Usage}{
@@ -75,8 +75,8 @@ A new  PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDeserializer-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDeserializer-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

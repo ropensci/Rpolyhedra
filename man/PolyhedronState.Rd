@@ -26,21 +26,21 @@ ken4rab
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{PolyhedronState$new()}}
-\item \href{#method-addError}{\code{PolyhedronState$addError()}}
-\item \href{#method-scrape}{\code{PolyhedronState$scrape()}}
-\item \href{#method-getName}{\code{PolyhedronState$getName()}}
-\item \href{#method-getSolid}{\code{PolyhedronState$getSolid()}}
-\item \href{#method-checkEdgesConsistency}{\code{PolyhedronState$checkEdgesConsistency()}}
-\item \href{#method-applyTransformationMatrix}{\code{PolyhedronState$applyTransformationMatrix()}}
-\item \href{#method-buildRGL}{\code{PolyhedronState$buildRGL()}}
-\item \href{#method-exportToXML}{\code{PolyhedronState$exportToXML()}}
-\item \href{#method-clone}{\code{PolyhedronState$clone()}}
+\item \href{#method-PolyhedronState-new}{\code{PolyhedronState$new()}}
+\item \href{#method-PolyhedronState-addError}{\code{PolyhedronState$addError()}}
+\item \href{#method-PolyhedronState-scrape}{\code{PolyhedronState$scrape()}}
+\item \href{#method-PolyhedronState-getName}{\code{PolyhedronState$getName()}}
+\item \href{#method-PolyhedronState-getSolid}{\code{PolyhedronState$getSolid()}}
+\item \href{#method-PolyhedronState-checkEdgesConsistency}{\code{PolyhedronState$checkEdgesConsistency()}}
+\item \href{#method-PolyhedronState-applyTransformationMatrix}{\code{PolyhedronState$applyTransformationMatrix()}}
+\item \href{#method-PolyhedronState-buildRGL}{\code{PolyhedronState$buildRGL()}}
+\item \href{#method-PolyhedronState-exportToXML}{\code{PolyhedronState$exportToXML()}}
+\item \href{#method-PolyhedronState-clone}{\code{PolyhedronState$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-new"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-new}{}}}
 \subsection{Method \code{new()}}{
 Create a polyhedronState object
 \subsection{Usage}{
@@ -63,8 +63,8 @@ Adds an error to the error string and log it as info
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addError"></a>}}
-\if{latex}{\out{\hypertarget{method-addError}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-addError"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-addError}{}}}
 \subsection{Method \code{addError()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PolyhedronState$addError(current.error)}\if{html}{\out{</div>}}
@@ -79,8 +79,8 @@ Adds an error to the error string and log it as info
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 Scrapes the polyhedra folder files
 \subsection{Usage}{
@@ -89,8 +89,8 @@ Scrapes the polyhedra folder files
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getName"></a>}}
-\if{latex}{\out{\hypertarget{method-getName}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-getName"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-getName}{}}}
 \subsection{Method \code{getName()}}{
 Get Polyhedron name
 \subsection{Usage}{
@@ -102,8 +102,8 @@ string with polyhedron name
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getSolid"></a>}}
-\if{latex}{\out{\hypertarget{method-getSolid}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-getSolid"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-getSolid}{}}}
 \subsection{Method \code{getSolid()}}{
 Returns the object corresponding to the solid
 \subsection{Usage}{
@@ -112,8 +112,8 @@ Returns the object corresponding to the solid
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-checkEdgesConsistency"></a>}}
-\if{latex}{\out{\hypertarget{method-checkEdgesConsistency}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-checkEdgesConsistency"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-checkEdgesConsistency}{}}}
 \subsection{Method \code{checkEdgesConsistency()}}{
 Checks edge consistency
 \subsection{Usage}{
@@ -122,8 +122,8 @@ Checks edge consistency
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
-\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-applyTransformationMatrix"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-applyTransformationMatrix}{}}}
 \subsection{Method \code{applyTransformationMatrix()}}{
 Apply transformation matrix to polyhedron
 \subsection{Usage}{
@@ -139,8 +139,8 @@ Apply transformation matrix to polyhedron
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-buildRGL"></a>}}
-\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-buildRGL"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-buildRGL}{}}}
 \subsection{Method \code{buildRGL()}}{
 Creates a 'rgl' representation of the object
 \subsection{Usage}{
@@ -156,8 +156,8 @@ Creates a 'rgl' representation of the object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportToXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-exportToXML"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-exportToXML}{}}}
 \subsection{Method \code{exportToXML()}}{
 Gets an XML representation out of the polyhedron object
 \subsection{Usage}{
@@ -166,8 +166,8 @@ Gets an XML representation out of the polyhedron object
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-PolyhedronState-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronState-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -4,14 +4,11 @@
 \alias{loggerSetupFile}
 \title{loggerSetupFile}
 \usage{
-loggerSetupFile(log.file)
-}
-\arguments{
-\item{log.file}{filepath to configure logger AppenderFile}
+loggerSetupFile(log.file, default.threshold = "info")
 }
 \description{
 loggerSetupFile
 }
 \author{
-ken4rab
+kenarab
 }

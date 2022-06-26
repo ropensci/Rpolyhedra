@@ -57,40 +57,40 @@ calculations and visualizing polyhedron}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{PolyhedronStateDefined$new()}}
-\item \href{#method-scrape}{\code{PolyhedronStateDefined$scrape()}}
-\item \href{#method-getName}{\code{PolyhedronStateDefined$getName()}}
-\item \href{#method-getSymbol}{\code{PolyhedronStateDefined$getSymbol()}}
-\item \href{#method-adjustVertices}{\code{PolyhedronStateDefined$adjustVertices()}}
-\item \href{#method-getVertices}{\code{PolyhedronStateDefined$getVertices()}}
-\item \href{#method-getNet}{\code{PolyhedronStateDefined$getNet()}}
-\item \href{#method-getSolid}{\code{PolyhedronStateDefined$getSolid()}}
-\item \href{#method-inferEdges}{\code{PolyhedronStateDefined$inferEdges()}}
-\item \href{#method-checkEdgesConsistency}{\code{PolyhedronStateDefined$checkEdgesConsistency()}}
-\item \href{#method-triangulate}{\code{PolyhedronStateDefined$triangulate()}}
-\item \href{#method-getConvHull}{\code{PolyhedronStateDefined$getConvHull()}}
-\item \href{#method-calculateMassCenter}{\code{PolyhedronStateDefined$calculateMassCenter()}}
-\item \href{#method-getNormalizedSize}{\code{PolyhedronStateDefined$getNormalizedSize()}}
-\item \href{#method-getTransformedVertices}{\code{PolyhedronStateDefined$getTransformedVertices()}}
-\item \href{#method-resetTransformationMatrix}{\code{PolyhedronStateDefined$resetTransformationMatrix()}}
-\item \href{#method-applyTransformationMatrix}{\code{PolyhedronStateDefined$applyTransformationMatrix()}}
-\item \href{#method-buildRGL}{\code{PolyhedronStateDefined$buildRGL()}}
-\item \href{#method-exportToXML}{\code{PolyhedronStateDefined$exportToXML()}}
-\item \href{#method-expectEqual}{\code{PolyhedronStateDefined$expectEqual()}}
-\item \href{#method-serialize}{\code{PolyhedronStateDefined$serialize()}}
-\item \href{#method-clone}{\code{PolyhedronStateDefined$clone()}}
+\item \href{#method-PolyhedronStateDefined-new}{\code{PolyhedronStateDefined$new()}}
+\item \href{#method-PolyhedronStateDefined-scrape}{\code{PolyhedronStateDefined$scrape()}}
+\item \href{#method-PolyhedronStateDefined-getName}{\code{PolyhedronStateDefined$getName()}}
+\item \href{#method-PolyhedronStateDefined-getSymbol}{\code{PolyhedronStateDefined$getSymbol()}}
+\item \href{#method-PolyhedronStateDefined-adjustVertices}{\code{PolyhedronStateDefined$adjustVertices()}}
+\item \href{#method-PolyhedronStateDefined-getVertices}{\code{PolyhedronStateDefined$getVertices()}}
+\item \href{#method-PolyhedronStateDefined-getNet}{\code{PolyhedronStateDefined$getNet()}}
+\item \href{#method-PolyhedronStateDefined-getSolid}{\code{PolyhedronStateDefined$getSolid()}}
+\item \href{#method-PolyhedronStateDefined-inferEdges}{\code{PolyhedronStateDefined$inferEdges()}}
+\item \href{#method-PolyhedronStateDefined-checkEdgesConsistency}{\code{PolyhedronStateDefined$checkEdgesConsistency()}}
+\item \href{#method-PolyhedronStateDefined-triangulate}{\code{PolyhedronStateDefined$triangulate()}}
+\item \href{#method-PolyhedronStateDefined-getConvHull}{\code{PolyhedronStateDefined$getConvHull()}}
+\item \href{#method-PolyhedronStateDefined-calculateMassCenter}{\code{PolyhedronStateDefined$calculateMassCenter()}}
+\item \href{#method-PolyhedronStateDefined-getNormalizedSize}{\code{PolyhedronStateDefined$getNormalizedSize()}}
+\item \href{#method-PolyhedronStateDefined-getTransformedVertices}{\code{PolyhedronStateDefined$getTransformedVertices()}}
+\item \href{#method-PolyhedronStateDefined-resetTransformationMatrix}{\code{PolyhedronStateDefined$resetTransformationMatrix()}}
+\item \href{#method-PolyhedronStateDefined-applyTransformationMatrix}{\code{PolyhedronStateDefined$applyTransformationMatrix()}}
+\item \href{#method-PolyhedronStateDefined-buildRGL}{\code{PolyhedronStateDefined$buildRGL()}}
+\item \href{#method-PolyhedronStateDefined-exportToXML}{\code{PolyhedronStateDefined$exportToXML()}}
+\item \href{#method-PolyhedronStateDefined-expectEqual}{\code{PolyhedronStateDefined$expectEqual()}}
+\item \href{#method-PolyhedronStateDefined-serialize}{\code{PolyhedronStateDefined$serialize()}}
+\item \href{#method-PolyhedronStateDefined-clone}{\code{PolyhedronStateDefined$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError">}\href{../../Rpolyhedra/html/PolyhedronState.html#method-addError}{\code{Rpolyhedra::PolyhedronState$addError()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-new"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-new}{}}}
 \subsection{Method \code{new()}}{
 object initialization routine
 \subsection{Usage}{
@@ -147,8 +147,8 @@ A new  PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scrape"></a>}}
-\if{latex}{\out{\hypertarget{method-scrape}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-scrape"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-scrape}{}}}
 \subsection{Method \code{scrape()}}{
 scrape polyhedron.
 As the state is defined this functions do nothing
@@ -161,8 +161,8 @@ current object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getName"></a>}}
-\if{latex}{\out{\hypertarget{method-getName}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-getName"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-getName}{}}}
 \subsection{Method \code{getName()}}{
 get Polyhedron name
 \subsection{Usage}{
@@ -174,8 +174,8 @@ string with polyhedron name
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getSymbol"></a>}}
-\if{latex}{\out{\hypertarget{method-getSymbol}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-getSymbol"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-getSymbol}{}}}
 \subsection{Method \code{getSymbol()}}{
 get Polyhedron symbol
 \subsection{Usage}{
@@ -187,8 +187,8 @@ string with polyhedron symbol
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-adjustVertices"></a>}}
-\if{latex}{\out{\hypertarget{method-adjustVertices}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-adjustVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-adjustVertices}{}}}
 \subsection{Method \code{adjustVertices()}}{
 adjust polyhedron Vertices
 \subsection{Usage}{
@@ -207,8 +207,8 @@ modified  PolyhedronStateDefined object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getVertices"></a>}}
-\if{latex}{\out{\hypertarget{method-getVertices}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-getVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-getVertices}{}}}
 \subsection{Method \code{getVertices()}}{
 Get the polyhedron state
 \subsection{Usage}{
@@ -224,8 +224,8 @@ Get the polyhedron state
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getNet"></a>}}
-\if{latex}{\out{\hypertarget{method-getNet}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-getNet"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-getNet}{}}}
 \subsection{Method \code{getNet()}}{
 Gets the net property
 \subsection{Usage}{
@@ -234,8 +234,8 @@ Gets the net property
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getSolid"></a>}}
-\if{latex}{\out{\hypertarget{method-getSolid}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-getSolid"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-getSolid}{}}}
 \subsection{Method \code{getSolid()}}{
 Gets the solid property
 \subsection{Usage}{
@@ -244,8 +244,8 @@ Gets the solid property
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-inferEdges"></a>}}
-\if{latex}{\out{\hypertarget{method-inferEdges}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-inferEdges"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-inferEdges}{}}}
 \subsection{Method \code{inferEdges()}}{
 Infer edges
 \subsection{Usage}{
@@ -261,8 +261,8 @@ Infer edges
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-checkEdgesConsistency"></a>}}
-\if{latex}{\out{\hypertarget{method-checkEdgesConsistency}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-checkEdgesConsistency"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-checkEdgesConsistency}{}}}
 \subsection{Method \code{checkEdgesConsistency()}}{
 Checks edges consistency
 \subsection{Usage}{
@@ -271,8 +271,8 @@ Checks edges consistency
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-triangulate"></a>}}
-\if{latex}{\out{\hypertarget{method-triangulate}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-triangulate"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-triangulate}{}}}
 \subsection{Method \code{triangulate()}}{
 Triangulates the polyhedron
 \subsection{Usage}{
@@ -288,8 +288,8 @@ Triangulates the polyhedron
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getConvHull"></a>}}
-\if{latex}{\out{\hypertarget{method-getConvHull}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-getConvHull"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-getConvHull}{}}}
 \subsection{Method \code{getConvHull()}}{
 Gets the convex hull
 \subsection{Usage}{
@@ -313,8 +313,8 @@ the convex hull
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-calculateMassCenter"></a>}}
-\if{latex}{\out{\hypertarget{method-calculateMassCenter}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-calculateMassCenter"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-calculateMassCenter}{}}}
 \subsection{Method \code{calculateMassCenter()}}{
 Calculates the center of mass.
 \subsection{Usage}{
@@ -335,8 +335,8 @@ Calculates the center of mass.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getNormalizedSize"></a>}}
-\if{latex}{\out{\hypertarget{method-getNormalizedSize}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-getNormalizedSize"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-getNormalizedSize}{}}}
 \subsection{Method \code{getNormalizedSize()}}{
 Gets the normalized size
 \subsection{Usage}{
@@ -352,8 +352,8 @@ Gets the normalized size
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getTransformedVertices"></a>}}
-\if{latex}{\out{\hypertarget{method-getTransformedVertices}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-getTransformedVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-getTransformedVertices}{}}}
 \subsection{Method \code{getTransformedVertices()}}{
 Gets the transformed vertices
 \subsection{Usage}{
@@ -374,8 +374,8 @@ Gets the transformed vertices
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-resetTransformationMatrix"></a>}}
-\if{latex}{\out{\hypertarget{method-resetTransformationMatrix}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-resetTransformationMatrix"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-resetTransformationMatrix}{}}}
 \subsection{Method \code{resetTransformationMatrix()}}{
 Resets the transformation matrix
 \subsection{Usage}{
@@ -384,8 +384,8 @@ Resets the transformation matrix
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-applyTransformationMatrix"></a>}}
-\if{latex}{\out{\hypertarget{method-applyTransformationMatrix}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-applyTransformationMatrix"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-applyTransformationMatrix}{}}}
 \subsection{Method \code{applyTransformationMatrix()}}{
 Apply transformation matrix to polyhedron
 \subsection{Usage}{
@@ -404,8 +404,8 @@ an applied transformation.matrix
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-buildRGL"></a>}}
-\if{latex}{\out{\hypertarget{method-buildRGL}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-buildRGL"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-buildRGL}{}}}
 \subsection{Method \code{buildRGL()}}{
 Build 'rgl'
 \subsection{Usage}{
@@ -421,8 +421,8 @@ Build 'rgl'
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportToXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportToXML}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-exportToXML"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-exportToXML}{}}}
 \subsection{Method \code{exportToXML()}}{
 Exports the object to XML format
 \subsection{Usage}{
@@ -431,8 +431,8 @@ Exports the object to XML format
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-expectEqual"></a>}}
-\if{latex}{\out{\hypertarget{method-expectEqual}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-expectEqual"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-expectEqual}{}}}
 \subsection{Method \code{expectEqual()}}{
 Determines if a polyhedron is equal to this one.
 \subsection{Usage}{
@@ -448,8 +448,8 @@ Determines if a polyhedron is equal to this one.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-serialize"></a>}}
-\if{latex}{\out{\hypertarget{method-serialize}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-serialize"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-serialize}{}}}
 \subsection{Method \code{serialize()}}{
 Serialize the object.
 \subsection{Usage}{
@@ -458,8 +458,8 @@ Serialize the object.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
