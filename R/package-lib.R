@@ -39,7 +39,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
   .available.scrapping.conf <- getUserEnvir(".available.scrapping.conf")
 
   # "dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
-  setUserEnvir(".scrape.config", "fulldb")
+  setUserEnvir(".scrape.config", "pkg-minimal")
   # When release version, change parameter to "pkg-minimal"
   .scrape.config <- getUserEnvir(".scrape.config")
   current.config <- .available.scrapping.conf[[.scrape.config]]
@@ -56,7 +56,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
 #' Download RPolyhedra supporting files
 #'
 #' Downloads the files from the remote location
-#' @param logger logger for inheriting threshold from calling class/function
+#' @param logger logger for inherating threshold from calling class/function
 #' @return TRUE if sucessfull, FALSE otherwise
 #' @importFrom utils unzip
 #' @importFrom utils download.file
@@ -132,7 +132,7 @@ downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
 #' @param source.folder folder of polyhedra data sources
 #' @param dest.folder   folder of polyhedra data destination
 #' @param force indicate if existings directories must be overwritten
-#' @param logger logger for inheriting threshold from calling class/function
+#' @param logger logger for inherating threshold from calling class/function
 #' @return TRUE if sucessfull
 #' @import lgr
 #' @noRd
