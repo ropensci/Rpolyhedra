@@ -1,3 +1,8 @@
+Rpolyhedra 0.5.3
+============
+### MINOR IMPROVEMENTS
+* Polyhedrons can be generated without normalizing size
+
 Rpolyhedra 0.5.2
 ============
 ### MINOR IMPROVEMENTS
