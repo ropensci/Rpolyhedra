@@ -290,11 +290,14 @@ getLogger <- function(r6.object) {
 #' loggerSetupFile
 #' @param log.file log path for logging file
 #' @param default.threshold threshold for setting root. Default = "info"
+#' @param append if set to FALSE, cleanup all previous logs
 #' @import lgr
 #' @author kenarab
 #' @export
-loggerSetupFile <- function(log.file, default.threshold = "info") {
-  unlink(lgr$appenders$file$file)  # cleanup
+loggerSetupFile <- function(log.file, default.threshold = "info", append = TRUE) {
+  if (!append){
+    unlink(unique(unlist(lapply(lgr$appenders, FUN = function(x){x$file}))))  # cleanup
+  }
   lgr::basic_config()
   lgr::get_logger("root")$add_appender(AppenderFile$new(log.file,
                                                         layout = LayoutFormat$new(
@@ -307,3 +310,4 @@ loggerSetupFile <- function(log.file, default.threshold = "info") {
   lgr::threshold(default.threshold, lgr::get_logger("root"))
   lgr
 }
+
