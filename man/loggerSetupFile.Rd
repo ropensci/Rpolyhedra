@@ -4,12 +4,14 @@
 \alias{loggerSetupFile}
 \title{loggerSetupFile}
 \usage{
-loggerSetupFile(log.file, default.threshold = "info")
+loggerSetupFile(log.file, default.threshold = "info", append = TRUE)
 }
 \arguments{
 \item{log.file}{log path for logging file}
 
 \item{default.threshold}{threshold for setting root. Default = "info"}
+
+\item{append}{if set to FALSE, cleanup all previous logs}
 }
 \description{
 loggerSetupFile

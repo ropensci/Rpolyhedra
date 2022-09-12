@@ -31,13 +31,13 @@ ken4rab
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></li>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="applyTransformationMatrix"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-applyTransformationMatrix'><code>Rpolyhedra::PolyhedronState$applyTransformationMatrix()</code></a></li>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="buildRGL"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-buildRGL'><code>Rpolyhedra::PolyhedronState$buildRGL()</code></a></li>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-checkEdgesConsistency'><code>Rpolyhedra::PolyhedronState$checkEdgesConsistency()</code></a></li>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="exportToXML"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-exportToXML'><code>Rpolyhedra::PolyhedronState$exportToXML()</code></a></li>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getName"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getName'><code>Rpolyhedra::PolyhedronState$getName()</code></a></li>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getSolid'><code>Rpolyhedra::PolyhedronState$getSolid()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="applyTransformationMatrix"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-applyTransformationMatrix'><code>Rpolyhedra::PolyhedronState$applyTransformationMatrix()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="buildRGL"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-buildRGL'><code>Rpolyhedra::PolyhedronState$buildRGL()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-checkEdgesConsistency'><code>Rpolyhedra::PolyhedronState$checkEdgesConsistency()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="exportToXML"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-exportToXML'><code>Rpolyhedra::PolyhedronState$exportToXML()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getName"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getName'><code>Rpolyhedra::PolyhedronState$getName()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getSolid'><code>Rpolyhedra::PolyhedronState$getSolid()</code></a></span></li>
 </ul>
 </details>
 }}

@@ -67,7 +67,6 @@ To get started execute the following commands:
 ``` r
 # 0.  Load libraries
 library(knitr)
-#> Warning: package 'knitr' was built under R version 4.1.2
 library(rgl)
 # For foarding webgl output to knitr
 knit_hooks$set(webgl = hook_webgl)

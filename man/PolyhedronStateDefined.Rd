@@ -84,7 +84,7 @@ calculations and visualizing polyhedron}
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></span></li>
 </ul>
 </details>
 }}

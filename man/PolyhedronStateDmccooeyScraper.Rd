@@ -59,9 +59,9 @@ ken4rab
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></li>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-checkEdgesConsistency'><code>Rpolyhedra::PolyhedronState$checkEdgesConsistency()</code></a></li>
-<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getSolid'><code>Rpolyhedra::PolyhedronState$getSolid()</code></a></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="addError"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-addError'><code>Rpolyhedra::PolyhedronState$addError()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="checkEdgesConsistency"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-checkEdgesConsistency'><code>Rpolyhedra::PolyhedronState$checkEdgesConsistency()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="Rpolyhedra" data-topic="PolyhedronState" data-id="getSolid"><a href='../../Rpolyhedra/html/PolyhedronState.html#method-PolyhedronState-getSolid'><code>Rpolyhedra::PolyhedronState$getSolid()</code></a></span></li>
 </ul>
 </details>
 }}
