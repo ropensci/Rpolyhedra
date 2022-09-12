@@ -11,6 +11,7 @@
   # It is not necesary to put trivial compatibility
   .package.db[["0.2.5"]] <- "0.2.5"
   .package.db[["0.5.1"]] <- "0.5.0"
+  .package.db[["0.5.4"]] <- "0.5.3"
 
   setPackageEnvir(variable.name = ".package.db", .package.db)
 
