@@ -1,3 +1,8 @@
+Rpolyhedra 0.5.4
+============
+### MINOR IMPROVEMENTS
+* Documentation updated to RoxygenNote and invalid links updated
+
 Rpolyhedra 0.5.3
 ============
 ### MINOR IMPROVEMENTS
