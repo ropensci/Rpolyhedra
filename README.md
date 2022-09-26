@@ -9,7 +9,7 @@
 <!-- Polyhedra database scraped from publically available sources using R6 objects and 'rgl' visualizing capabilities. -->
 
 This package is a polyhedra database based on the poly package found on
-<http://www.netlib.org/polyhedra/> ([Original Help
+<https://www.netlib.org/polyhedra/> ([Original Help
 message](https://raw.githubusercontent.com/ropensci/Rpolyhedra/master/man/html/poly_original_help_message.html)),
 and the polyhedra definitions found on <http://dmccooey.com/polyhedra/>.
 As such, Rpolyhedra provides with the following:
@@ -149,7 +149,7 @@ describe the geometric polyhedron definitions derived mathematically by
 Andrew Hume and by the Kaleido program of Zvi Har’El.
 
 PHD files were generated using
-[poly2](http://www.netlib.org/poly2/readme) library (no longer
+[poly2](https://www.netlib.org/poly2/readme) library (no longer
 maintained). Although the code is available, specific programming skills
 are required to run it.
 
