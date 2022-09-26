@@ -268,11 +268,11 @@ PolyhedronScraperConfigurationNetlib <- R6::R6Class(
     initialize = function(name) {
       super$initialize(
         name = "netlib",
-        base.dir = file.path("www.netlib.org", "polyhedra")
+        base.dir = file.path("netlib.org", "polyhedra")
       )
     },
     getPolyhedraFiles = function(home.dir.data) {
-      # wget -r -np -k https://www.netlib.org/polyhedra/ data/www.netlib.org
+      # wget -r -np -k https://netlib.org/polyhedra/ data/netlib.org
       polyhedra.dir <- self$getBaseDir(home.dir.data)
       polyhedra.files <- dir(polyhedra.dir)
       polyhedra.files <- polyhedra.files[grep("[0-9]+", polyhedra.files)]

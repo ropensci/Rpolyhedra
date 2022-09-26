@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
  <!-- Polyhedra database scraped from publically available sources using R6 objects and 'rgl' visualizing capabilities. -->
 
 
- This package is a polyhedra database based on the poly package found on https://www.netlib.org/polyhedra/ ([Original Help message](https://raw.githubusercontent.com/ropensci/Rpolyhedra/master/man/html/poly_original_help_message.html)), and the polyhedra definitions found on http://dmccooey.com/polyhedra/. As such, Rpolyhedra provides with the following:
+ This package is a polyhedra database based on the poly package found on https://netlib.org/polyhedra/ ([Original Help message](https://raw.githubusercontent.com/ropensci/Rpolyhedra/master/man/html/poly_original_help_message.html)), and the polyhedra definitions found on http://dmccooey.com/polyhedra/. As such, Rpolyhedra provides with the following:
 
  1. A module to scrape the polyhedra for the different sources found with features for incremental correction of issues found and to be found in scraping process.
  1. A database of the scraped polyhedra.
@@ -136,9 +136,9 @@ for (i in seq_len(n)) {
  Includes 142 polyhedra definitions.
  The PHD format was created to describe the geometric polyhedron definitions derived mathematically by Andrew Hume and by the Kaleido program of Zvi Har'El.
 
- PHD files were generated using [poly2](https://www.netlib.org/poly2/readme) library (no longer maintained). Although the code is available, specific programming skills are required to run it.
+ PHD files were generated using [poly2](https://netlib.org/poly2/readme) library (no longer maintained). Although the code is available, specific programming skills are required to run it.
 
-PHD files can be found in `extdata/www.netlib.org/polyhedra/index.html`
+PHD files can be found in `extdata/netlib.org/polyhedra/index.html`
 
 ### dmccooey
 Includes 767 polyhedra definitions.
