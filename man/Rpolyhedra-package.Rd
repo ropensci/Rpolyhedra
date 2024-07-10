@@ -3,7 +3,6 @@
 \docType{package}
 \name{Rpolyhedra-package}
 \alias{Rpolyhedra-package}
-\alias{_PACKAGE}
 \alias{Rpolyhedra}
 \title{Rpolyhedra: Polyhedra Database}
 \description{
