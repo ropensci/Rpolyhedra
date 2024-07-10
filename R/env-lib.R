@@ -57,7 +57,7 @@ getDataEnv <- function() {
 
 #' Get user space
 #'
-#' This function is used internally for accesing the local database path
+#' This function is used internally for accessing the local database path
 #' @return path of user space
 #' @noRd
 getUserSpace <- function() {
@@ -66,7 +66,7 @@ getUserSpace <- function() {
 
 #' Initialize data directory environment
 #'
-#' initialize data enviornment
+#' initialize data environment
 #'
 #' @return the data dir environment
 #' @noRd
@@ -88,7 +88,7 @@ initDataDirEnvironment <- function() {
 #'
 #' This function is used internally to determine whether the package
 #' is compiled in source or package directory.
-#' @param data.env enviroment where data directory must be returned
+#' @param data.env environment where data directory must be returned
 #' @return dir where the package access polyhedra database
 #' @noRd
 getDataDir <- function(data.env = getDataEnv()) {
@@ -117,7 +117,7 @@ getEnvironmentFilepath <- function() {
 #' This function is used to set the data directories either to the package or the user home directory.
 #'
 #' @param env The type of environment to work with. Values are "PACKAGE" or "HOME" and it defaults to package
-#' @return the curruent .data.env
+#' @return the current .data.env
 #' @noRd
 setDataDirEnvironment <- function(env = "PACKAGE") {
   if (env %in% c("PACKAGE", "HOME")) {

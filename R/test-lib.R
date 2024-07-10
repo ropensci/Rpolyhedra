@@ -86,7 +86,7 @@ PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
         },
         error = function(e) {
           error <- paste(e$message, collapse = ",")
-          logger$error(paste("catched error", error))
+          logger$error(paste("caught error", error))
           assign("error", error, envir = parent.env(environment()))
           status <- "exception"
           if (!is.na(self$scraped.polyhedron)) {
@@ -140,13 +140,13 @@ PolyhedronTestTaskEdgesConsistency <- R6::R6Class(
 )
 
 
-#' Get percentil polyhedra quantity
+#' Get percentile polyhedra quantity
 #'
-#' Returns polyhedra quantity of parameter percentil
-#' @param percentil is the percentil which must be applied
+#' Returns polyhedra quantity of parameter percentile
+#' @param percentile is the percentile which must be applied
 #'        to estimate the figure
 #' @param quant.min minimum quantity of files to return
 #' @noRd
-getPercentilPolyhedraQuant <- function(percentil, quant.min = 100) {
-  max(round(percentil * nrow(getAvailablePolyhedra())), quant.min)
+getPercentilPolyhedraQuant <- function(percentile, quant.min = 100) {
+  max(round(percentile * nrow(getAvailablePolyhedra())), quant.min)
 }

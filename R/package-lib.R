@@ -56,8 +56,8 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
 #' Download RPolyhedra supporting files
 #'
 #' Downloads the files from the remote location
-#' @param logger logger for inherating threshold from calling class/function
-#' @return TRUE if sucessfull, FALSE otherwise
+#' @param logger logger for inheriting threshold from calling class/function
+#' @return TRUE if successful, FALSE otherwise
 #' @importFrom utils unzip
 #' @importFrom utils download.file
 #' @importFrom utils zip
@@ -132,8 +132,8 @@ downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
 #' @param source.folder folder of polyhedra data sources
 #' @param dest.folder   folder of polyhedra data destination
 #' @param force indicate if existings directories must be overwritten
-#' @param logger logger for inherating threshold from calling class/function
-#' @return TRUE if sucessfull
+#' @param logger logger for inheriting threshold from calling class/function
+#' @return TRUE if successful
 #' @import lgr
 #' @noRd
 copyFilesToExtData <- function(source.folder = getDataDir(data.env = "HOME"),
@@ -210,7 +210,7 @@ copyFilesToExtData <- function(source.folder = getDataDir(data.env = "HOME"),
 
 #' Polyhedron scraper configuration class
 #'
-#' Abstract class for configuring specific scrapers for Diferent sources
+#' Abstract class for configuring specific scrapers for Different sources
 #'
 #' @section Methods:
 #' \describe{
@@ -423,7 +423,7 @@ isCompatiblePolyhedraRDS <- function(.polyhedra.candidate =
   }
   if (nchar(error) > 0) {
     if (halts) {
-      stop(paste(error, "Contact package mantainer."))
+      stop(paste(error, "Contact package maintainer."))
     } else {
       logger$error(error)
     }

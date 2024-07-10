@@ -426,7 +426,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
           error = function(e) {
             logger <- getLogger(self)
             error <- paste(e$message, collapse = ",")
-            logger$error("Catched error", error = error)
+            logger$error("Caught error", error = error)
             assign("error", error, envir = parent.env(environment()))
             self$ledger$updateStatus(
               source = source,
@@ -504,13 +504,13 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
       if (file.exists(self$polyhedra.rds.file)) {
         polyhedra.db.saved <- readRDS(self$polyhedra.rds.file)
         if (!isCompatiblePolyhedraRDS(polyhedra.db.saved)) {
-          stop("Incompatible polyhedra.db saved. Contact package mantainer.")
+          stop("Incompatible polyhedra.db saved. Contact package maintainer.")
         }
       } else {
         # if database doesn't exists setup test as false
         logger$error(paste(
           "There is no polyhedra database so ",
-          "test could not be runned"
+          "test could not be ran"
         ))
         test <- FALSE
       }
@@ -533,7 +533,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
           },
           error = function(e) {
             error <- paste(e$message, collapse = ",")
-            logger$error("catched error", error = error)
+            logger$error("caught error", error = error)
             assign("error", error, envir = parent.env(environment()))
             status <- "exception"
             obs <- scraped.polyhedron$getErrors()
@@ -563,7 +563,7 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
             },
             error = function(e) {
               error <- paste(e$message, collapse = ",")
-              logger$error("catched error", error = error)
+              logger$error("caught error", error = error)
               assign("error", error, envir = parent.env(environment()))
               status <- "failed"
               obs <- scraped.polyhedron$getErrors()
@@ -605,13 +605,13 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
       if (file.exists(self$polyhedra.rds.file)) {
         polyhedra.db.saved <- readRDS(self$polyhedra.rds.file)
         if (!isCompatiblePolyhedraRDS(polyhedra.db.saved)) {
-          stop("Incompatible polyhedra.db saved. Contact package mantainer.")
+          stop("Incompatible polyhedra.db saved. Contact package maintainer.")
         }
       } else {
         # if database doesn't exists setup test as false
         logger$error(paste(
           "There is no polyhedra database so test ",
-          "could not be runned"
+          "could not be ran"
         ))
         test <- FALSE
       }

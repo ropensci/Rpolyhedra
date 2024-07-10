@@ -8,7 +8,7 @@
 
   # package version db
   .package.db <- list()
-  # It is not necesary to put trivial compatibility
+  # It is not necessary to put trivial compatibility
   .package.db[["0.2.5"]] <- "0.2.5"
   .package.db[["0.5.1"]] <- "0.5.0"
 
