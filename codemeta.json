@@ -253,21 +253,9 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lgr"
     },
-    "9": {
-      "@type": "SoftwareApplication",
-      "identifier": "git2r",
-      "name": "git2r",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=git2r"
-    },
     "SystemRequirements": null
   },
-  "fileSize": "2223.236KB",
+  "fileSize": "2222.771KB",
   "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
   "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],
   "developmentStatus": "https://www.repostatus.org/#active",

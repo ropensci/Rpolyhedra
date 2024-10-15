@@ -235,12 +235,9 @@ selectDataEnv <- function(env = NA, downloadDatabase = TRUE,
 #' get the last git commit sha
 #' @param long.version determines if the complete version of the sha will
 #'         be returned.
-#' @importFrom git2r commits
 #' @return String with git commit sha
 #' @noRd
 getGitCommit <- function(long.version = FALSE) {
-  # TODO: replace with git2r when issue #2 is resolved.
-  # rgit2r::commits()[[1]]@sha
   if (file.exists(".git")) {
     git.sha <- system("git log --pretty=format:'%h' -n 1", intern = TRUE)[1]
   } else {

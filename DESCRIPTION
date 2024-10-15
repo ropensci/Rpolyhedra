@@ -14,7 +14,7 @@ Description: A polyhedra database scraped from various sources as R6 objects and
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Depends: R (>= 3.5.0)
 Imports: R6,
@@ -23,8 +23,7 @@ Imports: R6,
   stringr,
   XML,
   digest,
-  lgr,
-  git2r
+  lgr
 Suggests: 
   testthat,
   dplyr,
