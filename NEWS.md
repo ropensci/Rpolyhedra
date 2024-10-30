@@ -1,3 +1,9 @@
+Rpolyhedra 0.5.5
+============
+### MINOR IMPROVEMENTS
+* Removed dependency on git2r
+* Included method saveToJSON for exporting polyhedra
+
 Rpolyhedra 0.5.4
 ============
 ### MINOR IMPROVEMENTS
