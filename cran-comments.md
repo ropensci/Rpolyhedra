@@ -1,4 +1,7 @@
-── R CMD check results ────────────────────────────────────────────────────── Rpolyhedra 0.5.4 ────
-Duration: 1m 9.6s
+── R CMD check results ──────────────────────────────────────────────────── Rpolyhedra 0.5.5 ────
+Duration: 30.2s
 
-0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+❯ checking for future file timestamps ... NOTE
+  unable to verify current time
+
+0 errors ✔ | 0 warnings ✔ | 1 note ✖
