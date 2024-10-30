@@ -5,7 +5,7 @@
 #' @noRd
 .onLoad <- function(libname, pkgname) {
   if (interactive() == FALSE) {
-    rgl::rgl.useNULL(TRUE)
+    rgl::open3d(useNULL = TRUE)
   }
   setPackageEnvir(variable.name = "RpolyhedraEnv", new.env(parent = asNamespace("Rpolyhedra")))
 
