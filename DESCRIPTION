@@ -23,7 +23,8 @@ Imports: R6,
   stringr,
   XML,
   digest,
-  lgr
+  lgr,
+  jsonlite
 Suggests: 
   testthat,
   dplyr,

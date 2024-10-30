@@ -59,6 +59,7 @@ calculations and visualizing polyhedron}
 \itemize{
 \item \href{#method-PolyhedronStateDefined-new}{\code{PolyhedronStateDefined$new()}}
 \item \href{#method-PolyhedronStateDefined-scrape}{\code{PolyhedronStateDefined$scrape()}}
+\item \href{#method-PolyhedronStateDefined-saveToJson}{\code{PolyhedronStateDefined$saveToJson()}}
 \item \href{#method-PolyhedronStateDefined-getName}{\code{PolyhedronStateDefined$getName()}}
 \item \href{#method-PolyhedronStateDefined-getSymbol}{\code{PolyhedronStateDefined$getSymbol()}}
 \item \href{#method-PolyhedronStateDefined-adjustVertices}{\code{PolyhedronStateDefined$adjustVertices()}}
@@ -158,6 +159,26 @@ As the state is defined this functions do nothing
 
 \subsection{Returns}{
 current object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-PolyhedronStateDefined-saveToJson"></a>}}
+\if{latex}{\out{\hypertarget{method-PolyhedronStateDefined-saveToJson}{}}}
+\subsection{Method \code{saveToJson()}}{
+saves the state to a JSON file
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PolyhedronStateDefined$saveToJson(pretty = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pretty}}{whether json output is pretty or not}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a json object
 }
 }
 \if{html}{\out{<hr>}}

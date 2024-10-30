@@ -4,7 +4,7 @@
   "identifier": "Rpolyhedra",
   "description": "A polyhedra database scraped from various sources as R6 objects and 'rgl' visualizing capabilities.",
   "name": "Rpolyhedra: Polyhedra Database",
-  "relatedLink": ["https://docs.ropensci.org/Rpolyhedra/", "https://CRAN.R-project.org/package=Rpolyhedra"],
+  "relatedLink": "https://docs.ropensci.org/Rpolyhedra/",
   "codeRepository": "https://github.com/ropensci/Rpolyhedra",
   "issueTracker": "https://github.com/ropensci/Rpolyhedra/issues",
   "license": "https://spdx.org/licenses/MIT",
@@ -253,15 +253,19 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lgr"
     },
+    "9": {
+      "@type": "SoftwareApplication",
+      "identifier": "jsonlite",
+      "name": "jsonlite",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=jsonlite"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "2222.771KB",
-  "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/master/NEWS.md",
-  "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "review": {
-    "@type": "Review",
-    "url": "https://github.com/ropensci/software-review/issues/157",
-    "provider": "https://ropensci.org"
-  }
+  "fileSize": "2222.54KB"
 }

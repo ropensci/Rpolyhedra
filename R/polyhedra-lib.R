@@ -665,6 +665,7 @@ norm <- function(vector) {
 #' @importFrom rgl asHomogeneous
 #' @importFrom geometry convhulln
 #' @importFrom R6 R6Class
+#' @import jsonlite
 #' @docType class
 #' @author ken4rab
 PolyhedronStateDefined <- R6::R6Class(
@@ -772,6 +773,18 @@ PolyhedronStateDefined <- R6::R6Class(
     #' @return current object
     scrape = function() {
       self
+    },
+    #' @description
+    #' saves the state to a JSON file
+    #' @param pretty  whether json output is pretty or not
+    #' @return a json object
+    saveToJson = function(pretty = FALSE) {
+      ret <- list()
+      vertices <- self$vertices[, paste("Pos3D", 1:3, sep = "_")]
+      names(vertices) <- c("x", "y", "z")
+      ret$vertices <- vertices
+      ret$solid <- self$solid
+      jsonlite::toJSON(ret, pretty = pretty)
     },
     #' @description
     #' get Polyhedron name
