@@ -24,10 +24,10 @@ Imports: R6,
   XML,
   digest,
   lgr,
+  dplyr,
   jsonlite
 Suggests: 
   testthat,
-  dplyr,
   knitr, 
   pkgdown, 
   rmarkdown, 

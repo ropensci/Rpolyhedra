@@ -313,6 +313,7 @@ loggerSetupFile <- function(log.file, default.threshold = "info", append = TRUE)
 #' @param condition condition to conditionally apply mutate
 #' @param ... mutation function
 #' @param envir environment to apply condition
+#' @import dplyr
 #' @export
 mutate_cond <- function(.data, condition, ..., envir = parent.frame()) {
   condition <- eval(substitute(condition), .data, envir)

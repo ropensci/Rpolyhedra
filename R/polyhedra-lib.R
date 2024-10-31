@@ -804,8 +804,20 @@ PolyhedronStateDefined <- R6::R6Class(
     #' @param normalize.size whether it has to normalize the size or not
     #' @return modified  PolyhedronStateDefined object.
     adjustVertices = function(normalize.size = TRUE) {
+      logger <- getLogger(self)
       private$vertices.id.3d <- sort(unique(unlist(self$solid)))
+      vertices.id <- seq_len(nrow(self$vertices))
+      if (!identical(private$vertices.id.3d, vertices.id))
+      {
+        solid.not.vertices <- setdiff(private$vertices.id.3d, vertices.id)
+        vertices.not.solid <- setdiff(vertices.id, private$vertices.id.3d)
+        logger$warn("Differences in solid than in vertices",
+                    missing.solid = solid.not.vertices,
+                    missing.vertices = vertices.not.solid)
+      }
+      private$vertices.id.3d <- intersect(private$vertices.id.3d, vertices.id)
       self$vertices.centered <- self$vertices
+      #browser()
       mass.center <- self$calculateMassCenter(
         vertices.id.3d = private$vertices.id.3d,
         applyTransformation = FALSE
