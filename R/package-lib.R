@@ -19,9 +19,7 @@ getPreloadedDataFilename <- function(polyhedra.preloaded.data =
 #' @noRd
 updatePolyhedraDatabase <- function(source.filenames = NULL) {
   .polyhedra <- NULL
-
   polyhedra.rds.file <- getPolyhedraRDSPath()
-
 
   if (file.exists(polyhedra.rds.file)) {
     polyhedra.candidate <- readRDS(polyhedra.rds.file)
