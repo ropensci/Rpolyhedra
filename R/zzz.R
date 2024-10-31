@@ -74,5 +74,5 @@
     downloadRPolyhedraSupportingFiles()
   }
 
-  updatePolyhedraDatabase()
+  #updatePolyhedraDatabase()
 }

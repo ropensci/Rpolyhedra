@@ -424,9 +424,14 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
             }
           },
           error = function(e) {
+            #browser()
             logger <- getLogger(self)
-            error <- paste(e$message, collapse = ",")
-            logger$error("Caught error", error = error)
+            error <- paste(e$message, e$call, collapse = ",")
+            logger$error("Caught error",
+                         error = error,
+                         source = source,
+                         filename = source.filename
+                         )
             assign("error", error, envir = parent.env(environment()))
             self$ledger$updateStatus(
               source = source,
@@ -532,8 +537,11 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
             obs <- ""
           },
           error = function(e) {
-            error <- paste(e$message, collapse = ",")
-            logger$error("caught error", error = error)
+            error <- paste(e$message, e$call, collapse = ",")
+            logger$error("caught error",
+                         error = error,
+                         source = source,
+                         filename = source.filename)
             assign("error", error, envir = parent.env(environment()))
             status <- "exception"
             obs <- scraped.polyhedron$getErrors()
@@ -562,8 +570,11 @@ PolyhedraDatabase <- R6::R6Class("PolyhedraDatabase",
               status <- "tested"
             },
             error = function(e) {
-              error <- paste(e$message, collapse = ",")
-              logger$error("caught error", error = error)
+              error <- paste(e$message, e$call, collapse = ",")
+              logger$error("caught error",
+                           error = error,
+                           source = source,
+                           polyhedron.name = polyhedron.name)
               assign("error", error, envir = parent.env(environment()))
               status <- "failed"
               obs <- scraped.polyhedron$getErrors()

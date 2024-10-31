@@ -39,7 +39,7 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
   .available.scrapping.conf <- getUserEnvir(".available.scrapping.conf")
 
   # "dev-tetrahedron" "dev-minimal" "pkg-minimal" "fulldb"
-  setUserEnvir(".scrape.config", "pkg-minimal")
+  setUserEnvir(".scrape.config", "fulldb")
   # When release version, change parameter to "pkg-minimal"
   .scrape.config <- getUserEnvir(".scrape.config")
   current.config <- .available.scrapping.conf[[.scrape.config]]
