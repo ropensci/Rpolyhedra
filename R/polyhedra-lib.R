@@ -806,16 +806,14 @@ PolyhedronStateDefined <- R6::R6Class(
     adjustVertices = function(normalize.size = TRUE) {
       logger <- getLogger(self)
       private$vertices.id.3d <- sort(unique(unlist(self$solid)))
-      vertices.id <- seq_len(nrow(self$vertices))
-      if (!identical(private$vertices.id.3d, vertices.id))
+      vertices.real <- seq_len(nrow(self$vertices))
+      vertices.missing <- setdiff(private$vertices.id.3d, vertices.real)
+      if (length(vertices.missing) > 0)
       {
-        solid.not.vertices <- setdiff(private$vertices.id.3d, vertices.id)
-        vertices.not.solid <- setdiff(vertices.id, private$vertices.id.3d)
-        logger$warn("Differences in solid than in vertices",
-                    missing.solid = solid.not.vertices,
-                    missing.vertices = vertices.not.solid)
+        logger$warn("Verticea in solid not defined",
+                    vertices.missing = vertices.missing)
       }
-      private$vertices.id.3d <- intersect(private$vertices.id.3d, vertices.id)
+      private$vertices.id.3d <- intersect(private$vertices.id.3d, vertices.real)
       self$vertices.centered <- self$vertices
       #browser()
       mass.center <- self$calculateMassCenter(

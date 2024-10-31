@@ -1,3 +1,8 @@
+Rpolyhedra 0.5.6
+============
+### MINOR IMPROVEMENTS
+* BUGFIX when vertices in solid but not defined
+
 Rpolyhedra 0.5.5
 ============
 ### MINOR IMPROVEMENTS
