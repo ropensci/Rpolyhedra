@@ -810,7 +810,7 @@ PolyhedronStateDefined <- R6::R6Class(
       vertices.missing <- setdiff(private$vertices.id.3d, vertices.real)
       if (length(vertices.missing) > 0)
       {
-        logger$warn("Verticea in solid not defined",
+        logger$warn("Vertices in solid not defined",
                     vertices.missing = vertices.missing)
       }
       private$vertices.id.3d <- intersect(private$vertices.id.3d, vertices.real)
