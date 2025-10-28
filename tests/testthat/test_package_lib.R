@@ -19,47 +19,46 @@ testthat::test_that("test on package lib functions", {
   testthat::expect(!is.null(updatePolyhedraDatabase()),
     failure_message = "updatePolyhedraDatabase cannot be null"
   )
-  testthat::with_mock(
-    "Rpolyhedra::getUserSpace" = function() {
+})
+
+test_that("downloadRPolyhedraSupportingFiles works with mocks", {
+  local_mocked_bindings(
+    getUserSpace = function() {
       .tmp.home.dir
     },
-    testthat::expect(
-      testthat::with_mock(
-        "Rpolyhedra::getDataEnv" = function() {
-          "HOME"
-        },
-        testthat::with_mock(
-          "Rpolyhedra::checkDatabaseVersion" = function() {
-            "UPDATE"
-          },
-          downloadRPolyhedraSupportingFiles() %in%
-            c("SUCCESS", "NOT_AVAILABLE")
-        )
-      ),
-      failure_message = "downloadRPolyhedraSupportingFiles error"
-    )
+    getDataEnv = function() {
+      "HOME"
+    },
+    checkDatabaseVersion = function() {
+      "UPDATE"
+    })
+      result <- downloadRPolyhedraSupportingFiles()
+
+      expect_true(
+        result %in% c("SUCCESS", "NOT_AVAILABLE"),
+        info = "downloadRPolyhedraSupportingFiles error"
+      )
+      testthat::expect_equal(
+        copyFilesToExtData(
+          force = FALSE,
+          source.folder =
+            getDataDir(data.env = "PACKAGE"),
+          dest.folder = .tmp.package.dir
+        ),
+        TRUE
+      )
+
+      testthat::expect(!is.null(getPackageVersion()),
+                       failure_message = "getPackageVersion() is NULL")
+      testthat::expect(!is.null(getPackageDB()),
+                       failure_message = "getPackageDB() is NULL")
+      testthat::expect(!is.null(getDatabaseVersion()),
+                       failure_message = "getDatabaseVersion() is NULL")
+
+      testthat::expect_equal(switchToFullDatabase(env = "PACKAGE"), "PACKAGE")
+    }
   )
 
-
-  testthat::expect_equal(
-    copyFilesToExtData(
-      force = FALSE,
-      source.folder =
-        getDataDir(data.env = "PACKAGE"),
-      dest.folder = .tmp.package.dir
-    ),
-    TRUE
-  )
-
-  testthat::expect(!is.null(getPackageVersion()),
-                   failure_message = "getPackageVersion() is NULL")
-  testthat::expect(!is.null(getPackageDB()),
-                   failure_message = "getPackageDB() is NULL")
-  testthat::expect(!is.null(getDatabaseVersion()),
-                   failure_message = "getDatabaseVersion() is NULL")
-
-  testthat::expect_equal(switchToFullDatabase(env = "PACKAGE"), "PACKAGE")
-})
 
 teardown(unlink(.tmp.package.dir, recursive = TRUE))
 teardown(unlink(.tmp.home.dir, recursive = TRUE))

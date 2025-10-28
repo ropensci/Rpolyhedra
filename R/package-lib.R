@@ -63,7 +63,6 @@ updatePolyhedraDatabase <- function(source.filenames = NULL) {
 #' @noRd
 downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
   retVal <- "SUCCESS"
-
   if (checkDatabaseVersion() == "UPDATE") {
     if (getDataEnv() == "HOME") {
       db.version <- getPackageDB()
@@ -106,6 +105,7 @@ downloadRPolyhedraSupportingFiles <- function(logger = lgr) {
         tmp.db.path <- list.files(path = db.package.path)[1]
         files.to.copy <- list.files(db.package.path)
         # copy files
+        dir.create(getUserSpace(), recursive = TRUE, showWarnings = FALSE)
         file.copy(
           from = file.path(db.package.path, files.to.copy),
           to = getUserSpace(), recursive = TRUE
