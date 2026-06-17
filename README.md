@@ -21,12 +21,15 @@ As such, Rpolyhedra provides with the following:
 3.  An R6 polyhedron representation with ‘rgl’ package visualizing
     capabilities.
 
+<!-- badges: start -->
+
 | Release | Usage | Development |
 |:---|:---|:---|
-| [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/software-review/issues/157) | [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) |  |
-| [![R-CMD-check](https://github.com/ropensci/Rpolyhedra/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/Rpolyhedra/actions) |  |  |
-| [![CRAN](https://www.r-pkg.org:443/pkg/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra) |  | [![codecov](https://codecov.io/gh/ropensci/Rpolyhedra/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/Rpolyhedra) |
-|  |  | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) |
+| [![](https://badges.ropensci.org/157_status.svg)](https://github.com/ropensci/software-review/issues/157) | [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.0-blue.svg)](https://cran.r-project.org/) | [![CI](https://github.com/ropensci/Rpolyhedra/actions/workflows/ci.yaml/badge.svg)](https://github.com/ropensci/Rpolyhedra/actions/workflows/ci.yaml) |
+| [![CRAN status](https://www.r-pkg.org/badges/version/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra) | [![CRAN downloads](https://cranlogs.r-pkg.org/badges/Rpolyhedra)](https://cran.r-project.org/package=Rpolyhedra) | [![codecov](https://codecov.io/gh/ropensci/Rpolyhedra/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/Rpolyhedra) |
+|  |  | [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) |
+
+<!-- badges: end -->
 
 # Preview
 
