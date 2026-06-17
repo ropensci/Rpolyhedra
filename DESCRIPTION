@@ -19,7 +19,7 @@ VignetteBuilder: knitr
 Depends: R (>= 3.5.0)
 Imports: R6,
   geometry,
-  rgl,
+  rgl (>= 1.3.0),
   stringr,
   XML,
   digest,
