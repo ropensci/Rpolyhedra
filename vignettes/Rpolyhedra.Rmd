@@ -61,8 +61,8 @@ polyhedron.scale <- 5
 # 3. Open and setup RGL window
 open3d()
 par3d(FOV = 1)
-rgl.bg( sphere =FALSE, fogtype = "none", color=c("black"))
-rgl.viewpoint(theta = 0, phi=0, zoom=0.8, fov=1)
+rgl::bg3d( sphere =FALSE, fogtype = "none", color=c("black"))
+rgl::view3d(theta = 0, phi=0, zoom=0.8, fov=1)
 
 # 4. For each polyhedron, setup rotation, position and render
 for (i in seq_len(n)) {

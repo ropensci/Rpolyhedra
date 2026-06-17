@@ -261,13 +261,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2231.489KB",
-  "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/main/NEWS.md",
-  "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "review": {
-    "@type": "Review",
-    "url": "https://github.com/ropensci/software-review/issues/157",
-    "provider": "https://ropensci.org"
-  }
+  "fileSize": "2231.401KB"
 }
