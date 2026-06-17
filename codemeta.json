@@ -8,19 +8,13 @@
   "codeRepository": "https://github.com/ropensci/Rpolyhedra",
   "issueTracker": "https://github.com/ropensci/Rpolyhedra/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.5.6",
+  "version": "0.6.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
-  "provider": {
-    "@id": "https://cran.r-project.org",
-    "@type": "Organization",
-    "name": "Comprehensive R Archive Network (CRAN)",
-    "url": "https://cran.r-project.org"
-  },
+  "runtimePlatform": "R version 4.5.2 (2025-10-31)",
   "author": [
     {
       "@type": "Person",
@@ -267,5 +261,13 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2231.762KB"
+  "fileSize": "2231.489KB",
+  "releaseNotes": "https://github.com/ropensci/Rpolyhedra/blob/main/NEWS.md",
+  "contIntegration": ["https://github.com/ropensci/Rpolyhedra/actions", "https://app.codecov.io/gh/ropensci/Rpolyhedra"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/157",
+    "provider": "https://ropensci.org"
+  }
 }

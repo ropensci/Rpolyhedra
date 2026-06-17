@@ -54,8 +54,11 @@ test_that("downloadRPolyhedraSupportingFiles works with mocks", {
                        failure_message = "getPackageVersion() is NULL")
       testthat::expect(!is.null(getPackageDB()),
                        failure_message = "getPackageDB() is NULL")
-      testthat::expect(!is.null(getDatabaseVersion()),
-                       failure_message = "getDatabaseVersion() is NULL")
+      if (result == "SUCCESS"){
+        # If DB is not available skip this test
+        testthat::expect(!is.null(getDatabaseVersion()),
+                         failure_message = "getDatabaseVersion() is NULL")
+      }
 
     }
   )

@@ -460,6 +460,7 @@ getPackageDB <- function() {
 #' @noRd
 getDatabaseVersion <- function() {
   version <- NULL
+  print(getDataDir())
   version.file <- file.path(getDataDir(), "version")
   if (file.exists(version.file)) {
     version <- readLines(version.file, n = 1)
