@@ -62,7 +62,9 @@ testthat::test_that("Scrape test rpolyhedra for 12% of available polyhedra", {
     TestTaskClass = PolyhedronTestTaskScrape,
     max.quant = getPercentilPolyhedraQuant(0.12, 50)
   )
+  lgr$info("Checking polyhedra scraping", n = length(tasks))
   for (task in tasks) {
+    print(task$source.filename)
     task$run()
   }
 })
@@ -124,7 +126,7 @@ testthat::test_that(paste(
     TestTaskClass = PolyhedronTestTaskEdgesConsistency,
     max.quant = getPercentilPolyhedraQuant(0.12, 50)
   )
-
+  lgr$info("Checking polyhedra edges", n = length(tasks))
   for (task in tasks) {
     task$run()
   }

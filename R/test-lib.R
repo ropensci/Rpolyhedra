@@ -74,15 +74,24 @@ PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
       error <- ""
       scraped.name <- NA
       source <- self$source.config$getName()
+      can.test <- FALSE
       tryCatch(
         {
           obs <- ""
-          self$scraped.polyhedron <- self$source.config$scrape(
-            polyhedron.file.id = self$polyhedron.file.id,
-            source.filename = file.path(self$polyhedra.dir, self$source.filename)
-          )
-          scraped.name <- self$scraped.polyhedron$getName()
-          status <- "testing"
+          source.file.path <- file.path(self$polyhedra.dir, self$source.filename)
+          if (file.exists(source.file.path)){
+            self$scraped.polyhedron <- self$source.config$scrape(
+              polyhedron.file.id = self$polyhedron.file.id,
+              source.filename = source.file.path
+            )
+            scraped.name <- self$scraped.polyhedron$getName()
+            status <- "testing"
+          }
+          else{
+            logger$info("Polyhedron source file not available", path = source.file.path)
+            status <- "not-available"
+          }
+
         },
         error = function(e) {
           error <- paste(e$message, collapse = ",")
@@ -94,15 +103,16 @@ PolyhedronTestTaskScrape <- R6::R6Class("PolyhedronTestTaskScrape",
           }
         }
       )
+      if (status == "testing"){
+        expected.polyhedron <-
+          self$polyhedra.db$getPolyhedron(
+            source = source,
+            polyhedron.name = scraped.name
+          )
 
-      expected.polyhedron <-
-        self$polyhedra.db$getPolyhedron(
-          source = source,
-          polyhedron.name = scraped.name
-        )
-
-      expected.polyhedron.state <- expected.polyhedron$getState()
-      expected.polyhedron.state$expectEqual(self$scraped.polyhedron)
+        expected.polyhedron.state <- expected.polyhedron$getState()
+        expected.polyhedron.state$expectEqual(self$scraped.polyhedron)
+      }
     }
   )
 )
