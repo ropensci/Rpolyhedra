@@ -64,7 +64,7 @@ testthat::test_that("Scrape test rpolyhedra for 12% of available polyhedra", {
   )
   lgr$info("Checking polyhedra scraping", n = length(tasks))
   for (task in tasks) {
-    print(task$source.filename)
+    message(paste("Parsing", task$source.filename))
     task$run()
   }
 })

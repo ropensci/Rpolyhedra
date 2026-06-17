@@ -10,7 +10,9 @@ setup(assign(".tmp.home.dir",
   env = parent.frame()
 ))
 setup(dir.create(.tmp.package.dir, recursive = TRUE, showWarnings = FALSE))
+unlink(dir(.tmp.package.dir, full.names = TRUE), recursive = TRUE, force = TRUE)
 setup(dir.create(.tmp.home.dir, recursive = TRUE, showWarnings = FALSE))
+unlink(dir(.tmp.home.dir, full.names = TRUE), recursive = TRUE, force = TRUE)
 
 testthat::test_that("test on package lib functions", {
   testthat::expect(!is.null(getPreloadedDataFilename()),
@@ -55,9 +57,9 @@ test_that("downloadRPolyhedraSupportingFiles works with mocks", {
       testthat::expect(!is.null(getDatabaseVersion()),
                        failure_message = "getDatabaseVersion() is NULL")
 
-      testthat::expect_equal(switchToFullDatabase(env = "PACKAGE"), "PACKAGE")
     }
   )
+testthat::expect_equal(switchToFullDatabase(env = "PACKAGE"), "PACKAGE")
 
 
 teardown(unlink(.tmp.package.dir, recursive = TRUE))

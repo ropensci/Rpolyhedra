@@ -23,3 +23,7 @@ dmccooey.com/polyhedra/*.js
 #**/polyhedra/**/*.zip
 /doc/
 /Meta/
+
+
+#IA
+.clinerules
